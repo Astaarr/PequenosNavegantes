@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Datos del Tutor</title>
+</head>
+<body>
+    <h1>Registro al Campamento - Paso 2</h1>
+    <form id="form-datos-tutor" novalidate>
+        <!-- Nombre del tutor -->
+        <div class="form-group">
+            <label for="nombre-tutor">Nombre</label>
+            <input type="text" id="nombre-tutor" name="nombre_tutor" placeholder="Nombre completo">
+            <p id="error-nombre-tutor" class="error" style="display: none; color: red;"></p>
+        </div>
+
+        <!-- Correo -->
+        <div class="form-group">
+            <label for="correo-tutor">Correo</label>
+            <input type="email" id="correo-tutor" name="correo_tutor" placeholder="ejemplo@gmail.com">
+            <p id="error-correo-tutor" class="error" style="display: none; color: red;"></p>
+        </div>
+
+        <!-- DNI -->
+        <div class="form-group">
+            <label for="dni-tutor">DNI</label>
+            <input type="text" id="dni-tutor" name="dni_tutor" placeholder="DNI del tutor">
+            <p id="error-dni-tutor" class="error" style="display: none; color: red;"></p>
+        </div>
+
+        <!-- Teléfono -->
+        <div class="form-group">
+            <label for="telefono-tutor">Teléfono</label>
+            <input type="tel" id="telefono-tutor" name="telefono_tutor" placeholder="Teléfono de contacto">
+            <p id="error-telefono-tutor" class="error" style="display: none; color: red;"></p>
+        </div>
+
+        <!-- ¿No puedes venir a por el niño? -->
+        <div class="form-group">
+            <label for="venir">¿No puedes venir a por él?</label>
+            <select id="venir" name="venir">
+                <option value="">Selecciona una opción</option>
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+            <p id="error-venir" class="error" style="display: none; color: red;"></p>
+        </div>
+
+        <!-- Datos del tutor adicional (ocultos inicialmente) -->
+        <div id="datos-tutor-adicional" style="display: none;">
+            <div class="form-group">
+                <label for="nombre-tutor-adicional">Nombre</label>
+                <input type="text" id="nombre-tutor-adicional" name="nombre_tutor_adicional" placeholder="Nombre del tutor adicional">
+                <p id="error-nombre-tutor-adicional" class="error" style="display: none; color: red;"></p>
+            </div>
+            <div class="form-group">
+                <label for="dni-tutor-adicional">DNI</label>
+                <input type="text" id="dni-tutor-adicional" name="dni_tutor_adicional" placeholder="DNI del tutor adicional">
+                <p id="error-dni-tutor-adicional" class="error" style="display: none; color: red;"></p>
+            </div>
+            <div class="form-group">
+                <label for="telefono-tutor-adicional">Teléfono</label>
+                <input type="tel" id="telefono-tutor-adicional" name="telefono_tutor_adicional" placeholder="Teléfono del tutor adicional">
+                <p id="error-telefono-tutor-adicional" class="error" style="display: none; color: red;"></p>
+            </div>
+        </div>
+
+        <!-- Contenedor general para errores -->
+        <p id="form-errors" style="display: none; color: red;"></p>
+
+        <!-- Botón continuar -->
+        <div class="form-group">
+            <button type="submit">Continuar al Paso 3</button>
+        </div>
+    </form>
+    <script src="js/datosTutor.js"></script>
+</body>
+</html>

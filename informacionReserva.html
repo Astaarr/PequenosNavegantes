@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Extras</title>
+</head>
+<body>
+    <h1>Registro al Campamento - Paso 3</h1>
+    <form id="form-extras" novalidate>
+        <!-- Transporte -->
+        <div class="form-group">
+            <label for="transporte">¿Necesitas transporte?</label>
+            <select id="transporte" name="transporte">
+                <option value="">Seleccione una opción</option>
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+            <p id="error-transporte" class="error" style="display: none; color: red;"></p>
+        </div>
+
+        <!-- Comidas -->
+        <div class="form-group">
+            <label for="comidas">Opciones de comida</label>
+            <select id="comidas" name="comidas">
+                <option value="">Seleccione una opción</option>
+                <option value="no">No</option>
+                <option value="solo-desayuno">Solo desayuno</option>
+                <option value="desayuno-comida">Desayuno y comida</option>
+            </select>
+            <p id="error-comidas" class="error" style="display: none; color: red;"></p>
+        </div>
+
+        <!-- Contenedor general para errores -->
+        <p id="form-errors" style="display: none; color: red;"></p>
+
+        <!-- Botón enviar -->
+        <div class="form-group">
+            <button type="submit">Finalizar Registro</button>
+        </div>
+    </form>
+    <script src="js/informacionReserva.js"></script>
+</body>
+</html>
