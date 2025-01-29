@@ -1,0 +1,150 @@
+/* ------------------------------------------------------------------------------ */
+/* BASE */
+/* ------------------------------------------------------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blanco: #fff;
+    --negro: #1a1a1a;
+    --gris: #222;
+
+    --main: #0184DC;
+    --second: #071528;
+    --disable: #666666;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    height: 4000px;
+    background-color: red;
+    
+}
+
+
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+}
+
+p, a, span, i, li, input, button, label {
+    font-family: "Open Sans", sans-serif;
+}
+
+h1{
+    font-size: 3.2em;
+}
+p{
+    font-size: 1.2em;
+}
+
+span{
+    color: var(--main);
+}
+
+
+
+header{
+    width: 100%;
+    height: 100px;
+    background-color: var(--blanco);
+    position: fixed;
+}
+
+.navbar{
+    display: flex;
+    max-width: 70vw;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    gap: 2em;
+
+}
+.links{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+li{
+    text-decoration: none;
+    list-style: none;
+    position: relative;
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: var(--negro);
+
+}
+
+.logo{
+    width: 100px;
+}
+
+.logo img{
+    width: 100%;
+}
+
+.btn-nav{
+    padding: 0.5em 1em;
+    border-radius: 15px;
+    border: none;
+}
+
+.btn-nav i{
+    margin-right: 8px;
+}
+
+.navbar .actions button{
+    font-family: "Poppins", sans-serif;
+    font-weight: regular;
+}
+
+.navbar li::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--negro);
+    transition: 0.2s ease-in;
+}
+.navbar li:hover::after {
+    width: 100%;
+}
+
+.navbar .actions{
+    display: flex;
+    gap: 0.5em;
+}
+
+.navbar .actions button{
+
+}
+
+.btn-main {
+    background-color: var(--main);
+    color: var(--blanco);
+}
+
+.btn-second{
+    background-color: var(--blanco);
+    border: 1px solid var(--negro);
+}
