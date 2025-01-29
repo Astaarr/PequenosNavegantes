@@ -22,9 +22,7 @@ html {
 }
 
 body {
-    height: 4000px;
-    background-color: red;
-    
+    height: 4000px;    
 }
 
 
@@ -73,7 +71,7 @@ header{
 .content{
     display: flex;
     align-items: center;
-    gap: 2em;
+    gap: 3em;
 
 }
 .links{
@@ -86,10 +84,15 @@ li{
     text-decoration: none;
     list-style: none;
     position: relative;
+}
+
+a{
+    text-decoration: none;
+    color: var(--negro);
 
     font-family: "Poppins", sans-serif;
+    font-size: 1em;
     font-weight: 600;
-    color: var(--negro);
 
 }
 
@@ -124,7 +127,7 @@ li{
     width: 0;
     height: 2px;
     background-color: var(--negro);
-    transition: 0.2s ease-in;
+    transition: 0.3s ease width;
 }
 .navbar li:hover::after {
     width: 100%;
@@ -132,11 +135,18 @@ li{
 
 .navbar .actions{
     display: flex;
-    gap: 0.5em;
+    gap: 1em;
 }
 
-.navbar .actions button{
 
+
+.navbar .actions button{
+    font-size: 1em;
+    transition: 0.3s ease box-shadow;
+}
+
+.navbar .actions button:hover{
+    box-shadow: 5px 5px 15px #0184DC;
 }
 
 .btn-main {
@@ -146,5 +156,16 @@ li{
 
 .btn-second{
     background-color: var(--blanco);
-    border: 1px solid var(--negro);
+    border: 2px solid var(--negro);
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    .navbar .content{
+        flex-direction: column;
+    }
+
+
+
 }
