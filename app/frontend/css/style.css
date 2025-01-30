@@ -57,7 +57,7 @@ header{
     position: fixed;
 }
 
-.navbar{
+header .navbar{
     display: flex;
     max-width: 70vw;
     width: 100%;
@@ -68,25 +68,25 @@ header{
     align-items: center;
 }
 
-.content{
+header .content{
     display: flex;
     align-items: center;
     gap: 3em;
 
 }
-.links{
+header .links{
     display: flex;
     flex-direction: row;
     gap: 2em;
 }
 
-li{
+header li{
     text-decoration: none;
     list-style: none;
     position: relative;
 }
 
-a{
+header a{
     text-decoration: none;
     color: var(--negro);
 
@@ -96,30 +96,30 @@ a{
 
 }
 
-.logo{
+header .logo{
     width: 100px;
 }
 
-.logo img{
+header .logo img{
     width: 100%;
 }
 
-.btn-nav{
+header .btn-nav{
     padding: 0.5em 1em;
     border-radius: 15px;
     border: none;
 }
 
-.btn-nav i{
+header .btn-nav i{
     margin-right: 8px;
 }
 
-.navbar .actions button{
+header .navbar .actions button{
     font-family: "Poppins", sans-serif;
     font-weight: regular;
 }
 
-.navbar li::after {
+header .navbar li::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -129,41 +129,71 @@ a{
     background-color: var(--negro);
     transition: 0.3s ease width;
 }
-.navbar li:hover::after {
+header .navbar li:hover::after {
     width: 100%;
 }
 
-.navbar .actions{
+header .navbar .actions{
     display: flex;
     gap: 1em;
 }
 
 
 
-.navbar .actions button{
+header .navbar .actions button{
     font-size: 1em;
     transition: 0.3s ease box-shadow;
 }
 
-.navbar .actions button:hover{
+header .navbar .actions button:hover{
     box-shadow: 5px 5px 15px #0184DC;
 }
 
-.btn-main {
+header .btn-main {
     background-color: var(--main);
     color: var(--blanco);
 }
 
-.btn-second{
+header .btn-second{
     background-color: var(--blanco);
     border: 2px solid var(--negro);
 }
+
+.open-menu, .close-menu {
+    display: none;
+}
+
 
 
 
 @media screen and (max-width: 1024px) {
     .navbar .content{
+        position: absolute;
+        top: 0;
+        left: -500px;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 75vw;
+        height: 100vh;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        background-color: var(--blanco);
+        transition: left 0.2s ease-in-out;
+    }
+    .navbar .content .links, .actions{
+        flex-direction: column;
+
+    }
+
+    .open-menu, .close-menu {
+        display: block;
+        position: absolute;
+        top: 3em;
+        left: 3em;
+    }
+
+    .close-menu{
+        display: none;
     }
 
 
