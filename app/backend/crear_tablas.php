@@ -22,7 +22,7 @@ if (!verificarTabla($conexion, 'padre')){
     $sqlPadre = "CREATE TABLE padre (
         DNI VARCHAR(9) PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
-        password VARCHAR(100) NOT NULL,
+        password VARCHAR(255) NOT NULL,
         email VARCHAR(100) NOT NULL,
         telefono VARCHAR(16) NOT NULL
         )";
@@ -82,10 +82,10 @@ if(!verificarTabla($conexion, 'monitor')){
         DNI VARCHAR(9) PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
         apellidos VARCHAR(100) NOT NULL,
-        password VARCHAR(100) NOT NULL,
+        password VARCHAR(255) NOT NULL,
         email VARCHAR(100) NOT NULL,
         telefono VARCHAR(16) NOT NULL,
-        curriculum TEXT,
+        curriculum TEXT
         )";
     mysqli_query($conexion, $sqlMonitor) or die("Error al crear la tabla 'monitor': " . mysqli_error($conexion));
 

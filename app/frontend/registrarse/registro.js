@@ -95,11 +95,34 @@ document.getElementById('apellido').addEventListener('blur', validarApellido);
 document.getElementById('email').addEventListener('blur', validarEmail);
 document.getElementById('password').addEventListener('blur', validarPassword);
 
-// Evento submit
+// Evento submit 
 form.addEventListener('submit', (event) => {
     event.preventDefault(); // Evita el envío por defecto
+
     if (validarFormulario()) {
-        console.log('Formulario enviado correctamente.');
-        form.submit();
+        const data = {
+            nombre: document.getElementById('nombre').value,
+            apellido: document.getElementById('apellido').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value
+        };
+
+        axios.post('http://localhost/PequenosNavegantes/app/backend/registrarse/registrarse.php', JSON.stringify(data), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log(response.data);
+            if (response.data.success) {
+                alert('Padre registrado correctamente');
+                window.location.href = '../../frontend/login/login.html';
+            } else {
+                alert(response.data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error al crear cuenta', error);
+        });
     }
 });
