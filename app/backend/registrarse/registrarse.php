@@ -28,6 +28,15 @@ if (empty($password)) {
 $hashedPassword = password_hash($password,PASSWORD_DEFAULT);
 
 
+// Enviar datos a la base de datos
+$sql = "INSERT INTO padre (nombre, email, password) VALUES (?, ?, ?)";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("sss", $nombre, $email, $hashedPassword);
+$stmt->execute();
+
+
+// Previsualizar los datos recibidos
+/*
 echo json_encode([
     "success" => true,
     "message" => "Usuario registrado correctamente",
@@ -37,3 +46,4 @@ echo json_encode([
         "password" => $password, $hashedPassword
     ]
     ]);
+*/

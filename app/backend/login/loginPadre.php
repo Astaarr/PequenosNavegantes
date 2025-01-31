@@ -1,20 +1,20 @@
 <?php
-include 'conecta.php';
+// Habilitar errores
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-$email = $_POST['email'];
-$password = $_POST['password'];
+// CORS
+header("Access-Control-Allow-Origin: *"); // Permite peticiones desde cualquier dominio
+header("Access-Control-Allow-Methods: POST, OPTIONS"); // Permite POST y la pre-flight request (OPTIONS)
+header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Permite enviar datos JSON y tokens
 
-$sqlLogin = "SELECT * FROM padre WHERE email = '$email' and password = '$dni'";
-$result = mysqli_query($conexion, $sqlLogin) or die("Error al verificar el usuario: " . mysqli_error($conexion));
+include '../conecta.php';
 
-if (mysqli_num_rows($result) > 0) {
-    $user = mysqli_fetch_assoc($result);
-    session_start();
-    $_SESSION['DNI'] = $user['DNI'];
-    $_SESSION['nombre'] = $user['nombre'];
-    $_SESSION['email'] = $user['email'];
-    $_SESSION['telefono'] = $user['telefono'];
-    header('Location: ../padre.php');
-} else {
-    header('Location: ../login.php?error=1');
-}
+$data = json_decode(file_get_contents('php://input'), true);
+
+// Verificar que los datos se recibieron correctamente
+$email = $data['nombre'] ?? '';
+$password = $data['password'] ?? '';
+$recordar = $data['recordar'] ?? '';
+
+// IMPLEMENTAR LA LOGICA DE RECORDAR CONTRASENA CON SESSION Y TOKEN

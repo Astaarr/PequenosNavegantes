@@ -2,7 +2,6 @@
 const form = document.getElementById('registro');
 const errorMensajeGeneral = document.getElementById('mensaje-error');
 const errorMensajeNombre = document.getElementById('error-nombre');
-const errorMensajeApellido = document.getElementById('error-apellido');
 const errorMensajeEmail = document.getElementById('error-email');
 const errorMensajePassword = document.getElementById('error-password');
 
@@ -14,18 +13,6 @@ function validarNombre() {
         return false;
     } else {
         limpiarError(errorMensajeNombre);
-        return true;
-    }
-}
-
-// Validar apellidos
-function validarApellido() {
-    const apellido = document.getElementById('apellido').value.trim();
-    if (apellido === '') {
-        mostrarError(errorMensajeApellido, 'El campo Apellidos no puede estar vacío.');
-        return false;
-    } else {
-        limpiarError(errorMensajeApellido);
         return true;
     }
 }
@@ -76,11 +63,10 @@ function limpiarError(elementoError) {
 // Validar formulario completo
 function validarFormulario() {
     const nombreValido = validarNombre();
-    const apellidoValido = validarApellido();
     const emailValido = validarEmail();
     const passwordValido = validarPassword();
 
-    if (!nombreValido || !apellidoValido || !emailValido || !passwordValido) {
+    if (!nombreValido || !emailValido || !passwordValido) {
         mostrarError(errorMensajeGeneral, 'Por favor, corrige los errores antes de continuar.');
         return false;
     } else {
@@ -91,7 +77,6 @@ function validarFormulario() {
 
 // Asociar las validaciones al evento blur
 document.getElementById('nombre').addEventListener('blur', validarNombre);
-document.getElementById('apellido').addEventListener('blur', validarApellido);
 document.getElementById('email').addEventListener('blur', validarEmail);
 document.getElementById('password').addEventListener('blur', validarPassword);
 

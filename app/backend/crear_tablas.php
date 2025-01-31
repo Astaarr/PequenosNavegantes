@@ -20,11 +20,11 @@ function verificarTabla($conexion, $tabla) {
 if (!verificarTabla($conexion, 'padre')){
     $sqlPadre = "CREATE TABLE padre (
         id_padre INT AUTO_INCREMENT PRIMARY KEY,
-        DNI VARCHAR(9) UNIQUE NOT NULL,
+        DNI VARCHAR(9) UNIQUE,
         nombre VARCHAR(100) NOT NULL,
         password VARCHAR(255) NOT NULL,
         email VARCHAR(100) NOT NULL,
-        telefono VARCHAR(16) NOT NULL
+        telefono VARCHAR(16)
         )";
     mysqli_query($conexion, $sqlPadre) or die("Error al crear la tabla 'padre': " . mysqli_error($conexion));
 

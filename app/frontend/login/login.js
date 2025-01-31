@@ -62,11 +62,34 @@ function validarFormulario() {
 document.getElementById('email').addEventListener('blur', validarEmail);
 document.getElementById('password').addEventListener('blur', validarPassword);
 
+
 // Evento submit
 form.addEventListener('submit', (event) => {
     event.preventDefault(); // Evita el envío por defecto
     if (validarFormulario()) {
-        console.log('Formulario enviado correctamente.');
-        form.submit();
+        const data = {
+            email : document.getElementById('email').value,
+            password : document.getElementById('password').value,
+            recordar : document.getElementById('recordar').checked
+        };
+
+        axios.post('http://localhost/PequenosNavegantes/app/backend/login/loginPadre.php', JSON.stringify(data), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })                                                                                                                             
+
+        .then(response=>{
+            console.log(response.data);
+            if(response.data == success){
+                alert('Login exitoso');
+                windows.location.href = '../../frontend/recursos.html';
+            }else{
+                alert(response.data.messenger);
+            }
+        })
+        .catch(error => {
+            console.error('Error al iniciar sesion', error);
+        });
     }
 });
