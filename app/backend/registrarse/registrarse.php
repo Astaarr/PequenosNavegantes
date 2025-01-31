@@ -14,7 +14,6 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 // Verificar que los datos se recibieron correctamente
 $nombre = $data['nombre'] ?? '';
-$apellido = $data['apellido'] ?? '';
 $email = $data['email'] ?? '';
 $password = $data['password'] ?? '';
 
@@ -34,7 +33,6 @@ echo json_encode([
     "message" => "Usuario registrado correctamente",
     "data" => [
         "nombre" => $nombre,
-        "apellidos" => $apellido,
         "email" => $email,
         "password" => $password, $hashedPassword
     ]

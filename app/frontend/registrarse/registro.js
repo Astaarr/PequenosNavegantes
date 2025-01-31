@@ -102,7 +102,6 @@ form.addEventListener('submit', (event) => {
     if (validarFormulario()) {
         const data = {
             nombre: document.getElementById('nombre').value,
-            apellido: document.getElementById('apellido').value,
             email: document.getElementById('email').value,
             password: document.getElementById('password').value
         };
