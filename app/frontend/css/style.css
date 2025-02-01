@@ -9,13 +9,16 @@
 
 :root {
     /* COLORES */
+    --main: #0184DC;
+    --second: #071528;
+
     --blanco: #fff;
     --negro: #1a1a1a;
     --gris: #222;
 
-    --main: #0184DC;
-    --second: #071528;
+
     --disable: #666666;
+    --error: #FF4444;
 
     /* RADIO */
     --radio: 15px;
@@ -58,6 +61,7 @@ h3{
 p, a, span, i, li, input, button, label {
     font-family: "Open Sans", sans-serif;
     font-size: 1em;
+    font-weight: 400;
     text-decoration: none;
     list-style: none;
     color: var(--negro);
@@ -73,7 +77,7 @@ a::after {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: var(--negro);
+    background-color: currentColor;
     transition: 0.3s ease width;
 }
 a:hover::after {
@@ -100,6 +104,10 @@ a:hover::after {
 .btn:hover{
     transform: scale(0.95);
 }
+.btn i{
+    margin-right: 8px;
+    font-size: 1em;
+}
 
 
 /*//////////////////////////////////////////////////
@@ -107,11 +115,13 @@ a:hover::after {
 //////////////////////////////////////////////////*/
 header{
     width: 100%;
-    max-height: 100px;
+    height: 100px;
+    position: fixed;
+    top: 0;
     background-color: var(--blanco);
     box-shadow: var(--sombra);
-    z-index: 200;
-    position: fixed;
+    z-index: 100;
+    transition: top 0.3s ease-in-out;
 }
 header .navbar{
     display: flex;
@@ -160,13 +170,8 @@ header .navbar .actions{
 header .navbar .actions button{
     width: 135px;
     font-family: "Poppins", sans-serif;
-    font-weight: regular;
-    font-size: 1em;
     transition: 0.3s ease box-shadow;
 
-}
-header .btn i{
-    margin-right: 8px;
 }
 header .navbar .actions button:hover{
     box-shadow: 5px 5px 15px #0184DC;
@@ -192,16 +197,19 @@ header .btn-second{
 //SECCIONES
 //////////////////////////////////////////////////*/
 section{
-    margin: 0 auto;  
-    margin-bottom: 64px;
-    padding-top: 100px;
+    margin: 0 auto;      
+    padding: 64px;
+
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     width: 70vw;
-    height: 600px;
-    /* background-color: red; */
+    height: fit-content;
+    background-color: red;
+    border: 1px solid black;
 }
 
 section .title{
@@ -232,26 +240,25 @@ form .field{
     flex-direction: column;
     width: 100%;
 }
-.field input{
+.field input, .field .btn{
     width: 100%;
-
+    
     border: none;
     padding: 1em;
     border-radius: var(--radio);
     box-shadow: var(--sombra);
-    font-family: "Open Sans", sans-serif;
-    font-size: 1em;
 }
-.field label{
-    font-family: "Open Sans", sans-serif;
-    font-size: 1em;
-}
+
 
 /* ELEMENTOS EN LINEA */
 .field .inline{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+.field .question{
+    color: var(--disable);
+    font-size: 14px;
 }
 
 
@@ -262,7 +269,8 @@ form .field{
     justify-content: space-between;
     position: relative;
 }
-.field .separador::before,.separador::after{
+.field .separador::before,
+.field .separador::after{
     content: "";
     width: 45%;
     height: 2px;
@@ -270,6 +278,9 @@ form .field{
     background-color: var(--negro);
 }
 
+.field .inline>button{
+    width: 45%;
+}
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////
 //RESPONSIVE MÓVIL
@@ -277,6 +288,9 @@ form .field{
 @media screen and (max-width: 1024px) {
 
     /* HEADER */
+    header{
+        height: 80px;
+    }
     header .navbar{
         max-width: 85vw;
         width: 100%;
