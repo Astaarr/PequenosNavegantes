@@ -1,6 +1,6 @@
-/* ------------------------------------------------------------------------------ */
-/* BASE */
-/* ------------------------------------------------------------------------------ */
+/*//////////////////////////////////////////////////
+//BASE
+//////////////////////////////////////////////////*/
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +8,7 @@
 }
 
 :root {
+    /* COLORES */
     --blanco: #fff;
     --negro: #1a1a1a;
     --gris: #222;
@@ -15,6 +16,12 @@
     --main: #0184DC;
     --second: #071528;
     --disable: #666666;
+
+    /* RADIO */
+    --radio: 15px;
+
+    /* SOMBRAS */
+    --sombra: 5px 5px 20px rgba(0, 0, 0, 0.2);
 }
 
 html {
@@ -23,41 +30,89 @@ html {
 
 body {
     height: 4000px;    
-    background-color: #0184DC;
 }
 
 
+/*//////////////////////////////////////////////////
+//COMPONENTES
+//////////////////////////////////////////////////*/
 
-
+/* TÍTULOS */
 h1, h2, h3, h4, h5, h6 {
     font-family: "Poppins", sans-serif;
-    font-weight: 700;
-}
-
-p, a, span, i, li, input, button, label {
-    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    color: var(--negro);
 }
 
 h1{
-    font-size: 3.2em;
+    font-size: 3.5em;
 }
-p{
-    font-size: 1.2em;
+h2{
+    font-size: 3em;
+}
+h3{
+    font-size: 2.25em;
 }
 
-span{
-    color: var(--main);
+/* TEXTOS */
+p, a, span, i, li, input, button, label {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1em;
+    text-decoration: none;
+    list-style: none;
+    color: var(--negro);
+}
+a{
+    position: relative;
+    transition: color ease 0.3s;
+}
+a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--negro);
+    transition: 0.3s ease width;
+}
+a:hover::after {
+    width: 100%;
+}
+
+/* BOTONES */
+.btn{
+    padding: 0.5em 1em;
+    border-radius: var(--radio);
+    border: none;
+    font-size: 1em;
+    font-family: "Open Sans", sans-serif;
+    transition: transform ease 0.2s;
+}
+.btn-main {
+    background-color: var(--main);
+    color: var(--blanco);
+}
+.btn-second{
+    background-color: var(--blanco);
+    border: 2px solid var(--negro);
+}
+.btn:hover{
+    transform: scale(0.95);
 }
 
 
-
+/*//////////////////////////////////////////////////
+//HEADER
+//////////////////////////////////////////////////*/
 header{
     width: 100%;
     max-height: 100px;
     background-color: var(--blanco);
+    box-shadow: var(--sombra);
+    z-index: 200;
     position: fixed;
 }
-
 header .navbar{
     display: flex;
     max-width: 70vw;
@@ -68,106 +123,77 @@ header .navbar{
     justify-content: space-between;
     align-items: center;
 }
-
 header .content{
     display: flex;
     align-items: center;
     gap: 3em;
 
 }
+
+/* ENLACES */
 header .links{
     display: flex;
     flex-direction: row;
     gap: 2em;
 }
-
-header li{
-    text-decoration: none;
-    list-style: none;
-    position: relative;
-}
-
 header a{
-    text-decoration: none;
-    color: var(--negro);
-
     font-family: "Poppins", sans-serif;
     font-size: 1em;
     font-weight: 600;
 
 }
 
+/* LOGO */
 header .logo{
     width: 100px;
 }
-
 header .logo img{
     width: 100%;
 }
 
-header .btn-nav{
-    padding: 0.5em 1em;
-    border-radius: 15px;
-    border: none;
-}
-
-header .btn-nav i{
-    margin-right: 8px;
-}
-
-header .navbar .actions button{
-    font-family: "Poppins", sans-serif;
-    font-weight: regular;
-}
-
-header .navbar li::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--negro);
-    transition: 0.3s ease width;
-}
-header .navbar li:hover::after {
-    width: 100%;
-}
-
+/* BOTONES */
 header .navbar .actions{
     display: flex;
     gap: 1em;
 }
 
-
-
 header .navbar .actions button{
     width: 135px;
+    font-family: "Poppins", sans-serif;
+    font-weight: regular;
     font-size: 1em;
     transition: 0.3s ease box-shadow;
-}
 
+}
+header .btn i{
+    margin-right: 8px;
+}
 header .navbar .actions button:hover{
     box-shadow: 5px 5px 15px #0184DC;
 }
-
-header .btn-main {
+header .btn-main, .btn-main>i{
     background-color: var(--main);
     color: var(--blanco);
 }
-
 header .btn-second{
     background-color: var(--blanco);
     border: 2px solid var(--negro);
 }
 
+/* BOTONES RESPONSIVE */
 .open-menu, .close-menu {
     display: none;
 }
 
 
+
+
+/*//////////////////////////////////////////////////
+//SECCIONES
+//////////////////////////////////////////////////*/
 section{
-    margin: auto;
+    margin: 0 auto;  
+    margin-bottom: 64px;
     padding-top: 100px;
     display: flex;
     flex-direction: column;
@@ -175,7 +201,7 @@ section{
     justify-content: center;
     width: 70vw;
     height: 600px;
-    background-color: red;
+    /* background-color: red; */
 }
 
 section .title{
@@ -186,19 +212,75 @@ section .title{
 }
 section .content{
     width: 100%;
-    background-color: blue;
+    /* background-color: blue; */
 }
 
 
+/*//////////////////////////////////////////////////
+//FORMULARIOS 
+//////////////////////////////////////////////////*/
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 30vw;
+}
+
+/* ENTRADA */
+form .field{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.field input{
+    width: 100%;
+
+    border: none;
+    padding: 1em;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    font-family: "Open Sans", sans-serif;
+    font-size: 1em;
+}
+.field label{
+    font-family: "Open Sans", sans-serif;
+    font-size: 1em;
+}
+
+/* ELEMENTOS EN LINEA */
+.field .inline{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
 
+/* SEPARADOR */
+.field .separador{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+}
+.field .separador::before,.separador::after{
+    content: "";
+    width: 45%;
+    height: 2px;
+    transform: translateY(0.5em);
+    background-color: var(--negro);
+}
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////
+//RESPONSIVE MÓVIL
+/////////////////////////////////////////////////////////////////////////////////////////////////*/
 @media screen and (max-width: 1024px) {
+
+    /* HEADER */
     header .navbar{
         max-width: 85vw;
         width: 100%;
     }
-
-
     .navbar .content{
         position: absolute;
         top: 0;
@@ -210,7 +292,7 @@ section .content{
         width: 100%;
         height: 100vh;
         padding: 4em;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--sombra);
         background-color: var(--blanco);
         transition: right 0.2s ease-in-out;
     }
@@ -218,21 +300,17 @@ section .content{
         flex-direction: column;
 
     }
-
     span i{
         font-size: 1em;
         color: var(--negro);
     }
-
     .open-menu, .close-menu {
         z-index: 100;
         display: block;
     }
-
     .close-menu{
         display: none;
     }
-
     .actions{
         width: 100%;
     }
