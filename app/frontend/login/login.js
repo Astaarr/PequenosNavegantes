@@ -68,28 +68,29 @@ form.addEventListener('submit', (event) => {
     event.preventDefault(); // Evita el envío por defecto
     if (validarFormulario()) {
         const data = {
-            email : document.getElementById('email').value,
-            password : document.getElementById('password').value,
-            recordar : document.getElementById('recordar').checked
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            recordar: document.getElementById('recordar').checked
         };
+
+        console.log("Datos enviados:", data);
 
         axios.post('http://localhost/PequenosNavegantes/app/backend/login/loginPadre.php', JSON.stringify(data), {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })                                                                                                                             
-
-        .then(response=>{
+        })
+        .then(response => {
             console.log(response.data);
-            if(response.data == success){
+            if (response.data.success) {
                 alert('Login exitoso');
-                windows.location.href = '../../frontend/recursos.html';
-            }else{
-                alert(response.data.messenger);
+                window.location.href = '../../frontend/recursos.html'; 
+            } else {
+                alert(response.data.message || "Error en el inicio de sesión");
             }
         })
         .catch(error => {
-            console.error('Error al iniciar sesion', error);
+            console.error('Error al iniciar sesión', error);
         });
     }
 });
