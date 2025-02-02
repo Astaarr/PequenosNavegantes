@@ -8,6 +8,10 @@
 }
 
 :root {
+    /* TIPOGRAFÍAS */
+    --titulos: "Poppins", sans-serif;
+    --textos: "Open Sans", sans-serif;
+    
     /* COLORES */
     --main: #0184DC;
     --second: #071528;
@@ -15,7 +19,6 @@
     --blanco: #fff;
     --negro: #1a1a1a;
     --gris: #222;
-
 
     --disable: #666666;
     --error: #FF4444;
@@ -35,6 +38,10 @@ body {
     height: 4000px;    
 }
 
+main{
+    /* Espacio del header */
+    padding-top: 100px; 
+}
 
 /*//////////////////////////////////////////////////
 //COMPONENTES
@@ -42,7 +49,7 @@ body {
 
 /* TÍTULOS */
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Poppins", sans-serif;
+    font-family: var(--titulos);
     font-weight: bold;
     color: var(--negro);
 }
@@ -59,7 +66,7 @@ h3{
 
 /* TEXTOS */
 p, a, span, i, li, input, button, label {
-    font-family: "Open Sans", sans-serif;
+    font-family: var(--textos);
     font-size: 1em;
     font-weight: 400;
     text-decoration: none;
@@ -90,7 +97,6 @@ a:hover::after {
     border-radius: var(--radio);
     border: none;
     font-size: 1em;
-    font-family: "Open Sans", sans-serif;
     transition: transform ease 0.2s;
 }
 .btn-main {
@@ -104,7 +110,10 @@ a:hover::after {
 .btn:hover{
     transform: scale(0.95);
 }
-.btn i{
+
+/* ICONOS */
+i{
+    color: inherit;
     margin-right: 8px;
     font-size: 1em;
 }
@@ -147,7 +156,7 @@ header .links{
     gap: 2em;
 }
 header a{
-    font-family: "Poppins", sans-serif;
+    font-family: var(--titulos);
     font-size: 1em;
     font-weight: 600;
 
@@ -169,20 +178,12 @@ header .navbar .actions{
 
 header .navbar .actions button{
     width: 135px;
-    font-family: "Poppins", sans-serif;
+    font-family: var(--titulos);
     transition: 0.3s ease box-shadow;
 
 }
 header .navbar .actions button:hover{
     box-shadow: 5px 5px 15px #0184DC;
-}
-header .btn-main, .btn-main>i{
-    background-color: var(--main);
-    color: var(--blanco);
-}
-header .btn-second{
-    background-color: var(--blanco);
-    border: 2px solid var(--negro);
 }
 
 /* BOTONES RESPONSIVE */
@@ -208,14 +209,14 @@ section{
 
     width: 70vw;
     height: fit-content;
-    background-color: red;
-    border: 1px solid black;
+    /* background-color: red; */
+    /* border: 1px solid black; */
 }
 
 section .title{
     width: 100%;
     text-align: center;
-    background-color: green;
+    /* background-color: green; */
 
 }
 section .content{
@@ -238,6 +239,7 @@ form{
 form .field{
     display: flex;
     flex-direction: column;
+    gap: 8px;
     width: 100%;
 }
 .field input, .field .btn{
@@ -261,6 +263,45 @@ form .field{
     font-size: 14px;
 }
 
+/* CHECKBOX */
+.field .checkbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+}
+.field .checkbox input{
+    display: none;
+}
+.field .checkbox span {
+    display: inline-block;
+    position: relative;
+
+    height: 20px;
+    width: 20px;
+
+    margin-left: 8px;
+
+    background-color: none;
+    border-radius: 50%;
+    border: 2px solid var(--second);
+
+    cursor: pointer;
+}
+.field .checkbox span::after {
+    content: "";
+    position: absolute;
+    width: 0.8em;
+    height: 0.8em;
+
+    transform: translate(0.1em, 0.1em);
+    background-color: var(--second);
+    border-radius: 50%;
+    opacity: 0;
+    transition: ease 0.2s;
+}
+.checkbox-custom input:checked ~ span:after{
+    opacity: 1;
+}
 
 /* SEPARADOR */
 .field .separador{
@@ -277,10 +318,32 @@ form .field{
     transform: translateY(0.5em);
     background-color: var(--negro);
 }
-
 .field .inline>button{
     width: 45%;
 }
+
+/* CAMPOS ADICIONALES */
+.field .campo-adicional{
+    display: none;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+    border-left: 2px solid var(--disable);
+}
+
+/* MENSAJE ERROR */
+.field .error{
+    display: none;
+    color: var(--error);
+}
+
+
+
+
+
+
+
+
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////
 //RESPONSIVE MÓVIL

@@ -14,7 +14,7 @@
 
 </head>
 <body>
-    <header>
+    <header id="header-main">
         <div class="navbar">
             <div class="logo">
                 <img src="../../resources/logo/logoN.png" alt="">
@@ -36,6 +36,18 @@
         </div>
     </header>
 
+    <!-- <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="../../resources/logo/logoN.png" alt="">
+            </div>
+            <div class="content" id="menu">
+                <a href=""><i class="fa-solid fa-arrow-left"></i>Volver</a>
+            </div>
+        </div>
+    </header> -->
+
+
     <main>
         <section>
             <div class="title">
@@ -47,15 +59,25 @@
             </div>
 
         </section>
+
+        
+
         <section>
-            <form action="">
+            <form action="" id="formulario">
                 <div class="field">
                     <h3>INICIAR SESIÓN</h3>
                 </div>
 
                 <div class="field">
                     <label for="correo">Email</label>
-                    <input type="email" name="correo" id="correo" placeholder="Ingresa tu email" tabindex="1">
+                    <input type="email" class="obligatorio" name="correo" id="correo" placeholder="Ingresa tu email" tabindex="1">
+                    <span class="error"></span>
+                </div>
+
+                <div class="field">
+                    <label for="correo">DNI</label>
+                    <input type="text" class="obligatorio dni" name="correo" id="correo" placeholder="Ingresa tu DNI" tabindex="1">
+                    <span class="error"></span>
                 </div>
 
                 <div class="field">
@@ -63,7 +85,51 @@
                         <label for="contra">Contraseña</label>
                         <a href="" class="question">¿Contraseña olvidada?</a>
                     </div>
-                    <input type="password" name="contra" id="contra" placeholder="Ingresa tu contraseña" tabindex="2">
+                    <input type="password" class="obligatorio" name="contra" id="contra" placeholder="Ingresa tu contraseña" tabindex="2">
+                    <span class="error"></span>
+                </div>
+
+                <div class="field">
+                    <div class="checkbox">
+                        <label for="contra">Acepto los terminos y servicios</label>
+                        <label class="checkbox-custom">
+                            <input type="checkbox" name="" id="">
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="checkbox">
+                        <label for="contra">¿Presenta alguna alergia?</label>
+                        <label class="checkbox-custom ">
+                            <input type="checkbox" name="" id="" class="checkbox-adicional">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="campo-adicional">
+                        <input type="text" placeholder="Ingresa la Alergía" name="" id="">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="checkbox">
+                        <label for="contra">¿Le recojerá otra persona?</label>
+                        <label class="checkbox-custom ">
+                            <input type="checkbox" name="" id="" class="checkbox-adicional">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="campo-adicional">
+                        <div class="field">
+                            <label for="">Nombre del Autorizado</label>
+                            <input type="text" placeholder="Ingresa su Nombre" name="" id="">
+                        </div>
+                        <div class="field">
+                            <label for="">DNI del Autorizado</label>
+                            <input type="text" placeholder="Ingresa su DNI" name="" id="">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="field">
