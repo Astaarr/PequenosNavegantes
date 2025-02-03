@@ -232,7 +232,7 @@ form{
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 30vw;
+    width: 35vw;
 }
 
 /* ENTRADA */
@@ -320,6 +320,53 @@ form .field{
 }
 .field .inline>button{
     width: 45%;
+}
+
+/* PROCESO */
+.barra-proceso{
+    width: 30vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3em;
+}
+.barra-proceso h4{
+    background-color: var(--blanco);
+    color: var(--second);
+    border: 2px solid var(--second);
+    padding: 1em 1.5em;
+    border-radius: 50%;
+}
+.barra-proceso span{
+    content: "";
+    border: 2px dashed var(--second);
+    width: 20%;
+    height: 2px;
+    margin: 1em;
+}
+.barra-proceso .done,
+.barra-proceso .actual{
+    background-color: var(--second);
+    color: var(--blanco);
+}
+.barra-proceso .done::before{
+    content: "✔";
+    position: absolute;
+    left: 1.25em;
+    color: var(--blanco);
+}
+.barra-proceso .done{
+    content: none;
+    position: relative;
+    color: transparent;
+}
+h4.done + span{
+    border: 2px solid var(--second);
+} 
+h4.done ~ h4:first-of-type{
+    background-color: var(--second);
+    color: var(--blanco);
 }
 
 /* CAMPOS ADICIONALES */
