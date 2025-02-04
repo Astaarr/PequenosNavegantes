@@ -35,7 +35,8 @@ html {
 }
 
 body {
-    height: 4000px;    
+    height: auto;
+    /* height: 4000px;     */
 }
 
 main{
@@ -309,6 +310,7 @@ form .field{
     flex-direction: row;
     justify-content: space-between;
     position: relative;
+    margin: 2em 0;
 }
 .field .separador::before,
 .field .separador::after{
@@ -319,8 +321,21 @@ form .field{
     background-color: var(--negro);
 }
 .field .inline>button{
-    width: 45%;
+    width: 49%;
 }
+.field > p:first-child a {
+    padding-left: 8px;
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 4px; 
+}
+.field > p:first-child a::after{
+    width: 0;
+}
+.field > p:first-child a:hover{
+    color: var(--main);
+}
+
 
 /* PROCESO */
 .barra-proceso{
@@ -367,6 +382,18 @@ h4.done + span{
 h4.done ~ h4:first-of-type{
     background-color: var(--second);
     color: var(--blanco);
+}
+
+/* MOSTRAR CONTRASEÑA */
+input[type="password"]{
+    position: relative;
+}
+input[type="password"] ~ i{
+    position: absolute;
+    right: 1em;
+}
+.field .inputPassword i:nth-of-type(2){
+    display: none;
 }
 
 /* CAMPOS ADICIONALES */

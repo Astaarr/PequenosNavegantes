@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-
+    <!-- ESTILOS -->
     <link rel="stylesheet" href="../css/style.css">
+
+    <!-- AXIOS -->
+    <script src="../axios/node_modules/axios/dist/axios.min.js" defer></script>
 
     <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,62 +34,7 @@
 
     <main>
         <section>
-            <h1>Lorem Ipsum</h1>
-            <form id="login-form">
-                <!-- Email -->
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="ejemplo@gmail.com">
-                    <p id="error-email" class="error" style="display: none; color: red;"></p>
-                </div>
-    
-                <!-- Contraseña -->
-                <div class="form-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password">
-                    <p id="error-password" class="error" style="display: none; color: red;"></p>
-                </div>
-    
-                <!-- Recordar contraseña -->
-                <div class="form-group">
-                    <label for="recordar">
-                        <input type="checkbox" id="recordar" name="recordar">
-                        Recordar contraseña
-                    </label>
-                </div>
-    
-                <!-- Contenedor general para errores -->
-                <p id="form-errors" style="display: none; color: red;"></p>
-    
-                <!-- Botón enviar -->
-                <div class="form-group">
-                    <button type="submit">Iniciar sesión</button>
-                </div>
-    
-                <!-- Enlaces adicionales -->
-                <div class="form-group">
-                    <p>¿Has olvidado la contraseña? <a href="recuperar.html">Recupérala aquí</a></p>
-                </div>
-                <div class="form-group">
-                    <p>¿No tienes una cuenta? <a href="registro.html">Regístrate ahora</a></p>
-                </div>
-            </form>
-        </section>
-    </main>
-
-    <main>
-        <section>
-            <form action="#" id="formulario">
-                <div class="barra-proceso">
-                    <h4 class="done">1</h4>
-                    <span></span>
-                    <h4 class="actual">2</h4>
-                    <span></span>
-                    <h4>3</h4>
-                    <span></span>
-                    <h4>4</h4>
-                </div>
-
+            <form id="formulario">
                 <div class="field">
                     <h3>INICIAR SESIÓN</h3>
                 </div>
@@ -103,14 +51,16 @@
                         <a href="" class="question">¿Contraseña olvidada?</a>
                     </div>
                     <input type="password" class="obligatorio" id="password" name="password" placeholder="Ingresa tu contraseña" tabindex="2">
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-regular fa-eye-slash"></i>
                     <span class="error"></span>
                 </div>
 
                 <div class="field">
                     <div class="checkbox">
-                        <label for="contra">Acepto los terminos y servicios</label>
+                        <label for="recordar">Recordar contraseña</label>
                         <label class="checkbox-custom">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" name="recordar" id="recordar">
                             <span></span>
                         </label>
                     </div>
@@ -131,13 +81,17 @@
                     </div>
                 </div>
 
+                <div class="field">
+                    <p >¿No tienes cuenta?<a href="">Registrate ahora</a></p>
+                </div>
+
 
             </form>
         </section>
     </main>
 
-
-    <script src="login.js"></script>
     <script src="../main.js"></script>
+    <script src="login.js"></script>
+
 </body>
 </html>

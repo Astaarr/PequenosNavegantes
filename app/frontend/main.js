@@ -54,11 +54,17 @@ checkboxes.forEach(checkbox => {
 
 
 ////////////////////////////////////////
+// MOSTRAR CONTRASEÑA
+////////////////////////////////////////
+
+
+
+////////////////////////////////////////
 // VALIDACIONES
 ////////////////////////////////////////
 
 // Obtener el formulario
-const form = document.getElementById('formulario');
+const formulario = document.getElementById('formulario');
 
 // Validar campo
 function validarCampoEspecifico(campo) {
@@ -107,31 +113,17 @@ function validarDNI(dni) {
 
 // Función para mostrar el error
 function mostrarError(elementoError, mensaje) {
+    if (!elementoError) return; // Si es null, salir de la función
     elementoError.style.display = 'inline';
     elementoError.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${mensaje}`;
 }
 
 // Función para limpiar el error
 function limpiarError(elementoError) {
+    if (!elementoError) return; // Si es null, salir de la función
     elementoError.style.display = 'none';
 }
 
 // Seleccionar todos los inputs y añadir evento 'blur'
-const inputs = document.querySelectorAll('input');
+const inputs = document.querySelectorAll('input:not([type="button"]):not([type="checkbox"]):not([type="radio"])');
 inputs.forEach(input => input.addEventListener('blur', () => validarCampoEspecifico(input)));
-
-// Validar el formulario al enviarlo
-form.addEventListener('submit', function(event) {
-    let formularioValido = true;
-
-    inputs.forEach(input => {
-        if (!validarCampoEspecifico(input)) {
-            formularioValido = false;
-        }
-    });
-
-    if (!formularioValido) {
-        event.preventDefault(); // Evita el envío del formulario si hay errores
-    }
-});
-
