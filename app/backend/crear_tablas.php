@@ -25,7 +25,7 @@ if (!verificarTabla($conexion, 'padre')){
         password VARCHAR(255) NOT NULL,
         email VARCHAR(100) NOT NULL,
         telefono VARCHAR(16),
-        token_login VARCHAR(32)
+        token_login VARCHAR(255)
         )";
     mysqli_query($conexion, $sqlPadre) or die("Error al crear la tabla 'padre': " . mysqli_error($conexion));
 
@@ -39,7 +39,8 @@ if (!verificarTabla($conexion, 'padre')){
 // Verifica y crea tabla 'monitor
 if(!verificarTabla($conexion, 'monitor')){
     $sqlMonitor = "CREATE TABLE monitor (
-        DNI VARCHAR(9) PRIMARY KEY,
+        id_monitor INT AUTO_INCREMENT PRIMARY KEY,
+        DNI VARCHAR(9) UNIQUE,
         nombre VARCHAR(100) NOT NULL,
         apellidos VARCHAR(100) NOT NULL,
         password VARCHAR(255) NOT NULL,
@@ -60,15 +61,15 @@ if(!verificarTabla($conexion, 'grupo')){
     $sqlGrupo = "CREATE TABLE grupo (
         id_grupo INT AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(100) NOT NULL,
-        id_monitor VARCHAR(9),
-        FOREIGN KEY (id_monitor) REFERENCES monitor(DNI) ON DELETE SET NULL
+        id_monitor INT,
+        FOREIGN KEY (id_monitor) REFERENCES monitor(id_monitor) ON DELETE SET NULL
         )";
     mysqli_query($conexion, $sqlGrupo) or die("Error al crear la tabla 'grupo': " . mysqli_error($conexion));
 
     // Insertar datos en la tabla 'grupo'
     $sqlGrupoInsert = "INSERT INTO grupo (nombre, id_monitor) VALUES
-        ('Grupo 1', '34567890C'),
-        ('Grupo 2', '45678901D')";
+        ('Grupo 1', 1),
+        ('Grupo 2', 2)";
     mysqli_query($conexion, $sqlGrupoInsert) or die("Error al insertar datos en 'grupo': " . mysqli_error($conexion));
 }
 

@@ -49,6 +49,7 @@ $stmt -> bind_param("s", $email);
 $stmt -> execute();
 $result = $stmt -> get_result();
 
+
 if($row = $result ->fetch_assoc()){
     if(password_verify($password, $row['password'])){
         $_SESSION['id_padre'] = $row['id_padre'];
@@ -74,5 +75,3 @@ if($row = $result ->fetch_assoc()){
     }
 }
 echo json_encode(["success" => false, "message" => "Usuario no encontrado"]);
-
-// IMPLEMENTAR LA LOGICA DE RECORDAR CONTRASENA CON SESSION Y TOKEN

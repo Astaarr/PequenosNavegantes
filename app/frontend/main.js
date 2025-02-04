@@ -127,3 +127,37 @@ function limpiarError(elementoError) {
 // Seleccionar todos los inputs y añadir evento 'blur'
 const inputs = document.querySelectorAll('input:not([type="button"]):not([type="checkbox"]):not([type="radio"])');
 inputs.forEach(input => input.addEventListener('blur', () => validarCampoEspecifico(input)));
+
+
+
+// Verificar la cookie del navegador
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].split('=');
+        if (cookie[0] === name) {
+            return cookie[1];
+        }
+    }
+    return null;
+}
+
+window.onload = function() {
+    const token = getCookie("token_login");
+
+    if (token) {
+        axios.post('/PequenosNavegantes/app/backend/login/validarToken.php', JSON.stringify({ token: token }), {
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => {
+            if (response.data.success) {
+                // Si el token es válido, redirigir al usuario al dashboard
+                window.location.href = "/PequenosNavegantes/app/frontend/paginaPrincipal/index.html";
+            }
+        })
+        .catch(error => {
+            console.error("Error al validar el token:", error);
+        });
+    }
+};
+
