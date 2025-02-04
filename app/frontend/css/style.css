@@ -385,10 +385,12 @@ h4.done ~ h4:first-of-type{
 }
 
 /* MOSTRAR CONTRASEÑA */
-input[type="password"]{
+.field .inputPassword{
+    display: flex;
+    align-items: center;
     position: relative;
 }
-input[type="password"] ~ i{
+.field .inputPassword i{
     position: absolute;
     right: 1em;
 }
