@@ -21,7 +21,7 @@ form.addEventListener('submit', (event) => {
 
         console.log("Datos enviados:", data);
 
-        axios.post('http://localhost/PequenosNavegantes/app/backend/login/loginPadre.php', JSON.stringify(data), {
+        axios.post('/PequenosNavegantes/app/backend/login/loginPadre.php', JSON.stringify(data), {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -30,7 +30,7 @@ form.addEventListener('submit', (event) => {
             console.log(response.data);
             if (response.data.success) {
                 alert('Login exitoso');
-                window.location.href = '../../frontend/recursos.html'; 
+                window.location.href = '../../frontend/paginaPrincipal/index.html'; 
             } else {
                 alert(response.data.message || "Error en el inicio de sesión");
             }

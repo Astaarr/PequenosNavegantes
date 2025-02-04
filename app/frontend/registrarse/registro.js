@@ -91,7 +91,7 @@ form.addEventListener('submit', (event) => {
             password: document.getElementById('password').value
         };
 
-        axios.post('http://localhost/PequenosNavegantes/app/backend/registrarse/registrarse.php', JSON.stringify(data), {
+        axios.post('/PequenosNavegantes/app/backend/registrarse/registrarse.php', JSON.stringify(data), {
             headers: {
                 'Content-Type': 'application/json'
             }

@@ -34,16 +34,3 @@ $stmt = $conexion->prepare($sql);
 $stmt->bind_param("sss", $nombre, $email, $hashedPassword);
 $stmt->execute();
 
-
-// Previsualizar los datos recibidos
-/*
-echo json_encode([
-    "success" => true,
-    "message" => "Usuario registrado correctamente",
-    "data" => [
-        "nombre" => $nombre,
-        "email" => $email,
-        "password" => $password, $hashedPassword
-    ]
-    ]);
-*/
