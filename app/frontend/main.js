@@ -56,7 +56,14 @@ checkboxes.forEach(checkbox => {
 ////////////////////////////////////////
 // MOSTRAR CONTRASEÑA
 ////////////////////////////////////////
-const icono = select
+document.querySelectorAll('.mostrarPassword').forEach(icon => {
+    icon.addEventListener('click', function() {
+        const passwordInput = document.querySelector('#password');
+
+        // Alternar entre 'password' y 'text'
+        passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    });
+});
 
 ////////////////////////////////////////
 // VALIDACIONES
@@ -74,25 +81,32 @@ function validarCampoEspecifico(campo) {
     if (campo.classList.contains('obligatorio') && valor === '') {
         mostrarError(errorSpan, 'El campo no puede estar vacío.');
         return false;
+    }else{
+        // Si es un campo de tipo email, validar el formato
+        if (campo.type === 'email' && !validarEmail(valor)) {
+            mostrarError(errorSpan, 'Introduce un correo válido.');
+            return false;
+        }
+
+        // Validar DNI si el campo tiene la clase "dni"
+        if (campo.classList.contains('dni') && !validarDNI(valor)) {
+            mostrarError(errorSpan, 'Introduce un DNI válido.');
+            return false;
+        }
+
+        if (campo.type === 'tel' && !validarTelefono(valor)) {
+            mostrarError(errorSpan, 'Introduce un número de teléfono válido.');
+            return false;
+        }
+
+        // Validar contraseña si el campo tiene el id password
+        if (campo.id === 'password' && valor.length < 6) {
+            mostrarError(errorSpan, 'La contraseña debe tener al menos 6 caracteres.');
+            return false;
+        }
     }
 
-    // Si es un campo de tipo email, validar el formato
-    if (campo.type === 'email' && valor !== '' && !validarEmail(valor)) {
-        mostrarError(errorSpan, 'Introduce un correo válido.');
-        return false;
-    }
 
-    // Validar DNI si el campo tiene la clase "dni"
-    if (campo.classList.contains('dni') && valor !== '' && !validarDNI(valor)) {
-        mostrarError(errorSpan, 'Introduce un DNI válido.');
-        return false;
-    }
-
-    // Validar contraseña si el campo es de tipo password
-    if (campo.type === 'password' && valor !== '' && valor.length < 6) {
-        mostrarError(errorSpan, 'La contraseña debe tener al menos 6 caracteres.');
-        return false;
-    }
 
     limpiarError(errorSpan);
     return true;
