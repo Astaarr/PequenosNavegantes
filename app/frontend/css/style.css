@@ -385,16 +385,30 @@ h4.done ~ h4:first-of-type{
 }
 
 /* MOSTRAR CONTRASEÑA */
-input[type="password"]{
+.field{
     position: relative;
 }
-input[type="password"] ~ i{
+.field #password ~ i {
     position: absolute;
     right: 1em;
+    top: 3em;
+    font-size: 1em;
+    transition: color 0.2s ease-in-out;
+    cursor: pointer;
 }
-.field .inputPassword i:nth-of-type(2){
+.field #password ~ i:hover {
+    color: #0184DC;
+}
+.field input[type="password"] ~ i:nth-of-type(2){
     display: none;
 }
+.field input[type="text"] ~ i:nth-of-type(1){
+    display: none;
+}
+.field input[type="text"] ~ i:nth-of-type(2){
+    display: block;
+}
+
 
 /* CAMPOS ADICIONALES */
 .field .campo-adicional{
