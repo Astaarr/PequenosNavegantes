@@ -2,7 +2,7 @@
 
 Bienvenido a **Pequeños Navegantes**, un sitio web diseñado para un campamento infantil, donde los niños pueden descubrir aventuras, actividades y más. 🏕️✨
 
-![Logo de la web](resources/logoB.png)
+![Logo de la web](resources/logo/logoB.png)
 
 ## 📌 Características
 
