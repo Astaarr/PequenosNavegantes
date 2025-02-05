@@ -40,6 +40,7 @@ if($row = $result ->fetch_assoc()){
     require 'PHPMailer/SMTP.php';
     require 'PHPMailer/Exception.php';
 
-    
+// PONER EN LA BASE DE DATOS CODIGO_RESTABLECER Y TOKEN_RESTABLECER
+
 }
 ?>
