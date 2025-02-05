@@ -29,10 +29,14 @@ if (!verificarTabla($conexion, 'padre')){
         )";
     mysqli_query($conexion, $sqlPadre) or die("Error al crear la tabla 'padre': " . mysqli_error($conexion));
 
+    // Encriptar contraseñas
+    $passwordPadre1 = password_hash('padre123', PASSWORD_DEFAULT);
+    $passwordPadre2 = password_hash('padre456', PASSWORD_DEFAULT);
+
     // Insertar datos en la tabla 'padre'
     $sqlPadreInsert = "INSERT INTO padre (DNI, nombre, password, email, telefono) VALUES
-        ('12345678A', 'Daniel Clavel', 'padre123', 'ejemplo@gmail.com', '600123456'),
-        ('23456789B', 'Adri Arcones', 'padre456', 'ejemplo2@gmail.com', '611987654')";
+        ('12345678A', 'Daniel Clavel', '$passwordPadre1', 'ejemplo@gmail.com', '600123456'),
+        ('23456789B', 'Adri Arcones', '$passwordPadre2', 'ejemplo2@gmail.com', '611987654')";
     mysqli_query($conexion, $sqlPadreInsert) or die("Error al insertar datos en 'padre': " . mysqli_error($conexion));
 }
 
@@ -50,10 +54,14 @@ if(!verificarTabla($conexion, 'monitor')){
         )";
     mysqli_query($conexion, $sqlMonitor) or die("Error al crear la tabla 'monitor': " . mysqli_error($conexion));
 
+    // Encriptar contraseñas
+    $passwordMonitor1 = password_hash('monitor123', PASSWORD_DEFAULT);
+    $passwordMonitor2 = password_hash('monitor456', PASSWORD_DEFAULT);
+
     // Insertar datos en la tabla 'monitor'
     $sqlMonitorInsert = "INSERT INTO monitor (DNI, nombre, apellidos, password, email, telefono, curriculum) VALUES
-        ('34567890C', 'Juan', 'Perez', 'monitor123', 'juan.perez@example.com', '622345678', 'uploads/curriculums/cv_juan_perez.pdf'),
-        ('45678901D', 'Maria', 'Garcia', 'monitor456', 'maria.gomez@example.com', '633456789', 'uploads/curriculums/cv_maria_garcia.pdf')";
+        ('34567890C', 'Juan', 'Perez', '$passwordMonitor1', 'juan.perez@example.com', '622345678', 'uploads/curriculums/cv_juan_perez.pdf'),
+        ('45678901D', 'Maria', 'Garcia', '$passwordMonitor2', 'maria.gomez@example.com', '633456789', 'uploads/curriculums/cv_maria_garcia.pdf')";
     mysqli_query($conexion, $sqlMonitorInsert) or die("Error al insertar datos en 'monitor': " . mysqli_error($conexion));
 }
 // Verifica y crea la tabla 'grupo'
@@ -109,7 +117,7 @@ if (!verificarTabla($conexion, 'hijo')){
     
     // Insertar datos en la tabla 'hijo'
     $sqlHijoInsert = "INSERT INTO hijo (DNI, nombre, apellidos, fecha_nacimiento, medicacion, alergias, datos_adicionales, id_padre, id_grupo) VALUES
-        ('12345678A', 'Daniel', 'Clavel', '2015-11-15', 'Ninguna', 'Ninguna', 'Ninguna', 1, 1),
+        ('12345678A', 'Daniel', 'Clavel Vega', '2015-11-15', 'Ninguna', 'Ninguna', 'Ninguna', 1, 1),
         ('23456789B', 'Adri', 'Arcones', '2018-04-23', 'Ninguna', 'Ninguna', 'Ninguna', 2,1 )";
     mysqli_query($conexion, $sqlHijoInsert) or die("Error al insertar datos en 'hijo': " . mysqli_error($conexion));
 }
@@ -203,10 +211,13 @@ if(!verificarTabla($conexion, 'admin')){
         )";
     mysqli_query($conexion, $sqlAdmin) or die("Error al crear la tabla 'admin': " . mysqli_error($conexion));
 
+    // Encriptar contraseñas
+    $passwordAdmin1 = password_hash('admin123', PASSWORD_DEFAULT);
+    $passwordAdmin2 = password_hash('admin456', PASSWORD_DEFAULT);
     // Insertar datos en la tabla 'admin'
     $sqlAdminInsert = "INSERT INTO admin (email, password) VALUES
-        ('admin1@gmail.com', 'admin123'),
-        ('admin2@gmail.com', 'admin456')";
+        ('admin1@gmail.com', '$passwordAdmin1'),
+        ('admin2@gmail.com', '$passwordAdmin2')";
     mysqli_query($conexion, $sqlAdminInsert) or die("Error al insertar datos en 'admin': " . mysqli_error($conexion));
 }
 

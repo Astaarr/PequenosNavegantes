@@ -29,7 +29,6 @@ if($row = $result -> fetch_assoc()){
     if(password_verify($password, $row['password'])){
         $_SESSION['id_admin'] = $row['id_admin'];
         echo json_encode(["success" => true, "message" => "Sesión iniciada"]);
-        header("Location: ../../indexAdmin.html");
         exit;
     } else {
         echo json_encode(["success" => false, "message" => "Contraseña incorrecta"]);

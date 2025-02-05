@@ -28,7 +28,6 @@ if($row = $result -> fetch_assoc()){
     if(password_verify($password, $row['password'])){
         $_SESSION['id_monitor'] = $row['id_monitor'];
         echo json_encode(["success" => true, "message" => "Sesión iniciada"]);
-        header("Location: ../../indexMonitor.html");
         exit;
     } else {
         echo json_encode(["success" => false, "message" => "Contraseña incorrecta"]);
