@@ -82,7 +82,7 @@ function validarCampoEspecifico(campo) {
     if (campo.classList.contains('obligatorio') && valor === '') {
         mostrarError(errorSpan, 'El campo no puede estar vacío.');
         return false;
-    }else{
+    } else {
         // Si es un campo de tipo email, validar el formato
         if (campo.type === 'email' && !validarEmail(valor)) {
             mostrarError(errorSpan, 'Introduce un correo válido.');
@@ -103,6 +103,12 @@ function validarCampoEspecifico(campo) {
         // Validar contraseña si el campo tiene el id password
         if (campo.id === 'password' && valor.length < 6) {
             mostrarError(errorSpan, 'La contraseña debe tener al menos 6 caracteres.');
+            return false;
+        }
+
+        // Validar edad si el campo tiene el id fechaNacimiento
+        if (campo.id === 'nacimientoHijo' && !validarEdad(valor)) {
+            mostrarError(errorSpan, 'La edad debe estar entre 6 y 7 años.');
             return false;
         }
     }
@@ -127,6 +133,21 @@ function validarDNI(dni) {
 function validarTelefono(numero) {
     const regex = /^[0-9]{9}$/;
     return regex.test(numero);
+}
+
+// Función para validar la edad (entre 6 y 7 años)
+function validarEdad(fechaNacimiento) {
+    const fechaNac = new Date(fechaNacimiento);
+    const hoy = new Date();
+    const edad = hoy.getFullYear() - fechaNac.getFullYear();
+    const mesDiferencia = hoy.getMonth() - fechaNac.getMonth();
+    const diaDiferencia = hoy.getDate() - fechaNac.getDate();
+
+    // Ajustar edad si el cumpleaños aún no ha ocurrido este año
+    if (mesDiferencia < 0 || (mesDiferencia === 0 && diaDiferencia < 0)) {
+        return edad - 1 >= 6 && edad - 1 <= 7;
+    }
+    return edad >= 6 && edad <= 7;
 }
 
 // Función para mostrar el error

@@ -111,14 +111,19 @@ a:hover::after {
 .btn:hover{
     transform: scale(0.95);
 }
+.btn>a{
+    color: inherit;
+}
+.btn>a:hover::after{
+    width: 0;
+}
 
 /* ICONOS */
 i{
     color: inherit;
-    margin-right: 8px;
+    margin: 0 8px;
     font-size: 1em;
 }
-
 
 /*//////////////////////////////////////////////////
 //HEADER

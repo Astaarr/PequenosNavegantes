@@ -3,64 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - Datos del Niño</title>
+    <title>Datos del Niño</title>
+
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- AXIOS -->
     <script src="../axios/node_modules/axios/dist/axios.min.js" defer></script>
+
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
-    <h1>Registro al Campamento - Paso 1</h1>
-    <form id="form-datos-nino" novalidate>
-        <!-- Nombre y apellidos -->
-        <div class="form-group">
-            <label for="nombre-nino">Nombre y Apellidos</label>
-            <input type="text" id="nombre-nino" name="nombre_nino" placeholder="Nombre completo">
-            <p id="error-nombre-nino" class="error" style="display: none; color: red;"></p>
-        </div>
-
-        <!-- DNI -->
-        <div class="form-group">
-            <label for="dni-nino">DNI</label>
-            <input type="text" id="dni-nino" name="dni_nino" placeholder="DNI del niño">
-            <p id="error-dni-nino" class="error" style="display: none; color: red;"></p>
-        </div>
-
-        <!-- Fecha de nacimiento -->
-        <div class="form-group">
-            <label for="fecha-nacimiento">Fecha de Nacimiento</label>
-            <input type="date" id="fecha-nacimiento" name="fecha_nacimiento">
-            <p id="error-fecha-nacimiento" class="error" style="display: none; color: red;"></p>
-        </div>
-
-        <!-- Datos médicos -->
-        <fieldset>
-            <legend>Datos Médicos</legend>
-
-            <div class="form-group">
-                <label for="medicacion">Medicación</label>
-                <textarea id="medicacion" name="medicacion" placeholder="Especifica si toma medicación"></textarea>
-                <p id="error-medicacion" class="error" style="display: none; color: red;"></p>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="../../../resources/logo/logoN.png" alt="">
             </div>
-
-            <div class="form-group">
-                <label for="alergias">Alergias</label>
-                <textarea id="alergias" name="alergias" placeholder="Especifica si tiene alergias"></textarea>
-                <p id="error-alergias" class="error" style="display: none; color: red;"></p>
+            <div class="content" id="menu">
+                <a href="../paginaPrincipal/index.html"><i class="fa-solid fa-arrow-left"></i>Volver</a>
             </div>
-
-            <div class="form-group">
-                <label for="datos-adicionales">Datos Adicionales</label>
-                <textarea id="datos-adicionales" name="datos_adicionales" placeholder="Escribe datos adicionales"></textarea>
-                <p id="error-datos-adicionales" class="error" style="display: none; color: red;"></p>
-            </div>
-        </fieldset>
-
-        <!-- Contenedor general para errores -->
-        <p id="form-errors" style="display: none; color: red;"></p>
-
-        <!-- Botón continuar -->
-        <div class="form-group">
-            <button type="submit">Continuar al Paso 2</button>
         </div>
-    </form>
+    </header>
+
+    <main>
+        <section>
+            <form action="#" id="formulario">
+                <div class="barra-proceso">
+                    <h4 class="actual">1</h4>
+                    <span></span>
+                    <h4>2</h4>
+                    <span></span>
+                    <h4>3</h4>
+                    <span></span>
+                    <h4>4</h4>
+                </div>
+
+
+                <div class="field">
+                    <h3>Información del Niño</h3>
+                </div>
+
+                <div class="field">
+                    <label for="nombreHijo">Nombre</label>
+                    <input type="text" class="obligatorio" placeholder="Ingresa nombre del hijo" name="nombreHijo" id="nombreHijo" tabindex="1">
+                    <span class="error"></span>
+                </div>
+
+                <div class="field">
+                    <label for="apellidosHijo">Apellidos</label>
+                    <input type="text" class="obligatorio" placeholder="Ingresa apellidos del hijo" name="apellidosHijo" id="apellidosHijo" tabindex="2">
+                    <span class="error"></span>
+                </div>
+
+                <div class="field">
+                    <label for="nacimientoHijo">Fecha nacimiento</label>
+                    <input type="date" class="obligatorio" name="nacimientoHijo" id="nacimientoHijo" placeholder="Ingresa fecha nacimiento del hijo" tabindex="4">
+                    <span class="error"></span>
+                </div>
+
+                <div class="field">
+                    <h3>Información Médica</h3>
+                </div>
+
+                <div class="field">
+                    <div class="checkbox">
+                        <label for="contra">¿Presenta alguna alergia?</label>
+                        <label class="checkbox-custom ">
+                            <input type="checkbox" name="" id="" class="checkbox-adicional">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="campo-adicional">
+                        <input type="text" class="obligatorio" placeholder="Ejemplo: Polen" name="alergiaHijo" id="alergiaHijo">
+                        <span class="error"></span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="checkbox">
+                        <label for="contra">¿Medicación actual?</label>
+                        <label class="checkbox-custom ">
+                            <input type="checkbox" name="" id="" class="checkbox-adicional">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="campo-adicional">
+                        <input type="text" class="obligatorio" placeholder="Medicamento, posología, etc." name="medicacionActual" id="medicacionActual">
+                        <span class="error"></span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="infoAdicionalHijo">Datos adicionales</label>
+                    <input type="text" placeholder="Ingresa datos adicionales hijo" name="infoAdicionalHijo" id="infoAdicionalHijo">
+                    <span class="error"></span>
+                </div>
+
+                <div class="field">
+                    <button class="btn btn-main"><a href="../datosTutor/datosTutor.html">Siguiente<i class="fa-solid fa-chevron-right"></i></a></button>
+                </div>
+
+            </form>
+        </section>
+    </main>
+
+    <script src="../main.js"></script>
     <script src="datosHijo.js"></script>
 </body>
 </html>
