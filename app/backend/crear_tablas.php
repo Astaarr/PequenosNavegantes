@@ -101,7 +101,6 @@ if(!verificarTabla($conexion,'actividad')){
 if (!verificarTabla($conexion, 'hijo')){
     $sqlHijo = "CREATE TABLE hijo (
         id_hijo INT AUTO_INCREMENT PRIMARY KEY,
-        DNI VARCHAR(9) UNIQUE NOT NULL,
         nombre VARCHAR(100) NOT NULL,
         apellidos VARCHAR(100) NOT NULL,
         fecha_nacimiento DATE NOT NULL,
@@ -116,9 +115,9 @@ if (!verificarTabla($conexion, 'hijo')){
     mysqli_query($conexion, $sqlHijo) or die("Error al crear la tabla 'hijo': " . mysqli_error($conexion));
     
     // Insertar datos en la tabla 'hijo'
-    $sqlHijoInsert = "INSERT INTO hijo (DNI, nombre, apellidos, fecha_nacimiento, medicacion, alergias, datos_adicionales, id_padre, id_grupo) VALUES
-        ('12345678A', 'Daniel', 'Clavel Vega', '2015-11-15', 'Ninguna', 'Ninguna', 'Ninguna', 1, 1),
-        ('23456789B', 'Adri', 'Arcones', '2018-04-23', 'Ninguna', 'Ninguna', 'Ninguna', 2,1 )";
+    $sqlHijoInsert = "INSERT INTO hijo ( nombre, apellidos, fecha_nacimiento, medicacion, alergias, datos_adicionales, id_padre, id_grupo) VALUES
+        ('Daniel', 'Clavel Vega', '2015-11-15', 'Ninguna', 'Ninguna', 'Ninguna', 1, 1),
+        ('Adri', 'Arcones', '2018-04-23', 'Ninguna', 'Ninguna', 'Ninguna', 2,1 )";
     mysqli_query($conexion, $sqlHijoInsert) or die("Error al insertar datos en 'hijo': " . mysqli_error($conexion));
 }
 
@@ -172,14 +171,17 @@ if(!verificarTabla($conexion, 'campamento')){
         fecha_fin DATE NOT NULL,
         precio DECIMAL(6,2) NOT NULL,
         id_programacion INT NOT NULL,
+        municipio TEXT,
+        direccion TEXT,
+        codigo_postal VARCHAR(5),
         FOREIGN KEY (id_programacion) REFERENCES programacion_actividad(id_programacion) ON DELETE CASCADE
         )";
         mysqli_query($conexion, $sqlCampamento) or die("Error al crear la tabla 'campamento': " . mysqli_error($conexion));
 
     // Insertar datos en la tabla 'campamento'
-    $sqlCampamentoInsert = "INSERT INTO campamento (nombre, fecha_inicio, fecha_fin, precio, id_programacion) VALUES
-        ('Campamento 1', '2021-07-01', '2021-07-15', 200.00, 1),
-        ('Campamento 2', '2021-08-01', '2021-08-15', 200.00, 2)";
+    $sqlCampamentoInsert = "INSERT INTO campamento (nombre, fecha_inicio, fecha_fin, precio, id_programacion, municipio, direccion, codigo_postal) VALUES
+        ('Campamento 1', '2021-07-01', '2021-07-15', 200.00, 1, 'Madrid', 'Calle Mayor 1', '28001'),
+        ('Campamento 2', '2021-08-01', '2021-08-15', 200.00, 2, 'Madrid', 'Calle Mayor 2', '28002')";
     mysqli_query($conexion, $sqlCampamentoInsert) or die("Error al insertar datos en 'campamento': " . mysqli_error($conexion));
 }
 
@@ -190,6 +192,7 @@ if(!verificarTabla($conexion, 'inscripcion')){
         fecha_inscripcion DATE NOT NULL,
         id_hijo INT NOT NULL,
         id_campamento INT NOT NULL,
+        estado_pago ENUM('Pendiente', 'Pagado', 'No Pagado') NOT NULL DEFAULT 'Pendiente',
         FOREIGN KEY (id_hijo) REFERENCES hijo(id_hijo) ON DELETE CASCADE,
         FOREIGN KEY (id_campamento) REFERENCES campamento(id_campamento) ON DELETE CASCADE
         )";
@@ -223,7 +226,6 @@ if(!verificarTabla($conexion, 'admin')){
 
 
 // Tabla 'comunicacion' para gestionar mensajes entre padres y administración
-/*
 if (!verificarTabla($conexion, 'comunicacion')){
     $sqlComunicacion = "CREATE TABLE comunicacion (
         id_comunicacion INT AUTO_INCREMENT PRIMARY KEY,
@@ -231,14 +233,17 @@ if (!verificarTabla($conexion, 'comunicacion')){
         asunto VARCHAR(100) NOT NULL,
         mensaje TEXT NOT NULL,
         id_padre INT NOT NULL,
-        FOREIGN KEY (id_padre) REFERENCES padre(id_padre) ON DELETE CASCADE
+        id_hijo INT NOT  NULL,
+        id_monitor INT NOT NULL,
+        FOREIGN KEY (id_padre) REFERENCES padre(id_padre) ON DELETE CASCADE,
+        FOREIGN KEY (id_hijo) REFERENCES hijo(id_hijo) ON DELETE CASCADE,
+        FOREIGN KEY (id_monitor) REFERENCES monitor(id_monitor) ON DELETE CASCADE
     )";
     mysqli_query($conexion, $sqlComunicacion) or die("Error al crear la tabla 'comunicacion': " . mysqli_error($conexion));
 
     // Insertar datos en la tabla 'comunicacion'
-    $sqlComunicacionInsert = "INSERT INTO comunicacion (fecha, asunto, mensaje, id_padre) VALUES
-        ('2021-06-01', 'Asunto 1', 'Mensaje de la comunicación 1', 1),
-        ('2021-06-01', 'Asunto 2', 'Mensaje de la comunicación 2', 2)";
+    $sqlComunicacionInsert = "INSERT INTO comunicacion (fecha, asunto, mensaje, id_padre, id_hijo, id_monitor) VALUES
+        ('2021-06-01', 'Asunto 1', 'Mensaje de la comunicación 1', 1, 1, 1),
+        ('2021-06-01', 'Asunto 2', 'Mensaje de la comunicación 2', 2, 2, 2)";
     mysqli_multi_query($conexion, $sqlComunicacionInsert) or die("Error al insertar datos en 'comunicacion': " . mysqli_error($conexion));
 }
-*/
