@@ -147,8 +147,9 @@ const inputs = document.querySelectorAll('input:not([type="button"]):not([type="
 inputs.forEach(input => input.addEventListener('blur', () => validarCampoEspecifico(input)));
 
 
-
-// Verificar la cookie del navegador
+////////////////////////////////////////
+// COOKIES
+////////////////////////////////////////
 function getCookie(name) {
     const cookies = document.cookie.split('; ');
     for (let i = 0; i < cookies.length; i++) {
