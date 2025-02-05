@@ -65,6 +65,7 @@ document.querySelectorAll('.mostrarPassword').forEach(icon => {
     });
 });
 
+
 ////////////////////////////////////////
 // VALIDACIONES
 ////////////////////////////////////////
@@ -106,8 +107,6 @@ function validarCampoEspecifico(campo) {
         }
     }
 
-
-
     limpiarError(errorSpan);
     return true;
 }
@@ -122,6 +121,12 @@ function validarEmail(email) {
 function validarDNI(dni) {
     const regex = /^[0-9]{8}[A-Za-z]$/; // Formato DNI español: 8 dígitos + letra
     return regex.test(dni);
+}
+
+// Función para validar el formato del teléfono
+function validarTelefono(numero) {
+    const regex = /^[0-9]{9}$/;
+    return regex.test(numero);
 }
 
 // Función para mostrar el error
