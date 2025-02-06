@@ -5,6 +5,8 @@ require '../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
+
 
 // Configurar la respuesta como JSON
 header("Content-Type: application/json");
@@ -67,12 +69,12 @@ try {
     // Configuración del servidor SMTP de Gmail
     $mail = new PHPMailer(true);
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = $_ENV['SMTP_HOST'];
     $mail->SMTPAuth = true;
-    $mail->Username = 'soportepequenosnavegantes@gmail.com';
-    $mail->Password = 'ipbx xbdw mmak nyfs';
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-    $mail->Port = 465;
+    $mail->Username = $_ENV['SMTP_USERNAME']; 
+    $mail->Password = $_ENV['SMTP_PASSWORD'];
+    $mail->SMTPSecure = $_ENV['SMTP_SECURE'];
+    $mail->Port = $_ENV['SMTP_PORT'];
 
     // Configuración del correo
     $mail->setFrom('soportepequenosnavegantes@gmail.com', 'Pequeños Navegantes');
