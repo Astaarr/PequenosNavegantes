@@ -79,6 +79,7 @@ try {
     $mail->Port = $_ENV['SMTP_PORT'];
 
     // Configuración del correo
+    $mail->CharSet = 'UTF-8';
     $mail->setFrom('soportepequenosnavegantes@gmail.com', 'Pequeños Navegantes');
     $mail->addAddress($email, $nombre);
     $mail->Subject = 'Código de restablecimiento de contraseña';
@@ -88,11 +89,13 @@ try {
     $mail->Body = "
         <html>
         <head>
+            <meta charset=UTF-8>
             <style>
                 body { font-family: Arial, sans-serif; text-align: center; }
-                .container { padding: 20px; background: #f4f4f4; border-radius: 5px; width: 50%; margin: auto; }
-                .codigo { font-size: 20px; font-weight: bold; color: #007BFF; }
-                .button { background: #007BFF; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; }
+                .container { padding: 20px; background: #f4f4f4; border-radius: 15px; width: 50%; margin: auto; }
+                .codigo { font-size: 20px; font-weight: bold; color: #0184DC; }
+                .button { background-color: #0184DC; color: #f4f4f4; padding: 10px 15px; text-decoration: none; border-radius: 15px; display: inline-block; margin-top: 20px; }
+                a {color: #f4f4f4;}
             </style>
         </head>
         <body>
