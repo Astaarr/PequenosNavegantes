@@ -1,6 +1,38 @@
 // Obtener elementos del DOM
 const form = document.getElementById('formulario');
 
+
+
+function submitEmail() {
+    const data = {
+        emailRecuperacion: document.getElementById('emailRecuperacion')
+    }
+
+    console.log("Email recuperacion enviado");
+
+    axios.post('/PequenosNavegantes/app/backend/recuperar_password/enviar_codigo.php', JSON.stringify(data),{
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }) 
+    .then(response => {
+        console.log(response.data);
+        if (response.data.success) {
+            alert('Email enviado');
+        } else {
+            alert(response.data.message || "Error envio email");
+        }
+    })
+    .catch(error => {
+        console.error('Error envio email (catch)', error);
+    });
+
+}
+
+
+
+
+
 // Evento submit
 form.addEventListener('submit', (event) => {
 
