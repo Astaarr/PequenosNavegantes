@@ -51,6 +51,7 @@ function submitEmail() {
 const form = document.getElementById('formulario');
 
 
+
 // Evento submit
 form.addEventListener('submit', (event) => {
 

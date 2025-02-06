@@ -25,7 +25,9 @@ if (!verificarTabla($conexion, 'padre')){
         password VARCHAR(255) NOT NULL,
         email VARCHAR(100) NOT NULL,
         telefono VARCHAR(16),
-        token_login VARCHAR(255)
+        token_login VARCHAR(255),
+        codigo_restablecer VARCHAR(255),
+        token_restablecer VARCHAR(255)
         )";
     mysqli_query($conexion, $sqlPadre) or die("Error al crear la tabla 'padre': " . mysqli_error($conexion));
 
