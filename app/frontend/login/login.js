@@ -1,36 +1,54 @@
-// Obtener elementos del DOM
-const form = document.getElementById('formulario');
+////////////////////////////////////////
+// ABRIR POPUP
+////////////////////////////////////////
+const popup = document.getElementById('popupContainer');
+
+document.getElementById('contraOlvidada').addEventListener("click", function (event) {
+    event.preventDefault(); // Evita que el enlace recargue la página
+    popup.style.display = "flex";
+});
+
+document.getElementById('cerrarPopup').addEventListener("click", function () {
+    popup.style.display = "none";
+});
 
 
-
+////////////////////////////////////////
+// CORREO RECUPERACIÓN
+////////////////////////////////////////
 function submitEmail() {
-    const data = {
-        emailRecuperacion: document.getElementById('emailRecuperacion')
+    const email = document.getElementById('emailRecuperacion').value.trim();
+
+    if(!email){
+        console.error("El campo de email esta vacio");
+        alert("El campo de email esta vacio");
+        return;
     }
 
-    console.log("Email recuperacion enviado");
-
-    axios.post('/PequenosNavegantes/app/backend/recuperar_password/enviar_codigo.php', JSON.stringify(data),{
-        headers: {
-            'Content-Type': 'application/json'
+    axios.post('/PequenosNavegantes/app/backend/recuperar_password/enviar_codigo.php', 
+        JSON.stringify({ emailRecuperacion: email }), // ✅ Enviar un objeto JSON correctamente
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            }
         }
-    }) 
+    ) 
     .then(response => {
-        console.log(response.data);
-        if (response.data.success) {
-            alert('Email enviado');
-        } else {
-            alert(response.data.message || "Error envio email");
-        }
+        console.log("Respuesta del servidor:", response.data);
+        alert(response.data.message);
     })
     .catch(error => {
-        console.error('Error envio email (catch)', error);
+        console.error('Error al enviar el email:', error);
     });
-
 }
 
 
+////////////////////////////////////////
+// ENVIAR FORMULARIO
+////////////////////////////////////////
 
+// Obtener elementos del DOM
+const form = document.getElementById('formulario');
 
 
 // Evento submit
