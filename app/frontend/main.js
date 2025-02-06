@@ -44,10 +44,14 @@ const checkboxes = document.querySelectorAll('.checkbox-adicional');
 checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', function() {
         const campoAdicional = this.closest('.field').querySelector('.campo-adicional');
+        const inputs = campoAdicional.querySelectorAll('input');
+        
         if (this.checked) {
             campoAdicional.style.display = "flex";
+            inputs.forEach(input => input.classList.add('obligatorio'));
         } else {
             campoAdicional.style.display = "none";
+            inputs.forEach(input => input.classList.remove('obligatorio'));
         }
     });
 });
@@ -81,42 +85,51 @@ function validarCampoEspecifico(campo) {
     // Si el campo tiene la clase "obligatorio" y está vacío, muestra error
     if (campo.classList.contains('obligatorio') && valor === '') {
         mostrarError(errorSpan, 'El campo no puede estar vacío.');
+        console.log('Error: El campo obligatorio está vacío.');
         return false;
-    } else {
+
+    } else if (valor != '') {
+
         // Si es un campo de tipo email, validar el formato
         if (campo.type === 'email' && !validarEmail(valor)) {
             mostrarError(errorSpan, 'Introduce un correo válido.');
+            console.log('Error: El formato del correo electrónico no es válido.');
             return false;
         }
 
         // Validar DNI si el campo tiene la clase "dni"
         if (campo.classList.contains('dni') && !validarDNI(valor)) {
             mostrarError(errorSpan, 'Introduce un DNI válido.');
+            console.log('Error: El formato del DNI no es válido.');
             return false;
         }
 
+        // Validar teléfono si el campo es de tipo tel
         if (campo.type === 'tel' && !validarTelefono(valor)) {
             mostrarError(errorSpan, 'Introduce un número de teléfono válido.');
+            console.log('Error: El formato del número de teléfono no es válido.');
             return false;
         }
 
         // Validar contraseña si el campo tiene el id password
         if (campo.id === 'password' && valor.length < 6) {
             mostrarError(errorSpan, 'La contraseña debe tener al menos 6 caracteres.');
+            console.log('Error: La contraseña tiene menos de 6 caracteres.');
             return false;
         }
 
-        // Validar edad si el campo tiene el id fechaNacimiento
+        // Validar edad si el campo tiene el id nacimientoHijo
         if (campo.id === 'nacimientoHijo' && !validarEdad(valor)) {
             mostrarError(errorSpan, 'La edad debe estar entre 6 y 7 años.');
+            console.log('Error: La edad no está entre 6 y 7 años.');
             return false;
         }
-    }
+    } 
 
     limpiarError(errorSpan);
+
     return true;
 }
-
 // Función para validar el formato de un email
 function validarEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

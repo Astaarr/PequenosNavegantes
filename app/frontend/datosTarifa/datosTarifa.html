@@ -44,9 +44,16 @@
                 <h4>4</h4>
             </div>
 
+            <div class="field">
+                <h3>Selecciona Días</h3>
+            </div>
+
+            <div class="calendar" id="calendar"></div>
+            <button onclick="showSelectedDays()">Mostrar Selección</button>
+
 
             <div class="field">
-                <h3>Selecciona tu Plan</h3>
+                <h3>Selecciona Extras</h3>
             </div>
 
 
@@ -64,39 +71,44 @@
                         <li><i class="fa-solid fa-check"></i>Materiales para talleres.</li>
                         <li><i class="fa-solid fa-check"></i>Seguro de accidentes.</li>
                     </ul>
-                    <button class="btn btn-main">Seleccionar</button>
+                    <a class="btn btn-main">Seleccionar</a>
                 </div>
 
                 <div class="tarjeta">
                     <div class="imagen"><img src="../../../resources/img/plan_02.png" alt=""></div>
-                    <span>Navegante</span>
-                    <h3>Plan Intermedio</h3>
-                    <h2>+5€</h2>
+                    <div class="precio">
+                        <span>Navegante</span>
+                        <h3>Plan Intermedio</h3>
+                        <h2>+5€</h2>
+                    </div>
                     <ul>
                         <li><i class="fa-solid fa-check"></i>Todo lo del Plan Básico.</li>
                         <li><i class="fa-solid fa-check"></i>Desayuno saludable y comida completa.</li>
                         <li><i class="fa-solid fa-check"></i>Seguimiento del niño desde la web.</li>
                     </ul>
-                    <button class="btn btn-main">Seleccionar</button>
+                    <a class="btn btn-main">Seleccionar</a>
                 </div>
 
                 <div class="tarjeta">
                     <div class="imagen"><img src="../../../resources/img/plan_03.png" alt=""></div>
-                    <span>Capitan</span>
-                    <h3>Plan Avanzado</h3>
-                    <h2>+15€</h2>
+                    <div class="precio">
+                        <span>Capitan</span>
+                        <h3>Plan Avanzado</h3>
+                        <h2>+15€</h2>
+                    </div>
                     <ul>
                         <li><i class="fa-solid fa-check"></i>Todo lo del Plan Medio.</li>
                         <li><i class="fa-solid fa-check"></i>Transporte de ida y vuelta desde puntos estratégicos de la ciudad.</li>
                     </ul>
-                    <button class="btn btn-main">Seleccionar</button>
+                    <a class="btn btn-main">Seleccionar</a>
                 </div>
             </div>
             
         </section>
     </main>
 
-
+    <script src="datosTarifa.js"></script>
+    <script src="../main.js"></script>
 
 
 
