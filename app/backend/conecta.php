@@ -13,7 +13,7 @@ if ($conexion->connect_error) {
 
 // Consulta para verificar si la base de datos existe
 $sql = "SHOW DATABASES LIKE '$dbname'";
-$query = $conexion->query($sql); // Ejecuta la consulta
+$query = $conexion->query($sql); 
 
 if ($query->num_rows <= 0){
     $sql = "CREATE DATABASE $dbname";
