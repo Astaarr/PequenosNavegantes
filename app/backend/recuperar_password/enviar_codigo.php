@@ -105,8 +105,7 @@ try {
                 <p>Tu código de verificación es:</p>
                 <h2 class='codigo'>$codigo_restablecer</h2>
                 <p>Si no solicitaste este cambio, ignora este mensaje.</p>
-                <a href='https://tu-dominio.com/restablecer.php?token=$token_restablecer' class='button'>Restablecer contraseña</a>
-                <p>Este enlace expirará en 30 minutos.</p>
+                <a href='https://localhost/PequenosNavegantes/app/frontend/restablecer_password/solicitar_codigo.html?token=$token_restablecer' class='button' style='background-color: #0184DC; color: #ffffff; padding: 12px 20px; text-decoration: none; border-radius: 15px; display: inline-block; font-size: 16px;'>Restablecer contraseña</a>
             </div>
         </body>
         </html>";
