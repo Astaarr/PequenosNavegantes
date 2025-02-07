@@ -57,14 +57,16 @@
         </div>
         <div class="days" id="weekdays"></div>
         <div class="days" id="calendar-days"></div>
+        <p>Días seleccionados: <span id="selected-days"></span></p>
     </div>
 
     <script>
         const weekdays = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
         const monthYearElement = document.getElementById('month-year');
         const calendarDaysElement = document.getElementById('calendar-days');
+        const selectedDaysElement = document.getElementById('selected-days');
         let currentDate = new Date();
-        let selectedDays = new Set();
+        let selectedDays = [];
 
         function renderCalendar() {
             calendarDaysElement.innerHTML = '';
@@ -84,23 +86,29 @@
                 dayElement.textContent = day;
                 dayElement.classList.add('day');
                 
-                if (selectedDays.has(`${currentDate.getFullYear()}-${currentDate.getMonth()}-${day}`)) {
+                let dateKey = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                
+                if (selectedDays.includes(dateKey)) {
                     dayElement.classList.add('selected');
                 }
                 
                 dayElement.addEventListener('click', () => {
-                    let key = `${currentDate.getFullYear()}-${currentDate.getMonth()}-${day}`;
-                    if (selectedDays.has(key)) {
-                        selectedDays.delete(key);
+                    if (selectedDays.includes(dateKey)) {
+                        selectedDays = selectedDays.filter(d => d !== dateKey);
                         dayElement.classList.remove('selected');
                     } else {
-                        selectedDays.add(key);
+                        selectedDays.push(dateKey);
                         dayElement.classList.add('selected');
                     }
+                    updateSelectedDaysDisplay();
                 });
                 
                 calendarDaysElement.appendChild(dayElement);
             }
+        }
+        
+        function updateSelectedDaysDisplay() {
+            selectedDaysElement.textContent = selectedDays.join(', ');
         }
         
         function prevMonth() {

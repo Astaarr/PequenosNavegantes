@@ -531,8 +531,62 @@ h4.done ~ h4:first-of-type{
 }
 
 
+/* CALENDARIO */
+.calendario-padre{
+    /* font-family: Arial, sans-serif; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    margin-top: 2em;
 
-
+}
+.calendar {
+    font-family: var(--textos);
+    background: var(--blanco);
+    padding: 20px;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    text-align: center;
+}
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.calendar-header button{
+    background-color: var(--blanco);
+    border: none;
+    transition: all ease-in-out 0.2s;
+}
+.calendar-header button:hover{
+    color: var(--main);
+}
+.calendar-header h3{
+    padding: 0 1em;
+}
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+}
+.day, .weekday {
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+.weekday {
+    font-weight: bold;
+}
+.day {
+    cursor: pointer;
+    color: var(--blanco);
+    background: var(--main);
+}
+.day.selected {
+    background: var(--second);
+}
 
 
 

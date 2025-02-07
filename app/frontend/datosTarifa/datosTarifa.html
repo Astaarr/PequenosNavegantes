@@ -43,19 +43,36 @@
                 <span></span>
                 <h4>4</h4>
             </div>
+        </section>
 
+        <section>
             <div class="field">
                 <h3>Selecciona Días</h3>
             </div>
 
-            <div class="calendar" id="calendar"></div>
-            <button onclick="showSelectedDays()">Mostrar Selección</button>
+            <div class="calendario-padre">
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <button onclick="prevMonth()"><i class="fa-solid fa-angle-left"></i></button>
+                        <h3 id="month-year"></h3>
+                        <button onclick="nextMonth()"><i class="fa-solid fa-angle-right"></i></button>
+                    </div>
+                    <div class="days" id="weekdays"></div>
+                    <div class="days" id="calendar-days"></div>
+                </div>
+            </div>
 
 
+        
+
+
+
+        </section>
+
+        <section>
             <div class="field">
                 <h3>Selecciona Extras</h3>
             </div>
-
 
             <div class="contenedor-tarjetas">
                 <div class="tarjeta">
@@ -103,8 +120,12 @@
                     <a class="btn btn-main">Seleccionar</a>
                 </div>
             </div>
-            
+
+
         </section>
+
+           
+
     </main>
 
     <script src="datosTarifa.js"></script>
