@@ -4,7 +4,6 @@ const weekdays = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 // Elementos del DOM donde se mostrarán el mes y año, los días del calendario y los días seleccionados
 const monthYearElement = document.getElementById('month-year');
 const calendarDaysElement = document.getElementById('calendar-days');
-const selectedDaysElement = document.getElementById('selected-days');
 
 // Fecha actual
 let currentDate = new Date();
@@ -60,11 +59,6 @@ function renderCalendar() {
         // Añade el elemento del día al calendario
         calendarDaysElement.appendChild(dayElement);
     }
-}
-
-// Función para actualizar el elemento que muestra los días seleccionados
-function updateSelectedDaysDisplay() {
-    selectedDaysElement.textContent = selectedDays.join(', ');
 }
 
 // Función para cambiar al mes anterior y renderizar el calendario
