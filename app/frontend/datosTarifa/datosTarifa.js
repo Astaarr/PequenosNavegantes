@@ -1,16 +1,16 @@
 // Array con las iniciales de los días de la semana en español
 const weekdays = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 
-// Elementos del DOM donde se mostrarán el mes y año, los días del calendario y los días seleccionados
+// Elementos del DOM donde se mostrarán el mes y año y los días del calendario
 const monthYearElement = document.getElementById('month-year');
 const calendarDaysElement = document.getElementById('calendar-days');
-const selectedDaysElement = document.getElementById('selected-days');
+const clearButton = document.getElementById('clear-selection'); // Botón para limpiar selección
 
 // Fecha actual
 let currentDate = new Date();
 
-// Array para almacenar los días seleccionados
-let selectedDays = [];
+// Array para almacenar los días seleccionados (guardado en sessionStorage)
+let selectedDays = JSON.parse(sessionStorage.getItem("selectedDays")) || [];
 
 // Función para renderizar el calendario
 function renderCalendar() {
@@ -54,7 +54,7 @@ function renderCalendar() {
                 selectedDays.push(dateKey);
                 dayElement.classList.add('selected');
             }
-            updateSelectedDaysDisplay();
+            guardarSeleccion(); // Guardar en sessionStorage
         });
         
         // Añade el elemento del día al calendario
@@ -62,9 +62,22 @@ function renderCalendar() {
     }
 }
 
-// Función para actualizar el elemento que muestra los días seleccionados
-function updateSelectedDaysDisplay() {
-    selectedDaysElement.textContent = selectedDays.join(', ');
+// Función para guardar la selección en sessionStorage
+function guardarSeleccion() {
+    sessionStorage.setItem("selectedDays", JSON.stringify(selectedDays));
+}
+
+// Función para limpiar todos los días seleccionados
+function clearSelection() {
+    selectedDays = []; // Vaciar el array
+    sessionStorage.removeItem("selectedDays"); // Borrar del sessionStorage
+
+    // Eliminar la clase "selected" de todos los días en el calendario
+    document.querySelectorAll('.day.selected').forEach(day => {
+        day.classList.remove('selected');
+    });
+
+    console.log("Selección eliminada.");
 }
 
 // Función para cambiar al mes anterior y renderizar el calendario
@@ -81,6 +94,11 @@ function nextMonth() {
 
 // Muestra los días de la semana
 document.getElementById('weekdays').innerHTML = weekdays.map(day => `<div class="weekday">${day}</div>`).join('');
+
+// Evento para el botón de limpiar selección
+if (clearButton) {
+    clearButton.addEventListener('click', clearSelection);
+}
 
 // Renderiza el calendario al cargar la página
 renderCalendar();
