@@ -48,7 +48,7 @@ main{
 //COMPONENTES
 //////////////////////////////////////////////////*/
 
-/* TÍTULOS */
+/* ======= TITULOS ======= */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--titulos);
     font-weight: bold;
@@ -65,8 +65,8 @@ h3{
     font-size: 2.25em;
 }
 
-/* TEXTOS */
-p, a, span, i, li, input, button, label {
+/* ======= TEXTOS ======= */
+p, a, b, span, pre, sub, i, li, input, button, label {
     font-family: var(--textos);
     font-size: 1em;
     font-weight: 400;
@@ -92,7 +92,7 @@ a:hover::after {
     width: 100%;
 }
 
-/* BOTONES */
+/* ======= BOTONES ======= */
 .btn{
     width: 100%;
     padding: 1em;
@@ -128,14 +128,22 @@ a.btn:hover::after{
     width: 0;
 }
 
-/* ICONOS */
+/* ======= ICONOS ======= */
 i{
     color: inherit;
     margin: 0 8px;
     font-size: 1em;
 }
 
-/* PopUp */
+/* ======= TARJETAS ======= */
+.tarjeta{
+    background-color: var(--blanco);
+    padding: 2em;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+}
+
+/* ======= POPUPS ======= */
 .popup-container{
     top:0;
     display: none;
@@ -157,12 +165,8 @@ i{
     justify-content: center;
     align-items: center;
     gap: 2em;
-
     position: relative;
-    background-color: var(--blanco);
     padding: 4em;
-    border-radius: var(--radio);
-    box-shadow: var(--sombra);
 }
 .popup .close-popup{
     position: absolute;
@@ -186,8 +190,44 @@ i{
     padding: 1em;
 }
 
-/* Tarjetas */
-.contenedor-tarjetas{
+
+
+
+/*//////////////////////////////////////////////////
+//SECCIONES
+//////////////////////////////////////////////////*/
+section{
+    margin: 0 auto;      
+    padding: 64px;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 1440px;
+    height: fit-content;
+    /* background-color: red; */
+    /* border: 1px solid black; */
+}
+
+section .title{
+    width: 100%;
+    text-align: center;
+    /* background-color: green; */
+
+}
+section .content{
+    width: 100%;
+    /* background-color: blue; */
+}
+
+
+/*//////////////////////////////////////////////////
+//COLUMNAS
+//////////////////////////////////////////////////*/
+.columnas-contenedor{
     width: 100%;
     height: 100%;
     display: flex;
@@ -197,34 +237,17 @@ i{
     gap: 3em;
 }
 
-.contenedor-tarjetas .tarjeta{
-    height: 100%;
-
+.columnas-contenedor .columna{
+    height: auto;
     display: flex;
     flex: 1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 2em;
-    padding: 2em;
-
-    border-radius: var(--radio);
-    box-shadow: var(--sombra);
 
 }
-.contenedor-tarjetas .tarjeta .precio{
-    text-align: center;
-}
 
-.tarjeta .imagen{
-    width: auto;
-    height: 120px;
-}
-
-.tarjeta .imagen img{
-    width: 100%;
-    height: 100%;
-}
 
 /*//////////////////////////////////////////////////
 //HEADER
@@ -301,38 +324,6 @@ header .navbar .actions a.btn:hover{
 
 
 
-
-/*//////////////////////////////////////////////////
-//SECCIONES
-//////////////////////////////////////////////////*/
-section{
-    margin: 0 auto;      
-    padding: 64px;
-
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    width: 70vw;
-    height: fit-content;
-    /* background-color: red; */
-    /* border: 1px solid black; */
-}
-
-section .title{
-    width: 100%;
-    text-align: center;
-    /* background-color: green; */
-
-}
-section .content{
-    width: 100%;
-    /* background-color: blue; */
-}
-
-
 /*//////////////////////////////////////////////////
 //FORMULARIOS 
 //////////////////////////////////////////////////*/
@@ -340,7 +331,7 @@ form{
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 35vw;
+    width: 55vw;
 }
 
 /* ENTRADA */
@@ -356,7 +347,10 @@ form .field{
     border-radius: var(--radio);
     box-shadow: var(--sombra);
 }
-
+form input[type="radio"]{
+    width: 1em;
+    height: 1em;
+}
 
 /* ELEMENTOS EN LINEA */
 .field .inline{
@@ -465,6 +459,10 @@ form .field{
     height: 2px;
     margin: 1em;
 }
+.barra-proceso button{
+    background-color: red;
+    border: none;
+}
 .barra-proceso .done,
 .barra-proceso .actual{
     background-color: var(--second);
@@ -544,9 +542,6 @@ h4.done ~ h4:first-of-type{
 .calendar {
     font-family: var(--textos);
     background: var(--blanco);
-    padding: 20px;
-    border-radius: var(--radio);
-    box-shadow: var(--sombra);
     text-align: center;
 }
 .calendar-header {
@@ -587,6 +582,88 @@ h4.done ~ h4:first-of-type{
 .day.selected {
     background: var(--second);
 }
+
+
+/* TARIFA */
+.tarifa{
+    transition: all 0.4s ease;
+}
+.tarifa .precio{
+    text-align: center;
+}
+.tarifa .imagen{
+    width: auto;
+    height: 120px;
+}
+
+.tarifa .imagen img{
+    width: 100%;
+    height: 100%;
+}
+.tarifa:hover{
+    color: var(--blanco);
+    background-color: var(--second);
+}
+.tarifa:hover * {
+    color: inherit;
+}
+
+
+
+
+/* RESUMEN */
+.resumen{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 2em;
+}
+.resumen .imagen{
+    width: auto;
+    height: 120px;
+}
+.resumen .imagen img{
+    width: 100%;
+    height: 100%;
+}
+.resumen .info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.resumen .precio,
+.resumen .detalles{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: baseline;
+}
+.resumen .precio sub{
+    margin-left: 1em;
+    padding-top: 1.5em;
+    font-size: 0.8em;
+}
+.resumen .detalles span:nth-of-type(2){
+    margin: 0 4px;
+}
+
+.metodoPago{
+    transition: all 0.2s;
+}
+.metodoPago:hover{
+    color: var(--blanco);
+    background-color: var(--second);
+}
+.metodoPago.seleccionada {
+    color: var(--blanco);
+    background-color: var(--second);
+}
+.metodoPago label {
+    color: inherit;
+}
+
+
 
 
 
