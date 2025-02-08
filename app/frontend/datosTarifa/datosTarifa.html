@@ -79,6 +79,7 @@
                         </div>
                     </div>
                 </div>
+                <span class="error"></span>
         </section>
         
         <section class="sectionForm">
@@ -97,7 +98,7 @@
                         <li><i class="fa-solid fa-check"></i>Materiales para talleres.</li>
                         <li><i class="fa-solid fa-check"></i>Seguro de accidentes.</li>
                     </ul>
-                    <a class="btn btn-main">Seleccionar</a>
+                    <button onclick="planBasico()" class="btn btn-main">Seleccionar</button>
                 </div>
 
                 <div class="columna tarjeta tarifa">
@@ -112,7 +113,7 @@
                         <li><i class="fa-solid fa-check"></i>Desayuno saludable</li>
                         <li><i class="fa-solid fa-check"></i>1 día gratis por cada 10 días</li>
                     </ul>
-                    <a class="btn btn-main">Seleccionar</a>
+                    <button onclick="planIntermedio()" class="btn btn-main">Seleccionar</button>
                 </div>
 
                 <div class="columna tarjeta tarifa">
@@ -127,7 +128,7 @@
                         <li><i class="fa-solid fa-check"></i>Desayuno saludable y comida completa.</li>
                         <li><i class="fa-solid fa-check"></i>1 día gratis por cada 5 días</li>
                     </ul>
-                    <a class="btn btn-main">Seleccionar</a>
+                    <button onclick="planAvanzado()" class="btn btn-main">Seleccionar</button>
                 </div>
             </div>
 
@@ -139,9 +140,5 @@
     </main>
 
     <script src="datosTarifa.js"></script>
-    <script src="../main.js"></script>
-
-
-
 </body>
 </html>

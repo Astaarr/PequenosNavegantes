@@ -1,3 +1,7 @@
+////////////////////////////////////////
+// CALENDARIO
+////////////////////////////////////////
+
 const precioUnitario = 9;
 
 // Array con las iniciales de los días de la semana en español
@@ -120,3 +124,54 @@ if (clearButton) {
 // Renderiza el calendario al cargar la página
 renderCalendar();
 actualizarDiasSeleccionados();
+
+
+
+////////////////////////////////////////
+// SUBMIT
+////////////////////////////////////////
+
+// Función para guardar los datos en sessionStorage
+function guardarDatos(datos) {
+    sessionStorage.setItem("datosTarifa", JSON.stringify(datos));
+}
+
+//Planes
+let planSeleccionado = null; 
+
+function planBasico() {
+    planSeleccionado = "Basico";
+    enviarDatos();
+}
+
+function planIntermedio() {
+    planSeleccionado = "Intermedio";
+    enviarDatos();
+}
+
+function planAvanzado() {
+    planSeleccionado = "Avanzado";
+    enviarDatos();
+}
+
+//Enviar datos
+function enviarDatos() {
+
+    if(selectedDays.length==0){
+        const errorSpan = document.querySelector(".error");
+        errorSpan.style.display = 'inline';
+        errorSpan.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Selecciona los Días de Inscripción primero`;
+    }else{
+        const datosTarifa = {
+            planSeleccionado: planSeleccionado,
+            nDias: selectedDays.length,
+            diasSeleccionados: selectedDays
+        };
+
+        // Guardar en sessionStorage
+        guardarDatos(datosTarifa);
+
+        window.location.href = '../resumenInscripcion/resumenInscripcion.html';
+    }
+
+}

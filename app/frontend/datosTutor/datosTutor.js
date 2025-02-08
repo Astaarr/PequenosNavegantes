@@ -3,7 +3,7 @@ const form = document.getElementById('formulario');
 
 // Función para guardar los datos en localStorage
 function guardarDatos(datos) {
-    localStorage.setItem("datosTutor", JSON.stringify(datos));
+    sessionStorage.setItem("datosTutor", JSON.stringify(datos));
 }
 
 // Función para recuperar y autocompletar los datos al cargar la página
@@ -31,7 +31,7 @@ form.addEventListener("submit", (event) => {
     const inputs = form.querySelectorAll("input");
 
     inputs.forEach(input => {
-        if (!validarCampoEspecifico(input)) { // Supongo que tienes una función de validación
+        if (!validarCampoEspecifico(input)) {
             formularioValido = false;
         }
     });
@@ -42,6 +42,7 @@ form.addEventListener("submit", (event) => {
             dniPadre: document.getElementById("dniPadre").value,
             telPadre: document.getElementById("telPadre").value,
             telPadreAdicional: document.getElementById("telPadreAdicional").value,
+
             nombreAutorizado: document.getElementById("nombreAutorizado").value,
             dniAutorizado: document.getElementById("dniAutorizado").value,
             telAutorizado: document.getElementById("telAutorizado").value
@@ -51,6 +52,7 @@ form.addEventListener("submit", (event) => {
         guardarDatos(datosTutor);
 
         console.log("Datos enviados y guardados:", datosTutor);
+
         window.location.href = '../datosHijo/datosHijo.html';
     } else {
         console.log("Hay errores en el formulario.");

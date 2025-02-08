@@ -8,10 +8,6 @@ document.getElementById('contraOlvidada').addEventListener("click", function (ev
     popup.style.display = "flex";
 });
 
-document.getElementById('cerrarPopup').addEventListener("click", function () {
-    popup.style.display = "none";
-});
-
 
 ////////////////////////////////////////
 // CORREO RECUPERACIÓN

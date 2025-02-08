@@ -78,14 +78,15 @@
                                     <h2 id="precioTotal">34,9€</h2><sub>incl. impto.</sub>
                                 </div>
                                 <div class="detalles">
-                                    <span class="dias">5</span>
+                                    <span id="dias">5</span>
                                     <span>días +</span>
-                                    <span class="plan">Plan intermedio</span>
+                                    <span id="plan">Plan intermedio</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                </div>
+               <span class="error"></span>
 
                 <div class="field">
                     <button type="submit" class="btn btn-main">Finalizar Inscripción</i></button>
@@ -94,9 +95,19 @@
             </section>
         </form>
 
+        <!-- Popup -->
+        <div class="popup-container" id="popupContainer">
+            <div class="popup tarjeta">
+                <h3>Inscripción Completa</h3>
+                <p>¡Gracias por confiar en Pequeños Navegantes!</p>
+                <button onclick="closePopup()" class="btn btn-main">Aceptar</button>
+            </div>
+        </div>
+
     </main>
 
     <script src="../main.js"></script>
     <script src="resumenInscripcion.js"></script>
+
 </body>
 </html>
