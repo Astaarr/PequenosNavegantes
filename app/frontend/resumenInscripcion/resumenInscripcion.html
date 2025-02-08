@@ -33,25 +33,24 @@
     </header>
 
     <main>
-        <section>
-            <form action="#" id="formulario">
-                <div class="barra-proceso">
-                    <h4 class="done">1</h4>
-                    <span></span>
-                    <h4 class="done">2</h4>
-                    <span></span>
-                    <h4 class="done">3</h4>
-                    <span></span>
-                    <h4 class="actual">4</h4>
-                </div>
 
+        <section class="sectionForm contenedorProceso">
+            <div class="barra-proceso">
+                <h4 class="done">1</h4>
+                <span></span>
+                <h4 class="done">2</h4>
+                <span></span>
+                <h4 class="done">3</h4>
+                <span></span>
+                <h4 class="actual">4</h4>
+            </div>
+            <div class="volver">
+                <a href="../datosTarifa/datosTarifa.html"><i class="fa-solid fa-arrow-left"></i>Anterior</a>
+            </div>
+        </section>
 
-                
-                <div class="enlace">
-                    <a href="../datosTarifa/datosTarifa.html"><i class="fa-solid fa-arrow-left"></i>Anterior</a>
-                </div>
-
-
+        <form action="#" id="formulario">
+            <section class="sectionForm">
                <div class="columnas-contenedor">
                     <div class="columna">
                         <div class="field">
@@ -91,8 +90,10 @@
                 <div class="field">
                     <button type="submit" class="btn btn-main">Finalizar Inscripción</i></button>
                 </div>
-            </form>
-        </section>
+
+            </section>
+        </form>
+
     </main>
 
     <script src="../main.js"></script>

@@ -33,7 +33,7 @@
     </header>
     
     <main>
-        <section>
+        <section class="sectionForm contenedorProceso">
             <div class="barra-proceso">
                 <h4 class="done">1</h4>
                 <span></span>
@@ -43,35 +43,30 @@
                 <span></span>
                 <h4>4</h4>
             </div>
+            <div class="volver">
+                <a href="../datosHijo/datosHijo.html"><i class="fa-solid fa-arrow-left"></i>Anterior</a>
+            </div>
         </section>
 
-        <div class="enlace">
-            <a href="../datosHijo/datosHijo.html"><i class="fa-solid fa-arrow-left"></i>Anterior</a>
-        </div>
-
-        <section>
-            <div class="field">
-                <h3>Selecciona Días</h3>
-            </div>
-
+        <section class="sectionForm">
             <div class="calendario-padre">
+                <h3>Selecciona Días</h3>
+
                 <div class="calendar tarjeta">
                     <div class="calendar-header">
                         <button onclick="prevMonth()"><i class="fa-solid fa-angle-left"></i></button>
-                        <h3 id="month-year"></h3>
+                        <h4 id="month-year"></h4>
                         <button onclick="nextMonth()"><i class="fa-solid fa-angle-right"></i></button>
                     </div>
                     <div class="days" id="weekdays"></div>
                     <div class="days" id="calendar-days"></div>
                 </div>
+
+                <button class="btn btn-submain" onclick="clearSelection()">Borrar Selección</button>            
             </div>
-            <button class="btn btn-main" onclick="clearSelection()">Borrar</button>            
-
-        
-
         </section>
-
-        <section>
+        
+        <section class="sectionForm">
             <div class="field">
                 <h3>Selecciona Extras</h3>
             </div>

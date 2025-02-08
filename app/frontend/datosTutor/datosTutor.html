@@ -33,18 +33,21 @@
     </header>
 
     <main>
-        <section>
-            <form action="#" id="formulario">
-                <div class="barra-proceso">
-                    <h4 class="actual">1</h4>
-                    <span></span>
-                    <h4>2</h4>
-                    <span></span>
-                    <h4>3</h4>
-                    <span></span>
-                    <h4>4</h4>
-                </div>
+        <section class="sectionForm contenedorProceso">
+            <div class="barra-proceso">
+                <h4 class="actual">1</h4>
+                <span></span>
+                <h4>2</h4>
+                <span></span>
+                <h4>3</h4>
+                <span></span>
+                <h4>4</h4>
+            </div>
+        </section>
 
+
+        <form action="#" id="formulario">
+            <section class="sectionForm">
 
                 <div class="field">
                     <h3>Información del Tutor</h3>
@@ -72,6 +75,10 @@
                     <input type="tel" name="telPadreAdicional" id="telPadreAdicional" placeholder="Ingresa Teléfono Adicional" tabindex="4">
                     <span class="error"></span>
                 </div>
+
+            </section>
+
+            <section class="sectionForm">
 
                 <div class="field">
                     <h3>Recogida del Niño</h3>
@@ -107,10 +114,11 @@
                 </div>
 
                 <div class="field">
-                    <button class="btn btn-main">Siguiente<i class="fa-solid fa-chevron-right"></i></button>
+                    <button type="submit" class="btn btn-main">Siguiente<i class="fa-solid fa-chevron-right"></i></button>
                 </div>
-            </form>
-        </section>
+            </section>
+
+        </form>
     </main>
 
     <script src="../main.js"></script>

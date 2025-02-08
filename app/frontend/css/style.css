@@ -105,9 +105,17 @@ a:hover::after {
     background-color: var(--main);
     color: var(--blanco);
 }
+.btn-submain{
+    background-color: var(--second);
+    color: var(--blanco);
+}
 .btn-second{
     background-color: var(--blanco);
     border: 2px solid var(--negro);
+}
+.btn-third{
+    background-color: var(--blanco);
+    box-shadow: var(--sombra);
 }
 .btn:hover{
     transform: scale(0.95);
@@ -198,7 +206,7 @@ i{
 //////////////////////////////////////////////////*/
 section{
     margin: 0 auto;      
-    padding: 64px;
+    padding: 24px;
 
 
     display: flex;
@@ -234,7 +242,7 @@ section .content{
     flex-direction: row;
     align-items: stretch;
     justify-content: space-between;
-    gap: 3em;
+    gap: 2em;
 }
 
 .columnas-contenedor .columna{
@@ -327,11 +335,9 @@ header .navbar .actions a.btn:hover{
 /*//////////////////////////////////////////////////
 //FORMULARIOS 
 //////////////////////////////////////////////////*/
-form{
-    display: flex;
-    flex-direction: column;
+.sectionForm{
+    width: 1000px;
     gap: 24px;
-    width: 55vw;
 }
 
 /* ENTRADA */
@@ -435,15 +441,18 @@ form input[type="radio"]{
     color: var(--main);
 }
 
-
 /* PROCESO */
+.contenedorProceso{
+    align-items: baseline;
+    margin-top: 1em;
+    gap: 1em;
+}
 .barra-proceso{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3em;
 }
 .barra-proceso h4{
     background-color: var(--blanco);
@@ -533,21 +542,26 @@ h4.done ~ h4:first-of-type{
 .calendario-padre{
     /* font-family: Arial, sans-serif; */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: auto;
-    margin-top: 2em;
+    gap: 1em;
 
 }
 .calendar {
     font-family: var(--textos);
     background: var(--blanco);
     text-align: center;
+    width: 550px;
 }
 .calendar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.calendar-header h4{
+    font-size: 1.75em;
 }
 .calendar-header button{
     background-color: var(--blanco);
@@ -578,6 +592,11 @@ h4.done ~ h4:first-of-type{
     cursor: pointer;
     color: var(--blanco);
     background: var(--main);
+    transition: all 0.2s;
+}
+.day:hover{
+    color: var(--blanco);
+    background: var(--second);
 }
 .day.selected {
     background: var(--second);
