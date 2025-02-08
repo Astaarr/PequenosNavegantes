@@ -140,17 +140,17 @@ function guardarDatos(datos) {
 let planSeleccionado = null; 
 
 function planBasico() {
-    planSeleccionado = "Basico";
+    planSeleccionado = "basico";
     enviarDatos();
 }
 
 function planIntermedio() {
-    planSeleccionado = "Intermedio";
+    planSeleccionado = "intermedio";
     enviarDatos();
 }
 
 function planAvanzado() {
-    planSeleccionado = "Avanzado";
+    planSeleccionado = "avanzado";
     enviarDatos();
 }
 

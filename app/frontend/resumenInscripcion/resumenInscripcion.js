@@ -12,6 +12,10 @@ document.querySelectorAll('input[name="metodoPago"]').forEach((input) => {
 });
 
 
+////////////////////////////////////////
+// CALCULAR PRECIO 
+////////////////////////////////////////
+
 document.addEventListener("DOMContentLoaded", function () {
     // Recuperar datos de sessionStorage
     const datosTarifa = JSON.parse(sessionStorage.getItem("datosTarifa"));
@@ -20,33 +24,48 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    const { planSeleccionado, nDias } = datosTarifa;
+    let { planSeleccionado, nDias } = datosTarifa;
 
     // Definir precios
     const precioPorDia = 9;
     const preciosPlan = {
-        "básico": 0,
+        "basico": 0,
         "intermedio": 5,
         "avanzado": 15
     };
 
-    // Calcular días con descuento
-    let diasFinales = nDias;
+    // Calcular días gratis aplicados
+    let diasGratis = 0;
     if (planSeleccionado === "intermedio") {
-        diasFinales += Math.floor(nDias / 10); // 1 día gratis por cada 10 días
+        diasGratis = Math.floor(nDias / 10); // 1 día gratis por cada 10 días
     } else if (planSeleccionado === "avanzado") {
-        diasFinales += Math.floor(nDias / 5); // 1 día gratis por cada 5 días
+        diasGratis = Math.floor(nDias / 5); // 1 día gratis por cada 5 días
     }
 
-    // Calcular precio total
-    const precioTotal = (nDias * precioPorDia) + preciosPlan[planSeleccionado];
+    // Calcular precio total sin modificar nDias
+    const precioTotal = (nDias * precioPorDia) + preciosPlan[planSeleccionado] - (diasGratis * precioPorDia);
 
     // Insertar datos en la tarjeta de resumen
-    document.getElementById("dias").textContent = diasFinales;
+    document.getElementById("dias").textContent = nDias;
     document.getElementById("plan").textContent = `Plan ${planSeleccionado}`;
     document.getElementById("precioTotal").textContent = `${precioTotal.toFixed(2)}€`;
-});
 
+    // Mostrar días de descuento si aplica
+    const descuentoElemento = document.getElementById("descuentos");
+    if (diasGratis > 0) {
+        descuentoElemento.textContent = `Días gratis aplicados: ${diasGratis}`;
+    } else {
+        descuentoElemento.textContent = "";
+    }
+
+    // Cambiar la imagen según el plan seleccionado
+    const imagenResumen = document.querySelector(".resumen .imagen img");
+    if (planSeleccionado === "intermedio") {
+        imagenResumen.src = "../../../resources/img/plan_02.png";
+    } else if (planSeleccionado === "avanzado") {
+        imagenResumen.src = "../../../resources/img/plan_03.png";
+    }
+});
 
 
 
