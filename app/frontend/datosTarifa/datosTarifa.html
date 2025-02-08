@@ -49,35 +49,47 @@
         </section>
 
         <section class="sectionForm">
-            <div class="calendario-padre">
                 <h3>Selecciona Días</h3>
 
-                <div class="calendar tarjeta">
-                    <div class="calendar-header">
-                        <button onclick="prevMonth()"><i class="fa-solid fa-angle-left"></i></button>
-                        <h4 id="month-year"></h4>
-                        <button onclick="nextMonth()"><i class="fa-solid fa-angle-right"></i></button>
-                    </div>
-                    <div class="days" id="weekdays"></div>
-                    <div class="days" id="calendar-days"></div>
-                </div>
+                <div class="columnas-contenedor">
+                    <div class="columna">
+                        <div class="calendar tarjeta">
+                            <div class="calendar-header">
+                                <button onclick="prevMonth()"><i class="fa-solid fa-angle-left"></i></button>
+                                <h5 id="month-year"></h5>
+                                <button onclick="nextMonth()"><i class="fa-solid fa-angle-right"></i></button>
+                            </div>
+                            <div class="days" id="weekdays"></div>
+                            <div class="days" id="calendar-days"></div>
+                        </div>
 
-                <button class="btn btn-submain" onclick="clearSelection()">Borrar Selección</button>            
-            </div>
+                        <button class="btn btn-submain" onclick="clearSelection()">Borrar Selección</button>  
+                    </div>
+
+                    <div class="columna tarjeta">
+                        <div class="datosDias">
+                            <div class="dias">
+                                <strong><i class="fa-regular fa-circle-check"></i>Días seleccionados</strong>
+                                <h4 id="diasSelected">-</h4>
+                            </div>
+                            <div class="precio">
+                                <strong><i class="fa-solid fa-tags"></i>Precio días (9/día)</strong>
+                                <h4 id="diasPrecio">-</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </section>
         
         <section class="sectionForm">
-            <div class="field">
-                <h3>Selecciona Extras</h3>
-            </div>
+            <h3>Selecciona Extras</h3>
 
             <div class="columnas-contenedor">
                 <div class="columna tarjeta tarifa">
                     <div class="imagen"><img src="../../../resources/img/plan_01.png" alt=""></div>
                     <div class="precio">
                         <span>Grumete</span>
-                        <h3>Plan Básico</h3>
-                        <h2>39€</h2>
+                        <h4>Plan Básico</h4>
                     </div>
                     <ul>
                         <li><i class="fa-solid fa-check"></i>Actividades náuticas y creativas.</li>
@@ -92,13 +104,13 @@
                     <div class="imagen"><img src="../../../resources/img/plan_02.png" alt=""></div>
                     <div class="precio">
                         <span>Navegante</span>
-                        <h3>Plan Intermedio</h3>
-                        <h2>+5€</h2>
+                        <h4>Plan Intermedio</h4>
+                        <h3>+5€</h3>
                     </div>
                     <ul>
                         <li><i class="fa-solid fa-check"></i>Todo lo del Plan Básico.</li>
-                        <li><i class="fa-solid fa-check"></i>Desayuno saludable y comida completa.</li>
-                        <li><i class="fa-solid fa-check"></i>Seguimiento del niño desde la web.</li>
+                        <li><i class="fa-solid fa-check"></i>Desayuno saludable</li>
+                        <li><i class="fa-solid fa-check"></i>1 día gratis por cada 10 días</li>
                     </ul>
                     <a class="btn btn-main">Seleccionar</a>
                 </div>
@@ -107,12 +119,13 @@
                     <div class="imagen"><img src="../../../resources/img/plan_03.png" alt=""></div>
                     <div class="precio">
                         <span>Capitan</span>
-                        <h3>Plan Avanzado</h3>
-                        <h2>+15€</h2>
+                        <h4>Plan Avanzado</h4>
+                        <h3>+15€</h3>
                     </div>
                     <ul>
                         <li><i class="fa-solid fa-check"></i>Todo lo del Plan Medio.</li>
-                        <li><i class="fa-solid fa-check"></i>Transporte de ida y vuelta desde puntos estratégicos de la ciudad.</li>
+                        <li><i class="fa-solid fa-check"></i>Desayuno saludable y comida completa.</li>
+                        <li><i class="fa-solid fa-check"></i>1 día gratis por cada 5 días</li>
                     </ul>
                     <a class="btn btn-main">Seleccionar</a>
                 </div>

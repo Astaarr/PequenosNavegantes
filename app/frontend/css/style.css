@@ -64,9 +64,18 @@ h2{
 h3{
     font-size: 2.25em;
 }
+h4{
+    font-size: 2em;
+}
+h5{
+    font-size: 1.75em;
+}
+h6{
+    font-size: 1.25em;
+}
 
 /* ======= TEXTOS ======= */
-p, a, b, span, pre, sub, i, li, input, button, label {
+p, a, b, span, pre, sub, i, li, input, button, label, div {
     font-family: var(--textos);
     font-size: 1em;
     font-weight: 400;
@@ -206,7 +215,7 @@ i{
 //////////////////////////////////////////////////*/
 section{
     margin: 0 auto;      
-    padding: 24px;
+    padding: 36px;
 
 
     display: flex;
@@ -357,6 +366,9 @@ form input[type="radio"]{
     width: 1em;
     height: 1em;
 }
+.volver a{
+    font-weight: 600;
+}
 
 /* ELEMENTOS EN LINEA */
 .field .inline{
@@ -455,6 +467,7 @@ form input[type="radio"]{
     align-items: center;
 }
 .barra-proceso h4{
+    font-size: 1em;
     background-color: var(--blanco);
     color: var(--second);
     border: 2px solid var(--second);
@@ -539,16 +552,6 @@ h4.done ~ h4:first-of-type{
 
 
 /* CALENDARIO */
-.calendario-padre{
-    /* font-family: Arial, sans-serif; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    gap: 1em;
-
-}
 .calendar {
     font-family: var(--textos);
     background: var(--blanco);
@@ -560,9 +563,6 @@ h4.done ~ h4:first-of-type{
     justify-content: space-between;
     align-items: center;
 }
-.calendar-header h4{
-    font-size: 1.75em;
-}
 .calendar-header button{
     background-color: var(--blanco);
     border: none;
@@ -570,9 +570,6 @@ h4.done ~ h4:first-of-type{
 }
 .calendar-header button:hover{
     color: var(--main);
-}
-.calendar-header h3{
-    padding: 0 1em;
 }
 .days {
     display: grid;
@@ -602,9 +599,19 @@ h4.done ~ h4:first-of-type{
     background: var(--second);
 }
 
+.datosDias{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+.datosDias h4{
+    font-size: 2em;
+}
+
 
 /* TARIFA */
 .tarifa{
+    padding: 1.5em;
     transition: all 0.4s ease;
 }
 .tarifa .precio{
@@ -619,6 +626,9 @@ h4.done ~ h4:first-of-type{
     width: 100%;
     height: 100%;
 }
+.tarifa li{
+    margin-bottom: 1em;
+}
 .tarifa:hover{
     color: var(--blanco);
     background-color: var(--second);
@@ -626,8 +636,6 @@ h4.done ~ h4:first-of-type{
 .tarifa:hover * {
     color: inherit;
 }
-
-
 
 
 /* RESUMEN */

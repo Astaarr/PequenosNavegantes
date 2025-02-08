@@ -1,3 +1,5 @@
+const precioUnitario = 9;
+
 // Array con las iniciales de los días de la semana en español
 const weekdays = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 
@@ -5,6 +7,10 @@ const weekdays = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 const monthYearElement = document.getElementById('month-year');
 const calendarDaysElement = document.getElementById('calendar-days');
 const clearButton = document.getElementById('clear-selection'); // Botón para limpiar selección
+
+// Elementos del DOM para mostrar días seleccionados y precio total
+const diasSelectedElement = document.getElementById('diasSelected');
+const diasPrecioElement = document.getElementById('diasPrecio');
 
 // Fecha actual
 let currentDate = new Date();
@@ -14,37 +20,36 @@ let selectedDays = JSON.parse(sessionStorage.getItem("selectedDays")) || [];
 
 // Función para renderizar el calendario
 function renderCalendar() {
-    // Limpia el contenido del calendario
     calendarDaysElement.innerHTML = '';
-    
+
     // Muestra el mes y año actual
     monthYearElement.textContent = currentDate.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
-    
+
     // Calcula el primer día del mes y el número de días en el mes
     let firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
     let daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
     let prevDays = (firstDay === 0) ? 6 : firstDay - 1;
-    
+
     // Añade elementos vacíos para los días previos al primer día del mes
     for (let i = 0; i < prevDays; i++) {
         const emptyDiv = document.createElement('div');
         calendarDaysElement.appendChild(emptyDiv);
     }
-    
+
     // Crea elementos para cada día del mes
     for (let day = 1; day <= daysInMonth; day++) {
         const dayElement = document.createElement('div');
         dayElement.textContent = day;
         dayElement.classList.add('day');
-        
+
         // Formatea la fecha como clave
         let dateKey = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        
+
         // Marca los días seleccionados
         if (selectedDays.includes(dateKey)) {
             dayElement.classList.add('selected');
         }
-        
+
         // Añade eventos de clic para seleccionar/deseleccionar días
         dayElement.addEventListener('click', () => {
             if (selectedDays.includes(dateKey)) {
@@ -54,30 +59,42 @@ function renderCalendar() {
                 selectedDays.push(dateKey);
                 dayElement.classList.add('selected');
             }
-            guardarSeleccion(); // Guardar en sessionStorage
+            guardarSeleccion();
         });
-        
+
         // Añade el elemento del día al calendario
         calendarDaysElement.appendChild(dayElement);
     }
 }
 
+// Función para actualizar el número de días seleccionados y el precio total
+function actualizarDiasSeleccionados() {
+    diasSelectedElement.textContent = selectedDays.length;
+    actualizarPrecioTotal();
+}
+
+// Función para calcular y actualizar el precio total
+function actualizarPrecioTotal() {
+    const precioTotal = selectedDays.length * precioUnitario;
+    diasPrecioElement.textContent = precioTotal.toFixed(2) + "€";
+}
+
 // Función para guardar la selección en sessionStorage
 function guardarSeleccion() {
     sessionStorage.setItem("selectedDays", JSON.stringify(selectedDays));
+    actualizarDiasSeleccionados();
 }
 
 // Función para limpiar todos los días seleccionados
 function clearSelection() {
-    selectedDays = []; // Vaciar el array
-    sessionStorage.removeItem("selectedDays"); // Borrar del sessionStorage
+    selectedDays = [];
+    sessionStorage.removeItem("selectedDays");
 
-    // Eliminar la clase "selected" de todos los días en el calendario
     document.querySelectorAll('.day.selected').forEach(day => {
         day.classList.remove('selected');
     });
 
-    console.log("Selección eliminada.");
+    actualizarDiasSeleccionados();
 }
 
 // Función para cambiar al mes anterior y renderizar el calendario
@@ -102,3 +119,4 @@ if (clearButton) {
 
 // Renderiza el calendario al cargar la página
 renderCalendar();
+actualizarDiasSeleccionados();
