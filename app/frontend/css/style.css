@@ -48,7 +48,7 @@ main{
 //COMPONENTES
 //////////////////////////////////////////////////*/
 
-/* TÍTULOS */
+/* ======= TITULOS ======= */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--titulos);
     font-weight: bold;
@@ -64,9 +64,18 @@ h2{
 h3{
     font-size: 2.25em;
 }
+h4{
+    font-size: 2em;
+}
+h5{
+    font-size: 1.75em;
+}
+h6{
+    font-size: 1.25em;
+}
 
-/* TEXTOS */
-p, a, span, i, li, input, button, label {
+/* ======= TEXTOS ======= */
+p, a, b, span, pre, sub, i, li, input, button, label, div {
     font-family: var(--textos);
     font-size: 1em;
     font-weight: 400;
@@ -92,21 +101,30 @@ a:hover::after {
     width: 100%;
 }
 
-/* BOTONES */
+/* ======= BOTONES ======= */
 .btn{
-    padding: 0.5em 1em;
+    width: 100%;
+    padding: 1em;
     border-radius: var(--radio);
     border: none;
     font-size: 1em;
-    transition: transform ease 0.2s;
+    transition: all ease-in-out 0.2s;
 }
 .btn-main {
     background-color: var(--main);
     color: var(--blanco);
 }
+.btn-submain{
+    background-color: var(--second);
+    color: var(--blanco);
+}
 .btn-second{
     background-color: var(--blanco);
     border: 2px solid var(--negro);
+}
+.btn-third{
+    background-color: var(--blanco);
+    box-shadow: var(--sombra);
 }
 .btn:hover{
     transform: scale(0.95);
@@ -117,13 +135,145 @@ a:hover::after {
 .btn>a:hover::after{
     width: 0;
 }
+a.btn{
+    height: auto;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+a.btn:hover::after{
+    width: 0;
+}
 
-/* ICONOS */
+/* ======= ICONOS ======= */
 i{
     color: inherit;
     margin: 0 8px;
     font-size: 1em;
 }
+
+/* ======= TARJETAS ======= */
+.tarjeta{
+    background-color: var(--blanco);
+    padding: 2em;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+}
+
+/* ======= POPUPS ======= */
+.popup-container{
+    top:0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+
+    backdrop-filter: blur(10px); 
+
+}
+.popup{
+    display: flex;
+    max-width: 500px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    position: relative;
+    padding: 4em;
+    text-align: center;
+}
+.popup .close-popup{
+    position: absolute;
+    width: auto;
+    top: 1em;
+    right: 1em;
+    background-color: transparent;
+    padding: 0;
+}
+.popup .close-popup:hover{
+    color: var(--main);
+}
+.popup input{
+    width: 100%;
+    padding: 1em;
+    border-radius: var(--radio);
+    border: none;
+    box-shadow: var(--sombra);
+}
+.popup button{
+    padding: 1em;
+}
+.popup .mensaje,
+.popup .correo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+
+
+
+/*//////////////////////////////////////////////////
+//SECCIONES
+//////////////////////////////////////////////////*/
+section{
+    margin: 0 auto;      
+    padding: 36px;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 1440px;
+    height: fit-content;
+    /* background-color: red; */
+    /* border: 1px solid black; */
+}
+
+section .title{
+    width: 100%;
+    text-align: center;
+    /* background-color: green; */
+
+}
+section .content{
+    width: 100%;
+    /* background-color: blue; */
+}
+
+
+/*//////////////////////////////////////////////////
+//COLUMNAS
+//////////////////////////////////////////////////*/
+.columnas-contenedor{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.columnas-contenedor .columna{
+    height: auto;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+
+}
+
 
 /*//////////////////////////////////////////////////
 //HEADER
@@ -182,13 +332,14 @@ header .navbar .actions{
     gap: 1em;
 }
 
-header .navbar .actions button{
+header .navbar .actions a.btn{
     width: 135px;
+    padding: 0.75em 1em;
     font-family: var(--titulos);
     transition: 0.3s ease box-shadow;
 
 }
-header .navbar .actions button:hover{
+header .navbar .actions a.btn:hover{
     box-shadow: 5px 5px 15px #0184DC;
 }
 
@@ -199,46 +350,12 @@ header .navbar .actions button:hover{
 
 
 
-
-/*//////////////////////////////////////////////////
-//SECCIONES
-//////////////////////////////////////////////////*/
-section{
-    margin: 0 auto;      
-    padding: 64px;
-
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    width: 70vw;
-    height: fit-content;
-    /* background-color: red; */
-    /* border: 1px solid black; */
-}
-
-section .title{
-    width: 100%;
-    text-align: center;
-    /* background-color: green; */
-
-}
-section .content{
-    width: 100%;
-    /* background-color: blue; */
-}
-
-
 /*//////////////////////////////////////////////////
 //FORMULARIOS 
 //////////////////////////////////////////////////*/
-form{
-    display: flex;
-    flex-direction: column;
+.sectionForm{
+    width: 1000px;
     gap: 24px;
-    width: 35vw;
 }
 
 /* ENTRADA */
@@ -248,15 +365,19 @@ form .field{
     gap: 8px;
     width: 100%;
 }
-.field input, .field .btn{
-    width: 100%;
-    
+.field input, .field .btn{    
     border: none;
     padding: 1em;
     border-radius: var(--radio);
     box-shadow: var(--sombra);
 }
-
+form input[type="radio"]{
+    width: 1em;
+    height: 1em;
+}
+.volver a{
+    font-weight: 600;
+}
 
 /* ELEMENTOS EN LINEA */
 .field .inline{
@@ -341,17 +462,21 @@ form .field{
     color: var(--main);
 }
 
-
 /* PROCESO */
+.contenedorProceso{
+    align-items: baseline;
+    margin-top: 1em;
+    gap: 1em;
+}
 .barra-proceso{
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3em;
 }
 .barra-proceso h4{
+    font-size: 1em;
     background-color: var(--blanco);
     color: var(--second);
     border: 2px solid var(--second);
@@ -364,6 +489,10 @@ form .field{
     width: 20%;
     height: 2px;
     margin: 1em;
+}
+.barra-proceso button{
+    background-color: red;
+    border: none;
 }
 .barra-proceso .done,
 .barra-proceso .actual{
@@ -425,14 +554,150 @@ h4.done ~ h4:first-of-type{
 }
 
 /* MENSAJE ERROR */
-.field .error{
+.error{
     display: none;
     color: var(--error);
 }
 
 
+/* CALENDARIO */
+.calendar {
+    font-family: var(--textos);
+    background: var(--blanco);
+    text-align: center;
+    width: 550px;
+}
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.calendar-header button{
+    background-color: var(--blanco);
+    border: none;
+    transition: all ease-in-out 0.2s;
+}
+.calendar-header button:hover{
+    color: var(--main);
+}
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+}
+.day, .weekday {
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+.weekday {
+    font-weight: bold;
+}
+.day {
+    cursor: pointer;
+    color: var(--blanco);
+    background: var(--main);
+    transition: all 0.2s;
+}
+.day:hover{
+    color: var(--blanco);
+    background: var(--second);
+}
+.day.selected {
+    background: var(--second);
+}
+
+.datosDias{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+.datosDias h4{
+    font-size: 2em;
+}
 
 
+/* TARIFA */
+.tarifa{
+    padding: 1.5em;
+    transition: all 0.4s ease;
+}
+.tarifa .precio{
+    text-align: center;
+}
+.tarifa .imagen{
+    width: auto;
+    height: 120px;
+}
+
+.tarifa .imagen img{
+    width: 100%;
+    height: 100%;
+}
+.tarifa li{
+    margin-bottom: 1em;
+}
+.tarifa:hover{
+    color: var(--blanco);
+    background-color: var(--second);
+}
+.tarifa:hover * {
+    color: inherit;
+}
+
+
+/* RESUMEN */
+.resumen{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 2em;
+}
+.resumen .imagen{
+    width: auto;
+    height: 120px;
+}
+.resumen .imagen img{
+    width: 100%;
+    height: 100%;
+}
+.resumen .info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.resumen .precio,
+.resumen .detalles{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: baseline;
+}
+.resumen .precio sub{
+    margin-left: 1em;
+    padding-top: 1.5em;
+    font-size: 0.8em;
+}
+.resumen .detalles span:nth-of-type(2){
+    margin: 0 4px;
+}
+
+.metodoPago{
+    transition: all 0.2s;
+}
+.metodoPago:hover{
+    color: var(--blanco);
+    background-color: var(--second);
+}
+.metodoPago.seleccionada {
+    color: var(--blanco);
+    background-color: var(--second);
+}
+.metodoPago label {
+    color: inherit;
+}
 
 
 
@@ -488,3 +753,7 @@ h4.done ~ h4:first-of-type{
 
 
 }
+
+
+
+

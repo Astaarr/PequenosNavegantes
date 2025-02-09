@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen</title>
+
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- AXIOS -->
+    <script src="../axios/node_modules/axios/dist/axios.min.js" defer></script>
+
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="../../../resources/logo/logoN.png" alt="">
+            </div>
+            <div class="content" id="menu">
+                <a href="../paginaPrincipal/index.html"><i class="fa-solid fa-arrow-left"></i>Inicio</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="sectionForm contenedorProceso">
+            <div class="barra-proceso">
+                <h4 class="done">1</h4>
+                <span></span>
+                <h4 class="done">2</h4>
+                <span></span>
+                <h4 class="done">3</h4>
+                <span></span>
+                <h4 class="actual">4</h4>
+            </div>
+            <div class="volver">
+                <a href="../datosTarifa/datosTarifa.html"><i class="fa-solid fa-arrow-left"></i>Anterior</a>
+            </div>
+        </section>
+
+        <form action="#" id="formulario">
+            <section class="sectionForm">
+               <div class="columnas-contenedor">
+                    <div class="columna">
+                        <div class="field">
+                            <h3>Método de Pago</h3>
+                            <div class="tarjeta metodoPago">
+                                <input type="radio" name="metodoPago" id="metodoPago1" value="transferencia">
+                                <label for="metodoPago1"><i class="fa-solid fa-credit-card"></i>Transferencia Bancaria</label>
+                            </div>
+                            <div class="tarjeta metodoPago">
+                                <input type="radio" name="metodoPago" id="metodoPago2" value="bizum">
+                                <label for="metodoPago2"><i class="fa-solid fa-mobile"></i>Bizum</label>
+                            </div>
+                            <div class="tarjeta metodoPago">
+                                <input type="radio" name="metodoPago" id="metodoPago3" value="efectivo">
+                                <label for="metodoPago3"><i class="fa-solid fa-money-bill-wave"></i>Pago efectivo</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="columna">
+                        <div class="tarjeta resumen">
+                            <div class="imagen"><img src="../../../resources/img/plan_01.png" alt=""></div>
+                            <div class="info">
+                                <div class="precio">
+                                    <h2 id="precioTotal">34,9€</h2><sub>incl. impto.</sub>
+                                </div>
+                                <div class="detalles">
+                                    <span id="dias"></span>
+                                    <span>días +</span>
+                                    <span id="plan"></span>
+
+                                </div>
+                                <div class="ofertas">
+                                    <span id="descuentos"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+               <span class="error"></span>
+
+                <div class="field">
+                    <button type="submit" class="btn btn-main">Finalizar Inscripción</i></button>
+                </div>
+
+            </section>
+        </form>
+
+        <!-- Popup -->
+        <div class="popup-container" id="popupContainer">
+            <div class="popup tarjeta">
+                <h3>Inscripción Completa</h3>
+                <p>¡Gracias por confiar en Pequeños Navegantes!</p>
+                <button onclick="closePopup()" class="btn btn-main">Aceptar</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../main.js"></script>
+    <script src="resumenInscripcion.js"></script>
+
+</body>
+</html>

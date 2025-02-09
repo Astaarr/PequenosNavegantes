@@ -32,8 +32,8 @@
     </header>
 
     <main>
-        <section>
-            <form id="formulario">
+        <form id="formulario">
+            <section class="sectionForm">
                 <div class="field">
                     <h3>CREAR CUENTA</h3>
                 </div>
@@ -76,10 +76,17 @@
                 <div class="field">
                     <p>¿Ya tienes cuenta?<a href="../login/login.html">Accede aquí</a></p>
                 </div>
-
-            </form>
-        </section>
+            </section>
+        </form>
     </main>
+
+    <div class="popup-container" id="popupContainer">
+        <div class="popup tarjeta">
+            <h3>Cuenta Creada</h3>
+            <p>¡Tu cuenta ha sido creada exitosamente!</p>
+            <button onclick="aceptarBtn()" class="btn btn-main">Aceptar</button>
+        </div>
+    </div>
 
     <script src="../main.js"></script>
     <script src="registro.js"></script>

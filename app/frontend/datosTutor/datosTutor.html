@@ -27,24 +27,27 @@
                 <img src="../../../resources/logo/logoN.png" alt="">
             </div>
             <div class="content" id="menu">
-                <a href="../paginaPrincipal/index.html"><i class="fa-solid fa-arrow-left"></i>Volver</a>
+                <a href="../paginaPrincipal/index.html"><i class="fa-solid fa-arrow-left"></i>Inicio</a>
             </div>
         </div>
     </header>
 
     <main>
-        <section>
-            <form action="#" id="formulario">
-                <div class="barra-proceso">
-                    <h4 class="done">1</h4>
-                    <span></span>
-                    <h4 class="actual">2</h4>
-                    <span></span>
-                    <h4>3</h4>
-                    <span></span>
-                    <h4>4</h4>
-                </div>
+        <section class="sectionForm contenedorProceso">
+            <div class="barra-proceso">
+                <h4 class="actual">1</h4>
+                <span></span>
+                <h4>2</h4>
+                <span></span>
+                <h4>3</h4>
+                <span></span>
+                <h4>4</h4>
+            </div>
+        </section>
 
+
+        <form action="#" id="formulario">
+            <section class="sectionForm">
 
                 <div class="field">
                     <h3>Información del Tutor</h3>
@@ -73,6 +76,10 @@
                     <span class="error"></span>
                 </div>
 
+            </section>
+
+            <section class="sectionForm">
+
                 <div class="field">
                     <h3>Recogida del Niño</h3>
                 </div>
@@ -88,31 +95,30 @@
                     <div class="campo-adicional">
                         <div class="field">
                             <label for="nombreAutorizado">Nombre del Autorizado</label>
-                            <input type="text" class="obligatorio" placeholder="Ingresa su Nombre" name="nombreAutorizado" id="nombreAutorizado">
+                            <input type="text" placeholder="Ingresa su Nombre" name="nombreAutorizado" id="nombreAutorizado">
+                            <span class="error"></span>
                         </div>
 
                         <div class="field">
                             <label for="dniAutorizado">DNI del Autorizado</label>
-                            <input type="text" class="obligatorio" placeholder="Ingresa su DNI" name="dniAutorizado" id="dniAutorizado">
+                            <input type="text" class="dni" placeholder="Ingresa su DNI" name="dniAutorizado" id="dniAutorizado">
+                            <span class="error"></span>
                         </div>
 
                         <div class="field">
                             <label for="telAutorizado">Teléfono del Autorizado</label>
-                            <input type="tel" class="obligatorio" name="telAutorizado" id="telAutorizado" placeholder="Ingresa tu Teléfono" tabindex="2">
+                            <input type="tel" name="telAutorizado" id="telAutorizado" placeholder="Ingresa tu Teléfono" tabindex="2">
+                            <span class="error"></span>
                         </div>
                     </div>
                 </div>
 
                 <div class="field">
-                    <div class="inline">
-                        <button class="btn btn-second"><a href="../datosHijo/datosHijo.html"><i class="fa-solid fa-chevron-left"></i>Anterior</a></button>
-                        
-                        <button class="btn btn-main"><a href="">Siguiente<i class="fa-solid fa-chevron-right"></i></a></button>
-                    </div>
+                    <button type="submit" class="btn btn-main">Siguiente<i class="fa-solid fa-chevron-right"></i></button>
                 </div>
+            </section>
 
-            </form>
-        </section>
+        </form>
     </main>
 
     <script src="../main.js"></script>

@@ -1,8 +1,60 @@
+////////////////////////////////////////
+// ABRIR POPUP RECUPERACIÓN
+////////////////////////////////////////
+const popup = document.getElementById('popupContainer');
+
+document.getElementById('contraOlvidada').addEventListener("click", function (event) {
+    event.preventDefault(); // Evita que el enlace recargue la página
+    popup.style.display = "flex";
+});
+
+
+////////////////////////////////////////
+// CORREO RECUPERACIÓN
+////////////////////////////////////////
+function submitEmail() {
+    const email = document.getElementById('emailRecuperacion').value.trim();
+
+    if(!email){
+        console.error("El campo de email esta vacio");
+        alert("El campo de email esta vacio");
+        return;
+    }
+
+    axios.post('/PequenosNavegantes/app/backend/recuperar_password/enviar_codigo.php', 
+        JSON.stringify({ emailRecuperacion: email }), // ✅ Enviar un objeto JSON correctamente
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+    ) 
+    .then(response => {
+        if (response.data.success) {
+            document.getElementById("popupContainer").style.display = "none";
+            document.getElementById("popupCorreo").style.display = "flex"; 
+        } else {
+            alert("No se ha enviado el correo: " + response.data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error al enviar el email:', error);
+    });
+}
+
+
+////////////////////////////////////////
+// ENVIAR FORMULARIO
+////////////////////////////////////////
+
 // Obtener elementos del DOM
 const form = document.getElementById('formulario');
 
+
+
 // Evento submit
 form.addEventListener('submit', (event) => {
+    const errorGeneral = document.getElementById('errorGeneral');
 
     event.preventDefault();
 
@@ -29,10 +81,10 @@ form.addEventListener('submit', (event) => {
     .then(response => {
         console.log(response.data);
         if (response.data.success) {
-            alert('Login exitoso');
-            window.location.href = '../../frontend/paginaPrincipal/index.html'; 
+            document.getElementById("popupConfirmacion").style.display = "flex";
         } else {
-            alert(response.data.message || "Error en el inicio de sesión");
+            errorGeneral.style.display = 'inline';
+            errorGeneral.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Correo o Contraseña incorrectos`;
         }
     })
     .catch(error => {
@@ -40,3 +92,8 @@ form.addEventListener('submit', (event) => {
     });
     
 });
+
+function aceptarBtn(){
+    document.getElementById("popupConfirmacion").style.display = "none";
+    window.location.href = '../../frontend/paginaPrincipal/index.html'; 
+}
