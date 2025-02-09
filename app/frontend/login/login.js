@@ -1,5 +1,5 @@
 ////////////////////////////////////////
-// ABRIR POPUP
+// ABRIR POPUP RECUPERACIÓN
 ////////////////////////////////////////
 const popup = document.getElementById('popupContainer');
 
@@ -30,8 +30,12 @@ function submitEmail() {
         }
     ) 
     .then(response => {
-        console.log("Respuesta del servidor:", response.data);
-        alert(response.data.message);
+        if (response.data.success) {
+            document.getElementById("popupContainer").style.display = "none";
+            document.getElementById("popupCorreo").style.display = "flex"; 
+        } else {
+            alert("No se ha enviado el correo: " + response.data.message);
+        }
     })
     .catch(error => {
         console.error('Error al enviar el email:', error);
@@ -50,6 +54,7 @@ const form = document.getElementById('formulario');
 
 // Evento submit
 form.addEventListener('submit', (event) => {
+    const errorGeneral = document.getElementById('errorGeneral');
 
     event.preventDefault();
 
@@ -76,10 +81,10 @@ form.addEventListener('submit', (event) => {
     .then(response => {
         console.log(response.data);
         if (response.data.success) {
-            alert('Login exitoso');
-            window.location.href = '../../frontend/paginaPrincipal/index.html'; 
+            document.getElementById("popupConfirmacion").style.display = "flex";
         } else {
-            alert(response.data.message || "Error en el inicio de sesión");
+            errorGeneral.style.display = 'inline';
+            errorGeneral.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Correo o Contraseña incorrectos`;
         }
     })
     .catch(error => {
@@ -87,3 +92,8 @@ form.addEventListener('submit', (event) => {
     });
     
 });
+
+function aceptarBtn(){
+    document.getElementById("popupConfirmacion").style.display = "none";
+    window.location.href = '../../frontend/paginaPrincipal/index.html'; 
+}

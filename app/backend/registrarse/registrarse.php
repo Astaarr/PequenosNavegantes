@@ -17,7 +17,6 @@ $nombre = $data['nombre'] ?? '';
 $email = $data['email'] ?? '';
 $password = $data['password'] ?? '';
 
-
 // Verifica que la contraseña no esté vacía
 if (empty($password)) {
     echo json_encode(["success" => false, "message" => "La contraseña no puede estar vacía."]);
@@ -25,12 +24,19 @@ if (empty($password)) {
 }
 
 // Encriptar la contraseña
-$hashedPassword = password_hash($password,PASSWORD_DEFAULT);
-
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 // Enviar datos a la base de datos
 $sql = "INSERT INTO padre (nombre, email, password) VALUES (?, ?, ?)";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("sss", $nombre, $email, $hashedPassword);
-$stmt->execute();
 
+if ($stmt->execute()) {
+    echo json_encode(["success" => true, "message" => "Registro exitoso"]);
+} else {
+    echo json_encode(["success" => false, "message" => "Error al registrar."]);
+}
+
+$stmt->close();
+$conexion->close();
+?>

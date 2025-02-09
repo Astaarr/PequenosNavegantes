@@ -178,12 +178,14 @@ i{
 }
 .popup{
     display: flex;
+    max-width: 500px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2em;
     position: relative;
     padding: 4em;
+    text-align: center;
 }
 .popup .close-popup{
     position: absolute;
@@ -205,6 +207,13 @@ i{
 }
 .popup button{
     padding: 1em;
+}
+.popup .mensaje,
+.popup .correo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
 }
 
 

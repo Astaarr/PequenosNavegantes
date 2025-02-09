@@ -71,6 +71,8 @@
                     <button type="submit" class="btn btn-main" tabindex="3">Iniciar Sesión</button>
                 </div>
 
+                <span id="errorGeneral" class="error"></span>
+
                 <div class="field">
                     <div class="separador">O</div>
                 </div>
@@ -94,8 +96,31 @@
             <div class="popup tarjeta">
                 <h3>Introduce tu Correo</h3>
                 <button id="cerrarPopup" class="close-popup btn btn" onclick="closePopup()"><i class="fas fa-times"></i></button>
-                <input type="email" id="emailRecuperacion" name="emailRecuperacion" placeholder="Tu correo aquí">
+                <div class="correo">
+                    <input type="email" class="obligatorio" id="emailRecuperacion" name="emailRecuperacion" placeholder="Tu correo aquí">
+                    <span class="error"></span>
+                </div>
                 <button onclick="submitEmail()" class="btn btn-main">Enviar</button>
+            </div>
+        </div>
+
+        <div class="popup-container" id="popupCorreo">
+            <div class="popup tarjeta">
+                <h3>Correo envíado</h3>
+                <div class="mensaje">
+                    <p>Revisa tu bandeja de entrada y copia el código de verificación que te hemos enviado.</p>
+                    <p>Luego, haz clic en el botón de abajo para restablecer tu contraseña.</p>
+                </div>
+                <button onclick="aceptarBtn()" class="btn btn-main">Aceptar</button>
+            </div>
+        </div>
+
+        <!-- Popup -->
+        <div class="popup-container" id="popupConfirmacion">
+            <div class="popup tarjeta">
+                <h3>Inicio de Sesión Exitoso</h3>
+                <p>¡Nos alegra verte de nuevo!</p>
+                <button onclick="aceptarBtn()" class="btn btn-main">Aceptar</button>
             </div>
         </div>
 

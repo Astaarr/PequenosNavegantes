@@ -27,8 +27,7 @@ form.addEventListener('submit', (event) => {
     .then(response => {
         console.log(response.data);
         if (response.data.success) {
-            alert('Padre registrado correctamente');
-            window.location.href = '../../frontend/login/login.html';
+            document.getElementById("popupContainer").style.display = "flex";
         } else {
             alert(response.data.message);
         }
@@ -38,6 +37,11 @@ form.addEventListener('submit', (event) => {
     });
 
 });
+
+function aceptarBtn(){
+    document.getElementById("popupContainer").style.display = "none";
+    window.location.href = '../../frontend/login/login.html';
+}
 
 
 
