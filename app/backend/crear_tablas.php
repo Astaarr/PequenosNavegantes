@@ -25,6 +25,7 @@ if (!verificarTabla($conexion, 'padre')){
         password VARCHAR(255) NOT NULL,
         email VARCHAR(100) NOT NULL,
         telefono VARCHAR(16),
+        telefono_adicional VARCHAR(16),
         token_login VARCHAR(255),
         codigo_restablecer VARCHAR(255),
         token_restablecer VARCHAR(255)
@@ -36,11 +37,31 @@ if (!verificarTabla($conexion, 'padre')){
     $passwordPadre2 = password_hash('padre456', PASSWORD_DEFAULT);
 
     // Insertar datos en la tabla 'padre'
-    $sqlPadreInsert = "INSERT INTO padre (DNI, nombre, password, email, telefono) VALUES
-        ('12345678A', 'Daniel Clavel', '$passwordPadre1', 'ejemplo@gmail.com', '600123456'),
-        ('23456789B', 'Adri Arcones', '$passwordPadre2', 'ejemplo2@gmail.com', '611987654')";
+    $sqlPadreInsert = "INSERT INTO padre (DNI, nombre, password, email, telefono, telefono_adicional) VALUES
+        ('12345678A', 'Daniel Clavel', '$passwordPadre1', 'ejemplo@gmail.com', '600123456', '600123457'),
+        ('23456789B', 'Adri Arcones', '$passwordPadre2', 'ejemplo2@gmail.com', '611987654', '611987655')";
     mysqli_query($conexion, $sqlPadreInsert) or die("Error al insertar datos en 'padre': " . mysqli_error($conexion));
 }
+
+// Verifica y crea la tabla de 'tutor_adicional'
+
+if (!verificarTabla($conexion, 'tutor_adicional')){
+    $sqlTutorAdicional = "CREATE TABLE tutor_adicional (
+        id_tutor INT AUTO_INCREMENT PRIMARY KEY,
+        DNI VARCHAR (9) UNIQUE,
+        nombre VARCHAR(100),
+        telefono_autorizado VARCHAR(16),
+        id_padre INT,
+        FOREIGN KEY (id_padre) REFERENCES padre(id_padre) ON DELETE CASCADE
+        )";
+    mysqli_query($conexion, $sqlTutorAdicional) or die("Error al crear la tabla 'tutor_adicional': ". mysqli_error($conexion));
+
+    $sqlTutorAdicionalInsert = "INSERT INTO tutor_adicional (DNI, nombre, telefono_autorizado, id_padre) VALUES
+        ('34567890C', 'Juan Perez', '622345678', 1),
+        ('45678901D', 'Maria Garcia', '633456789', 2)";
+    mysqli_query($conexion, $sqlTutorAdicionalInsert) or die("Error al insertar datos en 'tutor_adicional': ". mysqli_error($conexion));
+}
+
 
 // Verifica y crea tabla 'monitor
 if(!verificarTabla($conexion, 'monitor')){
@@ -110,7 +131,7 @@ if (!verificarTabla($conexion, 'hijo')){
         alergias TEXT,
         datos_adicionales TEXT,
         id_padre INT NOT NULL,
-        id_grupo INT NOT NULL, 
+        id_grupo INT, 
         FOREIGN KEY (id_padre) REFERENCES padre(id_padre) ON DELETE CASCADE,
         FOREIGN KEY (id_grupo) REFERENCES grupo(id_grupo) ON DELETE CASCADE
         )";
@@ -192,8 +213,12 @@ if(!verificarTabla($conexion, 'inscripcion')){
     $sqlInscripcion = "CREATE TABLE inscripcion (
         id_inscripcion INT AUTO_INCREMENT PRIMARY KEY,
         fecha_inscripcion DATE NOT NULL,
+        numero_dias INT,
+        precio DECIMAL(6,2),
+        fecha_json TEXT,
+        plan ENUM('Basico', 'Intermedio', 'Avanzado') NOT NULL DEFAULT 'Basico',
         id_hijo INT NOT NULL,
-        id_campamento INT NOT NULL,
+        id_campamento INT,
         estado_pago ENUM('Pendiente', 'Pagado', 'No Pagado') NOT NULL DEFAULT 'Pendiente',
         FOREIGN KEY (id_hijo) REFERENCES hijo(id_hijo) ON DELETE CASCADE,
         FOREIGN KEY (id_campamento) REFERENCES campamento(id_campamento) ON DELETE CASCADE
@@ -201,9 +226,9 @@ if(!verificarTabla($conexion, 'inscripcion')){
     mysqli_query($conexion, $sqlInscripcion) or die("Error al crear la tabla 'inscripcion': " . mysqli_error($conexion));
 
     // Insertar datos en la tabla 'inscripcion'
-    $sqlInscripcionInsert = "INSERT INTO inscripcion (fecha_inscripcion, id_hijo, id_campamento) VALUES
-        ('2021-06-01', 1, 1),
-        ('2021-06-01', 2, 2)";
+    $sqlInscripcionInsert = "INSERT INTO inscripcion (fecha_inscripcion, numero_dias, precio, fecha_json, id_hijo, id_campamento) VALUES
+        ('2021-07-12', 8, 20 , 'prueba1', 1, 1),
+        ('2022-01-21', 7, 18 , 'prueba2', 2, 2)";
     mysqli_query($conexion, $sqlInscripcionInsert) or die("Error al insertar datos en 'inscripcion': " . mysqli_error($conexion));
 }
 

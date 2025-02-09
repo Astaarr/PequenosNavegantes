@@ -1,14 +1,14 @@
 // Obtener elementos del DOM
 const form = document.getElementById('formulario');
 
-// Función para guardar los datos en localStorage
+// Función para guardar los datos en sessionStorage
 function guardarDatos(datos) {
     sessionStorage.setItem("datosTutor", JSON.stringify(datos));
 }
 
 // Función para recuperar y autocompletar los datos al cargar la página
 function autocompletarFormulario() {
-    const datosGuardados = JSON.parse(localStorage.getItem("datosTutor"));
+    const datosGuardados = JSON.parse(sessionStorage.getItem("datosTutor"));
 
     if (datosGuardados) { 
         Object.keys(datosGuardados).forEach(id => {
@@ -22,6 +22,20 @@ function autocompletarFormulario() {
 
 // Ejecutar la función cuando la página cargue
 document.addEventListener("DOMContentLoaded", autocompletarFormulario);
+
+// Cargar nombre del padre
+document.addEventListener("DOMContentLoaded", function () {
+    axios.get("../../backend/reserva/nombrePadre.php")
+        .then(response => {
+            if (response.data.success) {
+                document.getElementById("nombrePadre").value = response.data.nombre;
+            } else {
+                console.error("Error:", response.data.message);
+            }
+        })
+        .catch(error => console.error("Error al obtener el nombre del padre:", error));
+});
+
 
 // Evento submit
 form.addEventListener("submit", (event) => {

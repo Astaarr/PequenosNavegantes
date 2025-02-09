@@ -97,7 +97,6 @@ formulario.addEventListener('submit', (event) => {
             console.error("Faltan datos en sessionStorage");
             return;
         }
-
         // Consolidar datos para el envío
         const datosReserva = {
             tarifa: datosTarifa,
@@ -112,7 +111,15 @@ formulario.addEventListener('submit', (event) => {
             .then(response => {
                 console.log("Respuesta del servidor:", response.data);
                 if (response.data.success) {
+                    sessionStorage.removeItem("datosTarifa");
+                    sessionStorage.removeItem("datosTutor");
+                    sessionStorage.removeItem("datosHijo");
+                    sessionStorage.removeItem("selectedDays");
+                    sessionStorage.removeItem("precioTotal");
+                    document.querySelectorAll("input").forEach(input => input.value = "");
+
                     document.getElementById("popupContainer").style.display = "flex";
+                    //window.location.href = "../paginaPrincipal/index.html";
                 } else {
                     console.error("Error en la respuesta del servidor:", response.data);
                 }

@@ -81,6 +81,8 @@ function actualizarDiasSeleccionados() {
 function actualizarPrecioTotal() {
     const precioTotal = selectedDays.length * precioUnitario;
     diasPrecioElement.textContent = precioTotal.toFixed(2) + "€";
+
+    sessionStorage.setItem("precioTotal", precioTotal.toFixed(2));
 }
 
 // Función para guardar la selección en sessionStorage
@@ -162,10 +164,12 @@ function enviarDatos() {
         errorSpan.style.display = 'inline';
         errorSpan.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Selecciona los Días de Inscripción primero`;
     }else{
+        const precioTotal = parseFloat(sessionStorage.getItem("precioTotal")) || 0;
         const datosTarifa = {
             planSeleccionado: planSeleccionado,
             nDias: selectedDays.length,
-            diasSeleccionados: selectedDays
+            diasSeleccionados: selectedDays,
+            precioTotal: precioTotal
         };
 
         // Guardar en sessionStorage
