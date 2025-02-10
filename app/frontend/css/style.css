@@ -79,6 +79,7 @@ p, a, b, span, pre, sub, i, li, input, button, label, div {
     font-family: var(--textos);
     font-size: 1em;
     font-weight: 400;
+    line-height: 1.5;
     text-decoration: none;
     list-style: none;
     color: var(--negro);

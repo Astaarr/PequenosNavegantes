@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Grupos y Monitores</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { margin: 20px; }
+        .section { margin-bottom: 20px; }
+        .title { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+        .card-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f8f8f8;
+            width: 250px;
+        }
+        .icons { display: flex; gap: 10px; }
+        .icon { cursor: pointer; font-size: 18px; }
+        .add-button { cursor: pointer; font-size: 20px; margin-left: 10px; }
+        
+        /* Popup */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            border-radius: 10px;
+        }
+        .popup input, .popup select, .popup button {
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Sección de Grupos -->
+    <div class="section">
+        <div class="title">Grupos</div>
+        <div id="groupContainer" class="card-container">
+            <span class="add-button" onclick="showPopup('grupo')">➕</span>
+        </div>
+    </div>
+
+    <!-- Sección de Monitores -->
+    <div class="section">
+        <div class="title">Monitores</div>
+        <div id="monitorContainer" class="card-container">
+            <span class="add-button" onclick="showPopup('monitor')">➕</span>
+        </div>
+    </div>
+</div>
+
+<!-- Popup para agregar y editar elementos -->
+<div id="popup" class="popup">
+    <label>Nombre:</label>
+    <input type="text" id="nameInput" placeholder="Escribe el nombre">
+    
+    <label>Seleccionar:</label>
+    <select id="selectInput">
+        <option value="opcion1">Opción 1</option>
+        <option value="opcion2">Opción 2</option>
+        <option value="opcion3">Opción 3</option>
+    </select>
+
+    <button onclick="saveCard()">Aceptar</button>
+    <button onclick="closePopup()">Cancelar</button>
+</div>
+
+<script>
+    let currentType = '';  // Indica si es grupo o monitor
+    let editingElement = null;  // Almacena el elemento en edición
+
+    function showPopup(type, card = null) {
+        currentType = type;
+        editingElement = card;
+
+        // Si es edición, llenar los campos con los valores actuales
+        if (card) {
+            document.getElementById("nameInput").value = card.dataset.name;
+            document.getElementById("selectInput").value = card.dataset.select;
+        } else {
+            document.getElementById("nameInput").value = "";
+            document.getElementById("selectInput").value = "opcion1";
+        }
+
+        document.getElementById("popup").style.display = "flex";
+    }
+
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    function saveCard() {
+        const name = document.getElementById("nameInput").value;
+        const selected = document.getElementById("selectInput").value;
+
+        if (!name.trim()) {
+        alert("El nombre no puede estar vacío.");
+        return;
+    }
+
+    if (editingElement) {
+        // Modo edición: actualizar datos
+        editingElement.dataset.name = name;
+        editingElement.dataset.select = selected;
+        editingElement.querySelector(".name").textContent = name;
+    } else {
+        // Modo agregar: crear nueva tarjeta
+        const container = currentType === "grupo" ? document.getElementById("groupContainer") : document.getElementById("monitorContainer");
+
+        const card = document.createElement("div");
+        card.className = "card";
+        card.dataset.name = name;
+        card.dataset.select = selected;
+        
+        card.innerHTML = `
+            <span class="name">${name}</span>
+            <div class="icons">
+                <span class="icon" onclick="showPopup('${currentType}', this.parentElement.parentElement)">✏️</span>
+                <span class="icon" onclick="this.parentElement.parentElement.remove()">❌</span>
+            </div>
+        `;
+
+        container.insertBefore(card, container.querySelector(".add-button"));
+    }
+
+    closePopup();
+}
+</script> 
+
+</body> 
+</html>
