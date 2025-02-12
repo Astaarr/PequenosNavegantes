@@ -4,7 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Grupos y Monitores</title>
-    <style>
+
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- AXIOS -->
+    <script src="../axios/node_modules/axios/dist/axios.min.js" defer></script>
+
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- <style>
         body { font-family: Arial, sans-serif; }
         .container { margin: 20px; }
         .section { margin-bottom: 20px; }
@@ -23,62 +38,78 @@
         .icons { display: flex; gap: 10px; }
         .icon { cursor: pointer; font-size: 18px; }
         .add-button { cursor: pointer; font-size: 20px; margin-left: 10px; }
-        
-        /* Popup */
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            border-radius: 10px;
-        }
-        .popup input, .popup select, .popup button {
-            padding: 8px;
-            font-size: 16px;
-        }
-    </style>
+    </style> -->
 </head>
 <body>
-
-<div class="container">
-    <!-- Sección de Grupos -->
-    <div class="section">
-        <div class="title">Grupos</div>
-        <div id="groupContainer" class="card-container">
-            <span class="add-button" onclick="showPopup('grupo')">➕</span>
+    <header id="header-main">
+        <div class="navbar">
+            <div class="logo">
+                <img src="../../../resources/logo/logoN.png" alt="">
+            </div>
+            <div class="content" id="menu">
+                <ul class="links">
+                    <li><a href="../datosTutor/datosTutor.html">INSCRÍBETE</a></li>
+                    <li><a href="#">EVENTOS</a></li>
+                    <li><a href="#">MONITORES</a></li>
+                    <li><a href="#">SOBRE NOSOTROS</a></li>
+                </ul>
+                <div class="actions">
+                    <a href="#" class="btn btn-second"><i class="fa-solid fa-language"></i>Idioma</a>
+                    <a href="../login/login.html" class="btn btn-main"><i class="fa-solid fa-user"></i>Acceso</a>
+                </div>
+            </div>
+            <span class="close-menu"><i class="fas fa-times"></i></span>
+            <span class="open-menu"><i class="fas fa-bars"></i></span>
         </div>
-    </div>
+    </header>
 
-    <!-- Sección de Monitores -->
-    <div class="section">
-        <div class="title">Monitores</div>
-        <div id="monitorContainer" class="card-container">
-            <span class="add-button" onclick="showPopup('monitor')">➕</span>
+    <main>
+
+        <section class="detallesAdmin">
+            <div class="container">
+                <!-- Sección de Grupos -->
+                <div class="section">
+                    <h3>Grupos</h3>
+                    <div id="groupContainer" class="contenedor-tarjetas">
+                        <span class="add-button" onclick="showPopup('grupo')"><i class="fa-solid fa-plus"></i></span>
+                    </div>
+                </div>
+            
+                <!-- Sección de Monitores -->
+                <div class="section">
+                    <h3>Monitores</h3>
+                    <div id="monitorContainer" class="card-container">
+                        <span class="add-button" onclick="showPopup('monitor')"><i class="fa-solid fa-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+      
+        
+        
+        <!-- Popup para agregar y editar elementos -->
+        <div class="popup-container" id="popup">
+            <div class="popup tarjeta">
+                <button id="cerrarPopup" class="close-popup btn btn" onclick="closePopup()"><i class="fas fa-times"></i></button>
+                <h3>Nuevo Grupo</h3>
+                <input type="text" id="nameInput" placeholder="Escribe el nombre">
+                
+                <div class="divLeft">
+                    <label>Seleccionar:</label>
+                    <select id="selectInput">
+                        <option value="opcion1">Opción 1</option>
+                        <option value="opcion2">Opción 2</option>
+                        <option value="opcion3">Opción 3</option>
+                    </select>
+                </div>
+        
+                <button class="btn btn-main" onclick="saveCard()">Aceptar</button>
+            </div>
         </div>
-    </div>
-</div>
+    </main>
 
-<!-- Popup para agregar y editar elementos -->
-<div id="popup" class="popup">
-    <label>Nombre:</label>
-    <input type="text" id="nameInput" placeholder="Escribe el nombre">
-    
-    <label>Seleccionar:</label>
-    <select id="selectInput">
-        <option value="opcion1">Opción 1</option>
-        <option value="opcion2">Opción 2</option>
-        <option value="opcion3">Opción 3</option>
-    </select>
 
-    <button onclick="saveCard()">Aceptar</button>
-    <button onclick="closePopup()">Cancelar</button>
-</div>
 
 <script>
     let currentType = '';  // Indica si es grupo o monitor
@@ -109,38 +140,35 @@
         const selected = document.getElementById("selectInput").value;
 
         if (!name.trim()) {
-        alert("El nombre no puede estar vacío.");
-        return;
+            alert("El nombre no puede estar vacío.");
+            return;
+        }
+
+        if (editingElement) {
+            // Modo edición: actualizar datos
+            editingElement.dataset.name = name;
+            editingElement.dataset.select = selected;
+            editingElement.querySelector(".name").textContent = name;
+        } else {
+            // Modo agregar: crear nueva tarjeta
+            const container = currentType === "grupo" ? document.getElementById("groupContainer") : document.getElementById("monitorContainer");
+
+            const cardHTML = `
+                <div class="tarjeta" data-name="${name}" data-select="${selected}">
+                    <span class="name">${name}</span>
+                    <div class="icons">
+                        <span class="icon" onclick="showPopup('${currentType}', this.parentElement.parentElement)"><i class="fa-solid fa-pen-to-square"></i></span>
+                        <span class="icon" onclick="this.parentElement.parentElement.remove()"><i class="fa-solid fa-trash"></i></span>
+                    </div>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', cardHTML);
+        }
+
+        closePopup();
     }
+</script>
 
-    if (editingElement) {
-        // Modo edición: actualizar datos
-        editingElement.dataset.name = name;
-        editingElement.dataset.select = selected;
-        editingElement.querySelector(".name").textContent = name;
-    } else {
-        // Modo agregar: crear nueva tarjeta
-        const container = currentType === "grupo" ? document.getElementById("groupContainer") : document.getElementById("monitorContainer");
-
-        const card = document.createElement("div");
-        card.className = "card";
-        card.dataset.name = name;
-        card.dataset.select = selected;
-        
-        card.innerHTML = `
-            <span class="name">${name}</span>
-            <div class="icons">
-                <span class="icon" onclick="showPopup('${currentType}', this.parentElement.parentElement)">✏️</span>
-                <span class="icon" onclick="this.parentElement.parentElement.remove()">❌</span>
-            </div>
-        `;
-
-        container.insertBefore(card, container.querySelector(".add-button"));
-    }
-
-    closePopup();
-}
-</script> 
-
-</body> 
+</body>
 </html>
