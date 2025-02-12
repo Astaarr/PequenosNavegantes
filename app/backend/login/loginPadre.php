@@ -8,28 +8,10 @@ ini_set('display_errors', 1);
 header("Access-Control-Allow-Origin: *"); // Permite peticiones desde cualquier dominio
 header("Access-Control-Allow-Methods: POST, OPTIONS"); // Permite POST y la pre-flight request (OPTIONS)
 header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Permite enviar datos JSON y tokens
+header("Access-Control-Allow-Credentials: true"); // Permitir cookies en la petición
+
 
 include '../conecta.php';
-
-// Probamos login con token si existe cookie
-if (!isset($_SESSION['id_padre']) && isset($_COOKIE['token_login'])){
-    $token = $_COOKIE['token_login'];
-
-    $sql = "SELECT id_padre FROM padre WHERE token_login = ?";
-    $stmt = $conexion ->prepare($sql);
-    $stmt -> bind_param("s", $token);
-    $stmt -> execute();
-    $result = $stmt->get_result();
-
-    if ($row = $result->fetch_assoc()){
-        $_SESSION['id_padre'] = $row['id_padre'];
-        echo json_encode(["success" => true, "message" => "Sesión iniciada con cookie"]);
-        exit;
-    }
-}
-
-
-// Si no se inicio sesion con cookie, que lo haga con email y contraseña
 
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -43,7 +25,7 @@ if (empty($email) || empty($password)) {
     exit;
 }
 
-$sql = "SELECT id_padre, password FROM padre WHERE email = ?";
+$sql = "SELECT id_padre, nombre ,password FROM padre WHERE email = ?";
 $stmt = $conexion -> prepare($sql);
 $stmt -> bind_param("s", $email);
 $stmt -> execute();
@@ -56,6 +38,7 @@ if($row = $result ->fetch_assoc()){
 
         if($recordar){
             $token = bin2hex(random_bytes(32));
+            $hashed_token = password_hash($token, PASSWORD_DEFAULT);
             // Dom = dominio
             // Sexto parámetro = True(https) False(http)
             // Septimo parámetro = True(secure) False(httpOnly)

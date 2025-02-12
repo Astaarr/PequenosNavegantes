@@ -192,33 +192,36 @@ inputs.forEach(input => input.addEventListener('blur', () => validarCampoEspecif
 ////////////////////////////////////////
 // COOKIES
 ////////////////////////////////////////
-function getCookie(name) {
-    const cookies = document.cookie.split('; ');
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].split('=');
-        if (cookie[0] === name) {
-            return cookie[1];
+document.addEventListener("DOMContentLoaded", function () {
+    axios.post("/PequenosNavegantes/app/backend/reserva/nombrePadre.php", {}, {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(response => {
+        console.log("Respuesta del servidor:", response.data);
+        const btnLogin = document.getElementById("btnlogin");
+
+        if (response.data.success) {
+            btnLogin.innerHTML = `<i class="fa-solid fa-user"></i> ${response.data.nombre}`;
+            console.log("✅ Sesión activa:", response.data.nombre);
+
+            // Asegurar que solo se agrega el evento una vez
+            btnLogin.removeEventListener("click", redirigirPerfil);
+            btnLogin.addEventListener("click", redirigirPerfil);
+
+        } else {
+            console.log("No hay sesión activa.");
+            btnLogin.innerHTML = `<i class="fa-solid fa-user"></i> Acceso`;
+            btnLogin.setAttribute("href", "/PequenosNavegantes/app/frontend/login/login.html");
         }
-    }
-    return null;
-}
+    })
+    .catch(error => {
+        console.error("❌ Error verificando sesión:", error);
+    });
 
-window.onload = function() {
-    const token = getCookie("token_login");
-
-    if (token) {
-        axios.post('/PequenosNavegantes/app/backend/login/validarToken.php', JSON.stringify({ token: token }), {
-            headers: { 'Content-Type': 'application/json' }
-        })
-        .then(response => {
-            if (response.data.success) {
-                // Si el token es válido, redirigir al usuario al dashboard
-                window.location.href = "/PequenosNavegantes/app/frontend/paginaPrincipal/index.html";
-            }
-        })
-        .catch(error => {
-            console.error("Error al validar el token:", error);
-        });
+    // Función para redirigir al perfil
+    function redirigirPerfil() {
+        window.location.href = "/PequenosNavegantes/app/frontend/perfilPadre/perfil.html";
     }
-};
+});
 
