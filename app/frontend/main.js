@@ -208,11 +208,13 @@ document.addEventListener("DOMContentLoaded", function () {
             // Asegurar que solo se agrega el evento una vez
             btnLogin.removeEventListener("click", redirigirPerfil);
             btnLogin.addEventListener("click", redirigirPerfil);
+            btnInscribirse.setAttribute("href", "/PequenosNavegantes/app/frontend/datosTutor/datosTutor.html");
 
         } else {
             console.log("No hay sesión activa.");
             btnLogin.innerHTML = `<i class="fa-solid fa-user"></i> Acceso`;
             btnLogin.setAttribute("href", "/PequenosNavegantes/app/frontend/login/login.html");
+            btnInscribirse.setAttribute("href", "/PequenosNavegantes/app/frontend/login/login.html");
         }
     })
     .catch(error => {
