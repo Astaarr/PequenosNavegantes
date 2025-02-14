@@ -768,13 +768,12 @@ h4.done ~ h4:first-of-type{
 }
 
 .contenedor-tarjetas .tarjeta{
-    width: auto;
     display: flex;
-    flex: 1;
+    flex-wrap: wrap;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 5em;
-    flex-direction: row;
 }
 
 

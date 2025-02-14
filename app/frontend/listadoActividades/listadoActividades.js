@@ -1,47 +1,46 @@
-let currentType = '';  // Indica si es grupo o monitor
-let editingElement = null;  // Almacena el elemento en edición
+document.addEventListener("DOMContentLoaded", function () {
+    // Redirigir a detalles de actividad al hacer clic en "+"
+    document.querySelector(".add-button").addEventListener("click", function () {
+        window.location.href = "../detallesActividad/detallesActividad.html";
+    });
 
-function showPopup(type, card = null) {
-    currentType = type;
-    editingElement = card;
+    // Manejar clic en editar actividad
+    document.querySelectorAll(".tarjeta .icon i.fa-pen-to-square").forEach(icon => {
+        icon.parentElement.addEventListener("click", function () {
+            const actividad = this.closest(".tarjeta");
+            const idActividad = actividad.getAttribute("data-id") || "nueva";
+            window.location.href = `../detallesActividad/detallesActividad.html?id=${idActividad}`;
+        });
+    });
 
-    // Si es edición, llenar los campos con los valores actuales
-    if (card) {
-        document.getElementById("selectInput").value = card.dataset.select;
-    } else {
-        document.getElementById("selectInput").value = "Grupo 1";
+    // Cargar actividades con Axios
+    axios.get("../php/getActividades.php")
+        .then(response => {
+            const actividades = response.data;
+            const container = document.getElementById("groupContainer");
+            container.innerHTML = "";
+            actividades.forEach(actividad => {
+                const tarjeta = document.createElement("div");
+                tarjeta.className = "tarjeta";
+                tarjeta.setAttribute("data-id", actividad.id);
+                tarjeta.innerHTML = `
+                    <span class="name">${actividad.nombre}</span>
+                    <div class="icons">
+                        <span class="icon"><i class="fa-solid fa-pen-to-square"></i></span>
+                        <span class="icon" onclick="eliminarActividad(${actividad.id})"><i class="fa-solid fa-trash"></i></span>
+                    </div>
+                `;
+                container.appendChild(tarjeta);
+            });
+        })
+        .catch(error => console.error("Error cargando actividades:", error));
+});
+
+// Eliminar actividad con Axios
+function eliminarActividad(id) {
+    if (confirm("¿Seguro que deseas eliminar esta actividad?")) {
+        axios.post("../php/eliminarActividad.php", { id })
+            .then(() => location.reload())
+            .catch(error => console.error("Error eliminando actividad:", error));
     }
-
-    document.getElementById("popup").style.display = "flex";
-}
-
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
-
-function saveCard() {
-    const selected = document.getElementById("selectInput").value;
-
-    if (editingElement) {
-        // Modo edición: actualizar datos
-        editingElement.dataset.select = selected;
-        editingElement.querySelector(".name").textContent = selected;
-    } else {
-        // Modo agregar: crear nueva tarjeta
-        const container = currentType === "grupo" ? document.getElementById("groupContainer") : document.getElementById("monitorContainer");
-
-        const cardHTML = `
-            <div class="tarjeta" data-select="${selected}">
-                <span class="name">${selected}</span>
-                <div class="icons">
-                    <span class="icon" onclick="showPopup('${currentType}', this.parentElement.parentElement)"><i class="fa-solid fa-pen-to-square"></i></span>
-                    <span class="icon" onclick="this.parentElement.parentElement.remove()"><i class="fa-solid fa-trash"></i></span>
-                </div>
-            </div>
-        `;
-
-        container.insertAdjacentHTML('beforeend', cardHTML);
-    }
-
-    closePopup();
 }
