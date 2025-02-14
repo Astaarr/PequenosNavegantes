@@ -75,7 +75,7 @@ h6{
 }
 
 /* ======= TEXTOS ======= */
-p, a, b, span, pre, sub, i, li, input, select, button, label, div {
+p, a, b, span, pre, sub, i, li, input, textarea, select, button, label, div {
     font-family: var(--textos);
     font-size: 1em;
     font-weight: 400;
@@ -179,7 +179,7 @@ i{
 }
 .popup{
     display: flex;
-    max-width: 500px;
+    width: 500px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -377,7 +377,8 @@ form .field{
 }
 .field input, 
 .field .btn,
-.field select{    
+.field select,
+.field textarea{    
     border: none;
     padding: 1em;
     border-radius: var(--radio);
@@ -437,6 +438,12 @@ form input[type="radio"]{
     border-radius: 50%;
     opacity: 0;
     transition: ease 0.2s;
+}
+.checkbox-custom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 .checkbox-custom input:checked ~ span:after{
     opacity: 1;
@@ -533,11 +540,12 @@ h4.done ~ h4:first-of-type{
 /* MOSTRAR CONTRASEÑA */
 .field{
     position: relative;
+    width: fit-content;
 }
 .field #password ~ i {
     position: absolute;
     right: 1em;
-    top: 3em;
+    top: 3.2em;
     font-size: 1em;
     transition: color 0.2s ease-in-out;
     cursor: pointer;
@@ -571,8 +579,29 @@ h4.done ~ h4:first-of-type{
     color: var(--error);
 }
 
+/* FORMLARIO SUBMAIN */
+.formSubmain{
+    align-items: baseline;
+}
 
-/* CALENDARIO */
+.formSubmain form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.formSubmain form .inline{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    gap: 2em;
+}
+
+
+/*//////////////////////////////////////////////////
+//CALENDARIO 
+//////////////////////////////////////////////////*/
 .calendar {
     font-family: var(--textos);
     background: var(--blanco);
@@ -630,7 +659,9 @@ h4.done ~ h4:first-of-type{
 }
 
 
-/* TARIFA */
+/*//////////////////////////////////////////////////
+//TARIFA
+//////////////////////////////////////////////////*/
 .tarifa{
     padding: 1.5em;
     transition: all 0.4s ease;
@@ -659,7 +690,9 @@ h4.done ~ h4:first-of-type{
 }
 
 
-/* RESUMEN */
+/*//////////////////////////////////////////////////
+//RESUMEN
+//////////////////////////////////////////////////*/
 .resumen{
     display: flex;
     flex-direction: row;
@@ -735,6 +768,7 @@ h4.done ~ h4:first-of-type{
 }
 
 .contenedor-tarjetas .tarjeta{
+    width: auto;
     display: flex;
     flex: 1;
     align-items: center;
@@ -742,6 +776,7 @@ h4.done ~ h4:first-of-type{
     gap: 5em;
     flex-direction: row;
 }
+
 
 .contenedor-tarjetas .tarjeta .icons{
     display: flex;
@@ -763,6 +798,26 @@ h4.done ~ h4:first-of-type{
 .contenedor-tarjetas .fa-trash:hover{
     color: var(--error);
     transform: scale(1.2);
+}
+
+
+/* VERTICAL */
+.container{
+    width: 100%;
+}
+.columns .contenedor-tarjetas{
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
+.columns .tarjeta{
+    width: 100%;
+}
+
+.columns .tarjeta{
+    justify-content: space-between;
 }
 
 

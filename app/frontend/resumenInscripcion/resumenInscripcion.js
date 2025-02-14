@@ -1,13 +1,20 @@
 ////////////////////////////////////////
-// CAMBIAR COLOR OPCION
+// CAMBIAR OPCION CON CLICK EN DIV
 ////////////////////////////////////////
 
-document.querySelectorAll('input[name="metodoPago"]').forEach((input) => {
-    input.addEventListener('change', function() {
-        document.querySelectorAll('.tarjeta').forEach((tarjeta) => {
-            tarjeta.classList.remove('seleccionada');
+document.querySelectorAll('.metodoPago').forEach(contenedorMetPago => {
+    contenedorMetPago.addEventListener('click', function(){
+        // Eliminar la clase 'seleccionada' de todos los elementos
+        document.querySelectorAll('.metodoPago').forEach(item => {
+            item.classList.remove('seleccionada');
         });
-        this.parentElement.classList.add('seleccionada');
+
+        const input = contenedorMetPago.querySelector('input[name="metodoPago"]');
+
+        if (input) {
+            input.checked = true;
+            contenedorMetPago.classList.add('seleccionada');
+        } 
     });
 });
 
