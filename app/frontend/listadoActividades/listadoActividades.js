@@ -4,43 +4,82 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "../detallesActividad/detallesActividad.html";
     });
 
-    // Manejar clic en editar actividad
-    document.querySelectorAll(".tarjeta .icon i.fa-pen-to-square").forEach(icon => {
-        icon.parentElement.addEventListener("click", function () {
-            const actividad = this.closest(".tarjeta");
-            const idActividad = actividad.getAttribute("data-id") || "nueva";
-            window.location.href = `../detallesActividad/detallesActividad.html?id=${idActividad}`;
-        });
-    });
-
     // Cargar actividades con Axios
-    axios.get("../php/getActividades.php")
-        .then(response => {
-            const actividades = response.data;
-            const container = document.getElementById("groupContainer");
-            container.innerHTML = "";
-            actividades.forEach(actividad => {
-                const tarjeta = document.createElement("div");
-                tarjeta.className = "tarjeta";
-                tarjeta.setAttribute("data-id", actividad.id);
-                tarjeta.innerHTML = `
-                    <span class="name">${actividad.nombre}</span>
-                    <div class="icons">
-                        <span class="icon"><i class="fa-solid fa-pen-to-square"></i></span>
-                        <span class="icon" onclick="eliminarActividad(${actividad.id})"><i class="fa-solid fa-trash"></i></span>
-                    </div>
-                `;
-                container.appendChild(tarjeta);
-            });
-        })
-        .catch(error => console.error("Error cargando actividades:", error));
+    cargarActividades();
 });
 
-// Eliminar actividad con Axios
+function cargarActividades() {
+    axios.post('/PequenosNavegantes/app/backend/admin/obtener_actividad.php', {}, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        console.log(response.data);
+
+        if (response.data.success) {
+            let groupContainer = document.getElementById("groupContainer");
+
+            // Verificar si el contenedor existe
+            if (!groupContainer) {
+                console.error("El contenedor de actividades no se encontró en el DOM.");
+                return;
+            }
+
+            // Limpiar el contenedor antes de agregar nuevas actividades
+            groupContainer.innerHTML = `
+                <span class="add-button" onclick="showPopup('grupo')"><i class="fa-solid fa-plus"></i></span>
+            `;
+
+            response.data.actividades.forEach(actividad => {
+                let actividadHTML = `
+                    <div class="tarjeta" data-id="${actividad.id_actividad}">
+                        <span class="name">${actividad.nombre}</span>
+                        <div class="icons">
+                            <span class="icon" onclick="editarActividad(${actividad.id_actividad})">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </span>
+                            <span class="icon" onclick="eliminarActividad(${actividad.id_actividad})">
+                                <i class="fa-solid fa-trash"></i>
+                            </span>
+                        </div>
+                    </div>
+                `;
+
+                groupContainer.innerHTML += actividadHTML;
+            });
+        } else {
+            console.error("Error al obtener actividades:", response.data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error al obtener actividades:', error);
+    });
+}
+
+// Función para editar actividad
+function editarActividad(id) {
+    window.location.href = `../detallesActividad/detallesActividad.html?id=${id}`;
+}
+
+// Función para eliminar actividad con Axios
 function eliminarActividad(id) {
     if (confirm("¿Seguro que deseas eliminar esta actividad?")) {
-        axios.post("../php/eliminarActividad.php", { id })
-            .then(() => location.reload())
-            .catch(error => console.error("Error eliminando actividad:", error));
+        axios.post("/PequenosNavegantes/app/backend/admin/eliminar_actividad.php", JSON.stringify({ id_actividad: id }), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.data.success) {
+                alert("Actividad eliminada correctamente.");
+                cargarActividades(); // Recargar la lista después de eliminar
+            } else {
+                alert("Error al eliminar la actividad.");
+            }
+        })
+        .catch(error => {
+            console.error("Error eliminando actividad:", error);
+        });
     }
 }

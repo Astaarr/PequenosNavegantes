@@ -33,7 +33,7 @@ if (isset($_COOKIE['token_login'])) {
     $token = $_COOKIE['token_login'];
 
     // Buscar el token en la base de datos
-    $sql = "SELECT id_padre, nombre, token_login FROM padre";
+    $sql = "SELECT id_padre, nombre, token_login FROM padre WHERE token = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->execute();
     $result = $stmt->get_result();
