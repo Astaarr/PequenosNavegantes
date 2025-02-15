@@ -21,12 +21,6 @@ function cargarActividades() {
         if (response.data.success) {
             let groupContainer = document.getElementById("groupContainer");
 
-            // Verificar si el contenedor existe
-            if (!groupContainer) {
-                console.error("El contenedor de actividades no se encontró en el DOM.");
-                return;
-            }
-
             // Limpiar el contenedor antes de agregar nuevas actividades
             groupContainer.innerHTML = `
                 <span class="add-button">
@@ -34,6 +28,7 @@ function cargarActividades() {
                 </span>
             `;
 
+            // Agregar tarjeta por cada actividad
             response.data.actividades.forEach(actividad => {
                 let actividadHTML = `
                     <div class="tarjeta" data-id="${actividad.id_actividad}">
@@ -71,28 +66,47 @@ document.body.addEventListener("click", function (event) {
     // Eliminar actividad
     if (event.target.closest(".icon.delete")) {
         let id = event.target.closest(".icon.delete").dataset.id;
-        eliminarActividad(id);
+        mostrarPopupConfirmacion(id);
     }
 });
 
+// Mostrar popup de confirmación
+function mostrarPopupConfirmacion(id) {
+    const popup = document.getElementById("popupConfirmacion");
+    popup.style.display = "flex";
+    popup.dataset.id = id; // Guardar el ID de la actividad a eliminar
+}
+
+// Confirmar eliminación
+function confirmarEliminacion() {
+    const popup = document.getElementById("popupConfirmacion");
+    const id = popup.dataset.id;
+    eliminarActividad(id);
+    closePopup();
+}
+
 // Función para eliminar actividad con Axios
 function eliminarActividad(id) {
-    if (confirm("¿Seguro que deseas eliminar esta actividad?")) {
-        axios.post("/PequenosNavegantes/app/backend/admin/eliminar_actividad.php", JSON.stringify({ id_actividad: id }), {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            if (response.data.success) {
-                alert("Actividad eliminada correctamente.");
-                cargarActividades(); // Recargar la lista después de eliminar
-            } else {
-                alert("Error al eliminar la actividad.");
-            }
-        })
-        .catch(error => {
-            console.error("Error eliminando actividad:", error);
-        });
-    }
+    axios.post("/PequenosNavegantes/app/backend/admin/eliminar_actividad.php", JSON.stringify({ id_actividad: id }), {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.data.success) {
+            document.getElementById("popupFin").style.display = "flex";
+            cargarActividades(); // Recargar la lista después de eliminar
+        } else {
+            alert("Error al eliminar la actividad.");
+        }
+    })
+    .catch(error => {
+        console.error("Error eliminando actividad:", error);
+    });
+}
+
+// Cerrar popup
+function closePopup() {
+    const popups = document.querySelectorAll(".popup-container");
+    popups.forEach(popup => popup.style.display = "none");
 }

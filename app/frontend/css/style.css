@@ -210,6 +210,17 @@ i{
 .popup button{
     padding: 1em;
 }
+
+.popup .actions{
+    width: 100%;
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+}
+.popup .actions button{
+    flex: 1;
+}
+
 .popup .mensaje,
 .popup .correo{
     width: 100%;
@@ -766,6 +777,16 @@ h4.done ~ h4:first-of-type{
     align-items: center;
     gap: 2em;
 }
+
+.detallesAdmin .add-button{
+    transition: all 0.3s ease;
+}
+.detallesAdmin .add-button:hover{
+    color: var(--main);
+    transform: scale(1.2) rotate(90deg);
+}
+
+
 
 .contenedor-tarjetas .tarjeta{
     display: flex;

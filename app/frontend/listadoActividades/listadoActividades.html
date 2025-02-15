@@ -4,21 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Actividades</title>
-
     <!-- ESTILOS -->
     <link rel="stylesheet" href="../css/style.css">
-
     <!-- AXIOS -->
     <script src="../axios/node_modules/axios/dist/axios.min.js" defer></script>
-
     <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    
     <!-- ICONOS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 <body>
     <header id="header-main">
@@ -44,7 +39,6 @@
     </header>
 
     <main>
-
         <section>
             <div class="title">
                 <h2>Listado de Actividades</h2>
@@ -57,50 +51,40 @@
                 <div class="section columns">
                     <h3>Actividades</h3>
                     <div id="groupContainer" class="contenedor-tarjetas">
-                        <span class="add-button" ><i class="fa-solid fa-plus"></i></span>
+                        <span class="add-button"><i class="fa-solid fa-plus"></i></span>
 
-
-                        <div class="tarjeta" data-select="${selected}">
-                            <span class="name"></span>
-                            <div class="icons">
-                                <span class="icon" onclick="showPopup('${currentType}', this.parentElement.parentElement)"><i class="fa-solid fa-pen-to-square"></i></span>
-                                <span class="icon" onclick="this.parentElement.parentElement.remove()"><i class="fa-solid fa-trash"></i></span>
-                            </div>
-                        </div>
-
-                        <div class="tarjeta" data-select="${selected}">
-                            <span class="name"></span>
-                            <div class="icons">
-                                <span class="icon" onclick="showPopup('${currentType}', this.parentElement.parentElement)"><i class="fa-solid fa-pen-to-square"></i></span>
-                                <span class="icon" onclick="this.parentElement.parentElement.remove()"><i class="fa-solid fa-trash"></i></span>
-                            </div>
-                        </div>
-
+                        
                     </div>
-                    
                 </div>
+            </div>
         </section>
 
-      
-        
-        <!-- Popup para agregar y editar elementos -->
-        <div class="popup-container" id="popup">
+
+        <!-- Popup de confirmación -->
+        <div class="popup-container" id="popupConfirmacion">
             <div class="popup tarjeta">
-                <button id="cerrarPopup" class="close-popup btn btn" onclick="closePopup()"><i class="fas fa-times"></i></button>
-                <h3>Nuevo Grupo</h3>
-                
-                <div class="divLeft">
-                    <label>Seleccionar:</label>
-                    <select id="selectInput">
-                        <option value="Grupo 1">Grupo 1</option>
-                        <option value="Grupo 2">Grupo 2</option>
-                        <option value="Grupo 3">Grupo 3</option>
-                    </select>
+                <h3>Atención</h3>
+                <p>¿Estás seguro de que deseas eliminar?</p>
+                <div class="actions">
+                    <button onclick="closePopup()" class="btn btn-main">Cancelar</button>
+                    <button onclick="confirmarEliminacion()" class="btn btn-third">Aceptar</button>
                 </div>
-        
-                <button class="btn btn-main" onclick="saveCard()">Aceptar</button>
             </div>
         </div>
+
+
+        <!-- Popup fin -->
+        <div class="popup-container" id="popupFin">
+            <div class="popup tarjeta">
+                <h3>Confirmación</h3>
+                <p>Actividad eliminada correctamente</p>
+                <div class="actions">
+                    <button onclick="closePopup()" class="btn btn-main">Aceptar</button>
+                </div>
+            </div>
+        </div>
+
+
     </main>
 
     <script src="../main.js"></script>
