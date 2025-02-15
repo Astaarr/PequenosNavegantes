@@ -73,8 +73,9 @@ document.querySelectorAll('.mostrarPassword').forEach(icon => {
 ////////////////////////////////////////
 // CERRAR POPUP
 ////////////////////////////////////////
-function closePopup(){
-    document.getElementById("popupContainer").style.display="none";
+function closePopup() {
+    const popups = document.querySelectorAll(".popup-container");
+    popups.forEach(popup => popup.style.display = "none");
 }
 
 

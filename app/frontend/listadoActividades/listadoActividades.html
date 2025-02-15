@@ -60,7 +60,7 @@
         <!-- Popup de edición -->
         <div class="popup-container" id="popupEdicion">
             <div class="popup tarjeta">
-                <button id="cerrarPopup" class="close-popup btn btn" onclick="closePopup()"><i class="fas fa-times"></i></button>
+                <button id="cerrarPopup" class="close-popup btn" onclick="closePopup()"><i class="fas fa-times"></i></button>
 
                 <h3>Editar Actividad</h3>
                 <div class="contenido">
@@ -84,25 +84,13 @@
         <div class="popup-container" id="popupConfirmacion">
             <div class="popup tarjeta">
                 <h3>Atención</h3>
-                <p id="confirmacionTexto">¿Estás seguro de que deseas eliminar la actividad "<span id="nombreActividad"></span>"?</p>
+                <p id="confirmacionTexto">¿Estás seguro de que deseas eliminar la actividad "<span id="nombreActividadEliminar"></span>"?</p>
                 <div class="actions">
                     <button onclick="closePopup()" class="btn btn-main">Cancelar</button>
                     <button onclick="confirmarEliminacion()" class="btn btn-third">Aceptar</button>
                 </div>
             </div>
         </div>
-
-        <!-- Popup fin -->
-        <div class="popup-container" id="popupFin">
-            <div class="popup tarjeta">
-                <h3>Confirmación</h3>
-                <p>Actividad eliminada correctamente</p>
-                <div class="actions">
-                    <button onclick="closePopup()" class="btn btn-main">Aceptar</button>
-                </div>
-            </div>
-        </div>
-
     </main>
 
     <script src="../main.js"></script>
