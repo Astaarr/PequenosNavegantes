@@ -779,6 +779,13 @@ h4.done ~ h4:first-of-type{
     gap: 2em;
 }
 
+.detallesAdmin .field{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
 .detallesAdmin .add-button{
     transition: all 0.3s ease;
 }
@@ -786,7 +793,6 @@ h4.done ~ h4:first-of-type{
     color: var(--main);
     transform: scale(1.2) rotate(90deg);
 }
-
 
 
 .contenedor-tarjetas .tarjeta{
@@ -839,6 +845,12 @@ h4.done ~ h4:first-of-type{
 
 .columns .tarjeta{
     justify-content: space-between;
+}
+
+.columns .tarjeta .info{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
 }
 
 

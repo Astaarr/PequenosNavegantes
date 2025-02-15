@@ -24,25 +24,27 @@ if (!isset($_SESSION)) {
     exit;
 }
 
-// Consulta para obtener grupos con el nombre del monitor
-$sql = "SELECT g.id_grupo, g.nombre, m.nombre AS nombre_monitor 
-        FROM grupo g 
-        JOIN monitor m ON g.id_monitor = m.id_monitor";
-$resultado = $conexion->query($sql);
+// Obtener datos del cuerpo de la solicitud
+$data = json_decode(file_get_contents("php://input"), true);
 
-if (!$resultado) {
-    echo json_encode(["success" => false, "message" => "Error en la consulta SQL: " . $conexion->error]);
+if (!isset($data['id_grupo'])) {
+    echo json_encode(["success" => false, "message" => "ID de grupo no proporcionado."]);
     exit;
 }
 
-$grupos = [];
+$id_grupo = $data['id_grupo'];
 
-while ($fila = $resultado->fetch_assoc()) {
-    $grupos[] = $fila;
+// Consulta para eliminar el grupo
+$sql = "DELETE FROM grupo WHERE id_grupo = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("i", $id_grupo);
+
+if ($stmt->execute()) {
+    echo json_encode(["success" => true]);
+} else {
+    echo json_encode(["success" => false, "message" => "Error al eliminar el grupo."]);
 }
 
-// Retornar datos en JSON
-echo json_encode(["success" => true, "grupos" => $grupos]);
-
+$stmt->close();
 $conexion->close();
 ?>
