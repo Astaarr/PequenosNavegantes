@@ -1,14 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    cargarActividades(); // Cargar actividades al iniciar
-
-    // Usar "event delegation" para el botón "+"
-    document.body.addEventListener("click", function (event) {
-        if (event.target.closest(".add-button")) {
-            window.location.href = "../detallesActividad/detallesActividad.html";
-        }
-    });
+    // Cargar actividades al iniciar la página
+    cargarActividades();
 });
 
+// Función para cargar y mostrar las actividades
 function cargarActividades() {
     axios.post('/PequenosNavegantes/app/backend/admin/obtener_actividad.php', {}, {
         headers: {
@@ -16,35 +11,25 @@ function cargarActividades() {
         }
     })
     .then(response => {
-        console.log(response.data);
-
         if (response.data.success) {
-            let groupContainer = document.getElementById("groupContainer");
-
-            // Limpiar el contenedor antes de agregar nuevas actividades
-            groupContainer.innerHTML = `
-                <span class="add-button">
-                    <i class="fa-solid fa-plus"></i>
-                </span>
-            `;
+            const groupContainer = document.getElementById("groupContainer");
+            groupContainer.innerHTML = `<span class="add-button" onclick="window.location.href='../detallesActividad/detallesActividad.html'"><i class="fa-solid fa-plus"></i></span>`;
 
             // Agregar tarjeta por cada actividad
             response.data.actividades.forEach(actividad => {
-                let actividadHTML = `
+                groupContainer.innerHTML += `
                     <div class="tarjeta" data-id="${actividad.id_actividad}">
                         <span class="name">${actividad.nombre}</span>
                         <div class="icons">
-                            <span class="icon edit" data-id="${actividad.id_actividad}">
+                            <span class="icon edit" onclick="editarActividad(${actividad.id_actividad})">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </span>
-                            <span class="icon delete" data-id="${actividad.id_actividad}">
+                            <span class="icon delete" onclick="mostrarPopupConfirmacion(${actividad.id_actividad}, '${actividad.nombre}')">
                                 <i class="fa-solid fa-trash"></i>
                             </span>
                         </div>
                     </div>
                 `;
-
-                groupContainer.innerHTML += actividadHTML;
             });
         } else {
             console.error("Error al obtener actividades:", response.data.message);
@@ -55,38 +40,31 @@ function cargarActividades() {
     });
 }
 
-// Delegación de eventos para edición y eliminación
-document.body.addEventListener("click", function (event) {
-    // Editar actividad
-    if (event.target.closest(".icon.edit")) {
-        let id = event.target.closest(".icon.edit").dataset.id;
-        window.location.href = `../detallesActividad/detallesActividad.html?id=${id}`;
-    }
-
-    // Eliminar actividad
-    if (event.target.closest(".icon.delete")) {
-        let id = event.target.closest(".icon.delete").dataset.id;
-        mostrarPopupConfirmacion(id);
-    }
-});
-
-// Mostrar popup de confirmación
-function mostrarPopupConfirmacion(id) {
-    const popup = document.getElementById("popupConfirmacion");
-    popup.style.display = "flex";
-    popup.dataset.id = id; // Guardar el ID de la actividad a eliminar
+// Función para editar una actividad
+function editarActividad(id) {
+    window.location.href = `../detallesActividad/detallesActividad.html?id=${id}`;
 }
 
-// Confirmar eliminación
+// Función para mostrar el popup de confirmación de eliminación
+function mostrarPopupConfirmacion(id, nombre) {
+    const popup = document.getElementById("popupConfirmacion");
+    const nombreActividad = document.getElementById("nombreActividad");
+
+    // Mostrar el nombre de la actividad en el popup
+    nombreActividad.textContent = nombre;
+
+    // Guardar el ID de la actividad en el popup
+    popup.dataset.id = id;
+
+    // Mostrar el popup
+    popup.style.display = "flex";
+}
+
+// Función para confirmar la eliminación de una actividad
 function confirmarEliminacion() {
     const popup = document.getElementById("popupConfirmacion");
-    const id = popup.dataset.id;
-    eliminarActividad(id);
-    closePopup();
-}
+    const id = popup.dataset.id; //Recupero el id del popup para eliminarlo
 
-// Función para eliminar actividad con Axios
-function eliminarActividad(id) {
     axios.post("/PequenosNavegantes/app/backend/admin/eliminar_actividad.php", JSON.stringify({ id_actividad: id }), {
         headers: {
             'Content-Type': 'application/json'
@@ -95,7 +73,7 @@ function eliminarActividad(id) {
     .then(response => {
         if (response.data.success) {
             document.getElementById("popupFin").style.display = "flex";
-            cargarActividades(); // Recargar la lista después de eliminar
+            cargarActividades(); 
         } else {
             alert("Error al eliminar la actividad.");
         }
@@ -103,9 +81,11 @@ function eliminarActividad(id) {
     .catch(error => {
         console.error("Error eliminando actividad:", error);
     });
+
+    closePopup();
 }
 
-// Cerrar popup
+// Función para cerrar los popups
 function closePopup() {
     const popups = document.querySelectorAll(".popup-container");
     popups.forEach(popup => popup.style.display = "none");

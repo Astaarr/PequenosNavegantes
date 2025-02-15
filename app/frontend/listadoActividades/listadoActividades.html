@@ -51,27 +51,46 @@
                 <div class="section columns">
                     <h3>Actividades</h3>
                     <div id="groupContainer" class="contenedor-tarjetas">
-                        <span class="add-button"><i class="fa-solid fa-plus"></i></span>
-
-                        
+                        <span class="add-button" onclick="window.location.href='../detallesActividad/detallesActividad.html'"><i class="fa-solid fa-plus"></i></span>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Popup de edición -->
+        <div class="popup-container" id="popupEdicion">
+            <div class="popup tarjeta">
+                <button id="cerrarPopup" class="close-popup btn btn" onclick="closePopup()"><i class="fas fa-times"></i></button>
+
+                <h3>Editar Actividad</h3>
+                <div class="contenido">
+                    <label for="nombreActividad" class="divLeft">Nombre</label>
+                    <input type="text" class="obligatorio" id="nombreActividad" name="nombreActividad" placeholder="Nombre de la actividad">
+                    <span class="error"></span>
+                </div>
+                <div class="contenido">
+                    <label for="detallesActividad" class="divLeft">Detalles</label>
+                    <textarea class="obligatorio" name="detallesActividad" id="detallesActividad"></textarea>
+                    <span class="error"></span>
+                </div>
+
+                <div class="actions">
+                    <button onclick="guardarActividad()" class="btn btn-main">Guardar</button>
+                </div>
+            </div>
+        </div>
 
         <!-- Popup de confirmación -->
         <div class="popup-container" id="popupConfirmacion">
             <div class="popup tarjeta">
                 <h3>Atención</h3>
-                <p>¿Estás seguro de que deseas eliminar?</p>
+                <p id="confirmacionTexto">¿Estás seguro de que deseas eliminar la actividad "<span id="nombreActividad"></span>"?</p>
                 <div class="actions">
                     <button onclick="closePopup()" class="btn btn-main">Cancelar</button>
                     <button onclick="confirmarEliminacion()" class="btn btn-third">Aceptar</button>
                 </div>
             </div>
         </div>
-
 
         <!-- Popup fin -->
         <div class="popup-container" id="popupFin">
@@ -83,7 +102,6 @@
                 </div>
             </div>
         </div>
-
 
     </main>
 
