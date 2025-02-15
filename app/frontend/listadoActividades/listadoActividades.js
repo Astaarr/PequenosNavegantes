@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Redirigir a detalles de actividad al hacer clic en "+"
-    document.querySelector(".add-button").addEventListener("click", function () {
-        window.location.href = "../detallesActividad/detallesActividad.html";
-    });
+    cargarActividades(); // Cargar actividades al iniciar
 
-    // Cargar actividades con Axios
-    cargarActividades();
+    // Usar "event delegation" para el botón "+"
+    document.body.addEventListener("click", function (event) {
+        if (event.target.closest(".add-button")) {
+            window.location.href = "../detallesActividad/detallesActividad.html";
+        }
+    });
 });
 
 function cargarActividades() {
@@ -28,7 +29,9 @@ function cargarActividades() {
 
             // Limpiar el contenedor antes de agregar nuevas actividades
             groupContainer.innerHTML = `
-                <span class="add-button" onclick="showPopup('grupo')"><i class="fa-solid fa-plus"></i></span>
+                <span class="add-button">
+                    <i class="fa-solid fa-plus"></i>
+                </span>
             `;
 
             response.data.actividades.forEach(actividad => {
@@ -36,10 +39,10 @@ function cargarActividades() {
                     <div class="tarjeta" data-id="${actividad.id_actividad}">
                         <span class="name">${actividad.nombre}</span>
                         <div class="icons">
-                            <span class="icon" onclick="editarActividad(${actividad.id_actividad})">
+                            <span class="icon edit" data-id="${actividad.id_actividad}">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </span>
-                            <span class="icon" onclick="eliminarActividad(${actividad.id_actividad})">
+                            <span class="icon delete" data-id="${actividad.id_actividad}">
                                 <i class="fa-solid fa-trash"></i>
                             </span>
                         </div>
@@ -57,10 +60,20 @@ function cargarActividades() {
     });
 }
 
-// Función para editar actividad
-function editarActividad(id) {
-    window.location.href = `../detallesActividad/detallesActividad.html?id=${id}`;
-}
+// Delegación de eventos para edición y eliminación
+document.body.addEventListener("click", function (event) {
+    // Editar actividad
+    if (event.target.closest(".icon.edit")) {
+        let id = event.target.closest(".icon.edit").dataset.id;
+        window.location.href = `../detallesActividad/detallesActividad.html?id=${id}`;
+    }
+
+    // Eliminar actividad
+    if (event.target.closest(".icon.delete")) {
+        let id = event.target.closest(".icon.delete").dataset.id;
+        eliminarActividad(id);
+    }
+});
 
 // Función para eliminar actividad con Axios
 function eliminarActividad(id) {
