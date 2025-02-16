@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Función para cargar y mostrar las actividades
 function cargarActividades() {
-    axios.post('/PequenosNavegantes/app/backend/admin/obtener_actividad.php', {}, {
+    axios.post('/PequenosNavegantes/app/backend/admin/actividades/obtener_actividad.php', {}, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -83,7 +83,7 @@ function guardarActividad() {
         descripcion: descripcion
     };
 
-    axios.post("/PequenosNavegantes/app/backend/admin/editar_actividad.php", JSON.stringify(data), {
+    axios.post("/PequenosNavegantes/app/backend/admin/actividades/editar_actividad.php", JSON.stringify(data), {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -122,7 +122,7 @@ function confirmarEliminacion() {
     const popup = document.getElementById("popupConfirmacion");
     const id = popup.dataset.id; // Recuperar el ID del popup para eliminarlo
 
-    axios.post("/PequenosNavegantes/app/backend/admin/eliminar_actividad.php", JSON.stringify({ id_actividad: id }), {
+    axios.post("/PequenosNavegantes/app/backend/admin/actividades/eliminar_actividad.php", JSON.stringify({ id_actividad: id }), {
         headers: {
             'Content-Type': 'application/json'
         }

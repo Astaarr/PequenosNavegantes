@@ -11,7 +11,7 @@ header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Incluir conexión
-include '../conecta.php';
+include '../../conecta.php';
 
 // Verificar conexión
 if (!$conexion) {
@@ -24,8 +24,10 @@ if (!isset($_SESSION)) {
     exit;
 }
 
-// Consulta para obtener actividades con control de errores
-$sql = "SELECT nombre, id_actividad FROM actividad";
+// Consulta para obtener grupos con el nombre del monitor
+$sql = "SELECT g.id_grupo, g.nombre, m.nombre AS nombre_monitor 
+        FROM grupo g 
+        JOIN monitor m ON g.id_monitor = m.id_monitor";
 $resultado = $conexion->query($sql);
 
 if (!$resultado) {
@@ -33,14 +35,14 @@ if (!$resultado) {
     exit;
 }
 
-$actividades = [];
+$grupos = [];
 
 while ($fila = $resultado->fetch_assoc()) {
-    $actividades[] = $fila;
+    $grupos[] = $fila;
 }
 
 // Retornar datos en JSON
-echo json_encode(["success" => true, "actividades" => $actividades]);
+echo json_encode(["success" => true, "grupos" => $grupos]);
 
 $conexion->close();
 ?>

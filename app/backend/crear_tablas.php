@@ -133,7 +133,7 @@ if (!verificarTabla($conexion, 'hijo')){
         id_padre INT NOT NULL,
         id_grupo INT, 
         FOREIGN KEY (id_padre) REFERENCES padre(id_padre) ON DELETE CASCADE,
-        FOREIGN KEY (id_grupo) REFERENCES grupo(id_grupo) ON DELETE CASCADE
+        FOREIGN KEY (id_grupo) REFERENCES grupo(id_grupo) ON DELETE SET NULL
         )";
     mysqli_query($conexion, $sqlHijo) or die("Error al crear la tabla 'hijo': " . mysqli_error($conexion));
     

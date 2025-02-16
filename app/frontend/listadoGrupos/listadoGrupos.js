@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Función para cargar y mostrar los grupos
 function cargarGrupos() {
-    axios.post('/PequenosNavegantes/app/backend/admin/obtener_grupos.php', {}, {
+    axios.post('/PequenosNavegantes/app/backend/admin/grupos/obtener_grupos.php', {}, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -72,7 +72,7 @@ function confirmarEliminacion() {
     const popup = document.getElementById("popupConfirmacion");
     const id = popup.dataset.id; // Recuperar el ID del popup para eliminarlo
 
-    axios.post("/PequenosNavegantes/app/backend/admin/eliminar_grupo.php", JSON.stringify({ id_grupo: id }), {
+    axios.post("/PequenosNavegantes/app/backend/admin/grupos/eliminar_grupo.php", JSON.stringify({ id_grupo: id }), {
         headers: {
             'Content-Type': 'application/json'
         }

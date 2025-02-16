@@ -11,7 +11,7 @@ header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Incluir conexión
-include '../conecta.php';
+include '../../conecta.php';
 
 // Verificar conexión
 if (!$conexion) {
@@ -27,26 +27,22 @@ if (!isset($_SESSION)) {
 // Obtener datos del cuerpo de la solicitud
 $data = json_decode(file_get_contents("php://input"), true);
 
-$id_actividad = $data['id_actividad'] ?? null;
-$nombre = $data['nombre'];
-$descripcion = $data['descripcion'];
-
-if ($id_actividad) {
-    // Editar actividad existente
-    $sql = "UPDATE actividad SET nombre = ?, descripcion = ? WHERE id_actividad = ?";
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("ssi", $nombre, $descripcion, $id_actividad);
-} else {
-    // Agregar nueva actividad
-    $sql = "INSERT INTO actividad (nombre, descripcion) VALUES (?, ?)";
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("ss", $nombre, $descripcion);
+if (!isset($data['id_grupo'])) {
+    echo json_encode(["success" => false, "message" => "ID de grupo no proporcionado."]);
+    exit;
 }
+
+$id_grupo = $data['id_grupo'];
+
+// Consulta para eliminar el grupo
+$sql = "DELETE FROM grupo WHERE id_grupo = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("i", $id_grupo);
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true]);
 } else {
-    echo json_encode(["success" => false, "message" => "Error al guardar la actividad."]);
+    echo json_encode(["success" => false, "message" => "Error al eliminar el grupo."]);
 }
 
 $stmt->close();

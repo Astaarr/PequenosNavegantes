@@ -8,14 +8,14 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-include '../conecta.php';
+include '../../conecta.php';
 
 if (!$conexion) {
     die(json_encode(["success" => false, "message" => "Error de conexión a la base de datos."]));
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
-$accion = $data['accion'] ?? null; // 'guardar_grupo', 'eliminar_monitor', 'eliminar_nino'
+$accion = $data['accion'] ?? null; // 'guardar_grupo', 'eliminar_monitor', 'eliminar_nino', 'agregar_nino'
 
 if ($accion === 'guardar_grupo') {
     // Guardar o editar grupo
@@ -36,12 +36,17 @@ if ($accion === 'guardar_grupo') {
     }
 
     if ($stmt->execute()) {
-        echo json_encode(["success" => true]);
+        if (!$idGrupo) {
+            // Obtener el ID del grupo recién creado
+            $idGrupo = $stmt->insert_id;
+        }
+        echo json_encode(["success" => true, "id_grupo" => $idGrupo]);
     } else {
         echo json_encode(["success" => false, "message" => "Error al guardar el grupo."]);
     }
 
     $stmt->close();
+    
 } elseif ($accion === 'eliminar_monitor') {
     // Eliminar monitor del grupo
     $idMonitor = $data['id'];
@@ -72,9 +77,46 @@ if ($accion === 'guardar_grupo') {
     }
 
     $stmt->close();
+
+} elseif ($accion === 'agregar_nino') {
+    // Agregar niño al grupo
+    $idNino = $data['id_hijo'];
+    $idGrupo = $data['id_grupo'];
+
+    if (!$idNino || !$idGrupo) {
+        echo json_encode(["success" => false, "message" => "Datos incompletos."]);
+        exit;
+    }
+
+    // Verificar si el niño ya está en otro grupo
+    $sql = "SELECT id_grupo FROM hijo WHERE id_hijo = ?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("i", $idNino);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    $fila = $resultado->fetch_assoc();
+
+    if ($fila && $fila['id_grupo'] !== null) {
+        echo json_encode(["success" => false, "message" => "El niño ya está en otro grupo."]);
+        exit;
+    }
+
+    // Actualizar el id_grupo del niño
+    $sql = "UPDATE hijo SET id_grupo = ? WHERE id_hijo = ?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("ii", $idGrupo, $idNino);
+
+    if ($stmt->execute()) {
+        echo json_encode(["success" => true]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Error al agregar niño al grupo."]);
+    }
+
+    $stmt->close();
 } else {
     echo json_encode(["success" => false, "message" => "Acción no válida."]);
 }
+
 
 $conexion->close();
 ?>

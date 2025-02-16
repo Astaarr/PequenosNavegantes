@@ -8,7 +8,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-include '../conecta.php';
+include '../../conecta.php';
 
 if (!$conexion) {
     die(json_encode(["success" => false, "message" => "Error de conexión a la base de datos."]));
@@ -33,12 +33,18 @@ if ($tipo === 'monitores') {
         echo json_encode(["success" => false, "message" => "Error al obtener monitores."]);
     }
 } elseif ($tipo === 'ninos') {
-    // Obtener niños
-    $sql = "SELECT id_hijo, nombre, apellidos FROM hijo WHERE id_grupo = ?";
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("i", $idGrupo);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
+    if ($idGrupo) {
+        // Obtener niños asociados a un grupo
+        $sql = "SELECT id_hijo, nombre, apellidos FROM hijo WHERE id_grupo = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("i", $idGrupo);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+    } else {
+        // Obtener niños sin grupo
+        $sql = "SELECT id_hijo, nombre, apellidos FROM hijo WHERE id_grupo IS NULL";
+        $resultado = $conexion->query($sql);
+    }
 
     if ($resultado) {
         $ninos = [];

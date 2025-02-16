@@ -11,7 +11,7 @@ header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Incluir conexión
-include '../conecta.php';
+include '../../conecta.php';
 
 // Obtener los datos enviados en el cuerpo de la petición
 $datos = json_decode(file_get_contents("php://input"), true);

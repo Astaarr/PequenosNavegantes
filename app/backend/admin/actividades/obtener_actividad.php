@@ -11,7 +11,7 @@ header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Incluir conexión
-include '../conecta.php';
+include '../../conecta.php';
 
 // Verificar conexión
 if (!$conexion) {
@@ -24,27 +24,23 @@ if (!isset($_SESSION)) {
     exit;
 }
 
-// Obtener datos del cuerpo de la solicitud
-$data = json_decode(file_get_contents("php://input"), true);
+// Consulta para obtener actividades con control de errores
+$sql = "SELECT nombre, id_actividad FROM actividad";
+$resultado = $conexion->query($sql);
 
-if (!isset($data['id_grupo'])) {
-    echo json_encode(["success" => false, "message" => "ID de grupo no proporcionado."]);
+if (!$resultado) {
+    echo json_encode(["success" => false, "message" => "Error en la consulta SQL: " . $conexion->error]);
     exit;
 }
 
-$id_grupo = $data['id_grupo'];
+$actividades = [];
 
-// Consulta para eliminar el grupo
-$sql = "DELETE FROM grupo WHERE id_grupo = ?";
-$stmt = $conexion->prepare($sql);
-$stmt->bind_param("i", $id_grupo);
-
-if ($stmt->execute()) {
-    echo json_encode(["success" => true]);
-} else {
-    echo json_encode(["success" => false, "message" => "Error al eliminar el grupo."]);
+while ($fila = $resultado->fetch_assoc()) {
+    $actividades[] = $fila;
 }
 
-$stmt->close();
+// Retornar datos en JSON
+echo json_encode(["success" => true, "actividades" => $actividades]);
+
 $conexion->close();
 ?>
