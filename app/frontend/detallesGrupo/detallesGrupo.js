@@ -35,27 +35,34 @@ function cargarDetallesGrupo(idGrupo) {
     });
 }
 
-// Función para cargar monitores
+// Función para cargar monitores y mostrar el seleccionado en pantalla
 function cargarMonitores(idMonitorSeleccionado = null) {
     axios.post('/PequenosNavegantes/app/backend/admin/grupos/obtener_datos.php', { tipo: 'monitores' }, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
         if (response.data.success) {
             const selectMonitor = document.getElementById('selectMonitor');
-            selectMonitor.innerHTML = '';
+            const monitorContainer = document.getElementById('monitorContainer');
+            
+            // Limpiar el select y el contenedor de tarjetas
+            selectMonitor.innerHTML = '<option value="">Selecciona un monitor</option>';
+            monitorContainer.innerHTML = '<span class="add-button" onclick="showPopup(\'monitor\')"><i class="fa-solid fa-plus"></i></span>';
 
             response.data.monitores.forEach(monitor => {
                 const option = document.createElement('option');
                 option.value = monitor.id_monitor;
                 option.textContent = `${monitor.nombre} ${monitor.apellidos}`;
-                if (monitor.id_monitor === idMonitorSeleccionado) {
+                
+                // Marcar como seleccionado en el select si coincide
+                if (parseInt(monitor.id_monitor) === parseInt(idMonitorSeleccionado)) {
                     option.selected = true;
+                    mostrarMonitorEnContenedor(monitor); // Llamar a la función para mostrarlo en pantalla
                 }
+
                 selectMonitor.appendChild(option);
             });
+
         } else {
             console.error("Error al obtener monitores:", response.data.message);
         }
@@ -64,6 +71,28 @@ function cargarMonitores(idMonitorSeleccionado = null) {
         console.error('Error al obtener monitores:', error);
     });
 }
+
+// Función para mostrar un monitor en `monitorContainer`
+function mostrarMonitorEnContenedor(monitor) {
+    const monitorContainer = document.getElementById('monitorContainer');
+
+    // Crear la tarjeta del monitor
+    const tarjeta = document.createElement('div');
+    tarjeta.className = 'tarjeta';
+    tarjeta.setAttribute('data-id', monitor.id_monitor);
+    tarjeta.innerHTML = `
+        <span class="name">${monitor.nombre} ${monitor.apellidos}</span>
+        <div class="icons">
+            <span class="icon delete" onclick="mostrarPopupConfirmacion(${monitor.id_monitor}, '${monitor.nombre} ${monitor.apellidos}', 'monitor')">
+                <i class="fa-solid fa-trash"></i>
+            </span>
+        </div>
+    `;
+
+    // Agregar la tarjeta al contenedor
+    monitorContainer.appendChild(tarjeta);
+}
+
 
 // Función para cargar niños
 function cargarNinos(idGrupo = null) {
