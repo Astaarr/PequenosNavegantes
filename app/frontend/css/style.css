@@ -306,7 +306,6 @@ section .content{
 //COLUMNAS
 //////////////////////////////////////////////////*/
 .columnas-contenedor{
-    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -316,16 +315,20 @@ section .content{
 }
 
 .columnas-contenedor .columna{
-    height: auto;
     display: flex;
     flex: 1;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     gap: 2em;
-
 }
 
+.imagenCol{
+    height: max-content;
+    filter: drop-shadow(var(--sombra));
+    animation: orbit 5s linear infinite;
+
+}
 
 /*//////////////////////////////////////////////////
 //HEADER
@@ -489,6 +492,36 @@ form input[type="radio"]{
 }
 .checkbox-custom input:checked ~ span:after{
     opacity: 1;
+}
+
+/* INPUT FILE */
+.cvContenedor{
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+
+    transition: all 0.3s ease;
+}
+
+.cvContenedor input[type="file"]{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.cvContenedor .botonCv{
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cvContenedor:hover{
+    transform: scale(1.1);
 }
 
 /* SEPARADOR */
@@ -796,7 +829,7 @@ h4.done ~ h4:first-of-type{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 1em;
     text-align: center;
 
@@ -822,6 +855,8 @@ h4.done ~ h4:first-of-type{
 .monitoresCard .links a::after{
     width: 0;
 }
+
+
 
 /*//////////////////////////////////////////////////
 //ADMIN

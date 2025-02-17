@@ -159,15 +159,62 @@
             <p>Completa el formulario para convertirte en monitor de campamento:</p>
         </section>
 
-        <section>
-            
+        <section class="columnas-contenedor">
+            <section class="columna">
+                <img src="../../../resources/img/person02.svg" class="imagenCol" alt="">       
+            </section>
+
+
+            <form action="#" id="formulario" class="columna">
+                <section class="sectionForm">
+    
+                    <div class="field">
+                        <label for="nombreMonitor">Nombre</label>
+                        <input type="text" class="obligatorio" placeholder="Introduce tu nombre" name="nombreMonitor" id="nombreMonitor" tabindex="1">
+                        <span class="error"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="apellidosMonitor">Apellidos</label>
+                        <input type="text" class="obligatorio" placeholder="Introduce tus apellidos" name="apellidosMonitor" id="apellidosMonitor" tabindex="2">
+                        <span class="error"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="emailMonitor">Email</label>
+                        <input type="email" class="obligatorio" id="emailMonitor" name="emailMonitor" placeholder="ejemplo@gmail.com" tabindex="3">
+                        <span class="error"></span>
+                    </div>
+    
+                    <div class="field">
+                        <label for="telMonitor">Teléfono</label>
+                        <input type="tel" class="obligatorio" name="telMonitor" id="telMonitor" placeholder="Ingresa tu Teléfono" tabindex="4">
+                        <span class="error"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="curriculumMonitor">Agregar curriculum</label>
+                        <div class="cvContenedor">
+                            <button class="botonCv btn btn-submain"><i class="fa-solid fa-file"></i>Subir cv</button>
+                            <input type="file" class="obligatorio" id="curriculumMonitor" name="curriculumMonitor" placeholder="Subir cv" tabindex="5">
+                        </div>
+                        <span class="error"></span>
+                    </div>
+
+                    <div class="field">
+                        <button type="submit" class="btn btn-main">Enviar Solicitud</button>
+                    </div>
+                </section>
+            </form>
+
         </section>
 
 
 
     </main>
 
-    <script src="nuestroEquipo.js"></script>
+
     <script src="../main.js"></script>
+    <script src="nuestroEquipo.js"></script>
 </body>
 </html>
