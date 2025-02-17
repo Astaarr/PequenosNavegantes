@@ -47,7 +47,11 @@ function cargarGrupos() {
 function abrirDetallesGrupo(idGrupo = null) {
     let url = '../detallesGrupo/detallesGrupo.html';
     if (idGrupo) {
-        url += `?id=${idGrupo}`; // Agregar el ID del grupo a la URL si estamos editando
+        url += `?id=${idGrupo}`;
+    } else {
+        // Generar un ID temporal único para nuevos grupos
+        const tempId = `temp_${Date.now()}`;
+        url += `?temp_id=${tempId}`;
     }
     window.location.href = url;
 }

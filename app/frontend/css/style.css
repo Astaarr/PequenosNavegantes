@@ -161,6 +161,7 @@ i{
     box-shadow: var(--sombra);
 }
 
+
 /* ======= POPUPS ======= */
 .popup-container{
     top:0;
@@ -270,6 +271,35 @@ section .content{
 }
 
 
+/*//////////////////////////////////////////////////
+//FILAS
+//////////////////////////////////////////////////*/
+.filas-contenedor{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.filas-contenedor .fila{
+    height: auto;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2em;
+
+}
+
+.t4{
+    /* min-height: 100%; */
+    flex: 0 0 calc(25% - 2em * 3 / 4); /* Ajuste por el gap */
+}
 
 
 /*//////////////////////////////////////////////////
@@ -758,6 +788,40 @@ h4.done ~ h4:first-of-type{
 
 
 
+
+/*//////////////////////////////////////////////////
+//MONITORES
+//////////////////////////////////////////////////*/
+.monitoresCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    text-align: center;
+
+    transition: all 0.3s ease;
+}
+
+.monitoresCard .imagen{
+    width: 100%;
+    height: auto;
+}
+.monitoresCard .imagen img{
+    width: 100%;
+    height: 100%;
+}
+
+.monitoresCard:hover{
+    transform: scale(1.05) rotate(3deg);
+}
+
+.monitoresCard .links a:hover{
+    color: var(--main);
+}
+.monitoresCard .links a::after{
+    width: 0;
+}
 
 /*//////////////////////////////////////////////////
 //ADMIN
