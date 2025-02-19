@@ -5,11 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Función para cargar y mostrar las actividades
 function cargarActividades() {
-    axios.post('/PequenosNavegantes/app/backend/admin/actividades/obtener_actividad.php', {}, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
+    axios.get('../../backend/admin/actividades/obtener_actividad.php')
     .then(response => {
         if (response.data.success) {
             const groupContainer = document.getElementById("groupContainer");
@@ -17,19 +13,51 @@ function cargarActividades() {
 
             // Agregar tarjeta por cada actividad
             response.data.actividades.forEach(actividad => {
-                groupContainer.innerHTML += `
-                    <div class="tarjeta" data-id="${actividad.id_actividad}">
-                        <span class="name"><i class="fa-solid fa-play"></i> ${actividad.nombre}</span>
-                        <div class="icons">
-                            <span class="icon edit" onclick="abrirPopupEdicion(${actividad.id_actividad}, '${actividad.nombre}', '${actividad.descripcion}')">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </span>
-                            <span class="icon delete" onclick="mostrarPopupConfirmacion(${actividad.id_actividad}, '${actividad.nombre}')">
-                                <i class="fa-solid fa-trash"></i>
-                            </span>
-                        </div>
+                const tarjeta = document.createElement("div");
+                tarjeta.classList.add("tarjeta", "tarjetaHover");
+                tarjeta.dataset.id = actividad.id_actividad;
+
+                tarjeta.innerHTML = `
+                    <div class="texto">
+                        <i class="fa-solid fa-play"></i>
+                        <span class="name"> ${actividad.nombre}</span>
+                        <span class="descripcion hidden"> ${actividad.descripcion}</span>
+                    </div>
+                    
+                    <div class="icons">
+                        <span class="icon edit" onclick="abrirPopupEdicion(${actividad.id_actividad}, '${actividad.nombre}', '${actividad.descripcion}')">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </span>
+                        <span class="icon delete" onclick="mostrarPopupConfirmacion(${actividad.id_actividad}, '${actividad.nombre}')">
+                            <i class="fa-solid fa-trash"></i>
+                        </span>
                     </div>
                 `;
+
+                // Agregar evento de clic a la tarjeta
+                tarjeta.addEventListener("click", function(event) {
+                    // Evitar que el evento se propague a los íconos dentro de la tarjeta
+                    if (event.target.closest('.icons')) return;
+
+                    const iconoPlay = this.querySelector(".texto i");
+                    const nombreSpan = this.querySelector(".name");
+                    const descripcionSpan = this.querySelector(".descripcion");
+                    const icons = this.querySelectorAll(".icon");
+
+                    // Rotar el ícono 90 grados
+                    iconoPlay.style.transform = iconoPlay.style.transform === "rotate(90deg)" ? "rotate(0deg)" : "rotate(90deg)";
+
+                    // Alternar las clases hidden
+                    nombreSpan.classList.toggle("hidden");
+                    descripcionSpan.classList.toggle("hidden");
+                    icons.forEach(icon => {
+                        icon.classList.toggle("hidden");
+                    });
+
+
+                });
+
+                groupContainer.appendChild(tarjeta);
             });
         } else {
             console.error("Error al obtener actividades:", response.data.message);

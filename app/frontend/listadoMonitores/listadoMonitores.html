@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Grupos</title>
+    <title>Listado de Monitores</title>
     <!-- ESTILOS -->
     <link rel="stylesheet" href="../css/style.css">
     <!-- AXIOS -->
@@ -23,9 +23,9 @@
             </div>
             <div class="content" id="menu">
                 <ul class="links">
-                    <li><a href="#">GRUPOS</a></li>
+                    <li><a href="../listadoGrupos/listadoGrupos.html">GRUPOS</a></li>
                     <li><a href="../listadoActividades/listadoActividades.html">ACTIVIDADES</a></li>
-                    <li><a href="../listadoMonitores/listadoMonitores.html">MONITORES</a></li>
+                    <li><a href="#">MONITORES</a></li>
                     <li><a href="#">SOBRE NOSOTROS</a></li>
                 </ul>
                 <div class="actions">
@@ -40,8 +40,8 @@
     <main>
         <section>
             <div class="title">
-                <h2>Listado de Grupos</h2>
-                <p>Editar grupos</p>
+                <h2>Solicitudes de Monitores</h2>
+                <p>Acepta nuevos integrantes para formar grupos:</p>
             </div>
         </section>
 
@@ -49,31 +49,38 @@
             <div class="container">
                 <div class="section columns">
                     <div id="groupContainer" class="contenedor-tarjetas">
-                        <span class="add-button" onclick="abrirDetallesGrupo()">
-                            <i class="fa-solid fa-plus"></i>
-                        </span>
 
-                        
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Popup de confirmación -->
-        <div class="popup-container" id="popupConfirmacion">
+    
+        <!-- Popup de eliminación -->
+        <div class="popup-container" id="popupEliminar">
             <div class="popup tarjeta">
                 <h3>Atención</h3>
-                <p id="confirmacionTexto">¿Estás seguro de que deseas eliminar el grupo "<span id="nombreGrupoEliminar"></span>"?</p>
+                <p id="confirmacionTexto">¿Estás seguro de que deseas eliminar la actividad "<span id="nombreActividadEliminar"></span>"?</p>
                 <div class="actions">
                     <button onclick="closePopup()" class="btn btn-main">Cancelar</button>
                     <button onclick="confirmarEliminacion()" class="btn btn-third">Aceptar</button>
                 </div>
             </div>
         </div>
+
+        <!-- Popup de confirmación -->
+        <div class="popup-container" id="popupConfirmación">
+            <div class="popup tarjeta">
+                <h3>Monitor Añadido</h3>
+                <p id="confirmacionTexto">El monitor ha sido añadido exitosamente al campamento.</p>
+                <div class="actions">
+                    <button onclick="closePopup()" class="btn btn-main">Aceptar</button>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <script src="../main.js"></script>
-    <script src="listadoGrupos.js"></script>
+    <script src="listadoMonitores.js"></script>
 
 </body>
 </html>

@@ -62,6 +62,25 @@ if (!verificarTabla($conexion, 'tutor_adicional')){
     mysqli_query($conexion, $sqlTutorAdicionalInsert) or die("Error al insertar datos en 'tutor_adicional': ". mysqli_error($conexion));
 }
 
+// Verifica y crea la tabla 'solicitud_monitor'
+if (!verificarTabla($conexion, 'solicitud_monitor')) {
+    $sqlSolicitudMonitor = "CREATE TABLE solicitud_monitor (
+        id_solicitud INT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(100) NOT NULL,
+        apellidos VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        telefono VARCHAR(16) NOT NULL,
+        curriculum TEXT NOT NULL
+    )";
+    mysqli_query($conexion, $sqlSolicitudMonitor) or die("Error al crear la tabla 'solicitud_monitor': " . mysqli_error($conexion));
+
+    // Insertar datos en la tabla 'solicitud_monitor'
+    $sqlSolicitudMonitorInsert = "INSERT INTO solicitud_monitor (nombre, apellidos, email, telefono, curriculum) VALUES
+        ('Carlos', 'Gómez Pérez', 'carlos.gomez@example.com', '644123456', 'uploads/curriculums/cv_carlos_gomez.pdf'),
+        ('Laura', 'Martínez Sánchez', 'laura.martinez@example.com', '655987654', 'uploads/curriculums/cv_laura_martinez.pdf')";
+    mysqli_query($conexion, $sqlSolicitudMonitorInsert) or die("Error al insertar datos en 'solicitud_monitor': " . mysqli_error($conexion));
+}
+
 
 // Verifica y crea tabla 'monitor
 if(!verificarTabla($conexion, 'monitor')){

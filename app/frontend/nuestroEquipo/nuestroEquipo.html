@@ -161,7 +161,7 @@
 
         <section class="columnas-contenedor">
             <section class="columna">
-                <img src="../../../resources/img/person02.svg" class="imagenCol" alt="">       
+                <img src="../../../resources/img/person03.svg" alt="">
             </section>
 
 
@@ -197,6 +197,7 @@
                         <div class="cvContenedor">
                             <button class="botonCv btn btn-submain"><i class="fa-solid fa-file"></i>Subir cv</button>
                             <input type="file" class="obligatorio" id="curriculumMonitor" name="curriculumMonitor" placeholder="Subir cv" tabindex="5">
+                            <span class="error"></span>
                         </div>
                         <span class="error"></span>
                     </div>
@@ -208,6 +209,14 @@
             </form>
 
         </section>
+
+        <div class="popup-container" id="popupContainer">
+            <div class="popup tarjeta">
+                <h3>Solicitud Enviada</h3>
+                <p>¡Gracias por tu solicitud! Nos pondremos en contacto contigo pronto.</p>
+                <button onclick="closePopup()" class="btn btn-main">Aceptar</button>
+            </div>
+        </div>
 
 
 

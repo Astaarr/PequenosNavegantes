@@ -86,7 +86,7 @@ function closePopup() {
 // Obtener el formulario
 const formulario = document.getElementById('formulario');
 
-// Validar campo
+// Modificar la función validarCampoEspecifico para incluir la validación del archivo
 function validarCampoEspecifico(campo) {
     const errorSpan = campo.parentElement.querySelector(".error");
     const valor = campo.value.trim();
@@ -96,7 +96,6 @@ function validarCampoEspecifico(campo) {
         mostrarError(errorSpan, 'El campo no puede estar vacío.');
         console.log('Error: El campo obligatorio está vacío.');
         return false;
-
     } else if (valor != '') {
 
         // Si es un campo de tipo email, validar el formato
@@ -133,12 +132,17 @@ function validarCampoEspecifico(campo) {
             console.log('Error: La edad no está entre 6 y 7 años.');
             return false;
         }
-    } 
+
+        // Validar archivo si el campo es de tipo file
+        if (campo.type === 'file') {
+            return validarArchivo(campo);
+        }
+    }
 
     limpiarError(errorSpan);
-
     return true;
 }
+
 // Función para validar el formato de un email
 function validarEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -172,6 +176,31 @@ function validarEdad(fechaNacimiento) {
     return edad >= 6 && edad <= 7;
 }
 
+// Función para validar el archivo subido
+function validarArchivo(campo) {
+    const errorSpan = campo.parentElement.querySelector(".error");
+    const archivo = campo.files[0];
+
+    if (archivo) {
+        // Verificar que el archivo sea un PDF
+        if (archivo.type !== 'application/pdf') {
+            mostrarError(errorSpan, 'El archivo debe ser un PDF.');
+            console.log('Error: El archivo no es un PDF.');
+            return false;
+        }
+
+        // Verificar que el archivo no exceda los 10 MB
+        if (archivo.size > 10 * 1024 * 1024) { // 10 MB en bytes
+            mostrarError(errorSpan, 'El archivo no debe exceder los 10 MB.');
+            console.log('Error: El archivo excede el tamaño máximo permitido.');
+            return false;
+        }
+    }
+
+    limpiarError(errorSpan);
+    return true;
+}
+
 // Función para mostrar el error
 function mostrarError(elementoError, mensaje) {
     if (!elementoError) return; // Si es null, salir de la función
@@ -185,10 +214,17 @@ function limpiarError(elementoError) {
     elementoError.style.display = 'none';
 }
 
+
 // Seleccionar todos los inputs y añadir evento 'blur'
 const inputs = document.querySelectorAll('input:not([type="button"]):not([type="checkbox"]):not([type="radio"])');
 inputs.forEach(input => input.addEventListener('blur', () => validarCampoEspecifico(input)));
 
+// Seleccionar el campo de archivo específico y añadir eventos 'change' y 'blur'
+const campoCurriculum = document.querySelector('input[type="file"]');
+if (campoCurriculum) {
+    campoCurriculum.addEventListener('change', () => validarCampoEspecifico(campoCurriculum));
+    campoCurriculum.addEventListener('blur', () => validarCampoEspecifico(campoCurriculum));
+}
 
 ////////////////////////////////////////
 // COOKIES

@@ -153,12 +153,25 @@ i{
     font-size: 1em;
 }
 
+
+/* ======= MOSTRAR / OCULTAR ======= */
+.hidden{
+    display: none;
+}
+
+
 /* ======= TARJETAS ======= */
 .tarjeta{
     background-color: var(--blanco);
     padding: 2em;
     border-radius: var(--radio);
     box-shadow: var(--sombra);
+
+    transition: transform 0.3s;
+}
+
+.tarjetaHover:hover{
+    transform: scale(0.98);
 }
 
 
@@ -236,7 +249,6 @@ i{
     flex-direction: column;
     align-items: baseline;
 }
-
 
 
 
@@ -856,6 +868,25 @@ h4.done ~ h4:first-of-type{
     width: 0;
 }
 
+.fa-user-plus{
+    color: var(--main);
+}
+.fa-user-minus{
+    color: var(--error);
+}
+
+.acciones .icon i:hover{
+    transform: scale(1.2);
+}
+
+
+
+.curriculum{
+    cursor: pointer;
+}
+.curriculum:hover{
+    color: var(--main);
+}
 
 
 /*//////////////////////////////////////////////////
@@ -951,6 +982,15 @@ h4.done ~ h4:first-of-type{
     flex-direction: row;
     gap: 2em;
 }
+
+.contenedor-tarjetas .fa-play {
+    transition: transform 0.3s ease;
+}
+
+
+
+
+
 
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////

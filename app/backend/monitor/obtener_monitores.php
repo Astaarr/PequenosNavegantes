@@ -7,26 +7,22 @@ ini_set('display_errors', 1);
 
 // CORS
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header('Content-Type: application/json');
 
 // Incluir conexión
-include '../../conecta.php';
+include '../conecta.php';
 
 // Verificar conexión
 if (!$conexion) {
-    die(json_encode(["success" => false, "message" => "Error de conexión a la base de datos."]));
-}
-
-// Comprobar si la sesión está activa
-if (!isset($_SESSION)) {
-    echo json_encode(["success" => false, "message" => "No hay sesión activa."]);
+    echo json_encode(["success" => false, "message" => "Error de conexión a la base de datos."]);
     exit;
 }
 
-// Consulta para obtener actividades con control de errores
-$sql = "SELECT nombre, id_actividad, descripcion FROM actividad";
+
+// Consulta para obtener monitores
+$sql = "SELECT id_solicitud, nombre, apellidos, email, telefono, curriculum FROM solicitud_monitor";
 $resultado = $conexion->query($sql);
 
 if (!$resultado) {
@@ -34,14 +30,14 @@ if (!$resultado) {
     exit;
 }
 
-$actividades = [];
+$monitores = [];
 
 while ($fila = $resultado->fetch_assoc()) {
-    $actividades[] = $fila;
+    $monitores[] = $fila;
 }
 
 // Retornar datos en JSON
-echo json_encode(["success" => true, "actividades" => $actividades]);
+echo json_encode(["success" => true, "monitores" => $monitores]);
 
 $conexion->close();
 ?>
