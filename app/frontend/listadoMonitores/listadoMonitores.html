@@ -48,8 +48,8 @@
         <section class="detallesAdmin">
             <div class="container">
                 <div class="section columns">
-                    <div id="groupContainer" class="contenedor-tarjetas">
-
+                    <div id="groupContainer" class="columnas-contenedor saltoLinea">
+                        
                     </div>
                 </div>
             </div>
@@ -68,11 +68,35 @@
             </div>
         </div>
 
-        <!-- Popup de confirmación -->
-        <div class="popup-container" id="popupConfirmación">
+        <!-- Popup añadir monitor -->
+        <div class="popup-container" id="popupAddMonitor">
             <div class="popup tarjeta">
-                <h3>Monitor Añadido</h3>
-                <p id="confirmacionTexto">El monitor ha sido añadido exitosamente al campamento.</p>
+                <h3>Nuevo monitor</h3>
+
+                <div class="contenido">
+                    <label for="nombreMonitor" class="divLeft">Nombre</label>
+                    <input type="text" class="obligatorio" id="nombreMonitor" name="nombreMonitor" placeholder="Nombre del Monitor">
+                    <span class="error"></span>
+                </div>
+
+                <div class="contenido">
+                    <label for="apellidosMonitor" class="divLeft">DNI</label>
+                    <input type="text" class="dni obligatorio" id="apellidosMonitor" name="apellidosMonitor" placeholder="DNI del Monitor">
+                    <span class="error"></span>
+                </div>
+
+                <div class="contenido">
+                    <label class="divLeft" for="password">Contraseña</label>
+                    <div class="inputContra">
+                        <input type="password" class="obligatorio" id="password" name="password" placeholder="Ingresa tu contraseña" tabindex="3">
+                        <span class="error"></span>
+                    </div>
+
+                </div>
+
+
+
+                
                 <div class="actions">
                     <button onclick="closePopup()" class="btn btn-main">Aceptar</button>
                 </div>
@@ -80,6 +104,7 @@
         </div>
     </main>
 
+    <script src="../main.js"></script>
     <script src="listadoMonitores.js"></script>
 
 </body>

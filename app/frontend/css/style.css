@@ -308,17 +308,16 @@ section .content{
 
 }
 
-.t4{
-    /* min-height: 100%; */
-    flex: 0 0 calc(25% - 2em * 3 / 4); /* Ajuste por el gap */
+.saltoLinea{
+    flex-wrap: wrap;
 }
-
 
 /*//////////////////////////////////////////////////
 //COLUMNAS
 //////////////////////////////////////////////////*/
 .columnas-contenedor{
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -335,11 +334,23 @@ section .content{
     gap: 2em;
 }
 
-.imagenCol{
-    height: max-content;
-    filter: drop-shadow(var(--sombra));
-    animation: orbit 5s linear infinite;
 
+.t4{
+    /* min-height: 100%; */
+    flex: 0 0 calc(25% - 2em * 3 / 4); /* Ajuste por el gap */
+}
+
+.t2{
+    flex: 1;
+}
+
+.imagenCol{
+    filter: drop-shadow(var(--sombra));
+}
+.imagenCol img{
+    max-width: 100%;
+    width: 100%;
+    height: auto;
 }
 
 /*//////////////////////////////////////////////////
@@ -535,6 +546,8 @@ form input[type="radio"]{
 .cvContenedor:hover{
     transform: scale(1.1);
 }
+
+
 
 /* SEPARADOR */
 .field .separador{
@@ -739,6 +752,8 @@ h4.done ~ h4:first-of-type{
 .datosDias{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 2em;
 }
 .datosDias h4{
@@ -751,19 +766,20 @@ h4.done ~ h4:first-of-type{
 //////////////////////////////////////////////////*/
 .tarifa{
     padding: 1.5em;
+    justify-content: space-between;
     transition: all 0.4s ease;
 }
 .tarifa .precio{
     text-align: center;
 }
+
 .tarifa .imagen{
-    width: auto;
-    height: 120px;
+    margin: 0 auto;
 }
 
 .tarifa .imagen img{
-    width: 100%;
-    height: 100%;
+    width: 120px;
+    height: auto;
 }
 .tarifa li{
     margin-bottom: 1em;
