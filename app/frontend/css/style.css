@@ -345,13 +345,19 @@ section .content{
 }
 
 .imagenCol{
+    flex: 1;
     filter: drop-shadow(var(--sombra));
 }
 .imagenCol>img{
-    max-width: 100% !important;
-    width: 100% !important;
-    height: 700px;
+    width: auto;
+    height: 100%;
 }
+
+.seccionLogin{
+    flex-direction: row;
+}
+
+
 
 /*//////////////////////////////////////////////////
 //HEADER

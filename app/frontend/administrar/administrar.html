@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Grupos</title>
+    <title>Administrar</title>
     <!-- ESTILOS -->
     <link rel="stylesheet" href="../css/style.css">
     <!-- AXIOS -->
@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+
     <header id="header-main">
         <div class="navbar">
             <div class="logo">
@@ -24,7 +25,7 @@
             <div class="content" id="menu">
                 <ul class="links">
                     <li><a href="../administrar/administrar.html">ADMINISTAR</a></li>
-                    <li><a href="#">GRUPOS</a></li>
+                    <li><a href="../listadoGrupos/listadoGrupos.html">GRUPOS</a></li>
                     <li><a href="../listadoActividades/listadoActividades.html">ACTIVIDADES</a></li>
                     <li><a href="../listadoMonitores/listadoMonitores.html">MONITORES</a></li>
                 </ul>
@@ -38,42 +39,9 @@
     </header>
 
     <main>
-        <section>
-            <div class="title">
-                <h2>Listado de Grupos</h2>
-                <p>Editar grupos</p>
-            </div>
-        </section>
-
-        <section class="detallesAdmin">
-            <div class="container">
-                <div class="section columns">
-                    <div id="groupContainer" class="contenedor-tarjetas">
-                        <span class="add-button" onclick="abrirDetallesGrupo()">
-                            <i class="fa-solid fa-plus"></i>
-                        </span>
-
-                        
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Popup de confirmación -->
-        <div class="popup-container" id="popupConfirmacion">
-            <div class="popup tarjeta">
-                <h3>Atención</h3>
-                <p id="confirmacionTexto">¿Estás seguro de que deseas eliminar el grupo "<span id="nombreGrupoEliminar"></span>"?</p>
-                <div class="actions">
-                    <button onclick="closePopup()" class="btn btn-main">Cancelar</button>
-                    <button onclick="confirmarEliminacion()" class="btn btn-third">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    </main>
+       
 
     <script src="../main.js"></script>
-    <script src="listadoGrupos.js"></script>
 
 </body>
 </html>
