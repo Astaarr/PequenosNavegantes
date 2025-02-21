@@ -278,66 +278,44 @@ function showPopup(tipo) {
     popup.style.display = "flex";
 }
 
-// Función para agregar un niño al grupo
+let ninosTemporales = [];
+
 function agregarNino() {
     const selectNino = document.getElementById('selectNino');
-    const idNino = selectNino.value; // Obtener el ID del niño seleccionado
-    const nombreNino = selectNino.options[selectNino.selectedIndex].text; // Obtener el nombre del niño seleccionado
+    const idNino = selectNino.value;
+    const nombreNino = selectNino.options[selectNino.selectedIndex].text;
 
     if (!idNino) {
         alert("Por favor, selecciona un niño.");
         return;
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const idGrupo = urlParams.get('id'); // Obtener el ID del grupo desde la URL
+    // Guardar temporalmente en el array
+    ninosTemporales.push({ id_hijo: idNino, nombre: nombreNino });
 
-    if (!idGrupo) {
-        alert("Error: No se ha proporcionado un ID de grupo.");
-        return;
-    }
+    // Mostrar en el contenedor
+    const ninoContainer = document.getElementById('ninoContainer');
+    const tarjeta = document.createElement('div');
+    tarjeta.className = 'tarjeta';
+    tarjeta.setAttribute('data-id', idNino);
+    tarjeta.innerHTML = `
+        <span class="name">${nombreNino}</span>
+        <div class="icons">
+            <span class="icon delete" onclick="eliminarNinoTemporal(${idNino})">
+                <i class="fa-solid fa-trash"></i>
+            </span>
+        </div>
+    `;
+    ninoContainer.appendChild(tarjeta);
 
-    const data = {
-        accion: 'agregar_nino',
-        id_hijo: idNino,
-        id_grupo: idGrupo
-    };
-
-    // Enviar la solicitud al backend para asociar el niño al grupo
-    axios.post("/PequenosNavegantes/app/backend/admin/grupos/gestionar_grupo.php", JSON.stringify(data), {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (response.data.success) {
-            // Añadir solo el niño seleccionado al contenedor
-            const ninoContainer = document.getElementById('ninoContainer');
-            const tarjeta = document.createElement('div');
-            tarjeta.className = 'tarjeta';
-            tarjeta.setAttribute('data-id', idNino);
-            tarjeta.innerHTML = `
-                <span class="name">${nombreNino}</span>
-                <div class="icons">
-                    <span class="icon delete" onclick="mostrarPopupConfirmacion(${idNino}, '${nombreNino}', 'nino')">
-                        <i class="fa-solid fa-trash"></i>
-                    </span>
-                </div>
-            `;
-            ninoContainer.appendChild(tarjeta);
-
-            closePopup(); // Cerrar el popup
-        } else {
-            alert("Error al agregar el niño: " + response.data.message);
-        }
-    })
-    .catch(error => {
-        console.error("Error agregando niño:", error);
-        alert("Error al agregar el niño. Por favor, intenta de nuevo.");
-    });
+    closePopup();
 }
 
-// Función para guardar el grupo
+function eliminarNinoTemporal(idNino) {
+    ninosTemporales = ninosTemporales.filter(n => n.id_hijo !== idNino);
+    document.querySelector(`#ninoContainer .tarjeta[data-id="${idNino}"]`).remove();
+}
+
 function guardarGrupo() {
     const nombreGrupo = document.getElementById('nombreGrupo').value;
     const idMonitor = document.querySelector('#monitorContainer .tarjeta')?.getAttribute('data-id');
@@ -348,42 +326,28 @@ function guardarGrupo() {
     }
 
     const urlParams = new URLSearchParams(window.location.search);
-    const idGrupo = urlParams.get('id'); // Obtener el ID del grupo desde la URL (si existe)
+    const idGrupo = urlParams.get('id');
 
     const data = {
         accion: 'guardar_grupo',
-        id_grupo: idGrupo, // Puede ser null si es un nuevo grupo
+        id_grupo: idGrupo,
         nombre: nombreGrupo,
-        id_monitor: idMonitor
+        id_monitor: idMonitor,
+        ninos: ninosTemporales // Enviar todos los niños temporales
     };
 
-    // Guardar el grupo en la base de datos
     axios.post("/PequenosNavegantes/app/backend/admin/grupos/gestionar_grupo.php", JSON.stringify(data), {
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
         if (response.data.success) {
-            const nuevoIdGrupo = response.data.id_grupo; // Obtener el ID del grupo creado
             alert("Grupo guardado correctamente.");
-
-            if (!idGrupo) {
-                // Redirigir a la página de edición del grupo con el ID generado
-                window.location.href = `detallesGrupo.html?id=${nuevoIdGrupo}`;
-            } else {
-                // Recargar la página para actualizar los datos
-                window.location.reload();
-            }
-        } else {
-            alert("Error al guardar el grupo: " + response.data.message);
+            window.location.href = `detallesGrupo.html?id=${response.data.id_grupo}`;
         }
     })
-    .catch(error => {
-        console.error("Error guardando grupo:", error);
-        alert("Error al guardar el grupo. Por favor, intenta de nuevo.");
-    });
+    .catch(error => console.error("Error guardando grupo:", error));
 }
+
 
 function closePopup() {
     const popups = document.querySelectorAll(".popup-container");
