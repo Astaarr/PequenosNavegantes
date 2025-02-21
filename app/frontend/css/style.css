@@ -335,7 +335,7 @@ section .content{
 }
 
 
-.t4{
+.columna.t4{
     /* min-height: 100%; */
     flex: 0 0 calc(25% - 2em * 3 / 4); /* Ajuste por el gap */
 }
@@ -347,10 +347,10 @@ section .content{
 .imagenCol{
     filter: drop-shadow(var(--sombra));
 }
-.imagenCol img{
-    max-width: 100%;
-    width: 100%;
-    height: auto;
+.imagenCol>img{
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 700px;
 }
 
 /*//////////////////////////////////////////////////
@@ -853,13 +853,15 @@ h4.done ~ h4:first-of-type{
 /*//////////////////////////////////////////////////
 //MONITORES
 //////////////////////////////////////////////////*/
-.monitoresCard{
+.tarjeta.t4.monitoresCard{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     gap: 1em;
     text-align: center;
+    flex: 0 0 calc(25% - 2em * 3 / 4);
+
 
     transition: all 0.3s ease;
 }

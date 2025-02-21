@@ -18,7 +18,7 @@ function cargarMonitores() {
 
                 monitores.forEach(monitor => {
                     const tarjeta = document.createElement('div');
-                    tarjeta.classList.add('tarjeta', 'columna', 't4');
+                    tarjeta.classList.add('t4', 'tarjeta', 'columna');
                     tarjeta.setAttribute('data-id', monitor.id_solicitud);
 
                     tarjeta.innerHTML = `
