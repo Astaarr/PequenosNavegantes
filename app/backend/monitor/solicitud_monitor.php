@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Manejo del archivo
     if (isset($_FILES['curriculum']) && $_FILES['curriculum']['error'] === UPLOAD_ERR_OK) {
-        $directorioDestino = '../uploads/';
+        $directorioDestino = 'uploads/';
         if (!is_dir($directorioDestino)) {
             mkdir($directorioDestino, 0777, true);
         }

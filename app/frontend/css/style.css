@@ -770,7 +770,7 @@ h4.done ~ h4:first-of-type{
 /*//////////////////////////////////////////////////
 //TARIFA
 //////////////////////////////////////////////////*/
-.tarifa{
+.columnas-contenedor .tarifa{
     padding: 1.5em;
     justify-content: space-between;
     transition: all 0.4s ease;
@@ -892,16 +892,6 @@ h4.done ~ h4:first-of-type{
     width: 0;
 }
 
-.fa-user-plus{
-    color: var(--main);
-}
-.fa-user-minus{
-    color: var(--error);
-}
-
-.acciones .icon i:hover{
-    transform: scale(1.2);
-}
 
 
 
@@ -913,9 +903,39 @@ h4.done ~ h4:first-of-type{
 }
 
 
+.solicitudesMonitor{
+    justify-content: center;
+}
+
+.solicitudesMonitor .tarjeta{
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2em;
+}
+
+.solicitudesMonitor .tarjeta .detalles{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.fa-user-plus:hover{
+    color: var(--main);
+}
+.fa-user-minus:hover{
+    color: var(--error);
+}
+
+
 /*//////////////////////////////////////////////////
 //ADMIN
 //////////////////////////////////////////////////*/
+.adminIndex .icono i{
+    font-size: 2em;
+}
 
 .detallesAdmin{
     align-items: baseline;
@@ -1013,6 +1033,68 @@ h4.done ~ h4:first-of-type{
 
 
 
+/*//////////////////////////////////////////////////
+//FOOTER
+//////////////////////////////////////////////////*/
+#footer-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--second);
+}
+#footer-main *{
+    color: var(--blanco);
+}
+
+#footer-main .separador{
+    width: 90vw;
+    border: 1px solid var(--blanco);
+}
+
+#footer-main .contenedorPadre{
+    width: 90vw;
+    padding: 2em 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+}
+#footer-main .caja{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+#footer-main .paginas,
+#footer-main .rrss,
+#footer-main .logo{
+    flex: 1;
+}
+
+#footer-main .logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#footer-main .contenedorPadre .enlaces{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+#footer-main .contenedorPadre img{
+    width: 30%;
+    height: auto;
+}
+
+
 
 
 
@@ -1063,8 +1145,6 @@ h4.done ~ h4:first-of-type{
     .actions{
         width: 100%;
     }
-
-
 
 }
 

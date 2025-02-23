@@ -27,10 +27,8 @@ function cargarMonitores() {
                         </div>
 
                         <div class="detalles">
-                            <div class="contacto">
-                                <span class="correo"><i class="fa-solid fa-envelope"></i> ${monitor.email}</span>
-                                <span class="telefono"><i class="fa-solid fa-phone"></i> ${monitor.telefono}</span>
-                            </div>
+                            <span class="correo"><i class="fa-solid fa-envelope"></i>${monitor.email}</span>
+                            <span class="telefono"><i class="fa-solid fa-phone"></i>${monitor.telefono}</span>
                         </div>
 
                         <div class="infoAdicional">
@@ -46,10 +44,13 @@ function cargarMonitores() {
                     // Añadir evento de clic para descargar el CV
                     const curriculumSpan = tarjeta.querySelector('.curriculum');
                     curriculumSpan.addEventListener('click', () => {
-                        descargarCurriculum(monitor.curriculum);
+                        descargarCurriculum(monitor.curriculum, monitor.nombre, monitor.apellidos);
                     });
 
+                    console.log(monitor.curriculum);
+
                     contenedorTarjetas.appendChild(tarjeta);
+
                 });
             } else {
                 console.error("Error al obtener monitores:", response.data ? response.data.message : "Respuesta no válida del servidor");
@@ -63,10 +64,13 @@ function cargarMonitores() {
 }
 
 // Función para descargar el CV
-function descargarCurriculum(urlCurriculum) {
+function descargarCurriculum(urlCurriculum, nombre, apellidos) {
+    //Correccion de rutas
+    const rutaCorrecta = `../../backend/monitor/${urlCurriculum}`;
+
     const link = document.createElement('a');
-    link.href = urlCurriculum;
-    link.download = 'curriculum.pdf';
+    link.href = rutaCorrecta;
+    link.download = `curriculum_${nombre}_${apellidos}.pdf`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

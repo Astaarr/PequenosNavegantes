@@ -48,33 +48,8 @@
         <section class="detallesAdmin">
             <div class="container">
                 <div class="section columns">
-                    <div id="groupContainer" class="columnas-contenedor saltoLinea">
+                    <div id="groupContainer" class="columnas-contenedor saltoLinea solicitudesMonitor">
                         
-
-
-                        <div class="tarjeta columna t4">
-                            <div class="nombreCompleto">
-                                <h6>${monitor.nombre} ${monitor.apellidos}</h6>
-                            </div>
-    
-                            <div class="detalles">
-                                <div class="contacto">
-                                    <span class="correo"><i class="fa-solid fa-envelope"></i> ${monitor.email}</span>
-                                    <span class="telefono"><i class="fa-solid fa-phone"></i> ${monitor.telefono}</span>
-                                </div>
-                            </div>
-    
-                            <div class="infoAdicional">
-                                <span class="curriculum"><i class="fa-solid fa-file"></i> Descargar CV</span>
-                            </div>
-    
-                            <div class="acciones">
-                                <span class="icon"><i class="fa-solid fa-user-plus"></i></span>
-                                <span class="icon"><i class="fa-solid fa-user-minus"></i></span>
-                            </div>
-                        </div>
-
-
 
                     </div>
                 </div>
@@ -86,7 +61,7 @@
         <div class="popup-container" id="popupEliminar">
             <div class="popup tarjeta">
                 <h3>Atención</h3>
-                <p id="confirmacionTexto">¿Estás seguro de que deseas eliminar la actividad "<span id="nombreActividadEliminar"></span>"?</p>
+                <p id="confirmacionTexto">¿Estás seguro de que deseas eliminar el monitor "<span id="nombreMonitor"></span>"?</p>
                 <div class="actions">
                     <button onclick="closePopup()" class="btn btn-main">Cancelar</button>
                     <button onclick="confirmarEliminacion()" class="btn btn-third">Aceptar</button>
@@ -97,13 +72,10 @@
         <!-- Popup añadir monitor -->
         <div class="popup-container" id="popupAddMonitor">
             <div class="popup tarjeta">
-                <h3>Nuevo monitor</h3>
 
-                <div class="contenido">
-                    <label for="nombreMonitor" class="divLeft">Nombre</label>
-                    <input type="text" class="obligatorio" id="nombreMonitor" name="nombreMonitor" placeholder="Nombre del Monitor">
-                    <span class="error"></span>
-                </div>
+                <button id="cerrarPopup" class="close-popup btn btn" onclick="closePopup()"><i class="fas fa-times"></i></button>
+
+                <h3 id="nombreMonitor">Nombre + Apellidos</h3>
 
                 <div class="contenido">
                     <label for="apellidosMonitor" class="divLeft">DNI</label>
@@ -119,10 +91,20 @@
                     </div>
 
                 </div>
-
-
-
                 
+                <div class="actions">
+                    <button onclick="closePopup()" class="btn btn-main">Añadir Monitor</button>
+                </div>
+            </div>
+        </div>
+
+
+            
+        <!-- Popup de eliminación -->
+        <div class="popup-container" id="popupConfirmacion">
+            <div class="popup tarjeta">
+                <h3>Monitor añadido</h3>
+                <p id="confirmacionTexto">¡El monitor se ha añadido correctamente al campamento!</p>
                 <div class="actions">
                     <button onclick="closePopup()" class="btn btn-main">Aceptar</button>
                 </div>

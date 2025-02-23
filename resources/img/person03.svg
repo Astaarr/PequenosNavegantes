@@ -792,14 +792,18 @@
         <path class="cls-73" d="M96.53,113.27l2.39,3.15s-4.62,2.15-7.62,1.31l.21-3.77,5.02-.69Z"/>
 
 
-          <animateTransform 
-            attributeName="transform" 
-            type="scale" 
-            values="1 1; 1 1.01; 1 1" 
-            dur="2s" 
-            repeatCount="indefinite" 
-            additive="sum" 
-            id="animacionCuerpo" />
+        <animateTransform
+          attributeName="transform"
+          type="scale"
+          values="1 1; 1 1.01; 1 1"
+          dur="4s"
+          repeatCount="indefinite"
+          additive="sum"
+          id="animacionCuerpo"
+          keyTimes="0; 0.5; 1"
+          keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
+          calcMode="spline"
+        />
 
 
 
@@ -889,14 +893,18 @@
           <path class="cls-88" d="M111.6,20.64c.64,1.5,1.2,3.59,.34,5.54-1.59,3.59-7,4.45-19.12,6.03-33.05,4.31-39.88,4.14-41.44,1.02-.53-1.05-.44-2.43,.6-4.23,14.05,0,29.98-1.09,45.67-4.56,5.28-1.17,9.92-2.47,13.94-3.8Z"/>
         </g>
         
-           <animateTransform 
-            attributeName="transform" 
-            type="translate" 
-            values="0,0; 0,5; 0,0" 
-            dur="2s" 
-            repeatCount="indefinite" 
-            additive="sum" 
-            id="animacionCabeza" />
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          values="0,0; 0,5; 0,0"
+          dur="4s"
+          repeatCount="indefinite"
+          additive="sum"
+          id="animacionCabeza"
+          keyTimes="0; 0.5; 1"
+          keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
+          calcMode="spline"
+        />
 
         
       </g>

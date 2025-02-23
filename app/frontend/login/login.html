@@ -32,65 +32,76 @@
         </div>
     </header>
 
+    
     <main>
-        <form id="formulario">
-            <section class="sectionForm">
-                <div class="field">
-                    <h3>INICIAR SESIÓN</h3>
-                </div>
 
-                <div class="field">
-                    <label for="correo">Email</label>
-                    <input type="email" class="obligatorio" id="email" name="email" placeholder="ejemplo@gmail.com" tabindex="1">
-                    <span class="error"></span>
-                </div>
 
-                <div class="field">
-                    <div class="inline">
-                        <label for="contra">Contraseña</label>
-                        <a href="#" id="contraOlvidada" class="question">¿Contraseña olvidada?</a>
-                    </div>
-                    
-                    <input type="password" class="obligatorio" id="password" name="password" placeholder="Ingresa tu contraseña" tabindex="2">
-                    <i class="fa-regular fa-eye mostrarPassword"></i>
-                    <i class="fa-regular fa-eye-slash mostrarPassword"></i>
-                    <span class="error"></span>
-                </div>
-
-                <div class="field">
-                    <div class="checkbox">
-                        <label for="recordar">Recordar contraseña</label>
-                        <label class="checkbox-custom">
-                            <input type="checkbox" name="recordar" id="recordar">
-                            <span></span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <button type="submit" class="btn btn-main" tabindex="3">Iniciar Sesión</button>
-                </div>
-
-                <span id="errorGeneral" class="error"></span>
-
-                <div class="field">
-                    <div class="separador">O</div>
-                </div>
-
-                <div class="field">
-                    <div class="inline">
-                        <button class="btn btn-second"><i class="fa-brands fa-google"></i>Iniciar con Google</button>
-                        <button class="btn btn-second"><i class="fa-brands fa-apple"></i>Iniciar con Apple</button>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <p>¿No tienes cuenta?<a href="../registrarse/registro.html">Regístrate ahora</a></p>
-                </div>
-
+        <section class="seccionLogin">
+            <section class="columna imagenCol t2">
+                <img class="formImg" src="../../../resources/img/person03.svg" alt="">
             </section>
-        </form>
 
+            <form id="formulario" class="columna t2">
+                <section class="sectionForm">
+                    <div class="field">
+                        <h2>INICIAR SESIÓN</h2>
+                    </div>
+    
+                    <div class="field">
+                        <label for="correo">Email</label>
+                        <input type="email" class="obligatorio" id="email" name="email" placeholder="ejemplo@gmail.com" tabindex="1">
+                        <span class="error"></span>
+                    </div>
+    
+                    <div class="field">
+                        <div class="inline">
+                            <label for="contra">Contraseña</label>
+                            <a href="#" id="contraOlvidada" class="question">¿Contraseña olvidada?</a>
+                        </div>
+                        
+                        <input type="password" class="obligatorio" id="password" name="password" placeholder="Ingresa tu contraseña" tabindex="2">
+                        <i class="fa-regular fa-eye mostrarPassword"></i>
+                        <i class="fa-regular fa-eye-slash mostrarPassword"></i>
+                        <span class="error"></span>
+                    </div>
+    
+                    <div class="field">
+                        <div class="checkbox">
+                            <label for="recordar">Recordar contraseña</label>
+                            <label class="checkbox-custom">
+                                <input type="checkbox" name="recordar" id="recordar">
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+    
+                    <div class="field">
+                        <button type="submit" class="btn btn-main" tabindex="3">Iniciar Sesión</button>
+                    </div>
+    
+                    <span id="errorGeneral" class="error"></span>
+    
+                    <div class="field">
+                        <div class="separador">O</div>
+                    </div>
+    
+                    <div class="field">
+                        <div class="inline">
+                            <button class="btn btn-second"><i class="fa-brands fa-google"></i>Iniciar con Google</button>
+                            <button class="btn btn-second"><i class="fa-brands fa-apple"></i>Iniciar con Apple</button>
+                        </div>
+                    </div>
+    
+                    <div class="field">
+                        <p>¿No tienes cuenta?<a href="../registrarse/registro.html">Regístrate ahora</a></p>
+                    </div>
+    
+                </section>
+            </form>
+        </section>
+
+
+        
         <!-- Popup -->
         <div class="popup-container" id="popupContainer">
             <div class="popup tarjeta">
