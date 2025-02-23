@@ -21,21 +21,14 @@
 
 </head>
 <body>
-    <header>
-        <div class="navbar">
-            <div class="logo">
-                <img src="../../../resources/logo/logoN.png" alt="">
-            </div>
-            <div class="content" id="menu">
-                <a href=""><i class="fa-solid fa-arrow-left"></i>Volver</a>
-            </div>
-        </div>
-    </header>
 
-    <main>
-        <section>
-            <form id="formulario">
+
+    <main id="bgForm">
+        <form id="formulario" class="formularioAdmin">
+            <section class="sectionForm tarjeta">
+               
                 <div class="field">
+                    <a id="closeBtn" class="close-popup" href="../paginaPrincipal/index.html"><i class="fas fa-times"></i></a>
                     <h3>ACCESO ADMIN</h3>
                 </div>
 
@@ -50,19 +43,30 @@
                         <label for="contra">Contraseña</label>
                         <a href="" class="question">¿Contraseña olvidada?</a>
                     </div>
+
                     <input type="password" class="obligatorio" id="password" name="password" placeholder="Ingresa tu contraseña" tabindex="2">
-                    <i class="fa-regular fa-eye"></i>
-                    <i class="fa-regular fa-eye-slash"></i>
+                    <i class="fa-regular fa-eye mostrarPassword"></i>
+                    <i class="fa-regular fa-eye-slash mostrarPassword"></i>
                     <span class="error"></span>
                 </div>
 
+                <span id="errorGeneral" class="error"></span>
 
                 <div class="field">
                     <button type="submit" class="btn btn-main" tabindex="3">Iniciar Sesión</button>
                 </div>
+            </section>
+        </form>
 
-            </form>
-        </section>
+        <!-- Popup -->
+        <div class="popup-container" id="popupConfirmacion">
+            <div class="popup tarjeta">
+                <h3>Inicio de Sesión Exitoso</h3>
+                <p>¡Nos alegra verte de nuevo!</p>
+                <button onclick="aceptarBtn()" class="btn btn-main">Aceptar</button>
+            </div>
+        </div>
+
     </main>
 
     <script src="../main.js"></script>

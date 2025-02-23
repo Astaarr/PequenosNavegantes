@@ -410,6 +410,10 @@ header .logo img{
     width: 100%;
 }
 
+header .logoHeader::after{
+    width: 0;
+}
+
 /* BOTONES */
 header .navbar .actions{
     display: flex;
@@ -933,6 +937,58 @@ h4.done ~ h4:first-of-type{
 /*//////////////////////////////////////////////////
 //ADMIN
 //////////////////////////////////////////////////*/
+
+#bgForm,
+#bgIndex{
+    width: 100%;
+    height: 100vh; 
+    padding-top: 0; 
+    background-image: url(../../../resources/bg/bg01.svg);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+#bgIndex{
+    height: 80vh; 
+}
+
+.formularioAdmin{
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px); 
+}
+
+.formularioAdmin .sectionForm{
+    padding: 4em;
+    width: 40vw;
+    gap: 2.5em;
+}
+.formularioAdmin #closeBtn{
+    width: 100%;
+    display: inline-block;
+    text-align: right;
+}
+.formularioAdmin #closeBtn::after{
+    width: 0;
+}
+.formularioAdmin #closeBtn i{
+    transition: all 0.3s;
+}
+.formularioAdmin #closeBtn i:hover{
+    transform: scale(1.2);
+}
+.formularioAdmin .sectionForm h3{
+    text-align: center;
+}
+.formularioAdmin .sectionForm input{
+    background-color: transparent;
+}
+
+
 .adminIndex .icono i{
     font-size: 2em;
 }
@@ -1066,13 +1122,9 @@ h4.done ~ h4:first-of-type{
     flex-direction: column;
     gap: 1em;
     align-items: center;
-}
-
-#footer-main .paginas,
-#footer-main .rrss,
-#footer-main .logo{
     flex: 1;
 }
+
 
 #footer-main .logo{
     display: flex;
@@ -1088,14 +1140,29 @@ h4.done ~ h4:first-of-type{
     flex-wrap: wrap;
     gap: 1em;
 }
+#footer-main .contenedorPadre .descripcion{
+    text-align: center;
+}
 
 #footer-main .contenedorPadre img{
     width: 30%;
     height: auto;
 }
 
+#footer-main .iconosSociales a{
+    font-size: 1.5em;
+    color: var(--blanco);
+    transition: all 0.3s;
+}
+
+#footer-main .iconosSociales a:hover{
+    font-size: 2.5em;
+}
 
 
+#footer-main .iconosSociales a::after{
+    width: 0;
+}
 
 
 
