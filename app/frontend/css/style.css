@@ -992,6 +992,9 @@ h4.done ~ h4:first-of-type{
 .adminIndex .icono i{
     font-size: 2em;
 }
+.adminIndex .columna{
+    justify-content: space-between;
+}
 
 .detallesAdmin{
     align-items: baseline;
@@ -1000,6 +1003,12 @@ h4.done ~ h4:first-of-type{
 .detallesAdmin h3{
     margin-bottom: 0.5em;
 }
+
+.myAcount{
+    width: 100%;
+    align-items: baseline;
+}
+
 
 
 .detallesAdmin .contenedor-tarjetas{
