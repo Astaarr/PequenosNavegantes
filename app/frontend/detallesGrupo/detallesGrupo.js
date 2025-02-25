@@ -6,17 +6,15 @@ document.addEventListener("DOMContentLoaded", function () {
         // Estamos editando un grupo existente
         cargarDetallesGrupo(idGrupo);
     } else {
-        // Estamos creando un nuevo grupo
-        cargarMonitores(); // Cargar monitores para un nuevo grupo
+        // Estamos creando un nuevo grupo: Cargar solo monitores libres
+        cargarMonitoresLibres(); 
     }
 });
 
 // Función para cargar los detalles del grupo
 function cargarDetallesGrupo(idGrupo) {
     axios.post('/PequenosNavegantes/app/backend/admin/grupos/obtener_grupo.php', { id_grupo: idGrupo }, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
         if (response.data.success) {
@@ -24,7 +22,7 @@ function cargarDetallesGrupo(idGrupo) {
             document.getElementById('nombreGrupo').value = grupo.nombre;
 
             // Cargar monitores y niños asociados
-            cargarMonitores(grupo.id_monitor);
+            cargarMonitorSeleccionado(grupo.id_monitor);
             cargarNinos(grupo.id_grupo);
         } else {
             console.error("Error al obtener detalles del grupo:", response.data.message);
@@ -35,17 +33,16 @@ function cargarDetallesGrupo(idGrupo) {
     });
 }
 
-// Función para cargar monitores y mostrar el seleccionado en pantalla
-function cargarMonitores(idMonitorSeleccionado = null) {
-    axios.post('/PequenosNavegantes/app/backend/admin/grupos/obtener_datos.php', { tipo: 'monitores' }, {
+// Función para cargar monitores libres (sin grupo asignado)
+function cargarMonitoresLibres() {
+    axios.post('/PequenosNavegantes/app/backend/admin/grupos/obtener_datos.php', { tipo: 'monitores_libres' }, {
         headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
         if (response.data.success) {
             const selectMonitor = document.getElementById('selectMonitor');
             const monitorContainer = document.getElementById('monitorContainer');
-            
-            // Limpiar el select y el contenedor de tarjetas
+
             selectMonitor.innerHTML = '<option value="">Selecciona un monitor</option>';
             monitorContainer.innerHTML = '<span class="add-button" onclick="showPopup(\'monitor\')"><i class="fa-solid fa-plus"></i></span>';
 
@@ -53,30 +50,52 @@ function cargarMonitores(idMonitorSeleccionado = null) {
                 const option = document.createElement('option');
                 option.value = monitor.id_monitor;
                 option.textContent = `${monitor.nombre} ${monitor.apellidos}`;
-                
-                // Marcar como seleccionado en el select si coincide
+                selectMonitor.appendChild(option);
+            });
+        } else {
+            console.warn("No hay monitores disponibles para asignar.");
+        }
+    })
+    .catch(error => console.error('Error al obtener monitores libres:', error));
+}
+
+// Función para cargar el monitor seleccionado (cuando se edita un grupo)
+function cargarMonitorSeleccionado(idMonitorSeleccionado) {
+    axios.post('/PequenosNavegantes/app/backend/admin/grupos/obtener_datos.php', { tipo: 'monitores' }, {
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+        if (response.data.success) {
+            const selectMonitor = document.getElementById('selectMonitor');
+            const monitorContainer = document.getElementById('monitorContainer');
+
+            selectMonitor.innerHTML = '<option value="">Selecciona un monitor</option>';
+            monitorContainer.innerHTML = '<span class="add-button" onclick="showPopup(\'monitor\')"><i class="fa-solid fa-plus"></i></span>';
+
+            response.data.monitores.forEach(monitor => {
+                const option = document.createElement('option');
+                option.value = monitor.id_monitor;
+                option.textContent = `${monitor.nombre} ${monitor.apellidos}`;
+
+                // Marcar como seleccionado si coincide
                 if (parseInt(monitor.id_monitor) === parseInt(idMonitorSeleccionado)) {
                     option.selected = true;
-                    mostrarMonitorEnContenedor(monitor); // Llamar a la función para mostrarlo en pantalla
+                    mostrarMonitorEnContenedor(monitor);
                 }
 
                 selectMonitor.appendChild(option);
             });
-
         } else {
-            console.error("Error al obtener monitores:", response.data.message);
+            console.warn("Error al obtener los monitores.");
         }
     })
-    .catch(error => {
-        console.error('Error al obtener monitores:', error);
-    });
+    .catch(error => console.error('Error al obtener monitores:', error));
 }
 
-// Función para mostrar un monitor en `monitorContainer`
+// Función para mostrar el monitor seleccionado en pantalla
 function mostrarMonitorEnContenedor(monitor) {
     const monitorContainer = document.getElementById('monitorContainer');
 
-    // Crear la tarjeta del monitor
     const tarjeta = document.createElement('div');
     tarjeta.className = 'tarjeta';
     tarjeta.setAttribute('data-id', monitor.id_monitor);
@@ -89,17 +108,13 @@ function mostrarMonitorEnContenedor(monitor) {
         </div>
     `;
 
-    // Agregar la tarjeta al contenedor
     monitorContainer.appendChild(tarjeta);
 }
 
-
-// Función para cargar niños
+// Función para cargar niños asociados al grupo
 function cargarNinos(idGrupo = null) {
     axios.post('/PequenosNavegantes/app/backend/admin/grupos/obtener_datos.php', { tipo: 'ninos', id_grupo: idGrupo }, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
         if (response.data.success) {
@@ -121,13 +136,12 @@ function cargarNinos(idGrupo = null) {
                 containerNinos.appendChild(tarjeta);
             });
         } else {
-            console.error("Error al obtener niños:", response.data.message);
+            console.warn("No hay niños en este grupo.");
         }
     })
-    .catch(error => {
-        console.error('Error al obtener niños:', error);
-    });
+    .catch(error => console.error('Error al obtener niños:', error));
 }
+
 
 // Función para mostrar el popup de confirmación de eliminación
 function mostrarPopupConfirmacion(id, nombre, tipo) {
@@ -159,8 +173,14 @@ function confirmarEliminacion() {
     })
     .then(response => {
         if (response.data.success) {
-            closePopup();
-            cargarDetallesGrupo(idGrupo);
+            closePopup(); // Cerrar el popup correctamente
+            
+            // Eliminar el elemento de la interfaz sin recargar
+            if (tipo === 'monitor') {
+                document.querySelector(`#monitorContainer .tarjeta[data-id="${id}"]`).remove();
+            } else if (tipo === 'nino') {
+                document.querySelector(`#ninoContainer .tarjeta[data-id="${id}"]`).remove();
+            }
         } else {
             alert("Error al eliminar.");
         }
@@ -189,6 +209,12 @@ function agregarMonitor() {
     const nombreMonitor = selectMonitor.options[selectMonitor.selectedIndex].text;
 
     const monitorContainer = document.getElementById('monitorContainer');
+
+    const tarjetaExistente = monitorContainer.querySelector('.tarjeta');
+    if (tarjetaExistente) {
+        tarjetaExistente.remove(); // Solo elimina la tarjeta del monitor si existe
+    }
+
     const tarjeta = document.createElement('div');
     tarjeta.className = 'tarjeta';
     tarjeta.setAttribute('data-id', idMonitor);
@@ -203,6 +229,18 @@ function agregarMonitor() {
     monitorContainer.appendChild(tarjeta);
 
     closePopup(); // Cerrar el popup después de agregar el monitor
+}
+
+function eliminarMonitor(idMonitor, nombreMonitor) {
+    const selectMonitor = document.getElementById('selectMonitor');
+    const monitorContainer = document.getElementById('monitorContainer');
+
+    // Habilitar el select para permitir añadir otro monitor
+    agregarMonitor.classList.remove('hidden');
+
+
+    // Eliminar la tarjeta visual
+    monitorContainer.innerHTML = '';
 }
 
 
@@ -278,66 +316,67 @@ function showPopup(tipo) {
     popup.style.display = "flex";
 }
 
-// Función para agregar un niño al grupo
+let ninosTemporales = [];
+
 function agregarNino() {
     const selectNino = document.getElementById('selectNino');
-    const idNino = selectNino.value; // Obtener el ID del niño seleccionado
-    const nombreNino = selectNino.options[selectNino.selectedIndex].text; // Obtener el nombre del niño seleccionado
+    const idNino = selectNino.value;
+    const nombreNino = selectNino.options[selectNino.selectedIndex].text;
 
     if (!idNino) {
         alert("Por favor, selecciona un niño.");
         return;
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const idGrupo = urlParams.get('id'); // Obtener el ID del grupo desde la URL
-
-    if (!idGrupo) {
-        alert("Error: No se ha proporcionado un ID de grupo.");
+    // Verificar si el niño ya existe en el array temporal
+    const existe = ninosTemporales.some(n => n.id_hijo === idNino);
+    if (existe) {
+        alert("Este niño ya ha sido añadido.");
         return;
     }
 
-    const data = {
-        accion: 'agregar_nino',
-        id_hijo: idNino,
-        id_grupo: idGrupo
-    };
+    // Guardar temporalmente en el array
+    ninosTemporales.push({ id_hijo: idNino, nombre: nombreNino });
 
-    // Enviar la solicitud al backend para asociar el niño al grupo
-    axios.post("/PequenosNavegantes/app/backend/admin/grupos/gestionar_grupo.php", JSON.stringify(data), {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (response.data.success) {
-            // Añadir solo el niño seleccionado al contenedor
-            const ninoContainer = document.getElementById('ninoContainer');
-            const tarjeta = document.createElement('div');
-            tarjeta.className = 'tarjeta';
-            tarjeta.setAttribute('data-id', idNino);
-            tarjeta.innerHTML = `
-                <span class="name">${nombreNino}</span>
-                <div class="icons">
-                    <span class="icon delete" onclick="mostrarPopupConfirmacion(${idNino}, '${nombreNino}', 'nino')">
-                        <i class="fa-solid fa-trash"></i>
-                    </span>
-                </div>
-            `;
-            ninoContainer.appendChild(tarjeta);
+    // Eliminar la opción del select
+    selectNino.remove(selectNino.selectedIndex);
 
-            closePopup(); // Cerrar el popup
-        } else {
-            alert("Error al agregar el niño: " + response.data.message);
-        }
-    })
-    .catch(error => {
-        console.error("Error agregando niño:", error);
-        alert("Error al agregar el niño. Por favor, intenta de nuevo.");
-    });
+    // Mostrar en el contenedor
+    const ninoContainer = document.getElementById('ninoContainer');
+    const tarjeta = document.createElement('div');
+    tarjeta.className = 'tarjeta';
+    tarjeta.setAttribute('data-id', idNino);
+    tarjeta.innerHTML = `
+        <span class="name">${nombreNino}</span>
+        <div class="icons">
+            <span class="icon delete" onclick="eliminarNinoTemporal(${idNino}, '${nombreNino}')">
+                <i class="fa-solid fa-trash"></i>
+            </span>
+        </div>
+    `;
+    ninoContainer.appendChild(tarjeta);
+
+    closePopup();
 }
 
-// Función para guardar el grupo
+
+
+function eliminarNinoTemporal(idNino, nombreNino) {
+    // Eliminar del array temporal
+    ninosTemporales = ninosTemporales.filter(n => n.id_hijo !== idNino);
+
+    // Eliminar del contenedor visual
+    document.querySelector(`#ninoContainer .tarjeta[data-id="${idNino}"]`).remove();
+
+    // Volver a añadir la opción al select
+    const selectNino = document.getElementById('selectNino');
+    const option = document.createElement('option');
+    option.value = idNino;
+    option.textContent = nombreNino;
+    selectNino.appendChild(option);
+}
+
+
 function guardarGrupo() {
     const nombreGrupo = document.getElementById('nombreGrupo').value;
     const idMonitor = document.querySelector('#monitorContainer .tarjeta')?.getAttribute('data-id');
@@ -348,42 +387,28 @@ function guardarGrupo() {
     }
 
     const urlParams = new URLSearchParams(window.location.search);
-    const idGrupo = urlParams.get('id'); // Obtener el ID del grupo desde la URL (si existe)
+    const idGrupo = urlParams.get('id');
 
     const data = {
         accion: 'guardar_grupo',
-        id_grupo: idGrupo, // Puede ser null si es un nuevo grupo
+        id_grupo: idGrupo,
         nombre: nombreGrupo,
-        id_monitor: idMonitor
+        id_monitor: idMonitor,
+        ninos: ninosTemporales // Enviar todos los niños temporales
     };
 
-    // Guardar el grupo en la base de datos
     axios.post("/PequenosNavegantes/app/backend/admin/grupos/gestionar_grupo.php", JSON.stringify(data), {
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
         if (response.data.success) {
-            const nuevoIdGrupo = response.data.id_grupo; // Obtener el ID del grupo creado
             alert("Grupo guardado correctamente.");
-
-            if (!idGrupo) {
-                // Redirigir a la página de edición del grupo con el ID generado
-                window.location.href = `detallesGrupo.html?id=${nuevoIdGrupo}`;
-            } else {
-                // Recargar la página para actualizar los datos
-                window.location.reload();
-            }
-        } else {
-            alert("Error al guardar el grupo: " + response.data.message);
+            window.location.href = '../listadoGrupos/listadoGrupos.html';
         }
     })
-    .catch(error => {
-        console.error("Error guardando grupo:", error);
-        alert("Error al guardar el grupo. Por favor, intenta de nuevo.");
-    });
+    .catch(error => console.error("Error guardando grupo:", error));
 }
+
 
 function closePopup() {
     const popups = document.querySelectorAll(".popup-container");

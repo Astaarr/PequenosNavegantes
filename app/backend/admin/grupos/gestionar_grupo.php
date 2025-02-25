@@ -22,6 +22,7 @@ if ($accion === 'guardar_grupo') {
     $idGrupo = $data['id_grupo'] ?? null;
     $nombre = $data['nombre'];
     $idMonitor = $data['id_monitor'];
+    $ninos = $data['ninos'] ?? []; // Obtener el array de niños
 
     if ($idGrupo) {
         // Editar grupo existente
@@ -40,13 +41,23 @@ if ($accion === 'guardar_grupo') {
             // Obtener el ID del grupo recién creado
             $idGrupo = $stmt->insert_id;
         }
+
+        // Guardar niños si existen
+        foreach ($ninos as $nino) {
+            $idNino = $nino['id_hijo'];
+            $sqlNino = "UPDATE hijo SET id_grupo = ? WHERE id_hijo = ?";
+            $stmtNino = $conexion->prepare($sqlNino);
+            $stmtNino->bind_param("ii", $idGrupo, $idNino);
+            $stmtNino->execute();
+            $stmtNino->close();
+        }
+
         echo json_encode(["success" => true, "id_grupo" => $idGrupo]);
     } else {
         echo json_encode(["success" => false, "message" => "Error al guardar el grupo."]);
     }
 
     $stmt->close();
-    
 } elseif ($accion === 'eliminar_monitor') {
     // Eliminar monitor del grupo
     $idMonitor = $data['id'];
