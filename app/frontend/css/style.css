@@ -934,6 +934,47 @@ h4.done ~ h4:first-of-type{
 }
 
 
+
+
+/*//////////////////////////////////////////////////
+//HERO
+//////////////////////////////////////////////////*/
+#hero{
+    padding: 0;
+    gap: 0;
+}
+
+#hero .content{
+    flex: 0 0 30%;
+    margin-left: 5em;
+    /* background-color: red; */
+}
+
+#hero .content span{
+    font-weight: bold;
+    color: var(--main);
+}
+
+#hero .imgHero{
+    width: auto;
+    height: 100%;
+
+    mask-image: url('../../../resources/bg/mask.svg'); /* Ruta a la imagen de la máscara */
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    -webkit-mask-image: url('../../../resources/bg/mask.svg'); /* Soporte para navegadores WebKit */
+    -webkit-mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+}
+
+#hero .content h1 span{
+    display: inline-block;
+}
+
+
+
+
+
 /*//////////////////////////////////////////////////
 //ADMIN
 //////////////////////////////////////////////////*/
@@ -943,7 +984,7 @@ h4.done ~ h4:first-of-type{
     width: 100%;
     height: 100vh; 
     padding-top: 0; 
-    background-image: url(../../../resources/bg/bg01.svg);
+    /* background-image: url(../../../resources/bg/bg01.svg); */
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 

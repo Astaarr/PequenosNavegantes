@@ -33,80 +33,50 @@
     </header>
 
     <main>
-    
-        <form action="#" id="formulario">
-            <section class="sectionForm">
 
-                <div class="field">
-                    <h3>Información del Tutor</h3>
-                </div>
-
-                <div class="field">
-                    <label for="nombrePadre">Nombre</label>
-                    <input type="text" placeholder="Padre 1" name="nombrePadre" id="nombrePadre" disabled tabindex="1">
-                </div>
-
-                <div class="field">
-                    <label for="dniPadre">DNI</label>
-                    <input type="text" class="obligatorio dni" name="dniPadre" id="dniPadre" placeholder="Ingresa tu DNI" tabindex="2">
-                    <span class="error"></span>
-                </div>
-
-                <div class="field">
-                    <label for="telPadre">Teléfono</label>
-                    <input type="tel" class="obligatorio" name="telPadre" id="telPadre" placeholder="Ingresa tu Teléfono" tabindex="3">
-                    <span class="error"></span>
-                </div>
-
-                <div class="field">
-                    <label for="telPadreAdicional">Teléfono Adicional</label>
-                    <input type="tel" name="telPadreAdicional" id="telPadreAdicional" placeholder="Ingresa Teléfono Adicional" tabindex="4">
-                    <span class="error"></span>
-                </div>
-
+        <section class="seccionLogin">
+            <section class="columna imagenCol t2">
+                <img class="formImg" src="../../../resources/img/item01.png" alt="">
             </section>
 
-            <section class="sectionForm">
+            <form id="formulario" class="columna t2">
+                <section class="sectionForm">
 
-                <div class="field">
-                    <h3>Recogida del Niño</h3>
-                </div>
-
-                <div class="field">
-                    <div class="checkbox">
-                        <label for="contra">¿Le recojerá otra persona?</label>
-                        <label class="checkbox-custom ">
-                            <input type="checkbox" name="" id="" class="checkbox-adicional">
-                            <span></span>
-                        </label>
+                    <div class="field">
+                        <h3>Editar Información Personal</h3>
                     </div>
-                    <div class="campo-adicional">
-                        <div class="field">
-                            <label for="nombreAutorizado">Nombre del Autorizado</label>
-                            <input type="text" placeholder="Ingresa su Nombre" name="nombreAutorizado" id="nombreAutorizado">
-                            <span class="error"></span>
-                        </div>
 
-                        <div class="field">
-                            <label for="dniAutorizado">DNI del Autorizado</label>
-                            <input type="text" class="dni" placeholder="Ingresa su DNI" name="dniAutorizado" id="dniAutorizado">
-                            <span class="error"></span>
-                        </div>
-
-                        <div class="field">
-                            <label for="telAutorizado">Teléfono del Autorizado</label>
-                            <input type="tel" name="telAutorizado" id="telAutorizado" placeholder="Ingresa tu Teléfono" tabindex="2">
-                            <span class="error"></span>
-                        </div>
+                    <div class="field">
+                        <label for="nombrePadre">Nombre</label>
+                        <input type="text" placeholder="Padre 1" name="nombrePadre" id="nombrePadre" disabled tabindex="1">
                     </div>
-                </div>
 
-                <div class="field">
-                    <button type="submit" class="btn btn-main">Siguiente<i class="fa-solid fa-chevron-right"></i></button>
-                </div>
-            </section>
+                    <div class="field">
+                        <label for="dniPadre">DNI</label>
+                        <input type="text" class="obligatorio dni" name="dniPadre" id="dniPadre" placeholder="Ingresa tu DNI" tabindex="2">
+                        <span class="error"></span>
+                    </div>
 
-        </form>
+                    <div class="field">
+                        <label for="telPadre">Teléfono</label>
+                        <input type="tel" class="obligatorio" name="telPadre" id="telPadre" placeholder="Ingresa tu Teléfono" tabindex="3">
+                        <span class="error"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="telPadreAdicional">Teléfono Adicional</label>
+                        <input type="tel" name="telPadreAdicional" id="telPadreAdicional" placeholder="Ingresa Teléfono Adicional" tabindex="4">
+                        <span class="error"></span>
+                    </div>
+
+                    
+                    <div class="field">
+                        <button type="submit" class="btn btn-main">Guardar</button>
+                    </div>
+
+                </section>
+
+            </form>
     </main>
 
     <script src="../main.js"></script>

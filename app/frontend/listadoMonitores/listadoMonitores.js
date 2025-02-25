@@ -74,4 +74,4 @@ function descargarCurriculum(urlCurriculum, nombre, apellidos) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-}
+} 
