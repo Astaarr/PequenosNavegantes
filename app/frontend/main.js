@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Función para redirigir al perfil
     function redirigirPerfil() {
-        window.location.href = "/PequenosNavegantes/app/frontend/perfilPadre/perfil.html";
+        window.location.href = "/PequenosNavegantes/app/frontend/cuentaPadre/cuentaPadre.html";
     }
 });
 
