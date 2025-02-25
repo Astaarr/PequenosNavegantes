@@ -1,3 +1,50 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const formulario = document.getElementById('formulario');
+
+    formulario.addEventListener('submit', function (event) {
+        event.preventDefault(); // Evita el envío tradicional del formulario
+
+        const passwordOld = document.getElementById('passwordOld').value.trim();
+        const passwordNew = document.getElementById('password').value.trim();
+
+        // Validaciones simples
+        if (!passwordOld || !passwordNew) {
+            alert("Todos los campos son obligatorios");
+            return;
+        }
+
+        if (passwordNew.length < 6) {
+            alert("La nueva contraseña debe tener al menos 6 caracteres");
+            return;
+        }
+
+        const data = {
+            passwordOld: passwordOld,
+            password: passwordNew
+        };
+
+        // Enviar los datos al servidor usando Axios
+        axios.post('../../backend/cambiarDatosPadre/cambiarPasswordPadre.php', data)
+            .then(response => {
+                if (response.data.success) {
+                    document.getElementById('popupConfirmacion').style.display = 'flex';
+                    formulario.reset(); // Limpiar los campos del formulario
+                } else {
+                    alert(response.data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error al cambiar la contraseña:", error);
+            });
+    });
+});
+
+// Función para cerrar los popups
+function closePopup() {
+    document.getElementById('popupConfirmacion').style.display = 'none';
+}
+
+
 ////////////////////////////////////////
 // ABRIR POPUP RECUPERACIÓN
 ////////////////////////////////////////
