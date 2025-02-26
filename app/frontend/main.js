@@ -239,6 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error creando tablas:", error);
         });
 
+        // Conseguir nombre padre
     axios.post("/PequenosNavegantes/app/backend/reserva/nombrePadre.php", {}, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" }
@@ -266,7 +267,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch(error => {
         console.error("❌ Error verificando sesión:", error);
     });
-
     // Función para redirigir al perfil
     function redirigirPerfil() {
         window.location.href = "/PequenosNavegantes/app/frontend/cuentaPadre/cuentaPadre.html";
