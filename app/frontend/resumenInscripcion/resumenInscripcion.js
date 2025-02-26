@@ -139,3 +139,9 @@ formulario.addEventListener('submit', (event) => {
         errorSpan.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Selecciona Método de Pago primero`;
     }
 });
+
+
+function aceptarPopup(){
+    document.getElementById("popupContainer").style.display = "none";
+    window.location.href = '../cuentaPadre/cuentaPadre.html';
+}
