@@ -93,6 +93,41 @@
             </div>
 
         </section>
+
+
+
+        <section id="misCampamentos">
+            <div class="myAcount">
+                <h3>Mis campamentos</h3>
+            </div>
+        </section>
+
+        <section class="detallesAdmin">
+            <div class="container">
+                <div class="section columns">
+                    <div id="groupContainer" class="contenedor-tarjetas">
+
+                        <div class="tarjeta">
+                            <div class="texto">
+                                <h6 class="name">${campamento.nombre_hijo} ${campamento.apellidos_hijo}</h6>
+                            </div>
+                            <div class="fecha">
+                                <i class="fa-solid fa-calendar"></i>
+                                <span class="fecha">${formatearFecha(campamento.fecha_inscripcion)}</span>
+                            </div>
+                            <div class="icons">
+                                <span class="icon edit">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
        
 
 
@@ -101,6 +136,7 @@
        
 
     <script src="../main.js"></script>
+    <script src="administrar.js"></script>
 
 </body>
 </html>
