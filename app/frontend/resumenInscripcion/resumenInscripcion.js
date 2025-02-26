@@ -126,7 +126,6 @@ formulario.addEventListener('submit', (event) => {
                     document.querySelectorAll("input").forEach(input => input.value = "");
 
                     document.getElementById("popupContainer").style.display = "flex";
-                    //window.location.href = "../paginaPrincipal/index.html";
                 } else {
                     console.error("Error en la respuesta del servidor:", response.data);
                 }
