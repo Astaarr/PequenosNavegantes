@@ -16,7 +16,7 @@ function submitPassword() {
     .then(response => {
         console.log(response.data);
         if (response.data.success) {
-            alert("Contraseña cambiada correctamente.");
+            document.getElementById('popupConfirmacion').style.display = 'flex';
             window.location.href = "../login/login.html"; 
         } else {
             alert(response.data.message);
@@ -26,4 +26,9 @@ function submitPassword() {
         console.error("Error al cambiar la contraseña:", error);
         alert("Error al actualizar la contraseña.");
     });
+}
+
+function aceptarPopup(){
+    document.getElementById('popupConfirmacion').style.display = 'none';
+    window.location.href = "../login/login.html"; 
 }

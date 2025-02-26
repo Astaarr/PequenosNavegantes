@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const formulario = document.getElementById('formulario');
+    const msgError= document.getElementById('campoError');
 
     formulario.addEventListener('submit', function (event) {
         event.preventDefault(); // Evita el envío tradicional del formulario
@@ -27,10 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
         axios.post('../../backend/cambiarDatosPadre/cambiarPasswordPadre.php', data)
             .then(response => {
                 if (response.data.success) {
+                    msgError.style.display= 'none';
                     document.getElementById('popupConfirmacion').style.display = 'flex';
                     formulario.reset(); // Limpiar los campos del formulario
                 } else {
-                    alert(response.data.message);
+                    msgError.style.display= 'flex';
+                    msgError.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Contraseña Incorrecta';
+                    // alert(response.data.message);
                 }
             })
             .catch(error => {
@@ -39,11 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Función para cerrar los popups
-function closePopup() {
+function aceptarPopup(){
     document.getElementById('popupConfirmacion').style.display = 'none';
+    window.location.href = '../cuentaPadre/cuentaPadre.html'
 }
-
 
 ////////////////////////////////////////
 // ABRIR POPUP RECUPERACIÓN

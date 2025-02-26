@@ -1,3 +1,5 @@
+const popUp = document.getElementById('popupConfirmacion');
+
 document.addEventListener("DOMContentLoaded", function() {
     axios.post('../../backend/cambiarDatosPadre/cargarDatosPadre.php')
         .then(response => {
@@ -17,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.getElementById('formulario').addEventListener('submit', function(event) {
+
     event.preventDefault();
 
     const data = {
@@ -37,8 +40,7 @@ document.getElementById('formulario').addEventListener('submit', function(event)
     axios.post('../../backend/cambiarDatosPadre/actualizarDatosPadre.php', filteredData)
         .then(response => {
             if (response.data.success) {
-                alert(response.data.message);
-                window.location.href = '../cuentaPadre/cuentaPadre.html';
+                popUp.style.display = 'flex';
             } else {
                 alert(response.data.message);
             }
@@ -47,3 +49,10 @@ document.getElementById('formulario').addEventListener('submit', function(event)
             console.error("Error al actualizar los datos:", error);
         });
 });
+
+function aceptarPopup(){
+    popUp.style.display = 'none';
+    window.location.href = '../cuentaPadre/cuentaPadre.html';
+
+}
+
