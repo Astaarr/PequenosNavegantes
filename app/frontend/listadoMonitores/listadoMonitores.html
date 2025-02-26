@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,15 +12,21 @@
     <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <!-- ICONOS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
     <header id="header-main">
         <div class="navbar">
             <div class="logo">
-                <a class="logoHeader" href="../paginaPrincipal/index.html"><img src="../../../resources/logo/logoN.png" alt=""></a>
+                <a class="logoHeader" href="../paginaPrincipal/index.html"><img src="../../../resources/logo/logoN.png"
+                        alt=""></a>
             </div>
             <div class="content" id="menu">
                 <ul class="links">
@@ -49,57 +56,58 @@
             <div class="container">
                 <div class="section columns">
                     <div id="groupContainer" class="columnas-contenedor saltoLinea solicitudesMonitor">
-                        
+
 
                     </div>
                 </div>
             </div>
         </section>
 
-    
+
         <!-- Popup de eliminación -->
         <div class="popup-container" id="popupEliminar">
             <div class="popup tarjeta">
                 <h3>Atención</h3>
-                <p id="confirmacionTexto">¿Estás seguro de que deseas eliminar el monitor "<span id="nombreMonitor"></span>"?</p>
+                <p id="confirmacionTexto">¿Estás seguro de que deseas eliminar el monitor "<span
+                        id="nombreMonitor"></span>"?</p>
                 <div class="actions">
                     <button onclick="closePopup()" class="btn btn-main">Cancelar</button>
-                    <button onclick="confirmarEliminacion()" class="btn btn-third">Aceptar</button>
+                    <button id="btnConfirmarEliminar" class="btn btn-third">Aceptar</button>
                 </div>
             </div>
         </div>
 
-        <!-- Popup añadir monitor -->
-        <div class="popup-container" id="popupAddMonitor">
+        <!-- Popup de aceptación de monitor -->
+        <div class="popup-container" id="popupAddMonitor" style="display: none;">
             <div class="popup tarjeta">
-
-                <button id="cerrarPopup" class="close-popup btn btn" onclick="closePopup()"><i class="fas fa-times"></i></button>
-
-                <h3 id="nombreMonitor">Nombre + Apellidos</h3>
+                <h3 id="nombreMonitorAceptar">Añadir Monitor</h3>
+                <button id="cerrarPopup" class="close-popup btn btn" onclick="closePopup()">
+                    <i class="fas fa-times"></i>
+                </button>
 
                 <div class="contenido">
-                    <label for="apellidosMonitor" class="divLeft">DNI</label>
-                    <input type="text" class="dni obligatorio" id="apellidosMonitor" name="apellidosMonitor" placeholder="DNI del Monitor">
+                    <label for="dniMonitor">DNI</label>
+                    <input type="text" class="dni obligatorio" id="dniMonitor" name="dniMonitor"
+                        placeholder="DNI del Monitor">
                     <span class="error"></span>
                 </div>
 
                 <div class="contenido">
-                    <label class="divLeft" for="password">Contraseña</label>
-                    <div class="inputContra">
-                        <input type="password" class="obligatorio" id="password" name="password" placeholder="Ingresa tu contraseña" tabindex="3">
-                        <span class="error"></span>
-                    </div>
-
+                    <label for="passwordMonitor">Contraseña</label>
+                    <input type="password" class="obligatorio" id="passwordMonitor" name="passwordMonitor"
+                        placeholder="Ingresa la contraseña">
+                    <span class="error"></span>
                 </div>
-                
+
                 <div class="actions">
-                    <button onclick="closePopup()" class="btn btn-main">Añadir Monitor</button>
+                    <button onclick="closePopup()" class="btn btn-main">Cancelar</button>
+                    <button id="btnAceptarMonitor" class="btn btn-third">Añadir Monitor</button>
                 </div>
             </div>
         </div>
 
 
-            
+
         <!-- Popup de eliminación -->
         <div class="popup-container" id="popupConfirmacion">
             <div class="popup tarjeta">
@@ -116,4 +124,5 @@
     <script src="listadoMonitores.js"></script>
 
 </body>
+
 </html>
