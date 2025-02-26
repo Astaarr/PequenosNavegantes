@@ -95,5 +95,5 @@ form.addEventListener('submit', (event) => {
 
 function aceptarBtn(){
     document.getElementById("popupConfirmacion").style.display = "none";
-    window.location.href = '../../frontend/index.html'; 
+    window.location.href = '../index.html'; 
 }

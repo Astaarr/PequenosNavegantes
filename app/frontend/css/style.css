@@ -475,6 +475,7 @@ form input[type="radio"]{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 2em;
 }
 .field .question{
     color: var(--disable);
@@ -865,6 +866,19 @@ h4.done ~ h4:first-of-type{
 }
 
 
+.editarPlan{
+    align-items: center;
+    width: 100%;
+}
+.editarPlan .infoPlan,
+.editarPlan .botones{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
+
 
 
 /*//////////////////////////////////////////////////
@@ -1113,6 +1127,36 @@ h4.done ~ h4:first-of-type{
     color: var(--error);
     transform: scale(1.2);
 }
+
+
+/* PROGRAMACIÓN */
+
+
+.formProgramacion{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.programacion input,
+.programacion select{
+    padding: 1em;
+    border-radius: var(--radio);
+    border: none;
+    box-shadow: var(--sombra);
+}
+
+.programacion .moreInfo{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.programacion .calendar h5{
+    text-align: left;
+    margin-bottom: 2em;
+}
+
 
 
 /* VERTICAL */

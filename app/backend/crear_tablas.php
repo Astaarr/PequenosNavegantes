@@ -189,18 +189,19 @@ if(!verificarTabla($conexion, 'programacion_actividad')){
         id_programacion INT AUTO_INCREMENT PRIMARY KEY,
         id_actividad INT,
         id_grupo INT,
+        fecha DATE NOT NULL,
         hora_inicio TIME NOT NULL,
-        hora_fin TIME NOT NULL,
+        duracion INT NOT NULL,
         lugar VARCHAR(255) NOT NULL,
         FOREIGN KEY (id_grupo) REFERENCES grupo(id_grupo) ON DELETE CASCADE,
         FOREIGN KEY (id_actividad) REFERENCES actividad(id_actividad) ON DELETE CASCADE
-        )";
+    )";
     mysqli_query($conexion, $sqlProgramacionActividad) or die("Error al crear la tabla 'programacion_actividad': " . mysqli_error($conexion));
 
     // Insertar datos en la tabla 'programacion_actividad'
-    $sqlProgramacionActividadInsert = "INSERT INTO programacion_actividad (id_actividad, id_grupo, hora_inicio, hora_fin, lugar) VALUES
-        (1, 1, '10:00:00', '12:00:00', 'Patio'),
-        (2, 2, '10:00:00', '12:00:00', 'Patio')";
+    $sqlProgramacionActividadInsert = "INSERT INTO programacion_actividad (id_actividad, id_grupo, fecha, hora_inicio, duracion, lugar) VALUES
+        (1, 1, '2025-03-01', '10:00:00', 120, 'Patio'),
+        (2, 2, '2025-03-01', '10:00:00', 120, 'Patio')";
     mysqli_query($conexion, $sqlProgramacionActividadInsert) or die("Error al insertar datos en 'programacion_actividad': " . mysqli_error($conexion));
 }
 
