@@ -230,6 +230,15 @@ if (campoCurriculum) {
 // COOKIES
 ////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", function () {
+    // Crear las tablas
+    axios.post("../backend/crear_tablas.php")
+        .then(response => {
+            console.log("Tablas creadas:", response.data);
+        })
+        .catch(error => {
+            console.error("Error creando tablas:", error);
+        });
+
     axios.post("/PequenosNavegantes/app/backend/reserva/nombrePadre.php", {}, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" }

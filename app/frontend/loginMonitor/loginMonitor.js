@@ -21,7 +21,7 @@ form.addEventListener('submit', (event) =>{
         console.log(response.data);
         if(response.data.success){
             alert('Login exitoso monitor');
-            window.location.href = '../../frontend/paginaPrincipal/index.html';
+            window.location.href = '../../frontend/index.html';
         }else{
             alert(response.data.message || "Error en el inicio de sesión como monitor");
         }
