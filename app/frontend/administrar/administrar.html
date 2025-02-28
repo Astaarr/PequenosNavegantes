@@ -87,10 +87,30 @@
                         <a href="../listadoMonitores/listadoMonitores.html">Ver más <i class="fa-solid fa-angle-right"></i></a>
                     </div>
                 </div>
-    
-    
-    
             </div>
+
+        </section>
+
+        <section class="calendarioGrande">
+
+     
+            <div class="calendar tarjeta">
+                <div class="calendar-header">
+                    <button onclick="prevMonth()"><i class="fa-solid fa-angle-left"></i></button>
+                    <h5 id="month-year"></h5>
+                    <button onclick="nextMonth()"><i class="fa-solid fa-angle-right"></i></button>
+                </div>
+                <div class="days" id="weekdays">
+                    <div class="weekday">L</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">X</div>
+                    <div class="weekday">J</div>
+                    <div class="weekday">V</div>
+                    <div class="weekday">S</div>
+                    <div class="weekday">D</div>
+                </div>
+                <div class="days" id="calendar-days"></div>
+            </div> 
 
         </section>
        
@@ -101,5 +121,6 @@
        
 
     <script src="../main.js"></script>
+    <script src="administrar.js"></script>
 
 </body>

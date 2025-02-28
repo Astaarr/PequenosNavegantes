@@ -54,7 +54,15 @@
                             <h6 id="month-year"></h6>
                             <button onclick="nextMonth()"><i class="fa-solid fa-angle-right"></i></button>
                         </div>
-                        <div class="days" id="weekdays"></div>
+                        <div class="days" id="weekdays">
+                            <div class="weekday">L</div>
+                            <div class="weekday">M</div>
+                            <div class="weekday">X</div>
+                            <div class="weekday">J</div>
+                            <div class="weekday">V</div>
+                            <div class="weekday">S</div>
+                            <div class="weekday">D</div>
+                        </div>
                         <div class="days" id="calendar-days"></div>
                     </div> 
                 </div>
@@ -68,12 +76,12 @@
                             <div class="inline">
                                 <div class="field">
                                     <label for="horaInicio">Hora Inicio:</label>
-                                    <input type="time" name="horaInicio" id="horaInicio">
+                                    <input type="time" name="horaInicio" id="horaInicio" tabindex="1">
                                 </div>
     
                                 <div class="field">
                                     <label for="duracion">Duración</label>
-                                    <input type="number" name="duracion" id="duracion" placeholder="duración (mins)">
+                                    <input type="number" name="duracion" id="duracion" placeholder="duración (mins)" tabindex="2">
                                 </div>
                             </div>
                         </div>
@@ -81,20 +89,20 @@
 
                         <div class="field">
                             <label for="lugar">Lugar</label>
-                            <input type="text" name="lugar" id="lugar" placeholder="lugar">
+                            <input type="text" name="lugar" id="lugar" placeholder="lugar" tabindex="3">
                         </div>
 
                         <div class="field">
                             <div class="inline">
                                 <div class="field">
-                                    <select name="listaActividades" id="listaActividades">
-                                        <option value="">Selecciona Actividad</option>
+                                    <select name="listaActividades" id="listaActividades" tabindex="4">
+                                        <!-- <option value="">Selecciona Actividad</option> -->
                                     </select>
                                 </div>
     
                                 <div class="field">
-                                    <select name="listaGrupos" id="listaGrupos">
-                                        <option value="">Selecciona Grupos</option>
+                                    <select name="listaGrupos" id="listaGrupos" tabindex="5">
+                                        <!-- <option value="">Selecciona Grupos</option> -->
                                     </select>
                                 </div>
                             </div>

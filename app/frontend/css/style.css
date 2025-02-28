@@ -421,7 +421,7 @@ header .navbar .actions{
 }
 
 header .navbar .actions a.btn{
-    width: 135px;
+    width: auto;
     padding: 0.75em 1em;
     font-family: var(--titulos);
     transition: 0.3s ease box-shadow;
@@ -765,6 +765,7 @@ h4.done ~ h4:first-of-type{
 }
 .day.selected {
     background: var(--second);
+    color: var(--blanco);
 }
 
 .datosDias{
@@ -777,6 +778,46 @@ h4.done ~ h4:first-of-type{
 .datosDias h4{
     font-size: 2em;
 }
+
+/* CALENDARIO CON ACTIVIDADES */
+.sinActividad{
+    background-color: var(--blanco);
+    color: var(--negro);
+}
+
+
+/* CALENDARIO GRANDE */
+.calendarioGrande h5{
+    margin-bottom: 1em;
+}
+.calendarioGrande .calendar{
+    width: 100%;
+}
+.calendarioGrande .evento{
+    padding-top: 1em;
+    color: var(--blanco);
+
+    transition: transform 0.3s;
+}
+
+.calendarioGrande .day:has(.eventos){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.calendarioGrande .day:not(:has(> .eventos)){
+    background-color: var(--blanco);
+    color: var(--negro);
+    padding: 2em;
+}
+
+.calendarioGrande .day:not(:has(> .eventos)):hover{
+    background-color: var(--second);
+    color: var(--blanco);
+}
+
 
 
 /*//////////////////////////////////////////////////
@@ -1000,12 +1041,11 @@ h4.done ~ h4:first-of-type{
 //ADMIN
 //////////////////////////////////////////////////*/
 
-#bgForm,
-#bgIndex{
+#bgForm{
     width: 100%;
     height: 100vh; 
     padding-top: 0; 
-    /* background-image: url(../../../resources/bg/bg01.svg); */
+    background-image: url(../../../resources/bg/bg01.svg);
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
@@ -1146,15 +1186,21 @@ h4.done ~ h4:first-of-type{
     box-shadow: var(--sombra);
 }
 
-.programacion .moreInfo{
+.programacion .campo{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.moreInfo{
     gap: 2em;
 }
 
+
 .programacion .calendar h5{
     text-align: left;
-    margin-bottom: 2em;
+    margin-bottom: 3em;
 }
 
 
