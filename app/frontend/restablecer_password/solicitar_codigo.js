@@ -20,7 +20,7 @@ function submitCodigo() {
     .then(response => {
         console.log(response.data);
         if (response.data.success) {
-            alert("Código correcto. Redirigiendo...");
+            // alert("Código correcto. Redirigiendo...");
             window.location.href = `nueva_password.html?token=${token}`; // Redirigir con el mismo token
         } else {
             alert(response.data.message);

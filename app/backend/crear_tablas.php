@@ -62,6 +62,25 @@ if (!verificarTabla($conexion, 'tutor_adicional')){
     mysqli_query($conexion, $sqlTutorAdicionalInsert) or die("Error al insertar datos en 'tutor_adicional': ". mysqli_error($conexion));
 }
 
+// Verifica y crea la tabla 'solicitud_monitor'
+if (!verificarTabla($conexion, 'solicitud_monitor')) {
+    $sqlSolicitudMonitor = "CREATE TABLE solicitud_monitor (
+        id_solicitud INT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(100) NOT NULL,
+        apellidos VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        telefono VARCHAR(16) NOT NULL,
+        curriculum TEXT NOT NULL
+    )";
+    mysqli_query($conexion, $sqlSolicitudMonitor) or die("Error al crear la tabla 'solicitud_monitor': " . mysqli_error($conexion));
+
+    // Insertar datos en la tabla 'solicitud_monitor'
+    $sqlSolicitudMonitorInsert = "INSERT INTO solicitud_monitor (nombre, apellidos, email, telefono, curriculum) VALUES
+        ('Carlos', 'Gómez Pérez', 'carlos.gomez@example.com', '644123456', 'uploads/curriculums/cv_carlos_gomez.pdf'),
+        ('Laura', 'Martínez Sánchez', 'laura.martinez@example.com', '655987654', 'uploads/curriculums/cv_laura_martinez.pdf')";
+    mysqli_query($conexion, $sqlSolicitudMonitorInsert) or die("Error al insertar datos en 'solicitud_monitor': " . mysqli_error($conexion));
+}
+
 
 // Verifica y crea tabla 'monitor
 if(!verificarTabla($conexion, 'monitor')){
@@ -133,7 +152,7 @@ if (!verificarTabla($conexion, 'hijo')){
         id_padre INT NOT NULL,
         id_grupo INT, 
         FOREIGN KEY (id_padre) REFERENCES padre(id_padre) ON DELETE CASCADE,
-        FOREIGN KEY (id_grupo) REFERENCES grupo(id_grupo) ON DELETE CASCADE
+        FOREIGN KEY (id_grupo) REFERENCES grupo(id_grupo) ON DELETE SET NULL
         )";
     mysqli_query($conexion, $sqlHijo) or die("Error al crear la tabla 'hijo': " . mysqli_error($conexion));
     
@@ -170,18 +189,19 @@ if(!verificarTabla($conexion, 'programacion_actividad')){
         id_programacion INT AUTO_INCREMENT PRIMARY KEY,
         id_actividad INT,
         id_grupo INT,
+        fecha DATE NOT NULL,
         hora_inicio TIME NOT NULL,
-        hora_fin TIME NOT NULL,
+        duracion INT NOT NULL,
         lugar VARCHAR(255) NOT NULL,
         FOREIGN KEY (id_grupo) REFERENCES grupo(id_grupo) ON DELETE CASCADE,
         FOREIGN KEY (id_actividad) REFERENCES actividad(id_actividad) ON DELETE CASCADE
-        )";
+    )";
     mysqli_query($conexion, $sqlProgramacionActividad) or die("Error al crear la tabla 'programacion_actividad': " . mysqli_error($conexion));
 
     // Insertar datos en la tabla 'programacion_actividad'
-    $sqlProgramacionActividadInsert = "INSERT INTO programacion_actividad (id_actividad, id_grupo, hora_inicio, hora_fin, lugar) VALUES
-        (1, 1, '10:00:00', '12:00:00', 'Patio'),
-        (2, 2, '10:00:00', '12:00:00', 'Patio')";
+    $sqlProgramacionActividadInsert = "INSERT INTO programacion_actividad (id_actividad, id_grupo, fecha, hora_inicio, duracion, lugar) VALUES
+        (1, 1, '2025-03-01', '10:00:00', 120, 'Patio'),
+        (2, 2, '2025-03-01', '10:00:00', 120, 'Patio')";
     mysqli_query($conexion, $sqlProgramacionActividadInsert) or die("Error al insertar datos en 'programacion_actividad': " . mysqli_error($conexion));
 }
 

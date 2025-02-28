@@ -1,17 +1,25 @@
 <?php
 session_start();
-session_destroy(); // Cierra la sesión
+header('Content-Type: application/json');
 
+// Destruye la sesión
+session_destroy();
+
+// Borra la cookie si existe
 if (isset($_COOKIE['token_login'])) {
-    setcookie("token_login", "", time() - 3600, "/", "", false, true); // Borra la cookie
+    setcookie("token_login", "", time() - 3600, "/", "", false, true);
 }
 
-// También borra el token en la base de datos
+// Conecta a la base de datos y borra el token
 include '../conecta.php';
-$sql = "UPDATE padre SET token_login = NULL WHERE token_login = ?";
-$stmt = $conexion->prepare($sql);
-$stmt->bind_param("s", $_COOKIE['token_login']);
-$stmt->execute();
+
+if (isset($_COOKIE['token_login'])) {
+    $sql = "UPDATE padre SET token_login = NULL WHERE token_login = ?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("s", $_COOKIE['token_login']);
+    $stmt->execute();
+    $stmt->close();
+}
 
 echo json_encode(["success" => true, "message" => "Sesión cerrada correctamente"]);
 ?>

@@ -75,10 +75,11 @@ h6{
 }
 
 /* ======= TEXTOS ======= */
-p, a, b, span, pre, sub, i, li, input, button, label, div {
+p, a, b, span, pre, sub, i, li, input, textarea, select, button, label, div {
     font-family: var(--textos);
     font-size: 1em;
     font-weight: 400;
+    line-height: 1.5;
     text-decoration: none;
     list-style: none;
     color: var(--negro);
@@ -152,13 +153,27 @@ i{
     font-size: 1em;
 }
 
+
+/* ======= MOSTRAR / OCULTAR ======= */
+.hidden{
+    display: none;
+}
+
+
 /* ======= TARJETAS ======= */
 .tarjeta{
     background-color: var(--blanco);
     padding: 2em;
     border-radius: var(--radio);
     box-shadow: var(--sombra);
+
+    transition: transform 0.3s;
 }
+
+.tarjetaHover:hover{
+    transform: scale(0.98);
+}
+
 
 /* ======= POPUPS ======= */
 .popup-container{
@@ -178,7 +193,7 @@ i{
 }
 .popup{
     display: flex;
-    max-width: 500px;
+    width: 500px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -198,7 +213,9 @@ i{
 .popup .close-popup:hover{
     color: var(--main);
 }
-.popup input{
+.popup input,
+.popup select,
+.popup textarea{
     width: 100%;
     padding: 1em;
     border-radius: var(--radio);
@@ -208,14 +225,30 @@ i{
 .popup button{
     padding: 1em;
 }
-.popup .mensaje,
-.popup .correo{
+
+.popup .actions{
+    width: 100%;
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+}
+.popup .actions button{
+    flex: 1;
+}
+
+.popup .contenido{
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
 }
 
+.popup .divLeft{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
 
 
 
@@ -251,11 +284,40 @@ section .content{
 
 
 /*//////////////////////////////////////////////////
+//FILAS
+//////////////////////////////////////////////////*/
+.filas-contenedor{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.filas-contenedor .fila{
+    height: auto;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2em;
+
+}
+
+.saltoLinea{
+    flex-wrap: wrap;
+}
+
+/*//////////////////////////////////////////////////
 //COLUMNAS
 //////////////////////////////////////////////////*/
 .columnas-contenedor{
-    width: 100%;
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -264,15 +326,37 @@ section .content{
 }
 
 .columnas-contenedor .columna{
-    height: auto;
     display: flex;
     flex: 1;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     gap: 2em;
-
 }
+
+
+.columna.t4{
+    /* min-height: 100%; */
+    flex: 0 0 calc(25% - 2em * 3 / 4); /* Ajuste por el gap */
+}
+
+.t2{
+    flex: 1;
+}
+
+.imagenCol{
+    flex: 1;
+    filter: drop-shadow(var(--sombra));
+}
+.imagenCol>img{
+    width: auto;
+    height: 100%;
+}
+
+.seccionLogin{
+    flex-direction: row;
+}
+
 
 
 /*//////////////////////////////////////////////////
@@ -326,6 +410,10 @@ header .logo img{
     width: 100%;
 }
 
+header .logoHeader::after{
+    width: 0;
+}
+
 /* BOTONES */
 header .navbar .actions{
     display: flex;
@@ -333,7 +421,7 @@ header .navbar .actions{
 }
 
 header .navbar .actions a.btn{
-    width: 135px;
+    width: auto;
     padding: 0.75em 1em;
     font-family: var(--titulos);
     transition: 0.3s ease box-shadow;
@@ -365,7 +453,10 @@ form .field{
     gap: 8px;
     width: 100%;
 }
-.field input, .field .btn{    
+.field input, 
+.field .btn,
+.field select,
+.field textarea{    
     border: none;
     padding: 1em;
     border-radius: var(--radio);
@@ -384,6 +475,7 @@ form input[type="radio"]{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 2em;
 }
 .field .question{
     color: var(--disable);
@@ -426,9 +518,47 @@ form input[type="radio"]{
     opacity: 0;
     transition: ease 0.2s;
 }
+.checkbox-custom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
 .checkbox-custom input:checked ~ span:after{
     opacity: 1;
 }
+
+/* INPUT FILE */
+.cvContenedor{
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+
+    transition: all 0.3s ease;
+}
+
+.cvContenedor input[type="file"]{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.cvContenedor .botonCv{
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cvContenedor:hover{
+    transform: scale(1.1);
+}
+
+
 
 /* SEPARADOR */
 .field .separador{
@@ -521,11 +651,13 @@ h4.done ~ h4:first-of-type{
 /* MOSTRAR CONTRASEÑA */
 .field{
     position: relative;
+    width: fit-content;
 }
-.field #password ~ i {
+.field #password ~ i,
+.field #passwordOld ~ i {
     position: absolute;
     right: 1em;
-    top: 3em;
+    top: 3.2em;
     font-size: 1em;
     transition: color 0.2s ease-in-out;
     cursor: pointer;
@@ -544,6 +676,12 @@ h4.done ~ h4:first-of-type{
 }
 
 
+.field #passwordOld ~ .fa-xmark{
+    display: none;
+    color: var(--error);
+}
+
+
 /* CAMPOS ADICIONALES */
 .field .campo-adicional{
     display: none;
@@ -559,8 +697,29 @@ h4.done ~ h4:first-of-type{
     color: var(--error);
 }
 
+/* FORMLARIO SUBMAIN */
+.formSubmain{
+    align-items: baseline;
+}
 
-/* CALENDARIO */
+.formSubmain form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.formSubmain form .inline{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    gap: 2em;
+}
+
+
+/*//////////////////////////////////////////////////
+//CALENDARIO 
+//////////////////////////////////////////////////*/
 .calendar {
     font-family: var(--textos);
     background: var(--blanco);
@@ -606,34 +765,80 @@ h4.done ~ h4:first-of-type{
 }
 .day.selected {
     background: var(--second);
+    color: var(--blanco);
 }
 
 .datosDias{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 2em;
 }
 .datosDias h4{
     font-size: 2em;
 }
 
+/* CALENDARIO CON ACTIVIDADES */
+.sinActividad{
+    background-color: var(--blanco);
+    color: var(--negro);
+}
 
-/* TARIFA */
-.tarifa{
+
+/* CALENDARIO GRANDE */
+.calendarioGrande h5{
+    margin-bottom: 1em;
+}
+.calendarioGrande .calendar{
+    width: 100%;
+}
+.calendarioGrande .evento{
+    padding-top: 1em;
+    color: var(--blanco);
+
+    transition: transform 0.3s;
+}
+
+.calendarioGrande .day:has(.eventos){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.calendarioGrande .day:not(:has(> .eventos)){
+    background-color: var(--blanco);
+    color: var(--negro);
+    padding: 2em;
+}
+
+.calendarioGrande .day:not(:has(> .eventos)):hover{
+    background-color: var(--second);
+    color: var(--blanco);
+}
+
+
+
+/*//////////////////////////////////////////////////
+//TARIFA
+//////////////////////////////////////////////////*/
+.columnas-contenedor .tarifa{
     padding: 1.5em;
+    justify-content: space-between;
     transition: all 0.4s ease;
 }
 .tarifa .precio{
     text-align: center;
 }
+
 .tarifa .imagen{
-    width: auto;
-    height: 120px;
+    margin: 0 auto;
 }
 
 .tarifa .imagen img{
-    width: 100%;
-    height: 100%;
+    width: 120px;
+    height: auto;
 }
 .tarifa li{
     margin-bottom: 1em;
@@ -647,7 +852,9 @@ h4.done ~ h4:first-of-type{
 }
 
 
-/* RESUMEN */
+/*//////////////////////////////////////////////////
+//RESUMEN
+//////////////////////////////////////////////////*/
 .resumen{
     display: flex;
     flex-direction: row;
@@ -700,6 +907,409 @@ h4.done ~ h4:first-of-type{
 }
 
 
+.editarPlan{
+    align-items: center;
+    width: 100%;
+}
+.editarPlan .infoPlan,
+.editarPlan .botones{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
+
+
+
+/*//////////////////////////////////////////////////
+//MONITORES
+//////////////////////////////////////////////////*/
+.tarjeta.t4.monitoresCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    text-align: center;
+    flex: 0 0 calc(25% - 2em * 3 / 4);
+
+
+    transition: all 0.3s ease;
+}
+
+.monitoresCard .imagen{
+    width: 100%;
+    height: auto;
+}
+.monitoresCard .imagen img{
+    width: 100%;
+    height: 100%;
+}
+
+.monitoresCard:hover{
+    transform: scale(1.05) rotate(3deg);
+}
+
+.monitoresCard .links a:hover{
+    color: var(--main);
+}
+.monitoresCard .links a::after{
+    width: 0;
+}
+
+
+
+
+.curriculum{
+    cursor: pointer;
+}
+.curriculum:hover{
+    color: var(--main);
+}
+
+
+.solicitudesMonitor{
+    justify-content: center;
+}
+
+.solicitudesMonitor .tarjeta{
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2em;
+}
+
+.solicitudesMonitor .tarjeta .detalles{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.fa-user-plus:hover{
+    color: var(--main);
+}
+.fa-user-minus:hover{
+    color: var(--error);
+}
+
+
+
+
+/*//////////////////////////////////////////////////
+//HERO
+//////////////////////////////////////////////////*/
+#hero{
+    padding: 0;
+    gap: 0;
+}
+
+#hero .content{
+    flex: 0 0 30%;
+    margin-left: 5em;
+    /* background-color: red; */
+}
+
+#hero .content span{
+    font-weight: bold;
+    color: var(--main);
+}
+
+#hero .imgHero{
+    width: auto;
+    height: 100%;
+
+    mask-image: url('../../../resources/bg/mask.svg'); /* Ruta a la imagen de la máscara */
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    -webkit-mask-image: url('../../../resources/bg/mask.svg'); /* Soporte para navegadores WebKit */
+    -webkit-mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+}
+
+#hero .content h1 span{
+    display: inline-block;
+}
+
+
+
+
+
+/*//////////////////////////////////////////////////
+//ADMIN
+//////////////////////////////////////////////////*/
+
+#bgForm{
+    width: 100%;
+    height: 100vh; 
+    padding-top: 0; 
+    background-image: url(../../../resources/bg/bg01.svg);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+#bgIndex{
+    height: 80vh; 
+}
+
+.formularioAdmin{
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px); 
+}
+
+.formularioAdmin .sectionForm{
+    padding: 4em;
+    width: 40vw;
+    gap: 2.5em;
+}
+.formularioAdmin #closeBtn{
+    width: 100%;
+    display: inline-block;
+    text-align: right;
+}
+.formularioAdmin #closeBtn::after{
+    width: 0;
+}
+.formularioAdmin #closeBtn i{
+    transition: all 0.3s;
+}
+.formularioAdmin #closeBtn i:hover{
+    transform: scale(1.2);
+}
+.formularioAdmin .sectionForm h3{
+    text-align: center;
+}
+.formularioAdmin .sectionForm input{
+    background-color: transparent;
+}
+
+
+.adminIndex .icono i{
+    font-size: 2em;
+}
+.adminIndex .columna{
+    justify-content: space-between;
+}
+
+.detallesAdmin{
+    align-items: baseline;
+}
+
+.detallesAdmin h3{
+    margin-bottom: 0.5em;
+}
+
+.myAcount{
+    width: 100%;
+    align-items: baseline;
+}
+
+
+
+.detallesAdmin .contenedor-tarjetas{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2em;
+}
+
+.detallesAdmin .field{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.detallesAdmin .add-button{
+    transition: all 0.3s ease;
+}
+.detallesAdmin .add-button:hover{
+    color: var(--main);
+    transform: scale(1.2) rotate(90deg);
+}
+
+
+.contenedor-tarjetas .tarjeta{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5em;
+}
+
+
+.contenedor-tarjetas .tarjeta .icons{
+    display: flex;
+    flex-direction: row;
+}
+
+.contenedor-tarjetas .tarjeta span{
+    height: auto;
+    width: auto;
+}
+
+.contenedor-tarjetas .fa-solid{
+    transition: all 0.3s;
+}
+.contenedor-tarjetas .fa-pen-to-square:hover{
+    color: var(--main);
+    transform: scale(1.2);
+}
+.contenedor-tarjetas .fa-trash:hover{
+    color: var(--error);
+    transform: scale(1.2);
+}
+
+
+/* PROGRAMACIÓN */
+
+
+.formProgramacion{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.programacion input,
+.programacion select{
+    padding: 1em;
+    border-radius: var(--radio);
+    border: none;
+    box-shadow: var(--sombra);
+}
+
+.programacion .campo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.moreInfo{
+    gap: 2em;
+}
+
+
+.programacion .calendar h5{
+    text-align: left;
+    margin-bottom: 3em;
+}
+
+
+
+/* VERTICAL */
+.container{
+    width: 100%;
+}
+.columns .contenedor-tarjetas{
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
+.columns .tarjeta{
+    width: 100%;
+}
+
+.columns .tarjeta{
+    justify-content: space-between;
+}
+
+.columns .tarjeta .info{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.contenedor-tarjetas .fa-play {
+    transition: transform 0.3s ease;
+}
+
+
+
+/*//////////////////////////////////////////////////
+//FOOTER
+//////////////////////////////////////////////////*/
+#footer-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--second);
+}
+#footer-main *{
+    color: var(--blanco);
+}
+
+#footer-main .separador{
+    width: 90vw;
+    border: 1px solid var(--blanco);
+}
+
+#footer-main .contenedorPadre{
+    width: 90vw;
+    padding: 2em 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+}
+#footer-main .caja{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    flex: 1;
+}
+
+
+#footer-main .logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#footer-main .contenedorPadre .enlaces{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+#footer-main .contenedorPadre .descripcion{
+    text-align: center;
+}
+
+#footer-main .contenedorPadre img{
+    width: 30%;
+    height: auto;
+}
+
+#footer-main .iconosSociales a{
+    font-size: 1.5em;
+    color: var(--blanco);
+    transition: all 0.3s;
+}
+
+#footer-main .iconosSociales a:hover{
+    font-size: 2.5em;
+}
+
+
+#footer-main .iconosSociales a::after{
+    width: 0;
+}
 
 
 
@@ -749,8 +1359,6 @@ h4.done ~ h4:first-of-type{
     .actions{
         width: 100%;
     }
-
-
 
 }
 

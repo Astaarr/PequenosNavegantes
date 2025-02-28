@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Actividades</title>
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- AXIOS -->
+    <script src="../axios/node_modules/axios/dist/axios.min.js" defer></script>
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header id="header-main">
+        <div class="navbar">
+            <div class="logo">
+                <a class="logoHeader" href="../index.html"><img src="../../../resources/logo/logoN.png" alt=""></a> 
+            </div>
+            <div class="content" id="menu">
+                <ul class="links">
+                    <li><a href="../programacion/programacion.html">PROGRAMACIÓN</a></li>
+                    <li><a href="../listadoActividades/listadoActividades.html">ACTIVIDADES</a></li>
+                    <li><a href="../listadoGrupos/listadoGrupos.html">GRUPOS</a></li>
+                    <li><a href="../listadoMonitores/listadoMonitores.html">MONITORES</a></li>
+                </ul>
+                <div class="actions">
+                    <a href="../administrar/administrar.html" class="btn btn-main"></i>Administrar</a>
+                </div>
+            </div>
+            <span class="close-menu"><i class="fas fa-times"></i></span>
+            <span class="open-menu"><i class="fas fa-bars"></i></span>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="title">
+                <h2>Listado de Actividades</h2>
+                <p>Editar actividades</p>
+            </div>
+        </section>
+
+        <section class="detallesAdmin">
+            <div class="container">
+                <div class="section columns">
+                    <div id="groupContainer" class="contenedor-tarjetas">
+                        <span class="add-button"><i class="fa-solid fa-plus"></i></span>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popup de edición -->
+        <div class="popup-container" id="popupEdicion">
+            <div class="popup tarjeta">
+                <button id="cerrarPopup" class="close-popup btn" onclick="closePopup()"><i class="fas fa-times"></i></button>
+
+                <h3 id="tituloAccion">Editar Actividad</h3>
+                <div class="contenido">
+                    <label for="nombreActividad" class="divLeft">Nombre</label>
+                    <input type="text" class="obligatorio" id="nombreActividad" name="nombreActividad" placeholder="Nombre de la actividad">
+                    <span class="error"></span>
+                </div>
+                <div class="contenido">
+                    <label for="detallesActividad" class="divLeft">Detalles</label>
+                    <textarea class="obligatorio" name="detallesActividad" id="detallesActividad"></textarea>
+                    <span class="error"></span>
+                </div>
+
+                <div class="actions">
+                    <button onclick="guardarActividad()" class="btn btn-main">Guardar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popup de confirmación -->
+        <div class="popup-container" id="popupConfirmacion">
+            <div class="popup tarjeta">
+                <h3>Atención</h3>
+                <p id="confirmacionTexto">¿Estás seguro de que deseas eliminar la actividad "<span id="nombreActividadEliminar"></span>"?</p>
+                <div class="actions">
+                    <button onclick="closePopup()" class="btn btn-main">Cancelar</button>
+                    <button onclick="confirmarEliminacion()" class="btn btn-third">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../main.js"></script>
+    <script src="listadoActividades.js"></script>
+
+</body>
+</html>

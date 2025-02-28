@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Información</title>
+
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- AXIOS -->
+    <script src="../axios/node_modules/axios/dist/axios.min.js" defer></script>
+
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="../../../resources/logo/logoN.png" alt="">
+            </div>
+            <div class="content" id="menu">
+                <a href="../cuentaPadre/cuentaPadre.html"><i class="fa-solid fa-arrow-left"></i>Volver</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="seccionLogin">
+            <section class="columna imagenCol t2">
+                <img class="formImg" src="../../../resources/img/item01.png" alt="">
+            </section>
+
+            <form id="formulario" class="columna t2">
+                <section class="sectionForm">
+
+                    <div class="field">
+                        <h3>Editar Información Personal</h3>
+                    </div>
+
+                    <div class="field">
+                        <label for="nombrePadre">Nombre</label>
+                        <input type="text" placeholder="Padre 1" name="nombrePadre" id="nombrePadre" disabled tabindex="1">
+                    </div>
+
+                    <div class="field">
+                        <label for="dniPadre">DNI</label>
+                        <input type="text" class="obligatorio dni" name="dniPadre" id="dniPadre" placeholder="Ingresa tu DNI" tabindex="2">
+                        <span class="error"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="telPadre">Teléfono</label>
+                        <input type="tel" class="obligatorio" name="telPadre" id="telPadre" placeholder="Ingresa tu Teléfono" tabindex="3">
+                        <span class="error"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="telPadreAdicional">Teléfono Adicional</label>
+                        <input type="tel" name="telPadreAdicional" id="telPadreAdicional" placeholder="Ingresa Teléfono Adicional" tabindex="4">
+                        <span class="error"></span>
+                    </div>
+
+                    
+                    <div class="field">
+                        <button type="submit" class="btn btn-main">Guardar</button>
+                    </div>
+
+                </section>
+
+            </form>
+
+        </section>
+
+
+        <!-- Popup -->
+        <div class="popup-container" id="popupConfirmacion">
+            <div class="popup tarjeta">
+                <h3>Datos Actualizados</h3>
+                <p>¡Tus datos han sido actualizados correctamente!</p>
+                <button onclick="aceptarPopup()" class="btn btn-main">Aceptar</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="../main.js"></script>
+    <script src="cambiarDatosCuenta.js"></script>
+</body>
+</html>

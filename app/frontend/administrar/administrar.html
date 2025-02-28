@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar</title>
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- AXIOS -->
+    <script src="../axios/node_modules/axios/dist/axios.min.js" defer></script>
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <header id="header-main">
+        <div class="navbar">
+            <div class="logo">
+                <a class="logoHeader" href="../index.html"><img src="../../../resources/logo/logoN.png" alt=""></a> 
+            </div>
+            <div class="content" id="menu">
+                <ul class="links">
+                    <li><a href="../programacion/programacion.html">PROGRAMACIÓN</a></li>
+                    <li><a href="../listadoActividades/listadoActividades.html">ACTIVIDADES</a></li>
+                    <li><a href="../listadoGrupos/listadoGrupos.html">GRUPOS</a></li>
+                    <li><a href="../listadoMonitores/listadoMonitores.html">MONITORES</a></li>
+                </ul>
+                <div class="actions">
+                    <a href="../administrar/administrar.html" class="btn btn-main"></i>Administrar</a>
+                </div>
+            </div>
+            <span class="close-menu"><i class="fas fa-times"></i></span>
+            <span class="open-menu"><i class="fas fa-bars"></i></span>
+        </div>
+    </header>
+
+    <main>
+
+        <section>
+            <div class="myAcount">
+                <h3>Administrar</h3>
+                <a href="">Cerrar Sesión<i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+        </section>
+
+        <section class="adminIndex">
+            <div class="columnas-contenedor"> 
+                <div class="tarjeta columna">
+                    <div class="icono">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <div class="descripcion">
+                        <h5>Actividades</h5>
+                        <p>Modifica, añade o elimina actividades para garantizar que cada día sea una experiencia inolvidable.</p>
+                    </div>
+                    <div class="boton">
+                        <a href="../listadoActividades/listadoActividades.html">Ver más <i class="fa-solid fa-angle-right"></i></a>
+                    </div>
+                </div>
+    
+                <div class="tarjeta columna">
+                    <div class="icono">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="descripcion">
+                        <h5>Grupos</h5>
+                        <p>Gestiona los grupos de niños de manera sencilla, asegurando que cada uno disfrute al máximo de las actividades.</p>
+                    </div>
+                    <div class="boton">
+                        <a href="../listadoGrupos/listadoGrupos.html">Ver más <i class="fa-solid fa-angle-right"></i></a>
+                    </div>
+                </div>
+    
+                <div class="tarjeta columna">
+                    <div class="icono">
+                        <i class="fa-solid fa-person"></i>
+                    </div>
+                    <div class="descripcion">
+                        <h5>Monitores</h5>
+                        <p>Actualiza y organiza los monitores asignados a cada grupo o actividad, garantizando el mejor acompañamiento y supervisión en cada momento.</p>
+                    </div>
+                    <div class="boton">
+                        <a href="../listadoMonitores/listadoMonitores.html">Ver más <i class="fa-solid fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="calendarioGrande">
+
+     
+            <div class="calendar tarjeta">
+                <div class="calendar-header">
+                    <button onclick="prevMonth()"><i class="fa-solid fa-angle-left"></i></button>
+                    <h5 id="month-year"></h5>
+                    <button onclick="nextMonth()"><i class="fa-solid fa-angle-right"></i></button>
+                </div>
+                <div class="days" id="weekdays">
+                    <div class="weekday">L</div>
+                    <div class="weekday">M</div>
+                    <div class="weekday">X</div>
+                    <div class="weekday">J</div>
+                    <div class="weekday">V</div>
+                    <div class="weekday">S</div>
+                    <div class="weekday">D</div>
+                </div>
+                <div class="days" id="calendar-days"></div>
+            </div> 
+
+        </section>
+       
+
+
+
+    </main>
+       
+
+    <script src="../main.js"></script>
+    <script src="administrar.js"></script>
+
+</body>

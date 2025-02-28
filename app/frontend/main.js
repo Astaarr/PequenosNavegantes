@@ -73,8 +73,9 @@ document.querySelectorAll('.mostrarPassword').forEach(icon => {
 ////////////////////////////////////////
 // CERRAR POPUP
 ////////////////////////////////////////
-function closePopup(){
-    document.getElementById("popupContainer").style.display="none";
+function closePopup() {
+    const popups = document.querySelectorAll(".popup-container");
+    popups.forEach(popup => popup.style.display = "none");
 }
 
 
@@ -85,7 +86,7 @@ function closePopup(){
 // Obtener el formulario
 const formulario = document.getElementById('formulario');
 
-// Validar campo
+// Modificar la función validarCampoEspecifico para incluir la validación del archivo
 function validarCampoEspecifico(campo) {
     const errorSpan = campo.parentElement.querySelector(".error");
     const valor = campo.value.trim();
@@ -95,7 +96,6 @@ function validarCampoEspecifico(campo) {
         mostrarError(errorSpan, 'El campo no puede estar vacío.');
         console.log('Error: El campo obligatorio está vacío.');
         return false;
-
     } else if (valor != '') {
 
         // Si es un campo de tipo email, validar el formato
@@ -132,12 +132,17 @@ function validarCampoEspecifico(campo) {
             console.log('Error: La edad no está entre 6 y 7 años.');
             return false;
         }
-    } 
+
+        // Validar archivo si el campo es de tipo file
+        if (campo.type === 'file') {
+            return validarArchivo(campo);
+        }
+    }
 
     limpiarError(errorSpan);
-
     return true;
 }
+
 // Función para validar el formato de un email
 function validarEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -171,6 +176,31 @@ function validarEdad(fechaNacimiento) {
     return edad >= 6 && edad <= 7;
 }
 
+// Función para validar el archivo subido
+function validarArchivo(campo) {
+    const errorSpan = campo.parentElement.querySelector(".error");
+    const archivo = campo.files[0];
+
+    if (archivo) {
+        // Verificar que el archivo sea un PDF
+        if (archivo.type !== 'application/pdf') {
+            mostrarError(errorSpan, 'El archivo debe ser un PDF.');
+            console.log('Error: El archivo no es un PDF.');
+            return false;
+        }
+
+        // Verificar que el archivo no exceda los 10 MB
+        if (archivo.size > 10 * 1024 * 1024) { // 10 MB en bytes
+            mostrarError(errorSpan, 'El archivo no debe exceder los 10 MB.');
+            console.log('Error: El archivo excede el tamaño máximo permitido.');
+            return false;
+        }
+    }
+
+    limpiarError(errorSpan);
+    return true;
+}
+
 // Función para mostrar el error
 function mostrarError(elementoError, mensaje) {
     if (!elementoError) return; // Si es null, salir de la función
@@ -184,41 +214,62 @@ function limpiarError(elementoError) {
     elementoError.style.display = 'none';
 }
 
+
 // Seleccionar todos los inputs y añadir evento 'blur'
 const inputs = document.querySelectorAll('input:not([type="button"]):not([type="checkbox"]):not([type="radio"])');
 inputs.forEach(input => input.addEventListener('blur', () => validarCampoEspecifico(input)));
 
+// Seleccionar el campo de archivo específico y añadir eventos 'change' y 'blur'
+const campoCurriculum = document.querySelector('input[type="file"]');
+if (campoCurriculum) {
+    campoCurriculum.addEventListener('change', () => validarCampoEspecifico(campoCurriculum));
+    campoCurriculum.addEventListener('blur', () => validarCampoEspecifico(campoCurriculum));
+}
 
 ////////////////////////////////////////
 // COOKIES
 ////////////////////////////////////////
-function getCookie(name) {
-    const cookies = document.cookie.split('; ');
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].split('=');
-        if (cookie[0] === name) {
-            return cookie[1];
-        }
-    }
-    return null;
-}
-
-window.onload = function() {
-    const token = getCookie("token_login");
-
-    if (token) {
-        axios.post('/PequenosNavegantes/app/backend/login/validarToken.php', JSON.stringify({ token: token }), {
-            headers: { 'Content-Type': 'application/json' }
-        })
+document.addEventListener("DOMContentLoaded", function () {
+    // Crear las tablas
+    axios.post("../backend/crear_tablas.php")
         .then(response => {
-            if (response.data.success) {
-                // Si el token es válido, redirigir al usuario al dashboard
-                window.location.href = "/PequenosNavegantes/app/frontend/paginaPrincipal/index.html";
-            }
+            console.log("Tablas creadas:", response.data);
         })
         .catch(error => {
-            console.error("Error al validar el token:", error);
+            console.error("Error creando tablas:", error);
         });
+
+        // Conseguir nombre padre
+    axios.post("/PequenosNavegantes/app/backend/reserva/nombrePadre.php", {}, {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(response => {
+        console.log("Respuesta del servidor:", response.data);
+        const btnLogin = document.getElementById("btnlogin");
+
+        if (response.data.success) {
+            btnLogin.innerHTML = `<i class="fa-solid fa-user"></i> ${response.data.nombre}`;
+            console.log("✅ Sesión activa:", response.data.nombre);
+
+            // Asegurar que solo se agrega el evento una vez
+            btnLogin.removeEventListener("click", redirigirPerfil);
+            btnLogin.addEventListener("click", redirigirPerfil);
+            btnInscribirse.setAttribute("href", "/PequenosNavegantes/app/frontend/datosTutor/datosTutor.html");
+
+        } else {
+            console.log("No hay sesión activa.");
+            btnLogin.innerHTML = `<i class="fa-solid fa-user"></i> Acceso`;
+            btnLogin.setAttribute("href", "/PequenosNavegantes/app/frontend/login/login.html");
+            btnInscribirse.setAttribute("href", "/PequenosNavegantes/app/frontend/login/login.html");
+        }
+    })
+    .catch(error => {
+        console.error("❌ Error verificando sesión:", error);
+    });
+    // Función para redirigir al perfil
+    function redirigirPerfil() {
+        window.location.href = "/PequenosNavegantes/app/frontend/cuentaPadre/cuentaPadre.html";
     }
-};
+});
 

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Equipo</title>
+
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- AXIOS -->
+    <script src="../axios/node_modules/axios/dist/axios.min.js" defer></script>
+
+    <!-- FUENTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    
+    <!-- ICONOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <header id="header-main">
+        <div class="navbar">
+            <div class="logo">
+                <a class="logoHeader" href="../index.html"><img src="../../../resources/logo/logoN.png" alt=""></a> 
+            </div>
+            <div class="content" id="menu">
+                <ul class="links">
+                    <li><a href="../index.html" id="btnInscribirse">INSCRÍBETE</a></li>
+                    <li><a href="#">EVENTOS</a></li>
+                    <li><a href="#">MONITORES</a></li>
+                    <li><a href="#">SOBRE NOSOTROS</a></li>
+                </ul>
+                <div class="actions">
+                    <a href="#" id="translate-btn" class="btn btn-second"><i class="fa-solid fa-language"></i>Idioma</a>
+                    <a href="#" id="btnlogin" class="btn btn-main"><i class="fa-solid fa-user"></i>Acceso</a>
+                </div>
+            </div>
+            <span class="close-menu"><i class="fas fa-times"></i></span>
+            <span class="open-menu"><i class="fas fa-bars"></i></span>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <h2>Nuestro Equipo</h2>
+            <p>Conoce a nuestros monitores apasionados y dedicados:</p>
+        </section>
+
+        <section class="filas-contenedor">
+            <div class="fila">
+                <div class="tarjeta t4 monitoresCard">
+                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="titulo">
+                        <h6 id="nombre">Jorge Martínez</h6>
+                        <p>Coordinador de actividades</p>
+                    </div>
+                    <div class="descripcion">
+                        <p>Experto en educación ambiental con 5 años de experiencia en campamentos.</p>
+                        <p>Experto en educación ambiental con 5 años de experiencia en campamentos.</p>
+                    </div>
+                    <div class="links">
+                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+
+                <div class="tarjeta t4 monitoresCard">
+                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="titulo">
+                        <h6 id="nombre">Carlos García</h6>
+                        <p>Monitor de actividades</p>
+                    </div>
+                    <div class="descripcion">
+                        <p>Licenciado en Ciencias Ambientales con 5 años de experiencia en educación y actividades al aire libre.</p>
+                    </div>
+                    <div class="links">
+                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tarjeta t4 monitoresCard">
+                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="titulo">
+                        <h6 id="nombre">María Fernández</h6>
+                        <p>Coordinadora de actividades</p>
+                    </div>
+                    <div class="descripcion">
+                        <p>Experta en educación ambiental y sostenibilidad con 6 años de experiencia en proyectos comunitarios.</p>
+                    </div>
+                    <div class="links">
+                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+                
+                <div class="tarjeta t4 monitoresCard">
+                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="titulo">
+                        <h6 id="nombre">Luis Martínez</h6>
+                        <p>Monitor de actividades</p>
+                    </div>
+                    <div class="descripcion">
+                        <p>Graduado en Biología con 4 años de experiencia en educación ambiental y actividades recreativas.</p>
+                    </div>
+                    <div class="links">
+                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="tarjeta t4 monitoresCard">
+                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="titulo">
+                        <h6 id="nombre">David Sánchez</h6>
+                        <p>Monitor de actividades</p>
+                    </div>
+                    <div class="descripcion">
+                        <p>Ingeniero ambiental con 3 años de experiencia en educación y actividades al aire libre.</p>
+                    </div>
+                    <div class="links">
+                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+
+                
+                <div class="tarjeta t4 monitoresCard">
+                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="titulo">
+                        <h6 id="nombre">Laura Gómez</h6>
+                        <p>Coordinadora de actividades</p>
+                    </div>
+                    <div class="descripcion">
+                        <p>Educadora ambiental con 6 años de experiencia en programas de concienciación y sostenibilidad.</p>
+                    </div>
+                    <div class="links">
+                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Únete al equipo</h2>
+            <p>Completa el formulario para convertirte en monitor de campamento:</p>
+        </section>
+
+        <section class="seccionLogin">
+            <section class="columna imagenCol t2">
+                <img src="../../../resources/img/person03.svg" alt="">
+            </section>
+
+
+            <form action="#" id="formulario" class="columna t2">
+                <section class="sectionForm">
+    
+                    <div class="field">
+                        <label for="nombreMonitor">Nombre</label>
+                        <input type="text" class="obligatorio" placeholder="Introduce tu nombre" name="nombreMonitor" id="nombreMonitor" tabindex="1">
+                        <span class="error"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="apellidosMonitor">Apellidos</label>
+                        <input type="text" class="obligatorio" placeholder="Introduce tus apellidos" name="apellidosMonitor" id="apellidosMonitor" tabindex="2">
+                        <span class="error"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="emailMonitor">Email</label>
+                        <input type="email" class="obligatorio" id="emailMonitor" name="emailMonitor" placeholder="ejemplo@gmail.com" tabindex="3">
+                        <span class="error"></span>
+                    </div>
+    
+                    <div class="field">
+                        <label for="telMonitor">Teléfono</label>
+                        <input type="tel" class="obligatorio" name="telMonitor" id="telMonitor" placeholder="Ingresa tu Teléfono" tabindex="4">
+                        <span class="error"></span>
+                    </div>
+
+                    <div class="field">
+                        <label for="curriculumMonitor">Agregar curriculum</label>
+                        <div class="cvContenedor">
+                            <button class="botonCv btn btn-submain"><i class="fa-solid fa-file"></i>Subir cv</button>
+                            <input type="file" class="obligatorio" id="curriculumMonitor" name="curriculumMonitor" placeholder="Subir cv" tabindex="5">
+                            <span class="error"></span>
+                        </div>
+                        <span class="error"></span>
+                    </div>
+
+                    <div class="field">
+                        <button type="submit" class="btn btn-main">Enviar Solicitud</button>
+                    </div>
+                </section>
+            </form>
+
+        </section>
+
+        <div class="popup-container" id="popupContainer">
+            <div class="popup tarjeta">
+                <h3>Solicitud Enviada</h3>
+                <p>¡Gracias por tu solicitud! Nos pondremos en contacto contigo pronto.</p>
+                <button onclick="closePopup()" class="btn btn-main">Aceptar</button>
+            </div>
+        </div>
+
+
+
+    </main>
+
+
+    <script src="../main.js"></script>
+    <script src="nuestroEquipo.js"></script>
+</body>
+</html>

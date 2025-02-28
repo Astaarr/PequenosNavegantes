@@ -17,25 +17,39 @@ function autocompletarFormulario() {
                 input.value = datosGuardados[id]; // Autocompleta el campo
             }
         });
+    } else {
+        // Si no hay datos en sessionStorage, obténlos del servidor
+        cargarDatosDesdeServidor();
     }
+}
+
+// Función para cargar los datos desde el servidor usando Axios
+function cargarDatosDesdeServidor() {
+    axios.get("../../backend/reserva/nombrePadre.php") // Asegúrate de que la ruta sea correcta
+        .then(response => {
+            console.log(response.data); // Depuración: Ver la respuesta
+            if (response.data.success) {
+                document.getElementById("nombrePadre").value = response.data.nombre || "";
+                document.getElementById("dniPadre").value = response.data.dni || "";
+                document.getElementById("telPadre").value = response.data.telefono || "";
+                document.getElementById("telPadreAdicional").value = response.data.telefono_adicional || "";
+
+                // Guardar los datos en sessionStorage para futuras visitas
+                guardarDatos({
+                    nombrePadre: response.data.nombre || "",
+                    dniPadre: response.data.dni || "",
+                    telPadre: response.data.telefono || "",
+                    telPadreAdicional: response.data.telefono_adicional || ""
+                });
+            } else {
+                console.error("Error al obtener los datos:", response.data.message);
+            }
+        })
+        .catch(error => console.error("Error al obtener los datos del padre:", error));
 }
 
 // Ejecutar la función cuando la página cargue
 document.addEventListener("DOMContentLoaded", autocompletarFormulario);
-
-// Cargar nombre del padre
-document.addEventListener("DOMContentLoaded", function () {
-    axios.get("../../backend/reserva/nombrePadre.php")
-        .then(response => {
-            if (response.data.success) {
-                document.getElementById("nombrePadre").value = response.data.nombre;
-            } else {
-                console.error("Error:", response.data.message);
-            }
-        })
-        .catch(error => console.error("Error al obtener el nombre del padre:", error));
-});
-
 
 // Evento submit
 form.addEventListener("submit", (event) => {
@@ -62,7 +76,7 @@ form.addEventListener("submit", (event) => {
             telAutorizado: document.getElementById("telAutorizado").value
         };
 
-        // Guardar en localStorage
+        // Guardar en sessionStorage
         guardarDatos(datosTutor);
 
         console.log("Datos enviados y guardados:", datosTutor);

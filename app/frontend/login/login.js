@@ -22,7 +22,7 @@ function submitEmail() {
     }
 
     axios.post('/PequenosNavegantes/app/backend/recuperar_password/enviar_codigo.php', 
-        JSON.stringify({ emailRecuperacion: email }), // ✅ Enviar un objeto JSON correctamente
+        JSON.stringify({ emailRecuperacion: email }), 
         {
             headers: {
                 'Content-Type': 'application/json'
@@ -95,5 +95,5 @@ form.addEventListener('submit', (event) => {
 
 function aceptarBtn(){
     document.getElementById("popupConfirmacion").style.display = "none";
-    window.location.href = '../../frontend/paginaPrincipal/index.html'; 
+    window.location.href = '../index.html'; 
 }
