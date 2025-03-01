@@ -10,17 +10,18 @@ $sql = "INSERT INTO asistencia (id_hijo, id_programacion, asistio)
         ON DUPLICATE KEY UPDATE asistio = VALUES(asistio)";
 
 $stmt = $conexion->prepare($sql);
+$stmt->bind_param("iii", 
+    $data['id_hijo'],
+    $data['id_programacion'],
+    $data['asistio']
+);
 
-foreach ($data['asistencias'] as $asistencia) {
-    $stmt->bind_param("iii", 
-        $asistencia['id_hijo'],
-        $asistencia['id_programacion'],
-        $asistencia['asistio']
-    );
-    $stmt->execute();
+if($stmt->execute()) {
+    echo json_encode(['success' => true]);
+} else {
+    echo json_encode(['error' => $stmt->error]);
 }
 
-echo json_encode(['success' => true]);
 $stmt->close();
 $conexion->close();
 ?>
