@@ -1,5 +1,5 @@
 <?php
-include '../conexion.php';
+include '../conecta.php';
 
 $id_programacion = $_GET['id_programacion'];
 

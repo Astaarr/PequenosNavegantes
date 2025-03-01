@@ -9,8 +9,10 @@ document.addEventListener("DOMContentLoaded", function() {
 function cargarNinos(idProgramacion) {
     axios.get(`../../backend/monitor/getNinosGrupo.php?id_programacion=${idProgramacion}`)
     .then(respuesta => {
-        const contenedor = document.getElementById('groupContainer');
-        contenedor.innerHTML = '';
+        console.log("Respuesta de la API:", respuesta.data); // Muestra la respuesta en la consola
+        if (!Array.isArray(respuesta.data)) {
+            throw new Error("La API no devolvió un array.");
+        }
         
         respuesta.data.forEach(nino => {
             contenedor.innerHTML += `
@@ -25,6 +27,7 @@ function cargarNinos(idProgramacion) {
             `;
         });
     });
+    
 }
 
 function actualizarAsistencia(idHijo, idProgramacion, estado) {
