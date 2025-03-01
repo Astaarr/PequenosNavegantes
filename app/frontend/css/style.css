@@ -153,6 +153,15 @@ i{
     font-size: 1em;
 }
 
+/* ======= EN LINEA ======= */
+.enLinea{
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1em;
+}
 
 /* ======= MOSTRAR / OCULTAR ======= */
 .hidden{
@@ -906,19 +915,42 @@ h4.done ~ h4:first-of-type{
     color: inherit;
 }
 
-
+/* ======= EDITAR PLAN ======= */
 .editarPlan{
+    width: 100%;
+    flex-direction: column;
+}
+
+.editarPlan .contenidoPrincipal{
+    display: flex;
     align-items: center;
+    gap: 1em;
     width: 100%;
 }
+
+.editarPlan .nombre{
+    flex: 1;
+    flex-wrap: wrap;
+}
+
 .editarPlan .infoPlan,
 .editarPlan .botones{
     display: flex;
+    flex: 1;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 2em;
 }
+
+.editarPlan .infoPlan .imagen img{
+    width: 100%;
+}
+
+.editarPlan .infoPlan .info{
+    flex: 1;
+}
+
 
 
 
@@ -1117,6 +1149,7 @@ h4.done ~ h4:first-of-type{
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
     gap: 2em;
 }
 

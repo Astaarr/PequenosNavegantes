@@ -38,35 +38,44 @@
             
             <section>
                 <div class="tarjeta resumen editarPlan">
-                    <div class="nombre">
-                        <h3 id="nombreHijo">Álvaro Sanz</h3>
-                    </div>
-                    
-                    <div class="infoPlan">
-                        <div class="imagen"><img src="../../../resources/img/plan_01.png" alt=""></div>
-                        <div class="info">
-                            <div class="precio">
-                                <h2 id="precioTotal">34,9€</h2><sub>incl. impto.</sub>
-                            </div>
-                            <div class="detalles">
-                                <span id="dias"></span>
-                                <span>días +</span>
-                                <span id="plan"></span>
+                    <div class="contenidoPrincipal">
+                        <div class="nombre">
+                            <h3 id="nombreHijo">Álvaro Sanz</h3>
+                            <p>Estado del pago: <span id="estadoPago"></span></p>
     
+                        </div>
+                        
+                        <div class="infoPlan">
+                            <div class="imagen"><img src="../../../resources/img/plan_01.png" alt=""></div>
+                            <div class="info">
+                                <div class="precio">
+                                    <h2 id="precioTotal">34,9€</h2><sub>incl. impto.</sub>
+                                </div>
+                                <div class="detalles">
+                                    <p>Plan: <span id="planSeleccionado"></span></p>
+                                </div>
+                                <div class="ofertas">
+                                    <span id="descuentos"></span>
+                                </div>
                             </div>
-                            <div class="ofertas">
-                                <span id="descuentos"></span>
-                            </div>
+                        </div>
+    
+        
+    
+                        <div class="botones">
+                            <!-- <a href=""><i class="fa-solid fa-pen-to-square"></i>Editar reserva</a> -->
+                            <a href=""><i class="fa-solid fa-trash"></i>Cancelar reserva</a>
                         </div>
                     </div>
 
-    
-
-                    <div class="botones">
-                        <!-- <a href=""><i class="fa-solid fa-pen-to-square"></i>Editar reserva</a> -->
-                        <a href=""><i class="fa-solid fa-trash"></i>Cancelar reserva</a>
+                    <div class="diasElegidos">
+                        <h6>Días Inscritos:</h6>
+                        <span id="diasSeleccionados">
+                            
+                        </span>
                     </div>
                 </div>
+                    
 
             </section>
 

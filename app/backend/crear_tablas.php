@@ -162,8 +162,11 @@ if (!verificarTabla($conexion, 'actividad')) {
 
     // Insertar datos en la tabla 'actividad'
     $sqlActividadInsert = "INSERT INTO actividad (nombre, descripcion) VALUES
-        ('Actividad 1', 'Descripcion de la actividad 1'),
-        ('Actividad 2', 'Descripcion de la actividad 2')";
+        ('Atrapa la bandera', 'Hay dos equipos, y cada uno tiene una bandera en su base. El objetivo es correr hasta la base del equipo contrario, coger su bandera y llevarla de vuelta a la propia base sin que te atrapen. Si un jugador entra en el territorio enemigo y lo tocan, queda “congelado” y debe quedarse quieto hasta que un compañero lo libere tocándolo. El equipo que primero lleve la bandera contraria a su base, gana. Así que piensa bien tu estrategia, corre rápido y trabaja en equipo.'),
+        ('Decorar las espadas', 'Este juego consiste en diseñar y decorar espadas de cartón utilizando diferentes materiales artísticos. Cada niño recibe una espada en blanco y una variedad de materiales como pinturas, pegatinas, purpurina, cintas de colores y papel decorativo. El objetivo es personalizar su espada, utilizando la imaginación y de la manera mas original.'),
+        ('Barcos de papel', 'Los niños crean barcos de cartulina. Luego, los decoran con pinturas, pegatinas o banderas para personalizarlos. Finalmente, los prueban en el agua.'),
+        ('Lanzar las anillas', 'Este juego consiste en lanzar anillas e intentar encajarlas en los conos que están colocados a cierta distancia. Sin embargo, hay un reto adicional: llevar un parche en un ojo, lo que hace que la percepción de profundidad sea más difícil y añade un nivel extra de dificultad.'),
+        ('Encajar las llaves', 'Los niños tienen varias llaves recortadas en papel y deben encontrar la silueta correcta donde encajarlas. Cada llave tiene una forma única, por lo que deben observar bien los contornos y probar hasta encontrar la coincidencia exacta.')";
     mysqli_query($conexion, $sqlActividadInsert) or die("Error al insertar datos en 'actividad': " . mysqli_error($conexion));
 }
 
