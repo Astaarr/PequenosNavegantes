@@ -229,25 +229,6 @@ if (!verificarTabla($conexion, 'hijo')) {
     mysqli_query($conexion, $sqlHijoInsert) or die("Error al insertar datos en 'hijo': " . mysqli_error($conexion));
 }
 
-// Verifica y crea la tabla 'asistencia'
-if (!verificarTabla($conexion, 'asistencia')) {
-    $sqlAsistencia = "CREATE TABLE asistencia (
-        id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
-        fecha DATE NOT NULL,
-        asistio BOOLEAN NOT NULL,
-        id_hijo INT NOT NULL,
-        id_grupo INT NOT NULL, 
-        FOREIGN KEY (id_hijo) REFERENCES hijo(id_hijo) ON DELETE CASCADE,
-        FOREIGN KEY (id_grupo) REFERENCES grupo(id_grupo) ON DELETE CASCADE
-        )";
-    mysqli_query($conexion, $sqlAsistencia) or die("Error al crear la tabla 'asistencia': " . mysqli_error($conexion));
-
-    // Insertar datos en la tabla 'asistencia'
-    $sqlAsistenciaInsert = "INSERT INTO asistencia (fecha, asistio, id_hijo, id_grupo) VALUES
-        ('2021-06-01', 1, 1, 1),
-        ('2021-06-01', 1, 2, 1)";
-    mysqli_query($conexion, $sqlAsistenciaInsert) or die("Error al insertar datos en 'asistencia': " . mysqli_error($conexion));
-}
 
 // Verifica y crea la tabla 'programacion_actividad'
 if (!verificarTabla($conexion, 'programacion_actividad')) {
@@ -270,6 +251,32 @@ if (!verificarTabla($conexion, 'programacion_actividad')) {
         (2, 2, '2025-03-01', '10:00:00', 120, 'Patio')";
     mysqli_query($conexion, $sqlProgramacionActividadInsert) or die("Error al insertar datos en 'programacion_actividad': " . mysqli_error($conexion));
 }
+
+
+// Verifica y crea la tabla 'asistencia'
+if (!verificarTabla($conexion, 'asistencia')) {
+    $sqlAsistencia = "CREATE TABLE asistencia (
+        id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
+        asistio BOOLEAN NOT NULL,
+        id_hijo INT NOT NULL,
+        id_programacion INT NOT NULL, 
+        FOREIGN KEY (id_hijo) REFERENCES hijo(id_hijo) ON DELETE CASCADE,
+        FOREIGN KEY (id_programacion) REFERENCES programacion_actividad(id_programacion) ON DELETE CASCADE
+        )";
+    mysqli_query($conexion, $sqlAsistencia) or die("Error al crear la tabla 'asistencia': " . mysqli_error($conexion));
+
+    // Insertar datos en la tabla 'asistencia'
+    $sqlAsistenciaInsert = "INSERT INTO asistencia (asistio, id_hijo, id_programacion) VALUES
+        (1, 1, 1),
+        (1, 2, 1),
+        (1, 3, 1),
+        (0, 4, 1),
+        (1, 5, 1),
+        (0, 6, 1),
+        (1, 7, 2)";
+    mysqli_query($conexion, $sqlAsistenciaInsert) or die("Error al insertar datos en 'asistencia': " . mysqli_error($conexion));
+}
+
 
 // Verifica y crea la tabla 'campamento'
 if (!verificarTabla($conexion, 'campamento')) {
