@@ -261,8 +261,9 @@ if (!verificarTabla($conexion, 'asistencia')) {
         id_hijo INT NOT NULL,
         id_programacion INT NOT NULL, 
         FOREIGN KEY (id_hijo) REFERENCES hijo(id_hijo) ON DELETE CASCADE,
-        FOREIGN KEY (id_programacion) REFERENCES programacion_actividad(id_programacion) ON DELETE CASCADE
-        )";
+        FOREIGN KEY (id_programacion) REFERENCES programacion_actividad(id_programacion) ON DELETE CASCADE,
+        UNIQUE (id_hijo, id_programacion) -- Restricción para evitar duplicados
+    )";
     mysqli_query($conexion, $sqlAsistencia) or die("Error al crear la tabla 'asistencia': " . mysqli_error($conexion));
 
     // Insertar datos en la tabla 'asistencia'
