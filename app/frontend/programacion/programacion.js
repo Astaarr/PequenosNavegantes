@@ -76,29 +76,6 @@ function crearCalendario() {
     }
 }
 
-function cargarActividadesMes() {
-    const mes = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-    const año = currentDate.getFullYear();
-    
-    // Se asume que el endpoint devuelve un array de objetos con al menos la propiedad "fecha" (formato YYYY-MM-DD)
-    axios.get(`../../backend/admin/programacion/getProgramacionPorMes.php?year=${año}&month=${mes}`)
-    .then(respuesta => {
-        // Si hay actividades en el mes
-        if(respuesta.data.length > 0) {
-            respuesta.data.forEach(actividad => {
-                // Se espera que 'actividad.fecha' tenga el formato "YYYY-MM-DD"
-                const fechaActividad = actividad.fecha;
-                const diaElemento = document.querySelector(`.day[data-fecha="${fechaActividad}"]`);
-                if (diaElemento) {
-                    diaElemento.classList.remove("sinActividad");
-                }
-            });
-        }
-    })
-    .catch(error => {
-        console.error("Error al cargar actividades del mes:", error);
-    });
-}
 
 function checkActividadDia(fecha, diaElemento) {
     axios.get(`../../backend/admin/programacion/getProgramacion.php?fecha=${fecha}`)

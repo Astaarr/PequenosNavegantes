@@ -123,7 +123,7 @@ if (!verificarTabla($conexion, 'monitor')) {
 
     // Insertar datos en la tabla 'monitor'
     $sqlMonitorInsert = "INSERT INTO monitor (DNI, nombre, apellidos, password, email, telefono, curriculum) VALUES
-        ('34567890C', 'Juan', 'Perez', '$passwordMonitor1', 'juan.perez@example.com', '622345678', 'uploads/curriculums/cv_juan_perez.pdf'),
+        ('34567890C', 'Juan', 'Perez', '$passwordMonitor1', 'monitor1@gmail.com', '622345678', 'uploads/curriculums/cv_juan_perez.pdf'),
         ('45678901D', 'Maria', 'Garcia', '$passwordMonitor2', 'maria.gomez@example.com', '633456789', 'uploads/curriculums/cv_maria_garcia.pdf'),
         ('56789012E', 'Carlos', 'Ramirez', '$passwordMonitor3', 'carlos.ramirez@example.com', '644567890', 'uploads/curriculums/cv_carlos_ramirez.pdf'),
         ('67890123F', 'Laura', 'Fernandez', '$passwordMonitor4', 'laura.fernandez@example.com', '655678901', 'uploads/curriculums/cv_laura_fernandez.pdf'),

@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 let currentDate;
+const idMonitor = 2; // Obtener de variable de sesión o localStorage
 
 function crearCalendario() {
     const diasContenedor = document.getElementById('calendar-days');
@@ -42,26 +43,16 @@ function crearCalendario() {
         diasContenedor.appendChild(diaElemento);
 
         const fecha = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
-        cargarActividadesDia(diaElemento, fecha);
+        cargarActividadesMonitor(diaElemento, fecha);
 
         diaElemento.addEventListener("click", function() {
-            abrirDetalles(fecha);
+            window.location.href = `../monitorActividadesDia/monitorActividadesDia.html?fecha=${fecha}&monitor=${idMonitor}`;
         });
     }
 }
 
-function prevMonth() {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    crearCalendario();
-}
-
-function nextMonth() {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    crearCalendario();
-}
-
-function cargarActividadesDia(diaElemento, fecha) {
-    axios.get(`../../backend/admin/programacion/getProgramacion.php?fecha=${fecha}`)
+function cargarActividadesMonitor(diaElemento, fecha) {
+    axios.get(`../../backend/monitor/getActividadesMonitor.php?fecha=${fecha}&id_monitor=${idMonitor}`)
     .then(respuesta => {
         if(respuesta.data.length > 0) {
             const listaActividades = document.createElement('div');
@@ -79,8 +70,12 @@ function cargarActividadesDia(diaElemento, fecha) {
     });
 }
 
+function prevMonth() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    crearCalendario();
+}
 
-
-function abrirDetalles(fecha) {
-    window.location.href = `../monitorActividadesDia/monitorActividadesDia.html?fecha=${fecha}`;
+function nextMonth() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    crearCalendario();
 }
