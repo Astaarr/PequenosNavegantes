@@ -121,26 +121,40 @@ function cargarNinos(idGrupo = null) {
             const containerNinos = document.getElementById('ninoContainer');
             containerNinos.innerHTML = '<span class="add-button" onclick="showPopup(\'nino\')"><i class="fa-solid fa-plus"></i></span>';
 
+            // **Limpiar el array de niños antes de llenarlo con los datos de la base de datos**
+            ninosTemporales = [];
+
             response.data.ninos.forEach(nino => {
+                // **Agregar niños existentes al array temporal**
+                ninosTemporales.push({ id_hijo: nino.id_hijo, nombre: `${nino.nombre} ${nino.apellidos}` });
+
+                // **Crear la tarjeta visual**
                 const tarjeta = document.createElement('div');
                 tarjeta.className = 'tarjeta';
                 tarjeta.setAttribute('data-id', nino.id_hijo);
                 tarjeta.innerHTML = `
                     <span class="name">${nino.nombre} ${nino.apellidos}</span>
                     <div class="icons">
-                        <span class="icon delete" onclick="mostrarPopupConfirmacion(${nino.id_hijo}, '${nino.nombre} ${nino.apellidos}', 'nino')">
+                        <span class="icon delete" onclick="eliminarNinoTemporal(${nino.id_hijo}, '${nino.nombre} ${nino.apellidos}')">
                             <i class="fa-solid fa-trash"></i>
                         </span>
                     </div>
                 `;
                 containerNinos.appendChild(tarjeta);
             });
+
+            console.log("Niños cargados desde la base de datos:", ninosTemporales);
+
+            // **Actualizar contador después de llenar `ninosTemporales`**
+            actualizarContadorNinos();
+
         } else {
             console.warn("No hay niños en este grupo.");
         }
     })
     .catch(error => console.error('Error al obtener niños:', error));
 }
+
 
 
 // Función para mostrar el popup de confirmación de eliminación
@@ -208,28 +222,37 @@ function agregarMonitor() {
     const idMonitor = selectMonitor.value;
     const nombreMonitor = selectMonitor.options[selectMonitor.selectedIndex].text;
 
-    const monitorContainer = document.getElementById('monitorContainer');
-
-    const tarjetaExistente = monitorContainer.querySelector('.tarjeta');
-    if (tarjetaExistente) {
-        tarjetaExistente.remove(); // Solo elimina la tarjeta del monitor si existe
+    if (!idMonitor) {
+        mostrarPopupError("Por favor, selecciona un monitor válido.");
+        return;
     }
 
+    const monitorContainer = document.getElementById('monitorContainer');
+
+    // Eliminar cualquier monitor existente antes de agregar uno nuevo
+    const tarjetaExistente = monitorContainer.querySelector('.tarjeta');
+    if (tarjetaExistente) {
+        tarjetaExistente.remove();
+    }
+
+    // Crear la tarjeta del monitor seleccionado
     const tarjeta = document.createElement('div');
     tarjeta.className = 'tarjeta';
     tarjeta.setAttribute('data-id', idMonitor);
     tarjeta.innerHTML = `
         <span class="name">${nombreMonitor}</span>
         <div class="icons">
-            <span class="icon delete" onclick="mostrarPopupConfirmacion(${idMonitor}, '${nombreMonitor}', 'monitor')">
+            <span class="icon delete" onclick="eliminarMonitor(${idMonitor}, '${nombreMonitor}')">
                 <i class="fa-solid fa-trash"></i>
             </span>
         </div>
     `;
+    
     monitorContainer.appendChild(tarjeta);
 
     closePopup(); // Cerrar el popup después de agregar el monitor
 }
+
 
 function eliminarMonitor(idMonitor, nombreMonitor) {
     const selectMonitor = document.getElementById('selectMonitor');
@@ -247,21 +270,24 @@ function eliminarMonitor(idMonitor, nombreMonitor) {
 // Función para cargar niños sin grupo en el <select> del popup
 function cargarNinosEnSelect() {
     axios.post('/PequenosNavegantes/app/backend/admin/grupos/obtener_datos.php', { tipo: 'ninos' }, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
         if (response.data.success) {
             const selectNino = document.getElementById('selectNino');
-            selectNino.innerHTML = '<option value="">Selecciona un niño</option>'; // Opción por defecto
+
+            selectNino.innerHTML = '<option value="">Selecciona un niño</option>'; 
 
             response.data.ninos.forEach(nino => {
-                const option = document.createElement('option');
-                option.value = nino.id_hijo;
-                option.textContent = `${nino.nombre} ${nino.apellidos}`;
-                selectNino.appendChild(option);
+                // Verificar si el niño ya está en el grupo
+                if (!ninosTemporales.some(n => n.id_hijo === nino.id_hijo)) {
+                    const option = document.createElement('option');
+                    option.value = nino.id_hijo;
+                    option.textContent = `${nino.nombre} ${nino.apellidos}`;
+                    selectNino.appendChild(option);
+                }
             });
+
         } else {
             console.error("Error al obtener niños:", response.data.message);
         }
@@ -271,32 +297,47 @@ function cargarNinosEnSelect() {
     });
 }
 
+
 // Función para cargar niños asociados al grupo en el contenedor
 function cargarNinosEnContenedor(idGrupo) {
     axios.post('/PequenosNavegantes/app/backend/admin/grupos/obtener_datos.php', { tipo: 'ninos', id_grupo: idGrupo }, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
         if (response.data.success) {
             const ninoContainer = document.getElementById('ninoContainer');
+            const addButton = document.querySelector(".add-button");
+
+            // **Vaciar el array de niños temporales antes de llenarlo**
+            ninosTemporales = [];
+
+            // **Vaciar el contenedor visual**
             ninoContainer.innerHTML = '<span class="add-button" onclick="showPopup(\'nino\')"><i class="fa-solid fa-plus"></i></span>';
 
             response.data.ninos.forEach(nino => {
+                // **Agregar niños existentes al array temporal**
+                let nuevoNino = { id_hijo: nino.id_hijo, nombre: `${nino.nombre} ${nino.apellidos}` };
+                ninosTemporales.push(nuevoNino);
+
+                // **Crear la tarjeta visual**
                 const tarjeta = document.createElement('div');
                 tarjeta.className = 'tarjeta';
                 tarjeta.setAttribute('data-id', nino.id_hijo);
                 tarjeta.innerHTML = `
                     <span class="name">${nino.nombre} ${nino.apellidos}</span>
                     <div class="icons">
-                        <span class="icon delete" onclick="mostrarPopupConfirmacion(${nino.id_hijo}, '${nino.nombre} ${nino.apellidos}', 'nino')">
+                        <span class="icon delete" onclick="eliminarNinoTemporal(${nino.id_hijo}, '${nino.nombre} ${nino.apellidos}')">
                             <i class="fa-solid fa-trash"></i>
                         </span>
                     </div>
                 `;
                 ninoContainer.appendChild(tarjeta);
             });
+
+            console.log("Niños cargados desde la base de datos:", ninosTemporales);
+
+            // **Actualizar contador de niños**
+            actualizarContadorNinos();
         } else {
             console.error("Error al obtener niños:", response.data.message);
         }
@@ -305,6 +346,11 @@ function cargarNinosEnContenedor(idGrupo) {
         console.error('Error al obtener niños:', error);
     });
 }
+
+
+
+
+
 
 
 // Función para mostrar el popup de agregar niño
@@ -322,26 +368,22 @@ function agregarNino() {
     const selectNino = document.getElementById('selectNino');
     const idNino = selectNino.value;
     const nombreNino = selectNino.options[selectNino.selectedIndex].text;
+    const addButton = document.querySelector(".add-button");
 
     if (!idNino) {
-        alert("Por favor, selecciona un niño.");
+        mostrarPopupError("Por favor, selecciona un niño.");
         return;
     }
 
-    // Verificar si el niño ya existe en el array temporal
-    const existe = ninosTemporales.some(n => n.id_hijo === idNino);
-    if (existe) {
-        alert("Este niño ya ha sido añadido.");
+    if (ninosTemporales.length >= 10) {
+        mostrarPopupError("No puedes añadir más de 10 niños a un grupo.");
         return;
     }
 
-    // Guardar temporalmente en el array
     ninosTemporales.push({ id_hijo: idNino, nombre: nombreNino });
 
-    // Eliminar la opción del select
     selectNino.remove(selectNino.selectedIndex);
 
-    // Mostrar en el contenedor
     const ninoContainer = document.getElementById('ninoContainer');
     const tarjeta = document.createElement('div');
     tarjeta.className = 'tarjeta';
@@ -357,24 +399,36 @@ function agregarNino() {
     ninoContainer.appendChild(tarjeta);
 
     closePopup();
+
+    actualizarContadorNinos();
 }
 
 
 
+
+
+
+
+
 function eliminarNinoTemporal(idNino, nombreNino) {
-    // Eliminar del array temporal
+    const addButton = document.querySelector(".add-button");
+
     ninosTemporales = ninosTemporales.filter(n => n.id_hijo !== idNino);
 
-    // Eliminar del contenedor visual
     document.querySelector(`#ninoContainer .tarjeta[data-id="${idNino}"]`).remove();
 
-    // Volver a añadir la opción al select
     const selectNino = document.getElementById('selectNino');
     const option = document.createElement('option');
     option.value = idNino;
     option.textContent = nombreNino;
     selectNino.appendChild(option);
+
+    actualizarContadorNinos();
 }
+
+
+
+
 
 
 function guardarGrupo() {
@@ -402,11 +456,56 @@ function guardarGrupo() {
     })
     .then(response => {
         if (response.data.success) {
-            alert("Grupo guardado correctamente.");
-            window.location.href = '../listadoGrupos/listadoGrupos.html';
+            mostrarPopupExito("El grupo se ha guardado correctamente."); 
         }
     })
     .catch(error => console.error("Error guardando grupo:", error));
+}
+
+function actualizarContadorNinos() {
+    const contador = document.getElementById("contadorNinos");
+    const addButton = document.querySelector(".add-button");
+    const totalNinos = ninosTemporales.length; // **Contar correctamente los niños**
+
+    // **Actualizar el contador en pantalla**
+    contador.textContent = `(${totalNinos}/10)`;
+
+    // **Si hay 10 niños, ocultar el botón `+`**
+    if (totalNinos >= 10) {
+        addButton.style.display = "none";
+    } else {
+        addButton.style.display = "inline-block";
+    }
+}
+
+
+
+function mostrarPopupError(mensaje) {
+    const popup = document.getElementById("popupError");
+    const mensajeError = document.getElementById("mensajeError");
+
+    mensajeError.textContent = mensaje;
+    popup.style.display = "flex";
+}
+
+function mostrarPopupExito(mensaje) {
+    const popup = document.getElementById("popupExito");
+    const mensajeExito = document.getElementById("mensajeExito");
+
+    mensajeExito.textContent = mensaje;
+    popup.style.display = "flex";
+}
+
+// Función para cerrar el popup de éxito
+function cerrarPopupExito() {
+    document.getElementById("popupExito").style.display = "none";
+    window.location.href = '../listadoGrupos/listadoGrupos.html'; 
+}
+
+
+// Función para cerrar el popup de error
+function cerrarPopupError() {
+    document.getElementById("popupError").style.display = "none";
 }
 
 

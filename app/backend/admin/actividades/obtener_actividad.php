@@ -14,6 +14,7 @@ header('Content-Type: application/json');
 // Incluir conexión
 include '../../conecta.php';
 
+
 // Verificar conexión
 if (!$conexion) {
     die(json_encode(["success" => false, "message" => "Error de conexión a la base de datos."]));
