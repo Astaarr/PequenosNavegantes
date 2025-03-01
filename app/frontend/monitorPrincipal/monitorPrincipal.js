@@ -1,15 +1,32 @@
 document.addEventListener("DOMContentLoaded", function() {
     currentDate = new Date();
     crearCalendario();
+
+    // Obtener el ID del monitor desde la sesión
+    axios.post("../../backend/monitor/nombreMonitor.php", {}, {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(response => {
+        if (response.data.success) {
+            const btnMonitor = document.getElementById("btnMonitor");
+            btnMonitor.textContent = response.data.nombre;
+            crearCalendario(); // Recargar calendario con el monitor correcto
+        } else {
+            console.error("No se pudo obtener el ID del monitor.");
+        }
+    })
+    .catch(error => {
+        console.error("Error verificando sesión del monitor:", error);
+    });
 });
 
 let currentDate;
-const idMonitor = 2; // Obtener de variable de sesión o localStorage
 
 function crearCalendario() {
     const diasContenedor = document.getElementById('calendar-days');
-    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio',
-                   'Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+                   'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     
     document.getElementById('month-year').textContent = 
         `${meses[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
@@ -28,45 +45,56 @@ function crearCalendario() {
         diasContenedor.appendChild(emptyDiv);
     }
 
-    for(let i = 1; i <= diasEnMes; i++) {
+    for (let i = 1; i <= diasEnMes; i++) {
         const diaElemento = document.createElement('div');
         diaElemento.className = 'day';
         diaElemento.textContent = i;
-        
+
         const hoy = new Date();
-        if(i === hoy.getDate() && 
-           currentDate.getMonth() === hoy.getMonth() &&
-           currentDate.getFullYear() === hoy.getFullYear()) {
+        if (i === hoy.getDate() &&
+            currentDate.getMonth() === hoy.getMonth() &&
+            currentDate.getFullYear() === hoy.getFullYear()) {
             diaElemento.classList.add('hoy');
         }
-        
+
         diasContenedor.appendChild(diaElemento);
 
         const fecha = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
         cargarActividadesMonitor(diaElemento, fecha);
 
         diaElemento.addEventListener("click", function() {
-            window.location.href = `../monitorActividadesDia/monitorActividadesDia.html?fecha=${fecha}&monitor=${idMonitor}`;
+            axios.post("../../backend/monitor/setSessionFecha.php", { fecha }, {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(response => {
+                if (response.data.success) {
+                    window.location.href = "../monitorActividadesDia/monitorActividadesDia.html";
+                } else {
+                    console.error("No se pudo establecer la fecha en sesión.");
+                }
+            })
+            .catch(error => {
+                console.error("Error estableciendo la fecha en sesión:", error);
+            });
         });
     }
 }
 
 function cargarActividadesMonitor(diaElemento, fecha) {
-    axios.get(`../../backend/monitor/getActividadesMonitor.php?fecha=${fecha}&id_monitor=${idMonitor}`)
+    axios.post("../../backend/monitor/getActividadesMonitor.php", { fecha }, {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" }
+    })
     .then(respuesta => {
-        if(respuesta.data.length > 0) {
-            const listaActividades = document.createElement('div');
-            listaActividades.className = 'eventos';
-            
-            respuesta.data.forEach(actividad => {
-                const actividadElemento = document.createElement('div');
-                actividadElemento.className = 'evento';
-                actividadElemento.textContent = `${actividad.hora_inicio} - ${actividad.nombre_actividad}`;
-                listaActividades.appendChild(actividadElemento);
-            });
-            
-            diaElemento.appendChild(listaActividades);
+        if (respuesta.data.success && respuesta.data.actividades.length > 0) {
+            const indicador = document.createElement('div');
+            indicador.className = 'indicador-actividad';
+            diaElemento.appendChild(indicador);
         }
+    })
+    .catch(error => {
+        console.error("Error cargando actividades:", error);
     });
 }
 
@@ -78,4 +106,19 @@ function prevMonth() {
 function nextMonth() {
     currentDate.setMonth(currentDate.getMonth() + 1);
     crearCalendario();
+}
+
+// Cerrar Sesión
+function cerrarSesion() {
+    axios.post('../../backend/login/logout.php')
+        .then(response => {
+            if (response.data.success) {
+                window.location.href = '../index.html'; 
+            } else {
+                alert('Error al cerrar sesión.');
+            }
+        })
+        .catch(error => {
+            console.error('Error al cerrar sesión:', error);
+        });
 }

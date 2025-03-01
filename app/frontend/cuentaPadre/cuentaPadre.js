@@ -59,8 +59,7 @@ function cerrarSesion() {
     axios.post('../../backend/login/logout.php')
         .then(response => {
             if (response.data.success) {
-                alert(response.data.message); // Muestra un mensaje de éxito
-                window.location.href = '../index.html'; // Redirecciona a la página de inicio o login
+                window.location.href = '../index.html'; 
             } else {
                 alert('Error al cerrar sesión.');
             }
