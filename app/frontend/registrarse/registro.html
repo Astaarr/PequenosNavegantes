@@ -31,58 +31,68 @@
         </div>
     </header>
 
-    <main>
+    <main id="login">
         <section class="seccionLogin">
-            <form id="formulario">
-                <section class="sectionForm" class="columna t2">
-                    <div class="field">
-                        <h2>CREAR CUENTA</h2>
-                    </div>
-    
-                    <div class="field">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="obligatorio" placeholder="Ingresa su Nombre" name="nombre" id="nombre" tabindex="1">
-                        <span class="error"></span>
-                    </div>
-    
-                    <div class="field">
-                        <label for="email">Email</label>
-                        <input type="email" class="obligatorio" id="email" name="email" placeholder="ejemplo@gmail.com" tabindex="2">
-                        <span class="error"></span>
-                    </div>
-    
-                    <div class="field">
-                        <label for="password">Contraseña</label>
-                        <input type="password" class="obligatorio" id="password" name="password" placeholder="Ingresa tu contraseña" tabindex="3">
-                        <i class="fa-regular fa-eye mostrarPassword"></i>
-                        <i class="fa-regular fa-eye-slash mostrarPassword"></i>
-                        <span class="error"></span>
-                    </div>
-    
-                    <div class="field">
-                        <button type="submit" class="btn btn-main" tabindex="3">Crear Cuenta</button>
-                    </div>
-    
-                    <div class="field">
-                        <div class="separador">O</div>
-                    </div>
-    
-                    <div class="field">
-                        <div class="inline">
-                            <button class="btn btn-second"><i class="fa-brands fa-google"></i>Iniciar con Google</button>
-                            <button class="btn btn-second"><i class="fa-brands fa-apple"></i>Iniciar con Apple</button>
+            <div class="columnas-contenedor">
+
+                <form id="formulario" class="columna t2">
+
+                    <div class="sectionForm">
+
+                        <div class="field">
+                            <h2>CREAR CUENTA</h2>
+                        </div>
+        
+                        <div class="field">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="obligatorio" placeholder="Ingresa su Nombre" name="nombre" id="nombre" tabindex="1">
+                            <span class="error"></span>
+                        </div>
+        
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" class="obligatorio" id="email" name="email" placeholder="ejemplo@gmail.com" tabindex="2">
+                            <span class="error"></span>
+                        </div>
+        
+                        <div class="field">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="obligatorio" id="password" name="password" placeholder="Ingresa tu contraseña" tabindex="3">
+                            <i class="fa-regular fa-eye mostrarPassword"></i>
+                            <i class="fa-regular fa-eye-slash mostrarPassword"></i>
+                            <span class="error"></span>
+                        </div>
+        
+                        <div class="field">
+                            <button type="submit" class="btn btn-main" tabindex="3">Crear Cuenta</button>
+                        </div>
+        
+                        <div class="field">
+                            <div class="separador">O</div>
+                        </div>
+        
+                        <div class="field">
+                            <div class="inline">
+                                <button class="btn btn-second"><i class="fa-brands fa-google"></i>Iniciar con Google</button>
+                                <button class="btn btn-second"><i class="fa-brands fa-apple"></i>Iniciar con Apple</button>
+                            </div>
+                        </div>
+        
+                        <div class="field">
+                            <p>¿Ya tienes cuenta?<a href="../login/login.html">Accede aquí</a></p>
                         </div>
                     </div>
-    
-                    <div class="field">
-                        <p>¿Ya tienes cuenta?<a href="../login/login.html">Accede aquí</a></p>
-                    </div>
+                </form>
+                
+                <section class="columna imagenCol t2">
+                    <img src="../../../resources/img/person02.svg" alt="">
                 </section>
-            </form>
+            </div>
 
-            <section class="columna imagenCol t2">
-                <img src="../../../resources/img/person02.svg" alt="">
-            </section>
+
+
+
+
         </section>
         
     </main>
