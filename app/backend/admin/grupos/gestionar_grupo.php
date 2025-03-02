@@ -16,7 +16,7 @@ if (!$conexion) {
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
-$accion = $data['accion'] ?? null; // 'guardar_grupo', 'eliminar_monitor', 'eliminar_nino', 'agregar_nino'
+$accion = $data['accion'] ?? null; 
 
 if ($accion === 'guardar_grupo') {
     // Guardar o editar grupo

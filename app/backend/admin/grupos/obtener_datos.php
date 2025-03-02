@@ -16,7 +16,7 @@ if (!$conexion) {
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
-$tipo = $data['tipo'] ?? null; // 'monitores' o 'ninos'
+$tipo = $data['tipo'] ?? null; 
 $idGrupo = $data['id_grupo'] ?? null;
 
 try {

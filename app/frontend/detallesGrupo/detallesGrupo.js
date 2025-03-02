@@ -3,10 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const idGrupo = urlParams.get('id'); // Obtener el ID del grupo desde la URL
 
     if (idGrupo) {
-        // Estamos editando un grupo existente
         cargarDetallesGrupo(idGrupo);
     } else {
-        // Estamos creando un nuevo grupo: Cargar solo monitores libres
         cargarMonitoresLibres(); 
     }
 });
@@ -476,12 +474,10 @@ function guardarGrupo() {
 function actualizarContadorNinos() {
     const contador = document.getElementById("contadorNinos");
     const addButton = document.querySelector(".add-button");
-    const totalNinos = ninosTemporales.length; // **Contar correctamente los niños**
+    const totalNinos = ninosTemporales.length; 
 
-    // **Actualizar el contador en pantalla**
     contador.textContent = `(${totalNinos}/10)`;
 
-    // **Si hay 10 niños, ocultar el botón `+`**
     if (totalNinos >= 10) {
         addButton.style.display = "none";
     } else {

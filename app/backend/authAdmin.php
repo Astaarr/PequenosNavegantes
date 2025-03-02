@@ -2,7 +2,9 @@
 session_start();
 
 if (!isset($_SESSION['id_admin'])) {
-    header("Location: /PequenosNavegantes/app/frontend/login.html");
+    echo json_encode(["auth" => false]);
     exit;
 }
+
+echo json_encode(["auth" => true]);
 ?>

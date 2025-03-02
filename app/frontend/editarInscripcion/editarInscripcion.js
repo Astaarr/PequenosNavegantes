@@ -117,7 +117,7 @@ function mostrarPopup(mensaje, error = false) {
 function cerrarPopupExito(error) {
     document.getElementById("popupConfirmacion").style.display = "none";
     if (!error) {
-        window.location.href = "../cuentaPadre/cuentaPadre.html"; // Redirigir solo si no hubo error
+        window.location.href = "../cuentaPadre/cuentaPadre.html"; 
     }
 }
 
@@ -151,7 +151,7 @@ function confirmarEliminar() {
         .then(response => {
             if (response.data.success) {
                 cerrarPopupEliminar();
-                window.location.href = "../cuentaPadre/cuentaPadre.html"; // Redirigir tras eliminar
+                window.location.href = "../cuentaPadre/cuentaPadre.html"; 
             } else {
                 mostrarPopupEliminar("Error al eliminar la inscripción: " + response.data.message, true);
             }

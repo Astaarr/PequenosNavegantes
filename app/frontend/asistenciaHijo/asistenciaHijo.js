@@ -58,7 +58,7 @@ function guardarAsistencia() {
     })
     .then(respuesta => {
         console.log("✅ Asistencia actualizada:", respuesta.data);
-        document.getElementById("popupConfirmacion").style.display = "flex"; // Mostrar mensaje de éxito
+        document.getElementById("popupConfirmacion").style.display = "flex"; 
     })
     .catch(error => console.error("❌ Error al actualizar asistencia:", error));
 }

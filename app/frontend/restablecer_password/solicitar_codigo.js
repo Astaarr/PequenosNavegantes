@@ -9,7 +9,6 @@ function submitCodigo() {
     const codigo = document.getElementById("codigoRecuperar").value.trim();
 
     if (!codigo) {
-        alert("Por favor, ingresa el código de recuperación.");
         return;
     }
 
@@ -27,6 +26,5 @@ function submitCodigo() {
     })
     .catch(error => {
         console.error("Error al verificar el código:", error);
-        alert("Error en la verificación. Inténtalo de nuevo.");
     });
 }
