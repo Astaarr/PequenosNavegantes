@@ -9,10 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // Mostrar la fecha en el encabezado
+    console.log(`📅 Cargando actividades para la fecha: ${fecha}`);
+    
+    // Mostrar la fecha en la interfaz
     document.getElementById('diaMes').textContent = fecha;
 
-    // Llamar al backend para obtener actividades de esa fecha
+    // Llamar al backend para obtener detalles de la actividad
     cargarActividadesDia(fecha);
 });
 
@@ -62,6 +64,8 @@ function cargarActividadesDia(fecha) {
         console.error("❌ Error cargando actividades:", error);
     });
 }
+
+
 
 function abrirAsistencia() {
     console.log("📌 Redirigiendo a asistencia...");

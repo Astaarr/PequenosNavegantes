@@ -115,7 +115,6 @@ function crearCalendario() {
             })
             .then(response => {
                 if (response.data.success) {
-                    window.location.href = "../monitorActividadesDia/monitorActividadesDia.html";
                 } else {
                     console.error("No se pudo establecer la fecha en sesión.");
                 }
@@ -154,23 +153,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-function abrirActividad(idProgramacion, actividad, grupo, hora, fecha, duracion, lugar) {
-    console.log("📌 Guardando datos en sessionStorage...");
-    
-    // Guardar la información en sessionStorage en lugar de pasarla en la URL
-    sessionStorage.setItem("actividadSeleccionada", JSON.stringify({
-        idProgramacion,
-        actividad,
-        grupo,
-        hora,
-        fecha,
-        duracion,
-        lugar
-    }));
 
-    console.log("📌 Redirigiendo a la vista de actividades...");
-    window.location.href = "../monitorActividadesDia/monitorActividadesDia.html";
+function abrirActividad(fecha) {
+    const urlDestino = `../monitorActividadesDia/monitorActividadesDia.html?fecha=${fecha}`;
+    console.log("🔗 Redirigiendo a:", urlDestino);
+    window.location.href = urlDestino;
 }
+
+
 
 
 function prevMonth() {
