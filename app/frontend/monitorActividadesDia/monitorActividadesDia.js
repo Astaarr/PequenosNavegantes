@@ -1,24 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Obtener la fecha desde la URL
     const params = new URLSearchParams(window.location.search);
     const fecha = params.get('fecha');
 
+    if (!fecha) {
+        console.error("❌ No se recibió ninguna fecha.");
+        document.getElementById('groupContainer').innerHTML = "<p>Error: No se ha seleccionado ninguna fecha.</p>";
+        return;
+    }
+
+    // Mostrar la fecha en el encabezado
     document.getElementById('diaMes').textContent = fecha;
 
-    // Obtener el ID del monitor desde la sesión y luego cargar las actividades
-    axios.post("../../backend/monitor/nombreMonitor.php", {}, {
-        withCredentials: true,
-        headers: { "Content-Type": "application/json" }
-    })
-    .then(response => {
-        if (response.data.success) {
-            cargarActividadesDia(fecha);
-        } else {
-            console.error("No se pudo obtener el ID del monitor.");
-        }
-    })
-    .catch(error => {
-        console.error("Error verificando sesión del monitor:", error);
-    });
+    // Llamar al backend para obtener actividades de esa fecha
+    cargarActividadesDia(fecha);
 });
 
 function cargarActividadesDia(fecha) {
@@ -53,7 +48,7 @@ function cargarActividadesDia(fecha) {
                     </div>
                     <div class="campo moreInfo">
                         <div class="duracion">${actividad.duracion} mins</div>
-                        <div class="lugar">${actividad.ubicacion}</div>
+                        <div class="lugar">${actividad.lugar}</div>
                     </div>
                 `;
 
@@ -64,10 +59,11 @@ function cargarActividadesDia(fecha) {
         }
     })
     .catch(error => {
-        console.error("Error cargando actividades:", error);
+        console.error("❌ Error cargando actividades:", error);
     });
 }
 
-function abrirAsistencia(idProgramacion, actividad, grupo, hora, fecha) {
-    window.location.href = `../monitorActividadesDia/monitorActividadesDia.html?fecha=${fecha}`;
+function abrirAsistencia() {
+    console.log("📌 Redirigiendo a asistencia...");
+    window.location.href = "../asistenciaHijo/asistenciaHijo.html";
 }

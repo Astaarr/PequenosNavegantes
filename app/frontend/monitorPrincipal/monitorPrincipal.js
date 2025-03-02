@@ -21,6 +21,52 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+function cargarActividadesMonitor(diaElemento, fecha) {
+    axios.post("../../backend/monitor/getActividadesMonitor.php", { fecha }, {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(respuesta => {
+        console.log(`📅 Respuesta de actividades para ${fecha}:`, respuesta.data);
+
+        if (respuesta.data.success && respuesta.data.actividades.length > 0) {
+            diaElemento.classList.add("actividad-presente");
+
+            let indicadorExistente = diaElemento.querySelector(".indicador-actividad");
+            if (!indicadorExistente) {
+                const indicador = document.createElement("div");
+                indicador.className = "indicador-actividad";
+                diaElemento.appendChild(indicador);
+            }
+
+            diaElemento.querySelectorAll(".nombre-actividad").forEach(el => el.remove());
+
+            respuesta.data.actividades.forEach(actividad => {
+                const actividadNombre = document.createElement("p");
+                actividadNombre.className = "nombre-actividad";
+                actividadNombre.textContent = `${actividad.hora_inicio} - ${actividad.nombre_actividad}`;
+                diaElemento.appendChild(actividadNombre);
+            });
+
+            // 🚀 Agregar console.log para verificar la URL antes de redirigir
+            diaElemento.onclick = () => {
+                const urlDestino = `../monitorActividadesDia/monitorActividadesDia.html?fecha=${fecha}`;
+                console.log("🔗 Redirigiendo a:", urlDestino);
+                window.location.href = urlDestino;
+            };
+        }
+    })
+    .catch(error => {
+        console.error(`❌ Error cargando actividades para ${fecha}:`, error);
+    });
+}
+
+
+
+
+
+
 let currentDate;
 
 function crearCalendario() {
@@ -80,40 +126,50 @@ function crearCalendario() {
         });
     }
 }
-function cargarActividadesMonitor(diaElemento, fecha) {
-    axios.post("../../backend/monitor/getActividadesMonitor.php", { fecha }, {
+document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+    const fecha = params.get('fecha');
+
+    if (!fecha) {
+        console.error("❌ No se recibió ninguna fecha.");
+        return;
+    }
+
+    document.getElementById('diaMes').textContent = fecha;
+
+    // Obtener el ID del monitor desde la sesión y luego cargar las actividades
+    axios.post("../../backend/monitor/nombreMonitor.php", {}, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" }
     })
-    .then(respuesta => {
-        console.log(`📅 Respuesta para ${fecha}:`, respuesta.data);
-
-        if (respuesta.data.success && respuesta.data.actividades.length > 0) {
-            console.log(`✅ Actividad encontrada para ${fecha}:`, respuesta.data.actividades);
-
-            // 1️⃣ Agregar la clase `.eventos` para que el CSS reconozca que este día tiene actividad
-            diaElemento.classList.add("eventos");
-
-            // 2️⃣ Agregar un punto visual para indicar actividad
-            const indicador = document.createElement("div");
-            indicador.className = "indicador-actividad";
-            diaElemento.appendChild(indicador);
-
-            // 3️⃣ Mostrar todas las actividades en el día
-            respuesta.data.actividades.forEach(actividad => {
-                const actividadInfo = document.createElement("p");
-                actividadInfo.className = "nombre-actividad";
-                actividadInfo.textContent = `${actividad.hora_inicio} - ${actividad.nombre_actividad}`;
-                diaElemento.appendChild(actividadInfo);
-            });
-
+    .then(response => {
+        if (response.data.success) {
+            cargarActividadesDia(fecha);
         } else {
-            console.log(`❌ No hay actividades para la fecha ${fecha}, no se agregará marcador.`);
+            console.error("❌ No se pudo obtener el ID del monitor.");
         }
     })
     .catch(error => {
-        console.error("❌ Error cargando actividades:", error);
+        console.error("❌ Error verificando sesión del monitor:", error);
     });
+});
+
+function abrirActividad(idProgramacion, actividad, grupo, hora, fecha, duracion, lugar) {
+    console.log("📌 Guardando datos en sessionStorage...");
+    
+    // Guardar la información en sessionStorage en lugar de pasarla en la URL
+    sessionStorage.setItem("actividadSeleccionada", JSON.stringify({
+        idProgramacion,
+        actividad,
+        grupo,
+        hora,
+        fecha,
+        duracion,
+        lugar
+    }));
+
+    console.log("📌 Redirigiendo a la vista de actividades...");
+    window.location.href = "../monitorActividadesDia/monitorActividadesDia.html";
 }
 
 

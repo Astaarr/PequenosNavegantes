@@ -62,8 +62,17 @@ foreach ($grupos as $id_grupo) {
         $resultNombreActividad = $stmtNombreActividad->get_result();
         $actividad = $resultNombreActividad->fetch_assoc();
         $stmtNombreActividad->close();
-
-        // Agregar actividad a la respuesta final
+    
+        // 🚀 Obtener el nombre del grupo
+        $sqlNombreGrupo = "SELECT nombre FROM grupo WHERE id_grupo = ?";
+        $stmtNombreGrupo = $conexion->prepare($sqlNombreGrupo);
+        $stmtNombreGrupo->bind_param("i", $row['id_grupo']);
+        $stmtNombreGrupo->execute();
+        $resultNombreGrupo = $stmtNombreGrupo->get_result();
+        $grupo = $resultNombreGrupo->fetch_assoc();
+        $stmtNombreGrupo->close();
+    
+        // Agregar actividad a la respuesta final con el nombre del grupo incluido
         $actividades[] = [
             "id_programacion" => $row['id_programacion'],
             "fecha" => $row['fecha'],
@@ -71,9 +80,11 @@ foreach ($grupos as $id_grupo) {
             "duracion" => $row['duracion'],
             "lugar" => $row['lugar'],
             "id_actividad" => $row['id_actividad'],
-            "nombre_actividad" => $actividad['nombre'] ?? "Desconocida"
+            "nombre_actividad" => $actividad['nombre'] ?? "Desconocida",
+            "nombre_grupo" => $grupo['nombre'] ?? "No especificado"  // ✅ Ahora sí devuelve el nombre del grupo
         ];
     }
+    
     $stmtActividades->close();
 }
 

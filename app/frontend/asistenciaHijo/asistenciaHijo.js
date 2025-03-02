@@ -1,59 +1,59 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    cargarNinos(params.get('id'));
-    document.getElementById('diaAsistencia').textContent = params.get('fecha');
-    document.getElementById('horaAsistencia').textContent = params.get('hora');
-    document.getElementById('grupoAsistencia').textContent = params.get('grupo');
-});
-
-function cargarNinos(idProgramacion) {
-    axios.get(`../../backend/monitor/getNinosGrupo.php?id_programacion=${idProgramacion}`)
+    // Llamamos al backend sin pasar parámetros en la URL
+    axios.post("../../backend/monitor/getNinosGrupo.php", {}, {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" }
+    })
     .then(respuesta => {
-        console.log("Respuesta de la API:", respuesta.data); // Muestra la respuesta en la consola
-        if (!Array.isArray(respuesta.data)) {
-            throw new Error("La API no devolvió un array.");
+        console.log("📌 Respuesta del backend:", respuesta.data);
+
+        if (!respuesta.data.success) {
+            throw new Error("❌ No se pudo obtener la información de asistencia.");
         }
-        
-        respuesta.data.forEach(nino => {
+
+        // Insertar los datos en la vista
+        document.getElementById('diaAsistencia').textContent = respuesta.data.fecha || "Fecha no disponible";
+        document.getElementById('horaAsistencia').textContent = respuesta.data.hora || "Hora no disponible";
+        document.getElementById('actividadAsistencia').textContent = respuesta.data.actividad || "Actividad no especificada";
+        document.getElementById('grupoAsistencia').textContent = respuesta.data.nombre_grupo || "Grupo no especificado";
+
+        const contenedor = document.getElementById("groupContainer");
+        contenedor.innerHTML = ''; // Limpiar antes de agregar
+
+        respuesta.data.ninos.forEach(nino => {
             contenedor.innerHTML += `
                 <div class="tarjeta">
                     <span id="nombreHijo">${nino.nombre} ${nino.apellidos}</span>
                     <div class="icons">
                         <span>¿Presente?</span>
-                        <input type="checkbox" ${nino.asistio ? 'checked' : ''} 
-                               onchange="actualizarAsistencia(${nino.id_hijo}, ${idProgramacion}, this.checked)">
+                        <input type="checkbox" name="asistenciaHijo" data-id="${nino.id_hijo}"
+                               ${nino.asistio ? 'checked' : ''} 
+                               onchange="actualizarAsistencia(${nino.id_hijo}, this.checked)">
                     </div>
                 </div>
             `;
         });
+    })
+    .catch(error => {
+        console.error("❌ Error cargando datos de asistencia:", error);
+        document.getElementById("groupContainer").innerHTML = "<p>Error al cargar la asistencia.</p>";
     });
-    
-}
+});
 
-function actualizarAsistencia(idHijo, idProgramacion, estado) {
+
+function actualizarAsistencia(idHijo, estado) {
     axios.post('../../backend/monitor/updateAsistencia.php', {
         id_hijo: idHijo,
-        id_programacion: idProgramacion,
         asistio: estado
     })
     .then(() => {
-        // Mostrar el popup
+        console.log(`✅ Asistencia actualizada para ID ${idHijo}`);
         document.getElementById("popupConfirmacion").style.display = "flex";
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => console.error('❌ Error al actualizar asistencia:', error));
 }
 
-// Función para cerrar el popup y redirigir
 function closePopup() {
     document.getElementById("popupConfirmacion").style.display = "none";
     window.location.href = "../monitorPrincipal/monitorPrincipal.html";
-}
-
-// Nueva función para procesar todos los checkboxes
-function guardarAsistencia() {
-    const checkboxes = document.querySelectorAll('input[name="asistenciaHijo"]');
-    checkboxes.forEach(checkbox => {
-        const idHijo = checkbox.getAttribute('data-id');
-        actualizarAsistencia(idHijo, idProgramacion, checkbox.checked);
-    });
 }
