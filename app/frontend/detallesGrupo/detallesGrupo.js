@@ -435,10 +435,21 @@ function guardarGrupo() {
     const nombreGrupo = document.getElementById('nombreGrupo').value;
     const idMonitor = document.querySelector('#monitorContainer .tarjeta')?.getAttribute('data-id');
 
-    if (!nombreGrupo || !idMonitor) {
-        alert("Por favor, completa todos los campos obligatorios.");
+    const camposRequeridos = {
+        nombreGrupo: nombreGrupo,
+        idMonitor: idMonitor
+    };
+
+    const camposVacios = Object.entries(camposRequeridos)
+        .filter(([_, valor]) => !valor)
+        .map(([nombre]) => nombre);
+
+    if (camposVacios.length > 0) {
+        errorGeneral.style.display = 'block';
+        errorGeneral.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Rellena todos los campos primero`;
         return;
     }
+
 
     const urlParams = new URLSearchParams(window.location.search);
     const idGrupo = urlParams.get('id');

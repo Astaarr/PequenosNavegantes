@@ -40,8 +40,10 @@ foreach ($data['asistencia'] as $registro) {
     $stmt->execute();
 }
 
+// Cerrar la conexión
 $stmt->close();
 $conexion->close();
 
 echo json_encode(["success" => true, "message" => "Asistencia actualizada correctamente"]);
+
 ?>

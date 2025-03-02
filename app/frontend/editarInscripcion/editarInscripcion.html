@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,12 +15,17 @@
     <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
     <!-- ICONOS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
+
 <body>
     <header>
         <div class="navbar">
@@ -35,21 +41,20 @@
     <main>
 
         <section>
-            
+
             <section>
                 <div class="tarjeta resumen editarPlan">
                     <div class="contenidoPrincipal">
                         <div class="nombre">
-                            <h3 id="nombreHijo">Álvaro Sanz</h3>
+                            <h3 id="nombreHijo"></h3>
                             <p>Estado del pago: <span id="estadoPago"></span></p>
-    
                         </div>
-                        
+
                         <div class="infoPlan">
                             <div class="imagen"><img src="../../../resources/img/plan_01.png" alt=""></div>
                             <div class="info">
                                 <div class="precio">
-                                    <h2 id="precioTotal">34,9€</h2><sub>incl. impto.</sub>
+                                    <h2 id="precioTotal"></h2><sub>incl. impto.</sub>
                                 </div>
                                 <div class="detalles">
                                     <p>Plan: <span id="planSeleccionado"></span></p>
@@ -59,40 +64,33 @@
                                 </div>
                             </div>
                         </div>
-    
-        
-    
                         <div class="botones">
-                            <!-- <a href=""><i class="fa-solid fa-pen-to-square"></i>Editar reserva</a> -->
-                            <a href=""><i class="fa-solid fa-trash"></i>Cancelar reserva</a>
+                            <a href="#" onclick="event.preventDefault(); mostrarPopupEliminar();">
+                                <i class="fa-solid fa-trash"></i> Borrar inscripción
+                            </a>
                         </div>
                     </div>
+                        <div class="diasElegidos">
+                            <h6>Días Inscritos:</h6>
+                            <span id="diasSeleccionados"></span>
+                        </div>
 
-                    <div class="diasElegidos">
-                        <h6>Días Inscritos:</h6>
-                        <span id="diasSeleccionados">
-                            
-                        </span>
                     </div>
-                </div>
-                    
+
 
             </section>
 
             <form id="formulario" class="columnas-contenedor">
-
-                <section class="sectionForm columna t2">        
-                    
+                <section class="sectionForm columna t2">
                     <div class="field">
                         <h3>Información del Niño</h3>
                     </div>
 
-
                     <div class="field">
                         <div class="checkbox">
-                            <label for="contra">¿Presenta alguna alergia?</label>
-                            <label class="checkbox-custom ">
-                                <input type="checkbox" name="" id="" class="checkbox-adicional">
+                            <label>¿Presenta alguna alergia?</label>
+                            <label class="checkbox-custom">
+                                <input type="checkbox" id="checkboxAlergia">
                                 <span></span>
                             </label>
                         </div>
@@ -101,85 +99,89 @@
                             <span class="error"></span>
                         </div>
                     </div>
-    
+
                     <div class="field">
                         <div class="checkbox">
-                            <label for="contra">¿Medicación actual?</label>
-                            <label class="checkbox-custom ">
-                                <input type="checkbox" name="" id="" class="checkbox-adicional">
+                            <label>¿Medicación actual?</label>
+                            <label class="checkbox-custom">
+                                <input type="checkbox" id="checkboxMedicacion">
                                 <span></span>
                             </label>
                         </div>
                         <div class="campo-adicional">
-                            <input type="text" placeholder="Medicamento, posología, etc." name="medicacionActual" id="medicacionActual">
+                            <input type="text" placeholder="Medicamento, posología, etc." name="medicacionActual"
+                                id="medicacionActual">
                             <span class="error"></span>
                         </div>
                     </div>
-    
+
                     <div class="field">
                         <label for="infoAdicionalHijo">Datos adicionales</label>
-                        <input type="text" placeholder="Ingresa datos adicionales hijo" name="infoAdicionalHijo" id="infoAdicionalHijo">
+                        <input type="text" placeholder="Ingresa datos adicionales hijo" name="infoAdicionalHijo"
+                            id="infoAdicionalHijo">
                         <span class="error"></span>
-                    </div>    
-                
+                    </div>
                 </section>
-                
+
                 <section class="sectionForm columna t2">
-    
-                        <div class="field">
-                            <h3>Recogida del Niño</h3>
-                        </div>
-    
-                        <div class="field">
-                            <div class="checkbox">
-                                <label for="contra">¿Le recogerá otra persona?</label>
-                                <label class="checkbox-custom ">
-                                    <input type="checkbox" name="" id="" class="checkbox-adicional">
-                                    <span></span>
-                                </label>
-                            </div>
-                            <div class="campo-adicional">
-                                <div class="field">
-                                    <label for="nombreAutorizado">Nombre del Autorizado</label>
-                                    <input type="text" placeholder="Ingresa su Nombre" name="nombreAutorizado" id="nombreAutorizado">
-                                    <span class="error"></span>
-                                </div>
-        
-                                <div class="field">
-                                    <label for="dniAutorizado">DNI del Autorizado</label>
-                                    <input type="text" class="dni" placeholder="Ingresa su DNI" name="dniAutorizado" id="dniAutorizado">
-                                    <span class="error"></span>
-                                </div>
-        
-                                <div class="field">
-                                    <label for="telAutorizado">Teléfono del Autorizado</label>
-                                    <input type="tel" name="telAutorizado" id="telAutorizado" placeholder="Ingresa tu Teléfono" tabindex="2">
-                                    <span class="error"></span>
-                                </div>
-                            </div>
+                    <div class="field">
+                        <h3>Recogida del Niño</h3>
+                    </div>
+
+                    <div class="field">
+                        <div class="checkbox">
+                            <label>¿Le recogerá otra persona?</label>
+                            <label class="checkbox-custom">
+                                <input type="checkbox" id="checkboxRecogida">
+                                <span></span>
+                            </label>
                         </div>
 
+                        <div class="campo-adicional">
+                            <div class="field">
+                                <label for="nombreAutorizado">Nombre del Autorizado</label>
+                                <input type="text" placeholder="Ingresa su Nombre" name="nombreAutorizado"
+                                    id="nombreAutorizado">
+                                <span class="error"></span>
+                            </div>
+
+                            <div class="field">
+                                <label for="dniAutorizado">DNI del Autorizado</label>
+                                <input type="text" class="dni" placeholder="Ingresa su DNI" name="dniAutorizado"
+                                    id="dniAutorizado">
+                                <span class="error"></span>
+                            </div>
+
+                            <div class="field">
+                                <label for="telAutorizado">Teléfono del Autorizado</label>
+                                <input type="tel" name="telAutorizado" id="telAutorizado"
+                                    placeholder="Ingresa tu Teléfono">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
             </form>
 
-           
+
+
 
             <section>
-                <button type="submit" class="btn btn-main">Actualizar</button>
+                <button type="submit" class="btn btn-main" id="btnActualizar">Actualizar</button>
             </section>
 
 
         </section>
-        
 
 
-        <!-- Popup -->
+
+        <!-- Popup de confirmación -->
         <div class="popup-container" id="popupConfirmacion">
             <div class="popup tarjeta">
                 <h3>Datos Actualizados</h3>
                 <p>¡Tus datos han sido actualizados correctamente!</p>
-                <button onclick="aceptarPopup()" class="btn btn-main">Aceptar</button>
+                <button id="btnPopupAceptar" class="btn btn-main">Aceptar</button>
             </div>
         </div>
 
@@ -196,9 +198,12 @@
         </div>
 
 
+
     </main>
 
     <script src="../main.js"></script>
-    <script src="cambiarDatosCuenta.js"></script>
+    <script src="editarInscripcion.js"></script>
 </body>
+
 </html>
+C

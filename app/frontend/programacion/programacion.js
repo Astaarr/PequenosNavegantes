@@ -244,11 +244,17 @@ document.getElementById('formulario').addEventListener('submit', function(e) {
     .then(() => {
         this.reset();
         cargarActividadesDia();
+        document.getElementById('popupActividadAgregada').style.display = 'flex';
     })
     .catch(error => {
         errorElement.textContent = 'Error al guardar: ' + error.message;
     });
 });
+
+// Función para cerrar el popup de actividad agregada
+function cerrarPopupActividad() {
+    document.getElementById('popupActividadAgregada').style.display = 'none';
+}
 
 /*---------- ELIMINAR ----------*/
 function mostrarPopupEliminar(id) {

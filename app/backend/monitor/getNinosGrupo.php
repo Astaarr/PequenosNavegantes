@@ -63,7 +63,7 @@ $sqlNinos = "SELECT h.id_hijo, h.nombre, h.apellidos,
              CASE WHEN a.asistio IS NOT NULL THEN a.asistio ELSE 0 END AS asistio
              FROM hijo h
              LEFT JOIN asistencia a ON h.id_hijo = a.id_hijo AND a.id_programacion = ?
-             WHERE h.id_grupo = (SELECT id_grupo FROM programacion_actividad WHERE id_programacion = ?)";
+             WHERE h.id_grupo = (SELECT id_grupo FROM programacion_actividad WHERE id_programacion = ? LIMIT 1)";
 
 $stmtNinos = $conexion->prepare($sqlNinos);
 $stmtNinos->bind_param("ii", $id_programacion, $id_programacion);
@@ -100,4 +100,3 @@ echo json_encode([
 
 
 $conexion->close();
-?>

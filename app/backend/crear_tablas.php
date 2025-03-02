@@ -252,7 +252,6 @@ if (!verificarTabla($conexion, 'programacion_actividad')) {
     mysqli_query($conexion, $sqlProgramacionActividadInsert) or die("Error al insertar datos en 'programacion_actividad': " . mysqli_error($conexion));
 }
 
-
 // Verifica y crea la tabla 'asistencia'
 if (!verificarTabla($conexion, 'asistencia')) {
     $sqlAsistencia = "CREATE TABLE asistencia (
@@ -262,7 +261,7 @@ if (!verificarTabla($conexion, 'asistencia')) {
         id_programacion INT NOT NULL, 
         FOREIGN KEY (id_hijo) REFERENCES hijo(id_hijo) ON DELETE CASCADE,
         FOREIGN KEY (id_programacion) REFERENCES programacion_actividad(id_programacion) ON DELETE CASCADE,
-        UNIQUE (id_hijo, id_programacion) -- Restricción para evitar duplicados
+        UNIQUE (id_hijo, id_programacion) 
     )";
     mysqli_query($conexion, $sqlAsistencia) or die("Error al crear la tabla 'asistencia': " . mysqli_error($conexion));
 
@@ -274,9 +273,12 @@ if (!verificarTabla($conexion, 'asistencia')) {
         (0, 4, 1),
         (1, 5, 1),
         (0, 6, 1),
-        (1, 7, 2)";
+        (1, 7, 2)
+    ON DUPLICATE KEY UPDATE asistio = VALUES(asistio)";
+    
     mysqli_query($conexion, $sqlAsistenciaInsert) or die("Error al insertar datos en 'asistencia': " . mysqli_error($conexion));
 }
+
 
 
 // Verifica y crea la tabla 'campamento'
@@ -321,8 +323,11 @@ if (!verificarTabla($conexion, 'inscripcion')) {
 
     // Insertar datos en la tabla 'inscripcion'
     $sqlInscripcionInsert = "INSERT INTO inscripcion (fecha_inscripcion, numero_dias, precio, fecha_json, id_hijo, id_campamento) VALUES
-        ('2021-07-12', 8, 20 , 'prueba1', 1, 1),
-        ('2022-01-21', 7, 18 , 'prueba2', 2, 2)";
+        ('2021-07-12', 8, 20 , '[\"2025-03-19\",\"2025-03-20\",\"2025-03-22\"]', 1, 1),
+        ('2021-07-12', 8, 20 , '[\"2025-03-22\",\"2025-03-23\",\"2025-03-24\"]', 2, 1),
+        ('2021-07-12', 8, 20 , '[\"2025-03-24\",\"2025-03-25\",\"2025-03-25\"]', 3, 1),
+        ('2021-07-12', 8, 20 , '[\"2025-03-25\",\"2025-03-24\",\"2025-03-27\"]', 4, 1),
+        ('2022-01-21', 7, 18 , '[\"2025-03-19\",\"2025-03-20\",\"2025-03-22\"]', 2, 2)";
     mysqli_query($conexion, $sqlInscripcionInsert) or die("Error al insertar datos en 'inscripcion': " . mysqli_error($conexion));
 }
 

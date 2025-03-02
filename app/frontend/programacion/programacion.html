@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,16 +12,21 @@
     <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <!-- ICONOS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
 
     <header id="header-main">
         <div class="navbar">
             <div class="logo">
-                <a class="logoHeader" href="../index.html"><img src="../../../resources/logo/logoN.png" alt=""></a> 
+                <a class="logoHeader" href="../index.html"><img src="../../../resources/logo/logoN.png" alt=""></a>
             </div>
             <div class="content" id="menu">
                 <ul class="links">
@@ -64,7 +70,7 @@
                             <div class="weekday">D</div>
                         </div>
                         <div class="days" id="calendar-days"></div>
-                    </div> 
+                    </div>
                 </div>
 
                 <div class="columna tarjeta">
@@ -78,10 +84,11 @@
                                     <label for="horaInicio">Hora Inicio:</label>
                                     <input type="time" name="horaInicio" id="horaInicio" tabindex="1">
                                 </div>
-    
+
                                 <div class="field">
                                     <label for="duracion">Duración</label>
-                                    <input type="number" name="duracion" id="duracion" placeholder="duración (mins)" tabindex="2">
+                                    <input type="number" name="duracion" id="duracion" placeholder="duración (mins)"
+                                        tabindex="2">
                                 </div>
                             </div>
                         </div>
@@ -99,7 +106,7 @@
                                         <!-- <option value="">Selecciona Actividad</option> -->
                                     </select>
                                 </div>
-    
+
                                 <div class="field">
                                     <select name="listaGrupos" id="listaGrupos" tabindex="5">
                                         <!-- <option value="">Selecciona Grupos</option> -->
@@ -108,9 +115,9 @@
                             </div>
                         </div>
 
-                        
+
                         <span id="errorGeneral" class="error"></span>
-       
+
 
                         <div class="field">
                             <button type="submit" class="btn btn-main">Añadir</button>
@@ -128,7 +135,7 @@
                 <div class="section columns">
                     <div id="groupContainer" class="contenedor-tarjetas">
 
-                        
+
 
 
                     </div>
@@ -150,13 +157,25 @@
             </div>
         </div>
 
-    
+        <!-- Popup de confirmación al añadir actividad -->
+        <div class="popup-container" id="popupActividadAgregada">
+            <div class="popup tarjeta">
+                <h3>Actividad Añadida</h3>
+                <p id="mensajeActividad">La actividad se ha añadido correctamente.</p>
+                <div class="actions">
+                    <button onclick="cerrarPopupActividad()" class="btn btn-main">Aceptar</button>
+                </div>
+            </div>
+        </div>
+
+
 
     </main>
-       
+
 
     <script src="../main.js"></script>
     <script src="programacion.js"></script>
 
 </body>
+
 </html>
