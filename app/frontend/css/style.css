@@ -465,12 +465,13 @@ header .navbar .actions a.btn:hover{
     width: 100%;
     padding: 0;
     gap: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 #hero .content{
     flex: 0 0 30%;
     margin-left: 16em;
-    /* background-color: red; */
 }
 
 #hero .content span{
@@ -692,6 +693,130 @@ header .navbar .actions a.btn:hover{
 
 .slider-container .slider-item{
     flex: 0 0 calc((100% - 4em) / 3); 
+}
+
+
+/*//////////////////////////////////////////////////
+//SOBRE NOSOTROS
+//////////////////////////////////////////////////*/
+#sobreNosotros section{
+    height: auto;
+    padding: 3em 0;
+}
+
+#sobreNosotros #hero{
+    width: var(--ancho);
+}
+
+#sobreNosotros #hero .botones{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+#sobreNosotros #hero .content{
+    margin: 0;
+    flex: 0 0 40%;
+    height: 100%;
+}
+#sobreNosotros #hero .img{
+    height: 100%;
+
+}
+
+.seccionLogin .title{
+    margin: 0;
+}
+
+#sobreNosotros .seccionLogin .imagenCol img{
+    height: 600px;
+}
+
+#sobreNosotros .seccionLogin .imagenCol img{
+    transform: scaleX(-1);
+}
+
+
+#sobreNosotros #hero .imgHero{
+    mask-image: url('../../../resources/bg/mask6.svg'); /* Ruta a la imagen de la máscara */
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+
+    -webkit-mask-image: url('../../../resources/bg/mask6.svg'); /* Soporte para navegadores WebKit */
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+}
+
+#sobreNosotros .datos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+
+/* ======= ACORDEON ======= */
+.tarjeta.accordion{
+    width: 100%;
+    gap: 0;
+    transition: background-color 0.3s ease;
+}
+.accordion:hover{
+    background-color: var(--second);
+}
+.accordion:hover *{
+    color: var(--blanco);
+}
+
+.accordion-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+}
+
+.accordion-content {
+    width: 100%;
+    display: block;
+
+    overflow: hidden;
+    max-height: 0; /* Comienza con la altura en 0 */
+    transition: max-height 0.5s ease-in-out; /* Animación suave de altura */
+}
+
+.accordion-content p {
+    margin: 16px 0;
+    font-size: 16px;
+}
+
+/* Estilo cuando la sección está abierta */
+.active .accordion-content {
+    max-height: 500px; /* Define el máximo de altura para el contenido */
+}
+
+.active .accordion-icon {
+    transform: rotate(90deg);
+}
+
+
+
+
+/*//////////////////////////////////////////////////
+//LOGIN
+//////////////////////////////////////////////////*/
+#login .sectionForm{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
 }
 
 
