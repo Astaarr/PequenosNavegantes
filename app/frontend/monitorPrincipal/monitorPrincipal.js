@@ -80,23 +80,42 @@ function crearCalendario() {
         });
     }
 }
-
 function cargarActividadesMonitor(diaElemento, fecha) {
     axios.post("../../backend/monitor/getActividadesMonitor.php", { fecha }, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" }
     })
     .then(respuesta => {
+        console.log(`📅 Respuesta para ${fecha}:`, respuesta.data);
+
         if (respuesta.data.success && respuesta.data.actividades.length > 0) {
-            const indicador = document.createElement('div');
-            indicador.className = 'indicador-actividad';
+            console.log(`✅ Actividad encontrada para ${fecha}:`, respuesta.data.actividades);
+
+            // 1️⃣ Agregar la clase `.eventos` para que el CSS reconozca que este día tiene actividad
+            diaElemento.classList.add("eventos");
+
+            // 2️⃣ Agregar un punto visual para indicar actividad
+            const indicador = document.createElement("div");
+            indicador.className = "indicador-actividad";
             diaElemento.appendChild(indicador);
+
+            // 3️⃣ Mostrar todas las actividades en el día
+            respuesta.data.actividades.forEach(actividad => {
+                const actividadInfo = document.createElement("p");
+                actividadInfo.className = "nombre-actividad";
+                actividadInfo.textContent = `${actividad.hora_inicio} - ${actividad.nombre_actividad}`;
+                diaElemento.appendChild(actividadInfo);
+            });
+
+        } else {
+            console.log(`❌ No hay actividades para la fecha ${fecha}, no se agregará marcador.`);
         }
     })
     .catch(error => {
-        console.error("Error cargando actividades:", error);
+        console.error("❌ Error cargando actividades:", error);
     });
 }
+
 
 function prevMonth() {
     currentDate.setMonth(currentDate.getMonth() - 1);

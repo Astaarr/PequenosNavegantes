@@ -69,5 +69,5 @@ function cargarActividadesDia(fecha) {
 }
 
 function abrirAsistencia(idProgramacion, actividad, grupo, hora, fecha) {
-    window.location.href = `../asistenciaHijo/asistenciaHijo.html?id=${idProgramacion}&actividad=${encodeURIComponent(actividad)}&grupo=${encodeURIComponent(grupo)}&hora=${hora}&fecha=${fecha}`;
+    window.location.href = `../monitorActividadesDia/monitorActividadesDia.html?fecha=${fecha}`;
 }
