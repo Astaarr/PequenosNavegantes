@@ -462,7 +462,8 @@ header .navbar .actions a.btn:hover{
 
 /* ======= HERO ======= */
 #hero{
-    width: 100%;
+    margin-top: 1.5em;
+    width: var(--ancho);
     padding: 0;
     gap: 0;
     justify-content: center;
@@ -471,7 +472,11 @@ header .navbar .actions a.btn:hover{
 
 #hero .content{
     flex: 0 0 30%;
-    margin-left: 16em;
+    width: 100%;
+}
+
+#hero .content h1 span{
+    white-space: nowrap;
 }
 
 #hero .content span{
@@ -482,12 +487,16 @@ header .navbar .actions a.btn:hover{
 #hero .imgHero{
     height: 100%;
 
-    mask-image: url('../../../resources/bg/mask.svg'); /* Ruta a la imagen de la máscara */
-    mask-size: cover;
+    mask-image: url('../../../resources/bg/mask6.svg'); /* Ruta a la imagen de la máscara */
+    mask-size: contain;
     mask-repeat: no-repeat;
-    -webkit-mask-image: url('../../../resources/bg/mask.svg'); /* Soporte para navegadores WebKit */
-    -webkit-mask-size: cover;
+    mask-position: right;
+
+    -webkit-mask-image: url('../../../resources/bg/mask6.svg'); /* Soporte para navegadores WebKit */
+    -webkit-mask-size: contain;
     -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: right;
+
 }
 
 #hero .content h1 span{
@@ -512,7 +521,7 @@ header .navbar .actions a.btn:hover{
 
 #index section{
     height: auto;
-    padding: 5em 0;
+    padding: 4em 0;
 }
 
 #index #hero{
