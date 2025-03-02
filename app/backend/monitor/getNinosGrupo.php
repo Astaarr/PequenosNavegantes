@@ -60,10 +60,22 @@ $nombre_grupo = $info['nombre_grupo'];
 
 // Obtener la lista de niños del grupo
 $sqlNinos = "SELECT h.id_hijo, h.nombre, h.apellidos, 
-             CASE WHEN a.id_hijo IS NOT NULL THEN 1 ELSE 0 END AS asistio
+             CASE WHEN a.asistio IS NOT NULL THEN a.asistio ELSE 0 END AS asistio
              FROM hijo h
              LEFT JOIN asistencia a ON h.id_hijo = a.id_hijo AND a.id_programacion = ?
              WHERE h.id_grupo = (SELECT id_grupo FROM programacion_actividad WHERE id_programacion = ?)";
+
+$stmtNinos = $conexion->prepare($sqlNinos);
+$stmtNinos->bind_param("ii", $id_programacion, $id_programacion);
+$stmtNinos->execute();
+$resultNinos = $stmtNinos->get_result();
+
+$ninos = [];
+while ($row = $resultNinos->fetch_assoc()) {
+    $ninos[] = $row;
+}
+$stmtNinos->close();
+
 
 $stmtNinos = $conexion->prepare($sqlNinos);
 $stmtNinos->bind_param("ii", $id_programacion, $id_programacion);

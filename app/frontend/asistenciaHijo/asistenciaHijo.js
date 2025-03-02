@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Llamamos al backend sin pasar parámetros en la URL
     axios.post("../../backend/monitor/getNinosGrupo.php", {}, {
         withCredentials: true,
         headers: { "Content-Type": "application/json" }
@@ -23,16 +22,18 @@ document.addEventListener("DOMContentLoaded", function() {
         respuesta.data.ninos.forEach(nino => {
             contenedor.innerHTML += `
                 <div class="tarjeta">
-                    <span id="nombreHijo">${nino.nombre} ${nino.apellidos}</span>
+                    <span>${nino.nombre} ${nino.apellidos}</span>
                     <div class="icons">
                         <span>¿Presente?</span>
                         <input type="checkbox" name="asistenciaHijo" data-id="${nino.id_hijo}"
-                               ${nino.asistio ? 'checked' : ''} 
-                               onchange="actualizarAsistencia(${nino.id_hijo}, this.checked)">
+                               ${nino.asistio ? 'checked' : ''}>
                     </div>
                 </div>
             `;
         });
+
+        // Agregar evento al botón de actualizar
+        document.getElementById("guardarAsistencia").addEventListener("click", guardarAsistencia);
     })
     .catch(error => {
         console.error("❌ Error cargando datos de asistencia:", error);
@@ -40,20 +41,30 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// Función para guardar la asistencia de todos los niños seleccionados
+function guardarAsistencia() {
+    const checkboxes = document.querySelectorAll('input[name="asistenciaHijo"]');
+    let asistenciaData = [];
 
-function actualizarAsistencia(idHijo, estado) {
-    axios.post('../../backend/monitor/updateAsistencia.php', {
-        id_hijo: idHijo,
-        asistio: estado
+    checkboxes.forEach(checkbox => {
+        asistenciaData.push({
+            id_hijo: checkbox.getAttribute('data-id'),
+            asistio: checkbox.checked ? 1 : 0
+        });
+    });
+
+    axios.post("../../backend/monitor/updateAsistencia.php", {
+        asistencia: asistenciaData
     })
-    .then(() => {
-        console.log(`✅ Asistencia actualizada para ID ${idHijo}`);
-        document.getElementById("popupConfirmacion").style.display = "flex";
+    .then(respuesta => {
+        console.log("✅ Asistencia actualizada:", respuesta.data);
+        document.getElementById("popupConfirmacion").style.display = "flex"; // Mostrar mensaje de éxito
     })
-    .catch(error => console.error('❌ Error al actualizar asistencia:', error));
+    .catch(error => console.error("❌ Error al actualizar asistencia:", error));
 }
 
+// Cierra el popup y recarga la página
 function closePopup() {
     document.getElementById("popupConfirmacion").style.display = "none";
-    window.location.href = "../monitorPrincipal/monitorPrincipal.html";
+    window.location.reload(); // Recargar para actualizar datos
 }
