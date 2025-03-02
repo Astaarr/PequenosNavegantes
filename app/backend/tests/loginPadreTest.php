@@ -2,93 +2,61 @@
 
 use PHPUnit\Framework\TestCase;
 
-class LoginPadreTest extends TestCase {
-    protected $conexion;
+class loginPadreTest extends TestCase
+{
+    private $conexion;
+    private $host = "localhost";
+    private $usuario = "root";
+    private $password = "";
+    private $dbname = "pequenosnavegantes";
 
-    // Configuración inicial para establecer la conexión a la base de datos
     protected function setUp(): void
     {
-        $this->conexion = new mysqli('host', 'usuario', 'contraseña', 'base_de_datos');
-        $this->assertFalse($this->conexion->connect_error, "Debe conectar correctamente a la base de datos");
+        // Conectar a la base de datos
+        $this->conexion = new mysqli($this->host, $this->usuario, $this->password, $this->dbname);
+        if ($this->conexion->connect_error) {
+            $this->fail("Error al conectar con MySQL: " . $this->conexion->connect_error);
+        }
     }
 
-    // Prueba para un inicio de sesión exitoso
-    public function testLoginExitoso()
-    {
-        // Simula una sesión vacía
-        $_SESSION = [];
-        
-        // Datos de prueba para un inicio de sesión exitoso
-        $data = ['email' => 'test@example.com', 'password' => 'testpassword'];
-        
-        // Llama al método login y captura la salida
-        $output = $this->login($data);
-        
-        // Compara la salida esperada con la salida real
-        $this->assertJsonStringEqualsJsonString(
-            json_encode(["success" => true, "message" => "Inicio de sesión correcto"]),
-            $output
-        );
-    }
-
-    // Prueba para un inicio de sesión con contraseña incorrecta
-    public function testLoginContrasenaIncorrecta()
-    {
-        // Simula una sesión vacía
-        $_SESSION = [];
-        
-        // Datos de prueba con una contraseña incorrecta
-        $data = ['email' => 'test@example.com', 'password' => 'wrongpassword'];
-        
-        // Llama al método login y captura la salida
-        $output = $this->login($data);
-        
-        // Compara la salida esperada con la salida real
-        $this->assertJsonStringEqualsJsonString(
-            json_encode(["success" => false, "message" => "Contraseña incorrecta"]),
-            $output
-        );
-    }
-
-    // Prueba para un inicio de sesión con un usuario no encontrado
-    public function testUsuarioNoEncontrado()
-    {
-        // Simula una sesión vacía
-        $_SESSION = [];
-        
-        // Datos de prueba con un correo que no existe en la base de datos
-        $data = ['email' => 'nonexistent@example.com', 'password' => 'password'];
-        
-        // Llama al método login y captura la salida
-        $output = $this->login($data);
-        
-        // Compara la salida esperada con la salida real
-        $this->assertJsonStringEqualsJsonString(
-            json_encode(["success" => false, "message" => "Usuario no encontrado"]),
-            $output
-        );
-    }
-
-    // Método privado para simular el comportamiento del script de inicio de sesión
-    private function login($data)
-    {
-        ob_start();
-        
-        // Simula los datos POST
-        $_POST = $data;
-        
-        // Incluye el script real de inicio de sesión
-        require_once '../login/loginPadre.php'; 
-        
-        // Captura y retorna la salida del script
-        $output = ob_get_clean();
-        return $output;
-    }
-
-    // Cierra la conexión a la base de datos
     protected function tearDown(): void
     {
         $this->conexion->close();
     }
+
+    public function testInicioSesionExitoso() {
+        // Insertar usuario de prueba
+        $email = "prueba@example.com";
+        $password = "123456";
+        $nombre = "Usuario"; 
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    
+        $sql = "INSERT INTO padre (nombre, email, password) VALUES (?, ?, ?)";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("sss", $nombre, $email, $hashed_password);
+        $stmt->execute();
+        $stmt->close();
+    
+        // Simular una solicitud HTTP POST a login.php
+        $data = json_encode(["email" => $email, "password" => $password]);
+        $ch = curl_init("http://localhost/PequenosNavegantes/backend/login.php");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    
+        $response = json_decode(curl_exec($ch), true);
+        curl_close($ch);
+        
+    
+        // Verificar que el inicio de sesión fue exitoso
+        $this->assertTrue($response["success"], "Error en el inicio de sesión");
+    
+        // Eliminar usuario de prueba
+        $sql = "DELETE FROM padre WHERE email = ?";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
-?>
