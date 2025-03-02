@@ -9,7 +9,6 @@ function submitCodigo() {
     const codigo = document.getElementById("codigoRecuperar").value.trim();
 
     if (!codigo) {
-        alert("Por favor, ingresa el código de recuperación.");
         return;
     }
 
@@ -20,7 +19,6 @@ function submitCodigo() {
     .then(response => {
         console.log(response.data);
         if (response.data.success) {
-            // alert("Código correcto. Redirigiendo...");
             window.location.href = `nueva_password.html?token=${token}`; // Redirigir con el mismo token
         } else {
             alert(response.data.message);
@@ -28,6 +26,5 @@ function submitCodigo() {
     })
     .catch(error => {
         console.error("Error al verificar el código:", error);
-        alert("Error en la verificación. Inténtalo de nuevo.");
     });
 }

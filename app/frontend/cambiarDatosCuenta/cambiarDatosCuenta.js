@@ -33,7 +33,6 @@ document.getElementById('formulario').addEventListener('submit', function(event)
     const filteredData = Object.fromEntries(Object.entries(data).filter(([_, value]) => value !== undefined && value !== ''));
 
     if (Object.keys(filteredData).length === 0) {
-        alert("No hay campos para actualizar.");
         return;
     }
 

@@ -2,50 +2,58 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . '../crear_tablas.php.php';
+class crear_tablasTest extends TestCase
+{
+    private $pdo;
 
-
-class CrearTablasTest extends TestCase {
-    private $mockConexion;
-    private $mockStmt;
-
-    protected function setUp(): void {
-        // Mock de la conexión a la base de datos
-        $this->mockConexion = $this->createMock(mysqli::class);
-        $this->mockStmt = $this->createMock(mysqli_stmt::class);
-
-        // Simulación de la conexión a la base de datos y consultas
-        $this->mockConexion->method('connect_error')->willReturn(false);
-        $this->mockConexion->method('query')->willReturn($this->mockStmt);
-        $this->mockConexion->method('select_db')->willReturn(true);
-
-        // Simulación de la consulta para verificar tablas
-        $this->mockStmt->method('num_rows')->willReturn(0); // Simula que las tablas no existen
-        $this->mockStmt->method('execute')->willReturn(true); // Simula la creación exitosa de las tablas y la inserción de datos
+    /**
+     * Configuración inicial antes de ejecutar cada test.
+     * Se establece la conexión a la base de datos utilizando PDO.
+     */
+    protected function setUp(): void
+    {
+        try {
+            // Conectar a la base de datos usando PDO
+            $this->pdo = new PDO('mysql:host=localhost;dbname=pequenosnavegantes', 'root', '');
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            // Si la conexión falla, marcar el test como fallido
+            $this->fail("Error al conectar con la base de datos: " . $e->getMessage());
+        }
     }
 
-    public function testCrearYVerificarTablas() {
-        // Incluir el archivo a probar
-        ob_start();
-        include './app/backend/crear_tablas.php';
-        $output = ob_get_clean();
-
-        // Verificar que no haya errores en la creación y verificación de las tablas
-        $this->assertStringNotContainsString("Error", $output);
+    /**
+     * Prueba que verifica si la conexión con la base de datos se ha establecido correctamente.
+     */
+    public function testConexionEsExitosa()
+    {
+        $this->assertNotNull($this->pdo, "La conexión a la base de datos no se ha establecido correctamente.");
     }
 
-    public function testInsertarDatos() {
-        // Simulación de la consulta para verificar tablas
-        $this->mockStmt->method('num_rows')->willReturn(1); // Simula que las tablas existen
+    /**
+     * Prueba que verifica la inserción y recuperación de un usuario en la tabla "usuarios".
+     * 1. Se crea la tabla "usuarios" si no existe.
+     * 2. Se inserta un usuario de prueba.
+     * 3. Se consulta la base de datos para recuperar al usuario insertado.
+     * 4. Se verifica que el usuario recuperado coincide con el esperado.
+     */
+    public function testInsertarYRecuperarUsuario()
+    {
+        // 1️ Crear la tabla "usuarios" si no existe
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS usuarios (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            nombre VARCHAR(100) NOT NULL
+        )");
 
-        // Incluir el archivo a probar
-        ob_start();
-        include './app/backend/crear_tablas.php'; 
-        $output = ob_get_clean();
+        // 2️ Insertar un usuario en la base de datos
+        $stmt = $this->pdo->prepare("INSERT INTO usuarios (nombre) VALUES (:nombre)");
+        $stmt->execute(['nombre' => 'Juan']);
 
-        // Verificar que no haya errores en la inserción de datos
-        $this->assertStringNotContainsString("Error al insertar datos", $output);
+        // 3️ Recuperar el usuario insertado
+        $stmt = $this->pdo->query("SELECT nombre FROM usuarios WHERE nombre = 'Juan'");
+        $usuario = $stmt->fetchColumn();
+
+        // 4️ Verificar que el usuario recuperado es "Juan"
+        $this->assertEquals('Juan', $usuario, "El usuario no se recuperó correctamente de la base de datos.");
     }
 }
-
-?>

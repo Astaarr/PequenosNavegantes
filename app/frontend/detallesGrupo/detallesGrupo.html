@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,12 +15,17 @@
     <!-- FUENTES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
     <!-- ICONOS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
+
 <body>
     <header>
         <div class="navbar">
@@ -45,7 +51,8 @@
             <h3>Nombre del Grupo</h3>
 
             <div class="field">
-                <input type="text" name="nombreGrupo" id="nombreGrupo" class="obligatorio" placeholder="Introduce un nombre">
+                <input type="text" name="nombreGrupo" id="nombreGrupo" class="obligatorio"
+                    placeholder="Introduce un nombre">
                 <span class="error"></span>
             </div>
 
@@ -56,7 +63,8 @@
                 <div class="section">
                     <h3>Monitor</h3>
                     <div id="monitorContainer" class="contenedor-tarjetas">
-                        <span class="add-button" id="agregarMonitor" onclick="showPopup('monitor')"><i class="fa-solid fa-plus"></i></span>
+                        <span class="add-button" id="agregarMonitor" onclick="showPopup('monitor')"><i
+                                class="fa-solid fa-plus"></i></span>
 
 
                     </div>
@@ -66,7 +74,10 @@
         <section class="detallesAdmin">
             <div class="container">
                 <div class="section">
-                    <h3>Niños</h3>
+                    <div class="enLinea">
+                        <h3>Niños</h3> <span id="contadorNinos">(0/10)</span>
+                    </div>
+
                     <div id="ninoContainer" class="contenedor-tarjetas">
                         <span class="add-button" onclick="showPopup('nino')"><i class="fa-solid fa-plus"></i></span>
 
@@ -76,16 +87,17 @@
         </section>
 
         <section>
+            <span id="errorGeneral" class="error" style="display: none;"></span> 
             <button class="btn btn-main" type="submit" onclick="guardarGrupo()">Guardar</button>
         </section>
-      
-        
+
+
         <!-- Popup para agregar monitor -->
         <div class="popup-container" id="popupAddMonitor">
             <div class="popup tarjeta">
                 <button class="close-popup btn btn" onclick="closePopup()"><i class="fas fa-times"></i></button>
                 <h3>Añadir Monitor</h3>
-                
+
                 <div class="divLeft">
                     <label>Seleccionar:</label>
                     <select id="selectMonitor"></select>
@@ -100,7 +112,7 @@
             <div class="popup tarjeta">
                 <button class="close-popup btn btn" onclick="closePopup()"><i class="fas fa-times"></i></button>
                 <h3>Añadir Niño</h3>
-                
+
                 <div class="divLeft">
                     <label>Seleccionar:</label>
                     <select id="selectNino"></select>
@@ -122,6 +134,24 @@
                 </div>
             </div>
         </div>
+        <!-- Popup de error -->
+        <div class="popup-container" id="popupError">
+            <div class="popup tarjeta">
+                <h3>Error</h3>
+                <p id="mensajeError">Mensaje de error.</p>
+                <button onclick="cerrarPopupError()" class="btn btn-main">Aceptar</button>
+            </div>
+        </div>
+
+        <!-- Popup de éxito -->
+        <div class="popup-container" id="popupExito">
+            <div class="popup tarjeta">
+                <h3>¡Éxito!</h3>
+                <p id="mensajeExito">El grupo se ha guardado correctamente.</p>
+                <button onclick="cerrarPopupExito()" class="btn btn-main">Aceptar</button>
+            </div>
+        </div>
+
 
     </main>
 
@@ -129,4 +159,5 @@
     <script src="detallesGrupo.js"></script>
 
 </body>
+
 </html>

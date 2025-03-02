@@ -1,5 +1,7 @@
 // Obtener elementos del DOM
 const form = document.getElementById('formulario');
+const popUp = document.getElementById('popupConfirmacion');
+const errorGeneral = document.getElementById('errorGeneral');
 
 form.addEventListener('submit', (event) =>{
 
@@ -20,13 +22,18 @@ form.addEventListener('submit', (event) =>{
     .then(response => {
         console.log(response.data);
         if(response.data.success){
-            alert('Login exitoso monitor');
-            window.location.href = '../../frontend/index.html';
+            popUp.style.display = 'flex';
         }else{
-            alert(response.data.message || "Error en el inicio de sesión como monitor");
+            errorGeneral.style.display = 'inline';
+            errorGeneral.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Correo o Contraseña incorrectos`;
         }
     })
     .catch(error => {
         console.error('Error al iniciar sesión como admin', error);
     });
 });
+
+function aceptarBtn(){
+    popUp.style.display = "none";
+    window.location.href = '../monitorPrincipal/monitorPrincipal.html';
+}

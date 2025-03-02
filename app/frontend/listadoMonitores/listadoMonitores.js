@@ -129,7 +129,6 @@ function aceptarSolicitud(id_solicitud) {
     const password = document.getElementById("passwordMonitor").value;
 
     if (!dni || !password) {
-        alert("Por favor, ingresa un DNI y una contraseña.");
         return;
     }
 

@@ -10,12 +10,13 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 include '../../conecta.php';
 
+
 if (!$conexion) {
     die(json_encode(["success" => false, "message" => "Error de conexión a la base de datos."]));
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
-$tipo = $data['tipo'] ?? null; // 'monitores' o 'ninos'
+$tipo = $data['tipo'] ?? null; 
 $idGrupo = $data['id_grupo'] ?? null;
 
 try {

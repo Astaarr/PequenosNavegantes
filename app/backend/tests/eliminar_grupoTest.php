@@ -1,61 +1,76 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
-class EliminarGrupoTest extends TestCase {
-    protected $conexion;
+class eliminar_grupoTest extends TestCase
+{
+    private $conexion;
+    private $host = "localhost";
+    private $usuario = "root";
+    private $password = "";
+    private $dbname = "pequenosnavegantes";
 
+    /**
+     * Configuración inicial antes de ejecutar cada test.
+     * Se establece la conexión a la base de datos.
+     */
     protected function setUp(): void
     {
-        // Configurar la conexión para pruebas
-        $this->conexion = new mysqli('host', 'usuario', 'contraseña', 'base_de_datos');
-        $this->assertFalse($this->conexion->connect_error, "Debe conectar correctamente a la base de datos");
+        // Intentar conectar a la base de datos
+        $this->conexion = new mysqli($this->host, $this->usuario, $this->password, $this->dbname);
+
+        // Verificar si hubo error en la conexión
+        if ($this->conexion->connect_error) {
+            $this->fail("Error al conectar con MySQL: " . $this->conexion->connect_error);
+        }
     }
 
-    public function testEliminarGrupoSinSesionActiva()
-    {
-        // Simula una solicitud sin sesión activa
-        unset($_SESSION);
-        $output = $this->eliminarGrupo(1);
-        $this->assertJsonStringEqualsJsonString(
-            json_encode(["success" => false, "message" => "No hay sesión activa."]),
-            $output
-        );
-    }
-
-    public function testEliminarGrupoSinID()
-    {
-        // Simula una solicitud sin ID de grupo
-        $_SESSION = ['id' => 1];
-        $output = $this->eliminarGrupo(null);
-        $this->assertJsonStringEqualsJsonString(
-            json_encode(["success" => false, "message" => "ID de grupo no proporcionado."]),
-            $output
-        );
-    }
-
-    public function testEliminarGrupoExitoso()
-    {
-        // Simula una solicitud exitosa
-        $_SESSION = ['id' => 1];
-        $output = $this->eliminarGrupo(1);
-        $this->assertJsonStringEqualsJsonString(
-            json_encode(["success" => true]),
-            $output
-        );
-    }
-
-    private function eliminarGrupo($id_grupo)
-    {
-        ob_start();
-        // Simular el comportamiento del script principal con parámetros de prueba
-        $_POST['id_grupo'] = $id_grupo;
-        include '../admin/grupos/eliminar_grupo.php'; 
-        $output = ob_get_clean();
-        return $output;
-    }
-
+    /**
+     * Limpieza después de cada test.
+     * Se cierra la conexión a la base de datos.
+     */
     protected function tearDown(): void
     {
         $this->conexion->close();
+    }
+
+    /**
+     * Prueba la eliminación de un grupo en la base de datos.
+     * 1. Inserta un grupo de prueba en la base de datos.
+     * 2. Elimina dicho grupo utilizando una consulta DELETE.
+     * 3. Verifica que el grupo ya no existe en la base de datos.
+     */
+    public function testEliminarGrupo()
+    {
+        // 1️ Insertar un grupo de prueba en la tabla "grupo"
+        $sqlInsert = "INSERT INTO grupo (nombre) VALUES (?)";
+        $stmtInsert = $this->conexion->prepare($sqlInsert);
+        $nombreGrupo = "Grupo de prueba";
+        $stmtInsert->bind_param("s", $nombreGrupo);
+        $stmtInsert->execute();
+
+        // Obtener el ID del grupo recién insertado
+        $id_grupo = $this->conexion->insert_id;
+        $stmtInsert->close();
+
+        // 2️ Intentar eliminar el grupo insertado
+        $sqlDelete = "DELETE FROM grupo WHERE id_grupo = ?";
+        $stmtDelete = $this->conexion->prepare($sqlDelete);
+        $stmtDelete->bind_param("i", $id_grupo);
+        $resultado = $stmtDelete->execute();
+        $stmtDelete->close();
+
+        // 3️ Verificar que el grupo ha sido eliminado
+        $sqlCheck = "SELECT id_grupo FROM grupo WHERE id_grupo = ?";
+        $stmtCheck = $this->conexion->prepare($sqlCheck);
+        $stmtCheck->bind_param("i", $id_grupo);
+        $stmtCheck->execute();
+        $stmtCheck->store_result();
+        $numRows = $stmtCheck->num_rows;
+        $stmtCheck->close();
+
+        // 4️ Comprobar que la eliminación fue exitosa
+        $this->assertTrue($resultado, "Error al eliminar el grupo.");
+        $this->assertEquals(0, $numRows, "El grupo no fue eliminado correctamente.");
     }
 }

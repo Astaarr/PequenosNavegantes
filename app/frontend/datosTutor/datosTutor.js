@@ -14,7 +14,7 @@ function autocompletarFormulario() {
         Object.keys(datosGuardados).forEach(id => {
             const input = document.getElementById(id);
             if (input) {
-                input.value = datosGuardados[id]; // Autocompleta el campo
+                input.value = datosGuardados[id]; 
             }
         });
     } else {
@@ -25,7 +25,7 @@ function autocompletarFormulario() {
 
 // Función para cargar los datos desde el servidor usando Axios
 function cargarDatosDesdeServidor() {
-    axios.get("../../backend/reserva/nombrePadre.php") // Asegúrate de que la ruta sea correcta
+    axios.get("../../backend/reserva/nombrePadre.php") 
         .then(response => {
             console.log(response.data); // Depuración: Ver la respuesta
             if (response.data.success) {

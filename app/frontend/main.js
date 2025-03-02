@@ -5,8 +5,21 @@ const openMenu = document.querySelector('.open-menu');
 const closeMenu = document.querySelector('.close-menu');
 const menu = document.getElementById("menu");
 const header = document.getElementById("header-main");
+const headerIndex = document.querySelector('.headerIndex');
 
 if(header){
+    
+    if (headerIndex) {
+        header.classList.add('sinSombra');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 0) {
+                header.classList.remove('sinSombra');
+            } else {
+                header.classList.add('sinSombra');
+            }
+        });
+    }
+
     openMenu.addEventListener('click', function() {
         openMenu.style.display = "none";
         closeMenu.style.display = "block";
@@ -33,6 +46,114 @@ if(header){
         
         lastScrollTop = scrollTop;
     });
+
+}
+
+
+
+////////////////////////////////////////
+// CARRUSEL
+////////////////////////////////////////
+const slider = document.getElementById('slider');
+
+if(slider){
+    const prevBtn = document.getElementById('slider-prev');
+    const nextBtn = document.getElementById('slide-next');
+    
+    let currentIndex = 0;
+    const cards = document.querySelectorAll('.slider-item');
+    const totalCards = cards.length;
+    
+    const updateSlider = () => {
+      const cardWidth = cards[0].offsetWidth + 20; // width + margin
+      slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    };
+    
+    // Botones de navegación
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < totalCards - 3) {
+        currentIndex++;
+      } else {
+        currentIndex = 0; // Vuelve al principio
+      }
+      updateSlider();
+    });
+    
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        currentIndex = totalCards - 3; // Va al final
+      }
+      updateSlider();
+    });
+    
+    // Funcionalidad de arrastrar
+    let startX;
+    let isDragging = false;
+    
+    slider.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.pageX - slider.offsetLeft;
+      slider.style.cursor = 'grabbing';
+    });
+    
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+    
+      const moveX = e.pageX - startX;
+      slider.style.transform = `translateX(${moveX - currentIndex * (cards[0].offsetWidth + 20)}px)`;
+    });
+    
+    slider.addEventListener('mouseup', () => {
+      isDragging = false;
+      slider.style.cursor = 'grab';
+    
+      // Ajuste al finalizar el arrastre
+      const cardWidth = cards[0].offsetWidth + 20;
+      const offset = Math.abs(slider.getBoundingClientRect().left - startX);
+      currentIndex = Math.round(offset / cardWidth);
+      if (currentIndex >= totalCards - 3) currentIndex = totalCards - 3;
+      if (currentIndex < 0) currentIndex = 0;
+    
+      updateSlider();
+    });
+    
+    slider.addEventListener('mouseleave', () => {
+      if (isDragging) {
+        isDragging = false;
+        slider.style.cursor = 'grab';
+        updateSlider();
+      }
+    });
+    
+    // Inicializa el slider
+    updateSlider();
+}
+
+
+////////////////////////////////////////
+// FLECHA SUBIR
+////////////////////////////////////////
+const scrollToTopBtn = document.getElementById('scrollToTop');
+
+if(scrollToTopBtn){
+    window.addEventListener('scroll', () => {
+        if (document.documentElement.scrollTop > 300) {
+          scrollToTopBtn.classList.add('show'); // Agregar clase 'show' para que aparezca
+        } else {
+          scrollToTopBtn.classList.remove('show'); // Remover clase 'show' para ocultarla
+        }
+    });
+      
+    // Desplazar hacia arriba cuando se hace clic en la flecha
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
 }
 
 

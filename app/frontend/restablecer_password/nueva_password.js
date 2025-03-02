@@ -24,7 +24,6 @@ function submitPassword() {
     })
     .catch(error => {
         console.error("Error al cambiar la contraseña:", error);
-        alert("Error al actualizar la contraseña.");
     });
 }
 

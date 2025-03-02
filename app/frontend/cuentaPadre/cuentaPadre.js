@@ -25,10 +25,10 @@ function cargarCampamentos() {
                         </div>
                         <div class="fecha">
                             <i class="fa-solid fa-calendar"></i>
-                            <span class="fecha">${formatearFecha(campamento.fecha_inscripcion)}</span>
+                            <span class="fecha">${formatearFecha(campamento.fecha_json)}</span>
                         </div>
                         <div class="icons">
-                            <span class="icon edit">
+                            <span class="icon edit" onclick="editarInscripcion(${campamento.id_inscripcion})">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </span>
                         </div>
@@ -42,6 +42,11 @@ function cargarCampamentos() {
         .catch(error => {
             console.error("Error al cargar los campamentos:", error);
         });
+}
+
+// Función para redirigir a la página de edición con la ID de inscripción
+function editarInscripcion(idInscripcion) {
+    window.location.href = `../editarInscripcion/editarInscripcion.html?id_inscripcion=${idInscripcion}`;
 }
 
 function formatearFecha(fecha) {
@@ -59,8 +64,7 @@ function cerrarSesion() {
     axios.post('../../backend/login/logout.php')
         .then(response => {
             if (response.data.success) {
-                alert(response.data.message); // Muestra un mensaje de éxito
-                window.location.href = '../index.html'; // Redirecciona a la página de inicio o login
+                window.location.href = '../index.html'; 
             } else {
                 alert('Error al cerrar sesión.');
             }

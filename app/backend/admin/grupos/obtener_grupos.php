@@ -19,10 +19,11 @@ if (!$conexion) {
 }
 
 // Comprobar si la sesión está activa
-if (!isset($_SESSION)) {
+if (!isset($_SESSION['id_admin'])) {
     echo json_encode(["success" => false, "message" => "No hay sesión activa."]);
     exit;
 }
+
 
 // Consulta para obtener grupos con el nombre del monitor
 $sql = "SELECT g.id_grupo, g.nombre, m.nombre AS nombre_monitor 

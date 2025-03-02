@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Validaciones simples
         if (!passwordOld || !passwordNew) {
-            alert("Todos los campos son obligatorios");
             return;
         }
 
@@ -72,7 +71,7 @@ function submitEmail() {
     }
 
     axios.post('/PequenosNavegantes/app/backend/recuperar_password/enviar_codigo.php', 
-        JSON.stringify({ emailRecuperacion: email }), // ✅ Enviar un objeto JSON correctamente
+        JSON.stringify({ emailRecuperacion: email }),
         {
             headers: {
                 'Content-Type': 'application/json'

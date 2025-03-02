@@ -1,10 +1,11 @@
 // Obtener elementos del DOM
 const form = document.getElementById('formulario');
 const popUp = document.getElementById('popupConfirmacion');
+const errorGeneral = document.getElementById('errorGeneral');
 
 form.addEventListener('submit', (event) =>{
 
-    const errorGeneral = document.getElementById('errorGeneral');
+    
 
     event.preventDefault();
 

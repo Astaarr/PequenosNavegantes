@@ -53,7 +53,9 @@
         <section class="filas-contenedor">
             <div class="fila">
                 <div class="tarjeta t4 monitoresCard">
-                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="imagen">
+                        <img src="../../../resources/monitores/person01.JPG" alt="">
+                    </div>
                     <div class="titulo">
                         <h6 id="nombre">Jorge Martínez</h6>
                         <p>Coordinador de actividades</p>
@@ -70,7 +72,7 @@
                 </div>
 
                 <div class="tarjeta t4 monitoresCard">
-                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="imagen"><img src="../../../resources/monitores/person02.JPG" alt=""></div>
                     <div class="titulo">
                         <h6 id="nombre">Carlos García</h6>
                         <p>Monitor de actividades</p>
@@ -86,7 +88,7 @@
                 </div>
                 
                 <div class="tarjeta t4 monitoresCard">
-                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="imagen"><img src="../../../resources/monitores/person04.JPG" alt=""></div>
                     <div class="titulo">
                         <h6 id="nombre">María Fernández</h6>
                         <p>Coordinadora de actividades</p>
@@ -102,7 +104,7 @@
                 </div>
                 
                 <div class="tarjeta t4 monitoresCard">
-                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="imagen"><img src="../../../resources/monitores/person03.JPG" alt=""></div>
                     <div class="titulo">
                         <h6 id="nombre">Luis Martínez</h6>
                         <p>Monitor de actividades</p>
@@ -120,13 +122,13 @@
 
             <div class="fila">
                 <div class="tarjeta t4 monitoresCard">
-                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="imagen"><img src="../../../resources/monitores/person06.JPG" alt=""></div>
                     <div class="titulo">
-                        <h6 id="nombre">David Sánchez</h6>
-                        <p>Monitor de actividades</p>
+                        <h6 id="nombre">Claudia Sánchez</h6>
+                        <p>Monitora de actividades</p>
                     </div>
                     <div class="descripcion">
-                        <p>Ingeniero ambiental con 3 años de experiencia en educación y actividades al aire libre.</p>
+                        <p>Ingeniera ambiental con 3 años de experiencia en educación y actividades al aire libre.</p>
                     </div>
                     <div class="links">
                         <a href="#"><i class="fa-brands fa-linkedin"></i></a>
@@ -137,7 +139,7 @@
 
                 
                 <div class="tarjeta t4 monitoresCard">
-                    <div class="imagen"><img src="https://placehold.co/600x600" alt=""></div>
+                    <div class="imagen"><img src="../../../resources/monitores/person08.JPG" alt=""></div>
                     <div class="titulo">
                         <h6 id="nombre">Laura Gómez</h6>
                         <p>Coordinadora de actividades</p>
@@ -154,59 +156,63 @@
             </div>
         </section>
 
-        <section>
-            <h2>Únete al equipo</h2>
-            <p>Completa el formulario para convertirte en monitor de campamento:</p>
-        </section>
-
         <section class="seccionLogin">
-            <section class="columna imagenCol t2">
-                <img src="../../../resources/img/person03.svg" alt="">
-            </section>
+            <div class="title">
+                <h2>Únete al equipo</h2>
+                <p>Completa el formulario para convertirte en monitor de campamento:</p>
+            </div>
 
 
-            <form action="#" id="formulario" class="columna t2">
-                <section class="sectionForm">
+            <div class="content columnas-contenedor">
+                <section class="columna imagenCol t2">
+                    <img src="../../../resources/img/person03.svg" alt="">
+                </section>
     
-                    <div class="field">
-                        <label for="nombreMonitor">Nombre</label>
-                        <input type="text" class="obligatorio" placeholder="Introduce tu nombre" name="nombreMonitor" id="nombreMonitor" tabindex="1">
-                        <span class="error"></span>
-                    </div>
-
-                    <div class="field">
-                        <label for="apellidosMonitor">Apellidos</label>
-                        <input type="text" class="obligatorio" placeholder="Introduce tus apellidos" name="apellidosMonitor" id="apellidosMonitor" tabindex="2">
-                        <span class="error"></span>
-                    </div>
-
-                    <div class="field">
-                        <label for="emailMonitor">Email</label>
-                        <input type="email" class="obligatorio" id="emailMonitor" name="emailMonitor" placeholder="ejemplo@gmail.com" tabindex="3">
-                        <span class="error"></span>
-                    </div>
     
-                    <div class="field">
-                        <label for="telMonitor">Teléfono</label>
-                        <input type="tel" class="obligatorio" name="telMonitor" id="telMonitor" placeholder="Ingresa tu Teléfono" tabindex="4">
-                        <span class="error"></span>
-                    </div>
-
-                    <div class="field">
-                        <label for="curriculumMonitor">Agregar curriculum</label>
-                        <div class="cvContenedor">
-                            <button class="botonCv btn btn-submain"><i class="fa-solid fa-file"></i>Subir cv</button>
-                            <input type="file" class="obligatorio" id="curriculumMonitor" name="curriculumMonitor" placeholder="Subir cv" tabindex="5">
+                <form action="#" id="formulario" class="columna t2">
+                    <section class="sectionForm">
+        
+                        <div class="field">
+                            <label for="nombreMonitor">Nombre</label>
+                            <input type="text" class="obligatorio" placeholder="Introduce tu nombre" name="nombreMonitor" id="nombreMonitor" tabindex="1">
                             <span class="error"></span>
                         </div>
-                        <span class="error"></span>
-                    </div>
-
-                    <div class="field">
-                        <button type="submit" class="btn btn-main">Enviar Solicitud</button>
-                    </div>
-                </section>
-            </form>
+    
+                        <div class="field">
+                            <label for="apellidosMonitor">Apellidos</label>
+                            <input type="text" class="obligatorio" placeholder="Introduce tus apellidos" name="apellidosMonitor" id="apellidosMonitor" tabindex="2">
+                            <span class="error"></span>
+                        </div>
+    
+                        <div class="field">
+                            <label for="emailMonitor">Email</label>
+                            <input type="email" class="obligatorio" id="emailMonitor" name="emailMonitor" placeholder="ejemplo@gmail.com" tabindex="3">
+                            <span class="error"></span>
+                        </div>
+        
+                        <div class="field">
+                            <label for="telMonitor">Teléfono</label>
+                            <input type="tel" class="obligatorio" name="telMonitor" id="telMonitor" placeholder="Ingresa tu Teléfono" tabindex="4">
+                            <span class="error"></span>
+                        </div>
+    
+                        <div class="field">
+                            <label for="curriculumMonitor">Agregar curriculum</label>
+                            <div class="cvContenedor">
+                                <button class="botonCv btn btn-submain"><i class="fa-solid fa-file"></i>Subir cv</button>
+                                <input type="file" class="obligatorio" id="curriculumMonitor" name="curriculumMonitor" placeholder="Subir cv" tabindex="5">
+                                <span class="error"></span>
+                            </div>
+                            <span class="error"></span>
+                        </div>
+    
+                        <div class="field">
+                            <button type="submit" class="btn btn-main">Enviar Solicitud</button>
+                        </div>
+                    </section>
+                </form>
+            </div>
+            
 
         </section>
 

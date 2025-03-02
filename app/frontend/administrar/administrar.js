@@ -79,6 +79,21 @@ function cargarActividadesDia(diaElemento, fecha) {
     });
 }
 
+// Funcion cerrar Sesion
+function cerrarSesion() {
+    axios.post('../../backend/login/logout.php')
+        .then(response => {
+            if (response.data.success) {
+                window.location.href = '../index.html'; 
+            } else {
+                alert('Error al cerrar sesión.');
+            }
+        })
+        .catch(error => {
+            console.error('Error al cerrar sesión:', error);
+        });
+}
+
 
 
 function abrirDetalles(fecha) {

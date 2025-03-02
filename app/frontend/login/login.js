@@ -17,7 +17,6 @@ function submitEmail() {
 
     if(!email){
         console.error("El campo de email esta vacio");
-        alert("El campo de email esta vacio");
         return;
     }
 

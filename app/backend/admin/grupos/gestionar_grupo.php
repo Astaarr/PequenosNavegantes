@@ -10,12 +10,13 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 include '../../conecta.php';
 
+
 if (!$conexion) {
     die(json_encode(["success" => false, "message" => "Error de conexión a la base de datos."]));
 }
 
 $data = json_decode(file_get_contents("php://input"), true);
-$accion = $data['accion'] ?? null; // 'guardar_grupo', 'eliminar_monitor', 'eliminar_nino', 'agregar_nino'
+$accion = $data['accion'] ?? null; 
 
 if ($accion === 'guardar_grupo') {
     // Guardar o editar grupo

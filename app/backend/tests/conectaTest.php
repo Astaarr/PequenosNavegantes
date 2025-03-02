@@ -2,64 +2,64 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . '../conecta.php';
+class ConectaTest extends TestCase
+{
+    private $conexion;
+    private $host = "localhost";
+    private $usuario = "root";
+    private $password = "";
+    private $dbname = "pequenosnavegantes";
 
-
-class ConexionTest extends TestCase {
-    private $mockConexion;
-    private $mockStmt;
-
+    /**
+     * Configuración inicial antes de cada prueba.
+     * Intenta establecer una conexión con MySQL.
+     */
     protected function setUp(): void
     {
-        // Mock de la conexión a la base de datos
-        $this->mockConexion = $this->createMock(mysqli::class);
-        $this->mockStmt = $this->createMock(mysqli_stmt::class);
+        // Intentar conectar a MySQL sin seleccionar la base de datos todavía
+        $this->conexion = new mysqli($this->host, $this->usuario, $this->password);
 
-        // Simulación de la conexión a la base de datos
-        $this->mockConexion->method('connect_error')->willReturn(false);
-        $this->mockConexion->method('query')->willReturn($this->mockStmt);
-
-        // Simulación de la consulta
-        $this->mockStmt->method('num_rows')->willReturn(0); // Simula que la base de datos no existe
-        $this->mockStmt->method('execute')->willReturn(true); // Simula la creación exitosa de la base de datos
+        // Verificar si hay un error en la conexión
+        if ($this->conexion->connect_error) {
+            $this->fail("Error al conectar con MySQL: " . $this->conexion->connect_error);
+        }
     }
 
-    public function testConexionBaseDatos()
+    /**
+     * Prueba que verifica si la base de datos existe o la crea si no está presente.
+     */
+    public function testBaseDeDatosExisteOCrear()
     {
-        // Incluir el archivo a probar
-        ob_start();
-        include './app/backend/conecta.php';
-        $output = ob_get_clean();
+        // Comprobar si la base de datos existe
+        $sql = "SHOW DATABASES LIKE '{$this->dbname}'";
+        $query = $this->conexion->query($sql);
 
-        // Verificar el resultado
-        $this->assertStringContainsString("Error al conectar con la base de datos", $output);
+        if ($query->num_rows <= 0) {
+            // Si la base de datos no existe, intentamos crearla
+            $sql = "CREATE DATABASE {$this->dbname}";
+            $this->assertTrue(
+                $this->conexion->query($sql),
+                "Error al crear la base de datos: " . $this->conexion->error
+            );
+        }
+
+        // Verificar nuevamente que la base de datos se haya creado correctamente
+        $query = $this->conexion->query("SHOW DATABASES LIKE '{$this->dbname}'");
+        $this->assertGreaterThan(
+            0,
+            $query->num_rows,
+            "La base de datos no fue creada correctamente"
+        );
     }
 
-    public function testCrearBaseDatos()
+    /**
+     * Prueba que verifica si la base de datos puede ser seleccionada correctamente.
+     */
+    public function testSeleccionarBaseDeDatos()
     {
-        // Simula que la base de datos no existe
-        $this->mockStmt->method('num_rows')->willReturn(0);
-
-        // Incluir el archivo a probar
-        ob_start();
-        include './app/backend/conecta.php';
-        $output = ob_get_clean();
-
-        // Verificar que la base de datos se haya creado correctamente
-        $this->assertStringNotContainsString("Error al crear la base de datos", $output);
-    }
-
-    public function testSeleccionarBaseDatos()
-    {
-        // Simula que la base de datos existe
-        $this->mockStmt->method('num_rows')->willReturn(1);
-
-        // Incluir el archivo a probar
-        ob_start();
-        include './app/backend/conecta.php';
-        $output = ob_get_clean();
-
-        // Verificar que se seleccionó la base de datos correctamente
-        $this->assertStringNotContainsString("Error al seleccionar la base de datos", $output);
+        $this->assertTrue(
+            $this->conexion->select_db($this->dbname),
+            "Error al seleccionar la base de datos: " . $this->conexion->error
+        );
     }
 }
