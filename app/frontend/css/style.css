@@ -1760,9 +1760,59 @@ h4.done ~ h4:first-of-type{
 /*/////////////////////////////////////////////////////////////////////////////////////////////////
 //RESPONSIVE MÓVIL
 /////////////////////////////////////////////////////////////////////////////////////////////////*/
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 480px) {
 
-    /* HEADER */
+
+    /* ======= VARIABLES GLOBALES ======= */
+    :root {
+        --radio: 10px;
+        --ancho: 100%;
+    }
+
+    /* Tipografías */
+    h1 { font-size: 2.5em; }
+    h2 { font-size: 2em; }
+    h3 { font-size: 1.75em; }
+    h4 { font-size: 1.5em; }
+    h5 { font-size: 1.25em; }
+    h6 { font-size: 1.1em; }
+
+    /* Secciones */
+    section {
+        width: 100%;
+        padding: 24px 16px;
+    }
+
+    section .title {
+        width: 100%;
+        margin-bottom: 2em;
+    }
+
+    /* Componentes comunes */
+    .tarjeta {
+        padding: 1.5em;
+    }
+
+    .btn {
+        padding: 0.8em;
+    }
+
+    /* Grid y flexbox */
+    .columnas-contenedor {
+        flex-direction: column;
+    }
+
+    .filas-contenedor .fila,
+    .columnas-contenedor .columna {
+        flex-direction: column;
+        gap: 1.5em;
+    }
+
+
+
+    /* ======= HEADER ======= */
+
+
     header{
         height: 80px;
     }
@@ -1787,8 +1837,12 @@ h4.done ~ h4:first-of-type{
     }
     .navbar .content .links, .actions{
         flex-direction: column;
-
     }
+
+    .navbar .content .actions a{
+        margin: 0;
+    }
+
     span i{
         font-size: 1em;
         color: var(--negro);
@@ -1802,6 +1856,184 @@ h4.done ~ h4:first-of-type{
     }
     .actions{
         width: 100%;
+    }
+
+
+    /* ======= FOOTER ======= */
+
+    #footer-main .contenedorPadre {
+        flex-direction: column;
+        text-align: center;
+        padding: 2em 16px;
+    }
+
+    #footer-main .caja {
+        width: 100%;
+        margin-bottom: 2em;
+    }
+
+
+    /* ======= MAIN ======= */
+    main {
+        padding: 80px 24px 0 24px;
+        padding-top: 80px; 
+    }
+
+    #scrollToTop{
+        bottom: 24px;
+        right: 24px;
+        padding: 0.5em;
+    }
+
+
+    /* Hero Section */
+    #hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 0 16px;
+    }
+
+    #hero .imgHero {
+        width: 400px;
+        height: auto;
+        mask-position: center;
+    }
+    
+    #hero.columnas-contenedor {
+        flex-direction: column;
+    }
+
+    #hero .content h1 span{
+        white-space: wrap;
+    }
+    
+    #hero .columna.img {
+        order: -1;
+        margin-bottom: 2em;
+    }
+
+    #hero .rrss {
+        justify-content: center;
+    }
+
+    /* Tarjetas especiales */
+
+    .flipcard {
+        height: 400px;
+        min-height: 400px;
+        margin: 1em 0;
+    }
+    
+    .flipcard .face {
+        padding: 1.5em;
+        justify-content: space-evenly;
+    }
+    
+    .flipcard .imagen img {
+        max-height: 120px;
+        margin: 0 auto;
+    }
+    
+    .flipcard .front img {
+        height: 80px;
+    }
+
+
+
+    /* Formularios */
+    .sectionForm {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .field .inline {
+        flex-direction: column;
+        gap: 1em;
+    }
+
+
+
+    /* Carrusel */
+    .slider-container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .slider {
+        display: flex;
+        transition: transform 0.4s ease-in-out;
+        width: 100%;
+    }
+    
+    .slider-item {
+        flex: 0 0 100%;
+        min-width: 100%;
+        scroll-snap-align: start;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+    }
+    
+    .slider-item.active {
+        opacity: 1;
+    }
+    
+    .botonesReview {
+        display: flex;
+        gap: 1em;
+        margin-top: 1em;
+    }
+    
+    /* Ocultar scrollbar en móvil */
+    .slider-container::-webkit-scrollbar {
+        display: none;
+    }
+    
+
+
+
+
+    
+    /* Galería */
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item.wide {
+        grid-column: span 1;
+    }
+
+    /* Calendario */
+    .calendar {
+        width: 100%;
+    }
+
+    .day {
+        padding: 8px;
+    }
+
+
+
+    /* Popups */
+    .popup {
+        width: 90% !important;
+        padding: 2em !important;
+    }
+
+    /* Ajustes específicos de secciones */
+    #sobreNosotros #hero .content,
+    #sobreNosotros .seccionLogin .imagenCol img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Monitores */
+    .monitoresCard {
+        flex: 0 0 100% !important;
+    }
+
+    .seccionLogin .imagenCol{
+        display: none;
     }
 
 }
