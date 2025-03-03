@@ -400,25 +400,28 @@ document.addEventListener("DOMContentLoaded", function () {
     .then(response => {
         console.log("Respuesta del servidor:", response.data);
         const btnLogin = document.getElementById("btnlogin");
+        const btnZarpa = document.getElementById("btnZarpa");
 
         if (response.data.success) {
             btnLogin.innerHTML = `<i class="fa-solid fa-user"></i> ${response.data.nombre}`;
-            console.log("✅ Sesión activa:", response.data.nombre);
+            console.log(" Sesión activa:", response.data.nombre);
 
             // Asegurar que solo se agrega el evento una vez
             btnLogin.removeEventListener("click", redirigirPerfil);
             btnLogin.addEventListener("click", redirigirPerfil);
             btnInscribirse.setAttribute("href", "/PequenosNavegantes/app/frontend/datosTutor/datosTutor.html");
+            btnZarpa.setAttribute("href", "/PequenosNavegantes/app/frontend/datosTutor/datosTutor.html");
 
         } else {
             console.log("No hay sesión activa.");
             btnLogin.innerHTML = `<i class="fa-solid fa-user"></i> Acceso`;
             btnLogin.setAttribute("href", "/PequenosNavegantes/app/frontend/login/login.html");
             btnInscribirse.setAttribute("href", "/PequenosNavegantes/app/frontend/login/login.html");
+            btnZarpa.setAttribute("href", "/PequenosNavegantes/app/frontend/login/login.html");
         }
     })
     .catch(error => {
-        console.error("❌ Error verificando sesión:", error);
+        console.error(" Error verificando sesión:", error);
     });
     // Función para redirigir al perfil
     function redirigirPerfil() {
