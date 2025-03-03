@@ -132,7 +132,6 @@ if(slider){
 }
 
 
-
 ////////////////////////////////////////
 // TARJETA ACORDEON
 ////////////////////////////////////////
@@ -148,6 +147,21 @@ if (acordeon){
         });
     });
 }
+
+
+
+////////////////////////////////////////
+// GALERIA IMAGENES POPUP
+////////////////////////////////////////
+function openPopup(element) {
+    var imgSrc = element.querySelector("img").src;
+    document.getElementById("popup-img").src = imgSrc;
+    document.getElementById("popupImg").style.display = "flex";
+}
+function closePopup() {
+    document.getElementById("popupImg").style.display = "none";
+}
+
 
 
 ////////////////////////////////////////
