@@ -462,15 +462,21 @@ header .navbar .actions a.btn:hover{
 
 /* ======= HERO ======= */
 #hero{
-    width: 100%;
+    margin-top: 1.5em;
+    width: var(--ancho);
     padding: 0;
     gap: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 #hero .content{
     flex: 0 0 30%;
-    margin-left: 16em;
-    /* background-color: red; */
+    width: 100%;
+}
+
+#hero .content h1 span{
+    white-space: nowrap;
 }
 
 #hero .content span{
@@ -481,12 +487,16 @@ header .navbar .actions a.btn:hover{
 #hero .imgHero{
     height: 100%;
 
-    mask-image: url('../../../resources/bg/mask.svg'); /* Ruta a la imagen de la máscara */
-    mask-size: cover;
+    mask-image: url('../../../resources/bg/mask6.svg'); /* Ruta a la imagen de la máscara */
+    mask-size: contain;
     mask-repeat: no-repeat;
-    -webkit-mask-image: url('../../../resources/bg/mask.svg'); /* Soporte para navegadores WebKit */
-    -webkit-mask-size: cover;
+    mask-position: right;
+
+    -webkit-mask-image: url('../../../resources/bg/mask6.svg'); /* Soporte para navegadores WebKit */
+    -webkit-mask-size: contain;
     -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: right;
+
 }
 
 #hero .content h1 span{
@@ -511,7 +521,7 @@ header .navbar .actions a.btn:hover{
 
 #index section{
     height: auto;
-    padding: 5em 0;
+    padding: 4em 0;
 }
 
 #index #hero{
@@ -693,6 +703,190 @@ header .navbar .actions a.btn:hover{
 .slider-container .slider-item{
     flex: 0 0 calc((100% - 4em) / 3); 
 }
+
+
+/*//////////////////////////////////////////////////
+//SOBRE NOSOTROS
+//////////////////////////////////////////////////*/
+#sobreNosotros section{
+    height: auto;
+    padding: 3em 0;
+}
+
+#sobreNosotros #hero{
+    width: var(--ancho);
+}
+
+#sobreNosotros #hero .botones{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+#sobreNosotros #hero .content{
+    margin: 0;
+    flex: 0 0 40%;
+    height: 100%;
+}
+#sobreNosotros #hero .img{
+    height: 100%;
+
+}
+
+.seccionLogin .title{
+    margin: 0;
+}
+
+#sobreNosotros .seccionLogin .imagenCol img{
+    height: 600px;
+}
+
+#sobreNosotros .seccionLogin .imagenCol img{
+    transform: scaleX(-1);
+}
+
+
+#sobreNosotros #hero .imgHero{
+    mask-image: url('../../../resources/bg/mask6.svg'); /* Ruta a la imagen de la máscara */
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+
+    -webkit-mask-image: url('../../../resources/bg/mask6.svg'); /* Soporte para navegadores WebKit */
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+}
+
+#sobreNosotros .datos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+
+/* ======= ACORDEON ======= */
+.tarjeta.accordion{
+    width: 100%;
+    gap: 0;
+    transition: background-color 0.3s ease;
+}
+.accordion:hover{
+    background-color: var(--second);
+}
+.accordion:hover *{
+    color: var(--blanco);
+}
+
+.accordion-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+}
+
+.accordion-content {
+    width: 100%;
+    display: block;
+
+    overflow: hidden;
+    max-height: 0; /* Comienza con la altura en 0 */
+    transition: max-height 0.5s ease-in-out; /* Animación suave de altura */
+}
+
+.accordion-content p {
+    margin: 16px 0;
+    font-size: 16px;
+}
+
+/* Estilo cuando la sección está abierta */
+.active .accordion-content {
+    max-height: 500px; /* Define el máximo de altura para el contenido */
+}
+
+.active .accordion-icon {
+    transform: rotate(90deg);
+}
+
+
+
+/*//////////////////////////////////////////////////
+//EVENTOS
+//////////////////////////////////////////////////*/
+
+/* ======= GALERIA IMAGENES ======= */
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 200px;
+    gap: 10px;
+}
+.gallery-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: var(--radio);
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+    transform: scale(0.95);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.gallery-item.tall {
+    grid-row: span 2;
+}
+.gallery-item.wide {
+    grid-column: span 2;
+}
+
+#popupImg{
+    z-index: 10000; 
+}
+#popupImg .popup{
+    width: 800px;
+    height: 800px;
+    max-height: 800px;
+}
+#popupImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+
+
+/*//////////////////////////////////////////////////
+//LOGIN
+//////////////////////////////////////////////////*/
+#login .sectionForm{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+
+#editInfo .columnas-contenedor{
+    align-items: center;
+}
+
 
 
 
@@ -1566,9 +1760,63 @@ h4.done ~ h4:first-of-type{
 /*/////////////////////////////////////////////////////////////////////////////////////////////////
 //RESPONSIVE MÓVIL
 /////////////////////////////////////////////////////////////////////////////////////////////////*/
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 480px) {
 
-    /* HEADER */
+
+    /* ======= VARIABLES GLOBALES ======= */
+    :root {
+        --radio: 10px;
+        --ancho: 100%;
+    }
+
+    /* Tipografías */
+    h1 { font-size: 2.5em; }
+    h2 { font-size: 2em; }
+    h3 { font-size: 1.75em; }
+    h4 { font-size: 1.5em; }
+    h5 { font-size: 1.25em; }
+    h6 { font-size: 1.1em; }
+
+    /* Secciones */
+    section {
+        width: 100%;
+        padding: 24px 16px;
+    }
+
+    section .title {
+        width: 100%;
+        margin-bottom: 2em;
+    }
+
+    #index section{
+        padding: 3em 0;
+    }
+
+    /* Componentes comunes */
+    .tarjeta {
+        padding: 1.5em;
+    }
+
+    .btn {
+        padding: 0.8em;
+    }
+
+    /* Grid y flexbox */
+    .columnas-contenedor {
+        flex-direction: column;
+    }
+
+    .filas-contenedor .fila,
+    .columnas-contenedor .columna {
+        flex-direction: column;
+        gap: 1.5em;
+    }
+
+
+
+    /* ======= HEADER ======= */
+
+
     header{
         height: 80px;
     }
@@ -1576,7 +1824,11 @@ h4.done ~ h4:first-of-type{
         max-width: 85vw;
         width: 100%;
     }
-    .navbar .content{
+    #header-main .navbar .logo{
+        width: 90px;
+        align-items: center;
+    }
+    #header-main .navbar .content{
         position: absolute;
         top: 0;
         right: -500px;
@@ -1593,8 +1845,12 @@ h4.done ~ h4:first-of-type{
     }
     .navbar .content .links, .actions{
         flex-direction: column;
-
     }
+
+    .navbar .content .actions a{
+        margin: 0;
+    }
+
     span i{
         font-size: 1em;
         color: var(--negro);
@@ -1608,6 +1864,224 @@ h4.done ~ h4:first-of-type{
     }
     .actions{
         width: 100%;
+    }
+
+
+    /* ======= FOOTER ======= */
+
+    #footer-main .contenedorPadre {
+        flex-direction: column;
+        text-align: center;
+        padding: 2em 16px;
+    }
+
+    #footer-main .caja {
+        width: 100%;
+        margin-bottom: 2em;
+    }
+
+
+    /* ======= MAIN ======= */
+    main {
+        padding: 80px 24px 0 24px;
+        padding-top: 80px; 
+    }
+
+    #scrollToTop{
+        bottom: 24px;
+        right: 24px;
+        padding: 0.5em;
+    }
+
+
+    /* Hero Section */
+    #hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 0 16px;
+    }
+
+    #hero .imgHero {
+        width: 400px;
+        height: auto;
+        mask-position: center;
+    }
+    
+    #hero.columnas-contenedor {
+        flex-direction: column;
+    }
+
+    #hero .content h1 span{
+        white-space: wrap;
+    }
+    
+    #hero .columna.img {
+        order: -1;
+        margin-bottom: 2em;
+    }
+
+    #hero .rrss {
+        justify-content: center;
+    }
+
+    /* Tarjetas especiales */
+
+    .columnas-contenedor:has(> .flipcard){
+        gap: 0;
+    }
+
+    .flipcard {
+        height: 300px;
+        min-height: 300px;
+        margin: 1em 0;
+    }
+    
+    .flipcard .face {
+        padding: 1.5em;
+        justify-content: space-evenly;
+    }
+    
+    .flipcard .imagen img {
+        max-height: 120px;
+        margin: 0 auto;
+    }
+    
+    .flipcard .front img {
+        height: 80px;
+    }
+
+
+
+    /* Formularios */
+    .sectionForm {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .field .inline {
+        flex-direction: row;
+        gap: 1em;
+    }
+
+
+
+    /* Carrusel */
+    .slider-container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .slider {
+        display: flex;
+        flex-direction: row;
+        transition: transform 0.4s ease-in-out;
+        width: 100%;
+    }
+
+    
+    .slider-item {
+        flex: 0 0 100%;
+        min-width: 100%;
+        scroll-snap-align: start;
+        transition: opacity 0.3s ease;
+    }
+    
+    .slider-item.active {
+        opacity: 1;
+    }
+    
+    .botonesReview {
+        display: flex;
+        gap: 1em;
+        margin-top: 1em;
+    }
+    
+   
+    
+    /* Galería */
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item.wide {
+        grid-column: span 1;
+    }
+
+    /* Calendario */
+    .calendar {
+        width: 100%;
+    }
+
+    .day {
+        padding: 8px;
+    }
+
+
+    /* Accordion */
+    .tarjeta.accordion{
+        gap: 0;
+    }
+
+    /* Mapa */
+    .mapa iframe{
+        width: 100%;
+    }
+
+
+    /*  Editar Inscripción*/
+    .editarPlan .contenidoPrincipal,
+    .editarPlan .infoPlan{
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 2em;
+    }
+
+
+    /* Resumen Inscripción */
+    .resumen {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .resumen .imagen img{
+        width: auto;
+    }
+
+    /* Popups */
+    .popup-container{
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .popup {
+        width: 90% !important;
+        padding: 2em !important;
+    }
+
+    /* Ajustes específicos de secciones */
+    #sobreNosotros #hero .content,
+    #sobreNosotros .seccionLogin .imagenCol img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Monitores */
+    .monitoresCard {
+        flex: 0 0 100% !important;
+    }
+
+    .seccionLogin .imagenCol{
+        display: none;
+    }
+
+
+    /* Login Admin & Monitor */
+    .formularioAdmin .sectionForm {
+        width: 100%;
+        margin: 0;
+        padding: 2em;
     }
 
 }

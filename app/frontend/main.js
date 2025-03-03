@@ -133,6 +133,38 @@ if(slider){
 
 
 ////////////////////////////////////////
+// TARJETA ACORDEON
+////////////////////////////////////////
+const acordeon = document.querySelector('.accordion-title');
+
+if (acordeon){
+    document.querySelectorAll('.accordion-title').forEach(item => {
+        item.addEventListener('click', function() {
+          const parent = this.parentElement;
+    
+          // Si la sección está abierta, cerrarla, si no, abrirla
+          parent.classList.toggle('active');
+        });
+    });
+}
+
+
+
+////////////////////////////////////////
+// GALERIA IMAGENES POPUP
+////////////////////////////////////////
+function openPopup(element) {
+    var imgSrc = element.querySelector("img").src;
+    document.getElementById("popup-img").src = imgSrc;
+    document.getElementById("popupImg").style.display = "flex";
+}
+function closePopup() {
+    document.getElementById("popupImg").style.display = "none";
+}
+
+
+
+////////////////////////////////////////
 // FLECHA SUBIR
 ////////////////////////////////////////
 const scrollToTopBtn = document.getElementById('scrollToTop');
