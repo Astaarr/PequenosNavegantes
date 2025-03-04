@@ -2,7 +2,7 @@
 // CALENDARIO
 ////////////////////////////////////////
 
-const precioUnitario = 9;
+const precioUnitario = 20;
 
 // Array con las iniciales de los días de la semana en español
 const weekdays = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
