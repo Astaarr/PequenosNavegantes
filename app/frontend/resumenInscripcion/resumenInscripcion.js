@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let { planSeleccionado, nDias } = datosTarifa;
 
     // Definir precios
-    const precioPorDia = 9;
+    const precioPorDia = 20;
     const preciosPlan = {
         "basico": 0,
         "intermedio": 5,

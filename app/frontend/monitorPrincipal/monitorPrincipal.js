@@ -43,11 +43,10 @@ function cargarActividadesMonitor(diaElemento, fecha) {
 
         if (respuesta.data.success && respuesta.data.actividades.length > 0) {
             diaElemento.classList.add("actividad-presente");
-
             let indicadorExistente = diaElemento.querySelector(".indicador-actividad");
             if (!indicadorExistente) {
                 const indicador = document.createElement("div");
-                indicador.className = "indicador-actividad";
+                indicador.className = 'eventos';
                 diaElemento.appendChild(indicador);
             }
 
@@ -55,7 +54,7 @@ function cargarActividadesMonitor(diaElemento, fecha) {
 
             respuesta.data.actividades.forEach(actividad => {
                 const actividadNombre = document.createElement("p");
-                actividadNombre.className = "nombre-actividad";
+                actividadNombre.className = 'evento';
                 actividadNombre.textContent = `${actividad.hora_inicio} - ${actividad.nombre_actividad}`;
                 diaElemento.appendChild(actividadNombre);
             });
