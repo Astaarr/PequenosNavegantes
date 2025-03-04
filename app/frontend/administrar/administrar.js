@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
+    axios.get('../../backend/authAdmin.php', { withCredentials: true })
+    .then(response => {
+        if (!response.data.auth) {
+            window.location.href = "../loginAdmin/loginAdmin.html";
+        }
+    })
+    .catch(error => {
+        console.error("Error verificando sesión:", error);
+        // En caso de error, redirige también para evitar accesos no deseados
+        window.location.href = "../loginAdmin/loginAdmin.html";
+    });
     currentDate = new Date();
     crearCalendario();
 });

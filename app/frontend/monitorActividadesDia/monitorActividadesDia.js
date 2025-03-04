@@ -1,4 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
+    axios.get('../../backend/authMonitor.php', { withCredentials: true })
+    .then(response => {
+        if (!response.data.auth) {
+            window.location.href = "../loginMonitor/loginMonitor.html";
+        }
+    })
+    .catch(error => {
+        console.error("Error verificando sesión:", error);
+        // En caso de error, redirige también para evitar accesos no deseados
+        window.location.href = "../loginMonitor/loginMonitor.html";
+    });
     // Obtener la fecha desde la URL
     const params = new URLSearchParams(window.location.search);
     const fecha = params.get('fecha');
