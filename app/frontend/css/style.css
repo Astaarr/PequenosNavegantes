@@ -1788,6 +1788,10 @@ h4.done ~ h4:first-of-type{
         margin-bottom: 2em;
     }
 
+    #index section{
+        padding: 3em 0;
+    }
+
     /* Componentes comunes */
     .tarjeta {
         padding: 1.5em;
@@ -1820,7 +1824,11 @@ h4.done ~ h4:first-of-type{
         max-width: 85vw;
         width: 100%;
     }
-    .navbar .content{
+    #header-main .navbar .logo{
+        width: 90px;
+        align-items: center;
+    }
+    #header-main .navbar .content{
         position: absolute;
         top: 0;
         right: -500px;
@@ -1918,9 +1926,13 @@ h4.done ~ h4:first-of-type{
 
     /* Tarjetas especiales */
 
+    .columnas-contenedor:has(> .flipcard){
+        gap: 0;
+    }
+
     .flipcard {
-        height: 400px;
-        min-height: 400px;
+        height: 300px;
+        min-height: 300px;
         margin: 1em 0;
     }
     
@@ -1947,7 +1959,7 @@ h4.done ~ h4:first-of-type{
     }
 
     .field .inline {
-        flex-direction: column;
+        flex-direction: row;
         gap: 1em;
     }
 
@@ -1962,15 +1974,16 @@ h4.done ~ h4:first-of-type{
     
     .slider {
         display: flex;
+        flex-direction: row;
         transition: transform 0.4s ease-in-out;
         width: 100%;
     }
+
     
     .slider-item {
         flex: 0 0 100%;
         min-width: 100%;
         scroll-snap-align: start;
-        opacity: 0.5;
         transition: opacity 0.3s ease;
     }
     
@@ -1984,15 +1997,7 @@ h4.done ~ h4:first-of-type{
         margin-top: 1em;
     }
     
-    /* Ocultar scrollbar en móvil */
-    .slider-container::-webkit-scrollbar {
-        display: none;
-    }
-    
-
-
-
-
+   
     
     /* Galería */
     .gallery {
@@ -2013,8 +2018,43 @@ h4.done ~ h4:first-of-type{
     }
 
 
+    /* Accordion */
+    .tarjeta.accordion{
+        gap: 0;
+    }
+
+    /* Mapa */
+    .mapa iframe{
+        width: 100%;
+    }
+
+
+    /*  Editar Inscripción*/
+    .editarPlan .contenidoPrincipal,
+    .editarPlan .infoPlan{
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 2em;
+    }
+
+
+    /* Resumen Inscripción */
+    .resumen {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .resumen .imagen img{
+        width: auto;
+    }
 
     /* Popups */
+    .popup-container{
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
     .popup {
         width: 90% !important;
         padding: 2em !important;
@@ -2034,6 +2074,14 @@ h4.done ~ h4:first-of-type{
 
     .seccionLogin .imagenCol{
         display: none;
+    }
+
+
+    /* Login Admin & Monitor */
+    .formularioAdmin .sectionForm {
+        width: 100%;
+        margin: 0;
+        padding: 2em;
     }
 
 }
